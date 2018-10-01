@@ -1,0 +1,2347 @@
+[
+    {
+        "name": "ALIBABA GROUP HOLDING ADR REPRESEN",
+        "class": "Equity",
+        "symbol": "BABA",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "TENCENT HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "700",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "APPLE INC",
+        "class": "Equity",
+        "symbol": "AAPL",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "NASPERS LIMITED N LTD",
+        "class": "Equity",
+        "symbol": "NPN",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "PHILIP MORRIS INTERNATIONAL INC",
+        "class": "Equity",
+        "symbol": "PM",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "CHINA MOBILE LTD",
+        "class": "Equity",
+        "symbol": "941",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "UNILEVER DRC NV",
+        "class": "Equity",
+        "symbol": "UNA",
+        "country": "Netherlands",
+        "currency": "USD"
+    },
+    {
+        "name": "ANHEUSER BUSCH INBEV NV",
+        "class": "Equity",
+        "symbol": "ABI",
+        "country": "Belgium",
+        "currency": "USD"
+    },
+    {
+        "name": "UNILEVER PLC",
+        "class": "Equity",
+        "symbol": "ULVR",
+        "country": "United Kingdom",
+        "currency": "USD"
+    },
+    {
+        "name": "ASTRAZENECA PLC",
+        "class": "Equity",
+        "symbol": "AZN",
+        "country": "United Kingdom",
+        "currency": "USD"
+    },
+    {
+        "name": "COLGATE-PALMOLIVE",
+        "class": "Equity",
+        "symbol": "CL",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "JD.COM ADR REPRESENTING INC CLASS",
+        "class": "Equity",
+        "symbol": "JD",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "TELEFONICA SA",
+        "class": "Equity",
+        "symbol": "TEF",
+        "country": "Spain",
+        "currency": "USD"
+    },
+    {
+        "name": "AMERICA MOVIL L",
+        "class": "Equity",
+        "symbol": "AMXL",
+        "country": "Mexico",
+        "currency": "USD"
+    },
+    {
+        "name": "GALAXY ENTERTAINMENT GROUP LTD",
+        "class": "Equity",
+        "symbol": "27",
+        "country": "Hong Kong",
+        "currency": "USD"
+    },
+    {
+        "name": "AMBEV SA",
+        "class": "Equity",
+        "symbol": "ABEV3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "LAS VEGAS SANDS CORP",
+        "class": "Equity",
+        "symbol": "LVS",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "NETEASE ADR REPRESENTING INC",
+        "class": "Equity",
+        "symbol": "NTES",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "CTRIP.COM INTERNATIONAL ADR REPRE",
+        "class": "Equity",
+        "symbol": "CTRP",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "FOMENTO ECONOMICO MEXICANO",
+        "class": "Equity",
+        "symbol": "FEMSAUBD",
+        "country": "Mexico",
+        "currency": "USD"
+    },
+    {
+        "name": "YUM CHINA HOLDINGS INC",
+        "class": "Equity",
+        "symbol": "YUMC",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "MTN GROUP LTD",
+        "class": "Equity",
+        "symbol": "MTN",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "HINDUSTAN UNILEVER LTD",
+        "class": "Equity",
+        "symbol": "HINDUNILVR",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "SANDS CHINA LTD",
+        "class": "Equity",
+        "symbol": "1928",
+        "country": "Hong Kong",
+        "currency": "USD"
+    },
+    {
+        "name": "HONDA MOTOR LTD",
+        "class": "Equity",
+        "symbol": "7267",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "GEELY AUTOMOBILE HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "175",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "CHUNGHWA TELECOM CO. LTD.",
+        "class": "Equity",
+        "symbol": "2412",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "NEW ORIENTAL EDUCATION & TECHNOLOG",
+        "class": "Equity",
+        "symbol": "EDU",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "WALMART DE MEXICO V",
+        "class": "Equity",
+        "symbol": "WALMEX*",
+        "country": "Mexico",
+        "currency": "USD"
+    },
+    {
+        "name": "TELEKOMUNIKASI INDONESIA",
+        "class": "Equity",
+        "symbol": "TLKM",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "ITC LTD",
+        "class": "Equity",
+        "symbol": "ITC",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "MARUTI SUZUKI INDIA LTD",
+        "class": "Equity",
+        "symbol": "MARUTI",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "CSPC PHARMACEUTICAL GROUP LTD",
+        "class": "Equity",
+        "symbol": "1093",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "TAL EDUCATION GROUP ADR REPTG",
+        "class": "Equity",
+        "symbol": "TAL",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "LG HOUSEHOLD & HEALTH CARE LTD",
+        "class": "Equity",
+        "symbol": "051900",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "HYUNDAI MOTOR",
+        "class": "Equity",
+        "symbol": "005380",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "SINO BIOPHARMACEUTICAL LTD",
+        "class": "Equity",
+        "symbol": "1177",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "UNI-PRESIDENT ENTERPRISES CORP.",
+        "class": "Equity",
+        "symbol": "1216",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "ASTRA INTERNATIONAL",
+        "class": "Equity",
+        "symbol": "ASII",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "WYNN RESORTS LTD",
+        "class": "Equity",
+        "symbol": "WYNN",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "CP ALL NON-VOTING DR PCL",
+        "class": "Equity",
+        "symbol": "CPALL.R",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "CHINA MENGNIU DAIRY LTD",
+        "class": "Equity",
+        "symbol": "2319",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "INDUSTRIA DE DISENO TEXTIL INDITEX",
+        "class": "Equity",
+        "symbol": "ITX",
+        "country": "Spain",
+        "currency": "USD"
+    },
+    {
+        "name": "AMOREPACIFIC CORP",
+        "class": "Equity",
+        "symbol": "090430",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "CK HUTCHISON HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "1",
+        "country": "Hong Kong",
+        "currency": "USD"
+    },
+    {
+        "name": "HYUNDAI MOBIS LTD",
+        "class": "Equity",
+        "symbol": "012330",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "KT&G CORP",
+        "class": "Equity",
+        "symbol": "033780",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "CELLTRION INC",
+        "class": "Equity",
+        "symbol": "068270",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "SHISEIDO LTD",
+        "class": "Equity",
+        "symbol": "4911",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "CHINA UNICOM (HONG KONG) LTD",
+        "class": "Equity",
+        "symbol": "762",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "CHINA RESOURCES BEER HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "291",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "TELENOR",
+        "class": "Equity",
+        "symbol": "TEL",
+        "country": "Norway",
+        "currency": "USD"
+    },
+    {
+        "name": "MAHINDRA AND MAHINDRA LTD",
+        "class": "Equity",
+        "symbol": "M&M",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "SWATCH GROUP AG",
+        "class": "Equity",
+        "symbol": "UHR",
+        "country": "Switzerland",
+        "currency": "USD"
+    },
+    {
+        "name": "MELCO RESORTS ENTERTAINMENT ADR LT",
+        "class": "Equity",
+        "symbol": "MLCO",
+        "country": "Hong Kong",
+        "currency": "USD"
+    },
+    {
+        "name": "GRUPO TELEVISA",
+        "class": "Equity",
+        "symbol": "TLEVISACPO",
+        "country": "Mexico",
+        "currency": "USD"
+    },
+    {
+        "name": "JARDINE STRATEGIC HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "J37",
+        "country": "Hong Kong",
+        "currency": "USD"
+    },
+    {
+        "name": "SHOPRITE HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "SHP",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "ANTA SPORTS PRODUCTS LTD",
+        "class": "Equity",
+        "symbol": "2020",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "BHARTI AIRTEL LTD",
+        "class": "Equity",
+        "symbol": "BHARTIARTL",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "PRESIDENT CHAIN STORE CORP.",
+        "class": "Equity",
+        "symbol": "2912",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "HENGAN INTERNATIONAL GROUP LTD",
+        "class": "Equity",
+        "symbol": "1044",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "PJSC MAGNIT GDR",
+        "class": "Equity",
+        "symbol": "MGNT",
+        "country": "Russian Federation",
+        "currency": "USD"
+    },
+    {
+        "name": "VODACOM GROUP LTD",
+        "class": "Equity",
+        "symbol": "VOD",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "DENSO CORP",
+        "class": "Equity",
+        "symbol": "6902",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "HERMES INTERNATIONAL",
+        "class": "Equity",
+        "symbol": "RMS",
+        "country": "France",
+        "currency": "USD"
+    },
+    {
+        "name": "MAGNA INTERNATIONAL INC",
+        "class": "Equity",
+        "symbol": "MG",
+        "country": "Canada",
+        "currency": "USD"
+    },
+    {
+        "name": "WYNN MACAU LTD",
+        "class": "Equity",
+        "symbol": "1128",
+        "country": "Hong Kong",
+        "currency": "USD"
+    },
+    {
+        "name": "BRILLIANCE CHINA AUTOMOTIVE HOLDIN",
+        "class": "Equity",
+        "symbol": "1114",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "TAIWAN MOBILE LTD",
+        "class": "Equity",
+        "symbol": "3045",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "S.A.C.I. FALABELLA",
+        "class": "Equity",
+        "symbol": "FALABELLA",
+        "country": "Chile",
+        "currency": "USD"
+    },
+    {
+        "name": "LG ELECTRONICS INC",
+        "class": "Equity",
+        "symbol": "066570",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "MEIJI HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "2269",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "LOJAS RENNER S/A",
+        "class": "Equity",
+        "symbol": "LREN3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "UNILEVER INDONESIA",
+        "class": "Equity",
+        "symbol": "UNVR",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "MOBILE TELESYSTEMS ADR REP",
+        "class": "Equity",
+        "symbol": "MBT",
+        "country": "Russian Federation",
+        "currency": "USD"
+    },
+    {
+        "name": "NEXON LTD",
+        "class": "Equity",
+        "symbol": "3659",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "SINOPHARM GROUP H",
+        "class": "Equity",
+        "symbol": "1099",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "TELEFONICA BRASIL PREF SA",
+        "class": "Equity",
+        "symbol": "VIVT4",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "E-MART INC",
+        "class": "Equity",
+        "symbol": "139480",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "ASPEN PHARMACARE LTD",
+        "class": "Equity",
+        "symbol": "APN",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "ESSITY CLASS B",
+        "class": "Equity",
+        "symbol": "ESSITY B",
+        "country": "Sweden",
+        "currency": "USD"
+    },
+    {
+        "name": "BIOMARIN PHARMACEUTICAL INC",
+        "class": "Equity",
+        "symbol": "BMRN",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "WANT WANT CHINA HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "151",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "ADVANCED INFO SERVICE NON-VOTING D",
+        "class": "Equity",
+        "symbol": "ADVANC.R",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "VIPSHOP HOLDINGS SPONSORED ADS REP",
+        "class": "Equity",
+        "symbol": "VIPS",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "TINGYI (CAYMAN ISLANDS) HOLDINGS C",
+        "class": "Equity",
+        "symbol": "322",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "MR PRICE GROUP LTD",
+        "class": "Equity",
+        "symbol": "MRP",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "BORGWARNER INC",
+        "class": "Equity",
+        "symbol": "BWA",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "TIGER BRANDS LTD",
+        "class": "Equity",
+        "symbol": "TBS",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "NCSOFT CORP",
+        "class": "Equity",
+        "symbol": "036570",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "HAIER ELECTRONICS GROUP LTD",
+        "class": "Equity",
+        "symbol": "1169",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "SK TELECOM LTD",
+        "class": "Equity",
+        "symbol": "017670",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "UNICHARM CORP",
+        "class": "Equity",
+        "symbol": "8113",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "MILLICOM INTERNATIONAL CELLULAR SD",
+        "class": "Equity",
+        "symbol": "MIC SDB",
+        "country": "Sweden",
+        "currency": "USD"
+    },
+    {
+        "name": "COCA COLA HBC AG",
+        "class": "Equity",
+        "symbol": "CCH",
+        "country": "United Kingdom",
+        "currency": "USD"
+    },
+    {
+        "name": "TITAN COMPANY LTD",
+        "class": "Equity",
+        "symbol": "TITAN",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "SM INVESTMENTS CORP",
+        "class": "Equity",
+        "symbol": "SM",
+        "country": "Philippines",
+        "currency": "USD"
+    },
+    {
+        "name": "COWAY LTD",
+        "class": "Equity",
+        "symbol": "021240",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "FAR EASTONE TELECOMMUNICATIONS LTD",
+        "class": "Equity",
+        "symbol": "4904",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "BYD LTD H",
+        "class": "Equity",
+        "symbol": "1211",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "CENCOSUD S.A.",
+        "class": "Equity",
+        "symbol": "CENCOSUD",
+        "country": "Chile",
+        "currency": "USD"
+    },
+    {
+        "name": "SUMITOMO ELECTRIC INDUSTRIES LTD",
+        "class": "Equity",
+        "symbol": "5802",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "MOMO ADR REPRESENTING INC CLASS A",
+        "class": "Equity",
+        "symbol": "MOMO",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "KROTON EDUCACIONAL SA",
+        "class": "Equity",
+        "symbol": "KROT3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "ZEE ENTERTAINMENT ENTERPRISES LTD",
+        "class": "Equity",
+        "symbol": "ZEEL",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "YY ADR REPRESENTING INC CLASS A",
+        "class": "Equity",
+        "symbol": "YY",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "SHENZHOU INTERNATIONAL GROUP LTD",
+        "class": "Equity",
+        "symbol": "2313",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "RAIA DROGASIL SA",
+        "class": "Equity",
+        "symbol": "RADL3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "RYOHIN KEIKAKU LTD",
+        "class": "Equity",
+        "symbol": "7453",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "GUANGZHOU AUTOMOBILE GROUP LTD H",
+        "class": "Equity",
+        "symbol": "2238",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "HOTEL SHILLA CO LTDINARY SHARES KO",
+        "class": "Equity",
+        "symbol": "008770",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "LOJAS AMERICANAS PN REP1 PREF SA",
+        "class": "Equity",
+        "symbol": "LAME4",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "DIGI.COM BHD",
+        "class": "Equity",
+        "symbol": "DIGI",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "BIM BIRLESIK MAGAZALAR A",
+        "class": "Equity",
+        "symbol": "BIMAS",
+        "country": "Turkey",
+        "currency": "USD"
+    },
+    {
+        "name": "WILMAR INTERNATIONAL LTD",
+        "class": "Equity",
+        "symbol": "F34",
+        "country": "Singapore",
+        "currency": "USD"
+    },
+    {
+        "name": "AMOREG",
+        "class": "Equity",
+        "symbol": "002790",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "SHINSEGAE INC",
+        "class": "Equity",
+        "symbol": "004170",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "AISIN SEIKI LTD",
+        "class": "Equity",
+        "symbol": "7259",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "NESTLE INDIA LTD",
+        "class": "Equity",
+        "symbol": "NESTLEIND",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "COMPANHIA BRASILEIRA DE DISTRIBUIC",
+        "class": "Equity",
+        "symbol": "PCAR4",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "DONGFENG MOTOR GROUP LTD H",
+        "class": "Equity",
+        "symbol": "489",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "SUN PHARMACEUTICAL INDUSTRIES LTD",
+        "class": "Equity",
+        "symbol": "SUNPHARMA",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "BRL CASH",
+        "class": "Cash",
+        "symbol": "BRL",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "GREAT WALL MOTOR LTD H",
+        "class": "Equity",
+        "symbol": "2333",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "LOCALIZA RENT A CAR S/A",
+        "class": "Equity",
+        "symbol": "RENT3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "TIM PARTICIPACOES S/A",
+        "class": "Equity",
+        "symbol": "TIMP3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "JG SUMMIT HOLDINGS INC",
+        "class": "Equity",
+        "symbol": "JGS",
+        "country": "Philippines",
+        "currency": "USD"
+    },
+    {
+        "name": "LIFE HEALTH LTD",
+        "class": "Equity",
+        "symbol": "LHC",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "KOITO MANUFACTURING LTD",
+        "class": "Equity",
+        "symbol": "7276",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "HELLENIC TELECOMMUNICATIONS ORGANI",
+        "class": "Equity",
+        "symbol": "HTO",
+        "country": "Greece",
+        "currency": "USD"
+    },
+    {
+        "name": "LATAM AIRLINES GROUP SA",
+        "class": "Equity",
+        "symbol": "LTM",
+        "country": "Chile",
+        "currency": "USD"
+    },
+    {
+        "name": "AXIATA GROUP",
+        "class": "Equity",
+        "symbol": "AXIATA",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "SHANGHAI FOSUN PHARMACEUTICAL (GRO",
+        "class": "Equity",
+        "symbol": "2196",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "COCA-COLA FEMSA CLASS L",
+        "class": "Equity",
+        "symbol": "KOFL",
+        "country": "Mexico",
+        "currency": "USD"
+    },
+    {
+        "name": "KANGWON LAND INC",
+        "class": "Equity",
+        "symbol": "035250",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "CHINA MEDICAL SYSTEM HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "867",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "GODREJ CONSUMER PRODUCTS LTD",
+        "class": "Equity",
+        "symbol": "GODREJCP",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "MGM CHINA HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "2282",
+        "country": "Hong Kong",
+        "currency": "USD"
+    },
+    {
+        "name": "UNITED SPIRITS LTD",
+        "class": "Equity",
+        "symbol": "MCDOWELL.N",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "WOOLWORTHS HLDGS LTD",
+        "class": "Equity",
+        "symbol": "WHL",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "HOTAI MOTOR CO LTD",
+        "class": "Equity",
+        "symbol": "2207",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "HKD CASH",
+        "class": "Cash",
+        "symbol": "HKD",
+        "country": "Hong Kong",
+        "currency": "USD"
+    },
+    {
+        "name": "DABUR INDIA LTD",
+        "class": "Equity",
+        "symbol": "DABUR",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "SUN ART RETAIL GROUP LTD",
+        "class": "Equity",
+        "symbol": "6808",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "JERONIMO MARTINS SGPS S/A",
+        "class": "Equity",
+        "symbol": "JMT",
+        "country": "Portugal",
+        "currency": "USD"
+    },
+    {
+        "name": "CP ALL PCL",
+        "class": "Equity",
+        "symbol": "CPALL.F",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "THE FOSCHINI GROUP LTD",
+        "class": "Equity",
+        "symbol": "TFG",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "MAXIS BHD",
+        "class": "Equity",
+        "symbol": "MAXIS",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "HERO MOTOCORP LTD",
+        "class": "Equity",
+        "symbol": "HEROMOTOCO",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "TSINGTAO BREWERY LTD H",
+        "class": "Equity",
+        "symbol": "168",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "HYPERMARCAS S/A",
+        "class": "Equity",
+        "symbol": "HYPE3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "SWATCH GROUP AG",
+        "class": "Equity",
+        "symbol": "UHRN",
+        "country": "Switzerland",
+        "currency": "USD"
+    },
+    {
+        "name": "SHARP CORP",
+        "class": "Equity",
+        "symbol": "6753",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "BAJAJ AUTO LTD",
+        "class": "Equity",
+        "symbol": "BAJAJ.AUTO",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "TURKCELL ILETISIM HIZMETLERI A",
+        "class": "Equity",
+        "symbol": "TCELL",
+        "country": "Turkey",
+        "currency": "USD"
+    },
+    {
+        "name": "HANJAYA MANDALA SAMPOERNA",
+        "class": "Equity",
+        "symbol": "HMSP",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "SJM HLDGS LTD",
+        "class": "Equity",
+        "symbol": "880",
+        "country": "Hong Kong",
+        "currency": "USD"
+    },
+    {
+        "name": "JARDINE CYCLE AND CARRIAGE LTD",
+        "class": "Equity",
+        "symbol": "C07",
+        "country": "Singapore",
+        "currency": "USD"
+    },
+    {
+        "name": "ARCA CONTINENTAL",
+        "class": "Equity",
+        "symbol": "AC*",
+        "country": "Mexico",
+        "currency": "USD"
+    },
+    {
+        "name": "KIMBERLY-CLARK DE MEXICO CLASS A",
+        "class": "Equity",
+        "symbol": "KIMBERA",
+        "country": "Mexico",
+        "currency": "USD"
+    },
+    {
+        "name": "ORION CORP",
+        "class": "Equity",
+        "symbol": "271560",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "SINGAPORE AIRLINES LTD",
+        "class": "Equity",
+        "symbol": "C6L",
+        "country": "Singapore",
+        "currency": "USD"
+    },
+    {
+        "name": "TRUWORTHS INTERNATIONAL LTD",
+        "class": "Equity",
+        "symbol": "TRU",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "GENTING MALAYSIA",
+        "class": "Equity",
+        "symbol": "GENM",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "PPB GROUP",
+        "class": "Equity",
+        "symbol": "PPB",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "BANGKOK DUSIT MEDICAL SERVICES NON",
+        "class": "Equity",
+        "symbol": "BDMS.R",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "GUDANG GARAM",
+        "class": "Equity",
+        "symbol": "GGRM",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "GREEK ORGANITION OF FOOTBALL PROGN",
+        "class": "Equity",
+        "symbol": "OPAP",
+        "country": "Greece",
+        "currency": "USD"
+    },
+    {
+        "name": "IHH HEALTHCARE",
+        "class": "Equity",
+        "symbol": "IHH",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "LOTTE SHOPPING LTD",
+        "class": "Equity",
+        "symbol": "023530",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "CJ CHEILJEDANG CORP",
+        "class": "Equity",
+        "symbol": "097950",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "YAMAHA CORP",
+        "class": "Equity",
+        "symbol": "7951",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "PICK N PAY STORES LTD",
+        "class": "Equity",
+        "symbol": "PIK",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "INDOFOOD SUKSES MAKMUR",
+        "class": "Equity",
+        "symbol": "INDF",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "STANLEY ELECTRIC LTD",
+        "class": "Equity",
+        "symbol": "6923",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "YAKULT HONSHA LTD",
+        "class": "Equity",
+        "symbol": "2267",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "PLDT INC INC",
+        "class": "Equity",
+        "symbol": "TEL",
+        "country": "Philippines",
+        "currency": "USD"
+    },
+    {
+        "name": "UNIVERSAL ROBINA CORP.",
+        "class": "Equity",
+        "symbol": "URC",
+        "country": "Philippines",
+        "currency": "USD"
+    },
+    {
+        "name": "MARICO LTD",
+        "class": "Equity",
+        "symbol": "MARICO",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "ALFA A",
+        "class": "Equity",
+        "symbol": "ALFAA",
+        "country": "Mexico",
+        "currency": "USD"
+    },
+    {
+        "name": "MAGAZINE LUIZA S.A.",
+        "class": "Equity",
+        "symbol": "MGLU3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "BERLI JUCKER CO THB1(ALIEN MKT)",
+        "class": "Equity",
+        "symbol": "BJC.F",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "EUR CASH",
+        "class": "Cash",
+        "symbol": "EUR",
+        "country": "European Union",
+        "currency": "USD"
+    },
+    {
+        "name": "KALBE FARMA",
+        "class": "Equity",
+        "symbol": "KLBF",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "JOLLIBEE FOODS CORP",
+        "class": "Equity",
+        "symbol": "JFC",
+        "country": "Philippines",
+        "currency": "USD"
+    },
+    {
+        "name": "LENOVO GROUP LTD",
+        "class": "Equity",
+        "symbol": "992",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "KUALA LUMPUR KEPONG BHD",
+        "class": "Equity",
+        "symbol": "KLK",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "HANMI PHARMACEUTICAL CO. LTD.",
+        "class": "Equity",
+        "symbol": "128940",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "SPAR GROUP LTD",
+        "class": "Equity",
+        "symbol": "SPP",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "GEDEON RICHTER",
+        "class": "Equity",
+        "symbol": "RICHTER",
+        "country": "Hungary",
+        "currency": "USD"
+    },
+    {
+        "name": "IMPERIAL HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "IPL",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "BRF SA",
+        "class": "Equity",
+        "symbol": "BRFS3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "CHAROEN POKPHAND INDONESIA",
+        "class": "Equity",
+        "symbol": "CPIN",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "BOSCH LTD",
+        "class": "Equity",
+        "symbol": "BOSCHLTD",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "CHENG SHIN RUBBER INDUSTRY LTD",
+        "class": "Equity",
+        "symbol": "2105",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "COMPANIA CERVECERIAS UNIDAS SA",
+        "class": "Equity",
+        "symbol": "CCU",
+        "country": "Chile",
+        "currency": "USD"
+    },
+    {
+        "name": "ZHEJIANG EXPRESSWAY LTD H",
+        "class": "Equity",
+        "symbol": "576",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "HOME PRODUCT CENTER NON-VOTING DR",
+        "class": "Equity",
+        "symbol": "HMPRO.R",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "YUHAN CORP",
+        "class": "Equity",
+        "symbol": "000100",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "CIPLA LTD",
+        "class": "Equity",
+        "symbol": "CIPLA",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "CJ CORP",
+        "class": "Equity",
+        "symbol": "001040",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "JIANGSU EXPRESSWAY LTD H",
+        "class": "Equity",
+        "symbol": "177",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "HYUNDAI MOTOR CO 2ND PRF",
+        "class": "Equity",
+        "symbol": "005387",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "GBP CASH",
+        "class": "Cash",
+        "symbol": "GBP",
+        "country": "United Kingdom",
+        "currency": "USD"
+    },
+    {
+        "name": "BUMRUNGRAD HOSPITAL NON-VOTING DR",
+        "class": "Equity",
+        "symbol": "BH.R",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "AIR CHINA LTD H",
+        "class": "Equity",
+        "symbol": "753",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "SHANGRI LA ASIA LTD",
+        "class": "Equity",
+        "symbol": "69",
+        "country": "Hong Kong",
+        "currency": "USD"
+    },
+    {
+        "name": "RAMSAY HEALTH CARE LTD",
+        "class": "Equity",
+        "symbol": "RHC",
+        "country": "Australia",
+        "currency": "USD"
+    },
+    {
+        "name": "CJ E&M CORP",
+        "class": "Equity",
+        "symbol": "130960",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "MATAHARI DEPARTMENT STORE",
+        "class": "Equity",
+        "symbol": "LPPF",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "ATACADAO CARREFOUR SA",
+        "class": "Equity",
+        "symbol": "CRFB3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "TRUE CORPORATION NON-VOTING DR PCL",
+        "class": "Equity",
+        "symbol": "TRUE.R",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "ADVANCED INFO SERVICE PCL F",
+        "class": "Equity",
+        "symbol": "ADVANC.F",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "LOTTE CORP",
+        "class": "Equity",
+        "symbol": "004990",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "MEDICLINIC INTERNATIONAL PLC",
+        "class": "Equity",
+        "symbol": "MDC",
+        "country": "United Kingdom",
+        "currency": "USD"
+    },
+    {
+        "name": "CYFROWY POLSAT S.A.",
+        "class": "Equity",
+        "symbol": "CPS",
+        "country": "Poland",
+        "currency": "USD"
+    },
+    {
+        "name": "MOTHERSON SUMI SYSTEMS LTD",
+        "class": "Equity",
+        "symbol": "MOTHERSUMI",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "NATURA COSMETICOS S.A.",
+        "class": "Equity",
+        "symbol": "NATU3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "JUMBO SA",
+        "class": "Equity",
+        "symbol": "BELA",
+        "country": "Greece",
+        "currency": "USD"
+    },
+    {
+        "name": "CHINA SOUTHERN AIRLINES LTD H",
+        "class": "Equity",
+        "symbol": "1055",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "FUYAO GLASS INDUSTRY GROUP LTD H",
+        "class": "Equity",
+        "symbol": "3606",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "OOREDOO",
+        "class": "Equity",
+        "symbol": "ORDS",
+        "country": "Qatar",
+        "currency": "USD"
+    },
+    {
+        "name": "YUE YUEN INDUSTRIAL (HOLDINGS) LTD",
+        "class": "Equity",
+        "symbol": "551",
+        "country": "Hong Kong",
+        "currency": "USD"
+    },
+    {
+        "name": "INDOFOOD CBP SUKSES MAKMUR",
+        "class": "Equity",
+        "symbol": "ICBP",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "STANDARD FOODS CORP.",
+        "class": "Equity",
+        "symbol": "1227",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "MINOR INTERNATIONAL PUBLIC NON VOT",
+        "class": "Equity",
+        "symbol": "MINT.R",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "GIANT MANUFACTURING CO. LTD.",
+        "class": "Equity",
+        "symbol": "9921",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "HYUNDAI DEPARTMENT STORE LTD",
+        "class": "Equity",
+        "symbol": "069960",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "DINO POLSKA SA",
+        "class": "Equity",
+        "symbol": "DNP",
+        "country": "Poland",
+        "currency": "USD"
+    },
+    {
+        "name": "AMOREPACIFIC CORP. NON-VOTING PREF",
+        "class": "Equity",
+        "symbol": "090435",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "KOREAN AIR LINES LTD",
+        "class": "Equity",
+        "symbol": "003490",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "IDEA CELLULAR LTD",
+        "class": "Equity",
+        "symbol": "IDEA",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "RUENTEX INDUSTRIES LTD.",
+        "class": "Equity",
+        "symbol": "2915",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "BHARAT FORGE LTD",
+        "class": "Equity",
+        "symbol": "BHARATFORG",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "LG HOUSEHOLD & HEALTH CARE LTD. PR",
+        "class": "Equity",
+        "symbol": "051905",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "CHAROEN POKPHAND FOODS NON-VOTING",
+        "class": "Equity",
+        "symbol": "CPF.R",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "BGF RETAIL LTD",
+        "class": "Equity",
+        "symbol": "282330",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "CCC SA",
+        "class": "Equity",
+        "symbol": "CCC",
+        "country": "Poland",
+        "currency": "USD"
+    },
+    {
+        "name": "ECLAT TEXTILE LTD",
+        "class": "Equity",
+        "symbol": "1476",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "ALIBABA PICTURES GROUP LTD",
+        "class": "Equity",
+        "symbol": "1060",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "EL PUERTO DE LIVERPOOL C1",
+        "class": "Equity",
+        "symbol": "LIVEPOLC.1",
+        "country": "Mexico",
+        "currency": "USD"
+    },
+    {
+        "name": "TURK HAVA YOLLARI AO A",
+        "class": "Equity",
+        "symbol": "THYAO",
+        "country": "Turkey",
+        "currency": "USD"
+    },
+    {
+        "name": "NETCARE LTD",
+        "class": "Equity",
+        "symbol": "NTC",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "M. DIAS BRANCO S/A INDUSTRIA E COM",
+        "class": "Equity",
+        "symbol": "MDIA3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "AIRASIA GROUP",
+        "class": "Equity",
+        "symbol": "AIRASIA",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "DISCOVERY INC SERIES C",
+        "class": "Equity",
+        "symbol": "DISCK",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "GOLDEN AGRI RESOURCES LTD",
+        "class": "Equity",
+        "symbol": "E5H",
+        "country": "Singapore",
+        "currency": "USD"
+    },
+    {
+        "name": "LUPIN LTD",
+        "class": "Equity",
+        "symbol": "LUPIN",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "HANSSEM CO LTD",
+        "class": "Equity",
+        "symbol": "009240",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "EMBOTELLADORA ANDINA SERIES B PREF",
+        "class": "Equity",
+        "symbol": "ANDINA.B",
+        "country": "Chile",
+        "currency": "USD"
+    },
+    {
+        "name": "AUROBINDO PHARMA LTD",
+        "class": "Equity",
+        "symbol": "AUROPHARMA",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "GOME RETAIL HOLDINGS LTD",
+        "class": "Equity",
+        "symbol": "493",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "PIONEER FOOD GROUP LTD",
+        "class": "Equity",
+        "symbol": "PFG",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "HYUNDAI MOTOR PREF",
+        "class": "Equity",
+        "symbol": "005385",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "BRITISH AMERICAN TOBACCO (MALAYSIA",
+        "class": "Equity",
+        "symbol": "BAT",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "ROBINSON PCL F",
+        "class": "Equity",
+        "symbol": "ROBINS.F",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "KRW CASH",
+        "class": "Cash",
+        "symbol": "KRW",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "SURYA CITRA MEDIA",
+        "class": "Equity",
+        "symbol": "SCMA",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "RINNAI CORP",
+        "class": "Equity",
+        "symbol": "5947",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "CHEIL WORLDWIDE INC",
+        "class": "Equity",
+        "symbol": "030000",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "NOK CORP",
+        "class": "Equity",
+        "symbol": "7240",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "SIHUAN PHARMACEUTICAL HOLDINGS GRO",
+        "class": "Equity",
+        "symbol": "460",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "ODONTOPREV SA",
+        "class": "Equity",
+        "symbol": "ODPV3",
+        "country": "Brazil",
+        "currency": "USD"
+    },
+    {
+        "name": "ZAR CASH",
+        "class": "Cash",
+        "symbol": "ZAR",
+        "country": "South Africa",
+        "currency": "USD"
+    },
+    {
+        "name": "ALLIANCE GLOBAL GROUP INC.",
+        "class": "Equity",
+        "symbol": "AGI",
+        "country": "Philippines",
+        "currency": "USD"
+    },
+    {
+        "name": "GLOBE TEL INC",
+        "class": "Equity",
+        "symbol": "GLO",
+        "country": "Philippines",
+        "currency": "USD"
+    },
+    {
+        "name": "CASIO COMPUTER LTD",
+        "class": "Equity",
+        "symbol": "6952",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "HANON SYSTEMS",
+        "class": "Equity",
+        "symbol": "018880",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "GS RETAIL LTD",
+        "class": "Equity",
+        "symbol": "007070",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "OTTOGI CORP",
+        "class": "Equity",
+        "symbol": "007310",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "ORANGE POLSKA SA",
+        "class": "Equity",
+        "symbol": "OPL",
+        "country": "Poland",
+        "currency": "USD"
+    },
+    {
+        "name": "DISCOVERY INC SERIES A",
+        "class": "Equity",
+        "symbol": "DISCA",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "HANMI SCIENCE LTD",
+        "class": "Equity",
+        "symbol": "008930",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "ANADOLU EFES BIRACILIK VE MALT SAN",
+        "class": "Equity",
+        "symbol": "AEFES",
+        "country": "Turkey",
+        "currency": "USD"
+    },
+    {
+        "name": "O2 CZECH REPUBLIC AS",
+        "class": "Equity",
+        "symbol": "BAATELEC",
+        "country": "Czech Republic",
+        "currency": "USD"
+    },
+    {
+        "name": "FORD OTOMOTIV SANAYI A",
+        "class": "Equity",
+        "symbol": "FROTO",
+        "country": "Turkey",
+        "currency": "USD"
+    },
+    {
+        "name": "BANGKOK DUSIT MEDICAL SERVICES PCL",
+        "class": "Equity",
+        "symbol": "BDMS.F",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "IDR CASH",
+        "class": "Cash",
+        "symbol": "IDR",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "EVA AIRWAYS CORP.",
+        "class": "Equity",
+        "symbol": "2618",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "DONG SUH INC",
+        "class": "Equity",
+        "symbol": "026960",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "GRUPO LALA",
+        "class": "Equity",
+        "symbol": "LALAB",
+        "country": "Mexico",
+        "currency": "USD"
+    },
+    {
+        "name": "HYUNDAI WIA CORP",
+        "class": "Equity",
+        "symbol": "011210",
+        "country": "Korea (South)",
+        "currency": "USD"
+    },
+    {
+        "name": "FORMOSA TAFFETA CO. LTD.",
+        "class": "Equity",
+        "symbol": "1434",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "TURK TELEKOMUNIKASYON",
+        "class": "Equity",
+        "symbol": "TTKOM",
+        "country": "Turkey",
+        "currency": "USD"
+    },
+    {
+        "name": "ASICS CORP",
+        "class": "Equity",
+        "symbol": "7936",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "TRUE CORPORATION PCL F",
+        "class": "Equity",
+        "symbol": "TRUE.F",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "ABC MART INC",
+        "class": "Equity",
+        "symbol": "2670",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "UMW HOLDINGS BHD",
+        "class": "Equity",
+        "symbol": "UMWH",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "HTC CORP",
+        "class": "Equity",
+        "symbol": "2498",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "ASIA PACIFIC TELECOM LTD",
+        "class": "Equity",
+        "symbol": "3682",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "GLENMARK PHARMACEUTICALS LTD",
+        "class": "Equity",
+        "symbol": "GLENMARK",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "USD CASH",
+        "class": "Cash",
+        "symbol": "USD",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "ULKER BISKUVI SANAYI A",
+        "class": "Equity",
+        "symbol": "ULKER",
+        "country": "Turkey",
+        "currency": "USD"
+    },
+    {
+        "name": "ASTRO MALAYSIA HOLDINGS",
+        "class": "Equity",
+        "symbol": "ASTRO",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "CADILA HEALTHCARE LTD",
+        "class": "Equity",
+        "symbol": "CADILAHC",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "TOYODA GOSEI LTD",
+        "class": "Equity",
+        "symbol": "7282",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "FELDA GLOBAL VENTURES HOLDINGS",
+        "class": "Equity",
+        "symbol": "FGV",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "JPY CASH",
+        "class": "Cash",
+        "symbol": "JPY",
+        "country": "Japan",
+        "currency": "USD"
+    },
+    {
+        "name": "XL AXIATA",
+        "class": "Equity",
+        "symbol": "EXCL",
+        "country": "Indonesia",
+        "currency": "USD"
+    },
+    {
+        "name": "GENTING PLANTATIONS BHD",
+        "class": "Equity",
+        "symbol": "GENP",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "ARCELIK A",
+        "class": "Equity",
+        "symbol": "ARCLK",
+        "country": "Turkey",
+        "currency": "USD"
+    },
+    {
+        "name": "CHINA AIRLINES LTD.",
+        "class": "Equity",
+        "symbol": "2610",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "MXN CASH",
+        "class": "Cash",
+        "symbol": "MXN",
+        "country": "Mexico",
+        "currency": "USD"
+    },
+    {
+        "name": "CHAROEN POKPHAND FOODS PCL FOREIGN",
+        "class": "Equity",
+        "symbol": "CPF.F",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "BUMRUNGRAD HOPTL THB1(ALIEN MKT)",
+        "class": "Equity",
+        "symbol": "BH.F",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "DXB ENTERTAINMENTS",
+        "class": "Equity",
+        "symbol": "DXBE",
+        "country": "United Arab Emirates",
+        "currency": "USD"
+    },
+    {
+        "name": "TOFAS TURK OTOMOBIL FABRIKASI A",
+        "class": "Equity",
+        "symbol": "TOASO",
+        "country": "Turkey",
+        "currency": "USD"
+    },
+    {
+        "name": "COCA-COLA ICECEK A",
+        "class": "Equity",
+        "symbol": "CCOLA",
+        "country": "Turkey",
+        "currency": "USD"
+    },
+    {
+        "name": "NOK CASH",
+        "class": "Cash",
+        "symbol": "NOK",
+        "country": "Norway",
+        "currency": "USD"
+    },
+    {
+        "name": "CASH COLLATERAL USD BZFUT",
+        "class": "Cash Collateral and Margins",
+        "symbol": "BZFUT",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "INR CASH",
+        "class": "Cash",
+        "symbol": "INR",
+        "country": "India",
+        "currency": "USD"
+    },
+    {
+        "name": "MYR CASH",
+        "class": "Cash",
+        "symbol": "MYR",
+        "country": "Malaysia",
+        "currency": "USD"
+    },
+    {
+        "name": "CHF CASH",
+        "class": "Cash",
+        "symbol": "CHF",
+        "country": "Switzerland",
+        "currency": "USD"
+    },
+    {
+        "name": "SEK CASH",
+        "class": "Cash",
+        "symbol": "SEK",
+        "country": "Sweden",
+        "currency": "USD"
+    },
+    {
+        "name": "GLOBAL TELECOM HOLDING",
+        "class": "Equity",
+        "symbol": "GTHE",
+        "country": "Egypt",
+        "currency": "USD"
+    },
+    {
+        "name": "AED CASH",
+        "class": "Cash",
+        "symbol": "AED",
+        "country": "United Arab Emirates",
+        "currency": "USD"
+    },
+    {
+        "name": "FOLLI FOLLIE COMMERCIAL MANUFACTUR",
+        "class": "Equity",
+        "symbol": "FFGRP",
+        "country": "Greece",
+        "currency": "USD"
+    },
+    {
+        "name": "SGD CASH",
+        "class": "Cash",
+        "symbol": "SGD",
+        "country": "Singapore",
+        "currency": "USD"
+    },
+    {
+        "name": "TRY CASH",
+        "class": "Cash",
+        "symbol": "TRY",
+        "country": "Turkey",
+        "currency": "USD"
+    },
+    {
+        "name": "QAR CASH",
+        "class": "Cash",
+        "symbol": "QAR",
+        "country": "Qatar",
+        "currency": "USD"
+    },
+    {
+        "name": "HUF CASH",
+        "class": "Cash",
+        "symbol": "HUF",
+        "country": "Hungary",
+        "currency": "USD"
+    },
+    {
+        "name": "TWD CASH",
+        "class": "Cash",
+        "symbol": "TWD",
+        "country": "Taiwan",
+        "currency": "USD"
+    },
+    {
+        "name": "CAD CASH",
+        "class": "Cash",
+        "symbol": "CAD",
+        "country": "Canada",
+        "currency": "USD"
+    },
+    {
+        "name": "AUD CASH",
+        "class": "Cash",
+        "symbol": "AUD",
+        "country": "Australia",
+        "currency": "USD"
+    },
+    {
+        "name": "THB CASH",
+        "class": "Cash",
+        "symbol": "THB",
+        "country": "Thailand",
+        "currency": "USD"
+    },
+    {
+        "name": "CZK CASH",
+        "class": "Cash",
+        "symbol": "CZK",
+        "country": "Czech Republic",
+        "currency": "USD"
+    },
+    {
+        "name": "CNH CASH",
+        "class": "Cash",
+        "symbol": "CNH",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "PHP CASH",
+        "class": "Cash",
+        "symbol": "PHP",
+        "country": "Philippines",
+        "currency": "USD"
+    },
+    {
+        "name": "CLP CASH",
+        "class": "Cash",
+        "symbol": "CLP",
+        "country": "Chile",
+        "currency": "USD"
+    },
+    {
+        "name": "BRL/USD",
+        "class": "FX",
+        "symbol": "BRL",
+        "country": "United States",
+        "currency": "USD"
+    },
+    {
+        "name": "MSCI EMER MKT INDEX (ICE) JUN 18",
+        "class": "Futures",
+        "symbol": "MESM8",
+        "country": "-",
+        "currency": "USD"
+    },
+    {
+        "name": "CHINA HUISHAN DAIRY HOLDINGS COMPA",
+        "class": "Equity",
+        "symbol": "6863",
+        "country": "China",
+        "currency": "USD"
+    },
+    {
+        "name": "EGP CASH",
+        "class": "Cash",
+        "symbol": "EGP",
+        "country": "Egypt",
+        "currency": "USD"
+    },
+    {
+        "name": "PLN CASH",
+        "class": "Cash",
+        "symbol": "PLN",
+        "country": "Poland",
+        "currency": "USD"
+    }
+]

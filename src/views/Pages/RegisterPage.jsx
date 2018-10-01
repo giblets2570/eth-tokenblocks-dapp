@@ -1,0 +1,230 @@
+import React from "react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardBody,
+  CardFooter,
+  Container,
+  Row,
+  Col,
+  Form,
+  FormGroup,
+  InputGroup,
+  InputGroupAddon,
+  InputGroupText,
+  Input,
+  Label
+} from "reactstrap";
+
+import { CardSocial, InfoArea, Button } from "components";
+import { loadBundle, createBundle, saveBundle, formatPublicBundle } from "utils/encrypt";
+import { Redirect } from 'react-router-dom';
+import axios from "utils/request"
+import bgImage from "assets/img/bg16.jpg";
+import Auth from 'utils/auth';
+
+class RegisterPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+  handleChange(event,key) {
+    this.setState({
+      [key]: event.target.value
+    })
+  }
+  async signup() {
+    await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, { 
+      name: this.state.name,
+      email: this.state.email,
+      password: this.state.password
+    });
+    let response = await axios.post(`${process.env.REACT_APP_API_URL}auth/login`,{
+      email: this.state.email,
+      password: this.state.password
+    })
+    let {user, token} = response.data
+    Auth.authenticate(user, token);
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
+    if(!(user.ik && user.signature && user.spk)) {
+      let bundle;
+      if(localStorage.getItem(`bundle:${user.id}`)){
+        try{
+          let loadedBundle = JSON.parse(localStorage.getItem(`bundle:${user.id}`));
+          bundle = loadBundle(loadedBundle)
+        }catch(e){
+          console.log(e)
+        }
+      }
+      if(!bundle){
+        bundle = createBundle(user.id);
+        let savedBundle = saveBundle( bundle);
+        localStorage.setItem(`bundle:${user.id}`, JSON.stringify(savedBundle));
+      }
+
+      let publicBundle = formatPublicBundle(bundle);
+      let response = await axios.put(`${process.env.REACT_APP_API_URL}users/${user.id}`, { 
+        ik: publicBundle.ik,
+        spk: publicBundle.spk,
+        signature: publicBundle.signature
+      })
+    }else{
+      let loadedBundle = JSON.parse(localStorage.getItem(`bundle:${user.id}`))
+    }
+    this.setState({ signedUp: true })
+  }
+  render() {
+    if(this.state.signedUp) {
+      return <Redirect to='/investor/trades' />
+    }
+    return (
+      <div>
+        <div className="full-page-content">
+          <div className="register-page">
+            <Container>
+              <Row className="justify-content-center">
+                <Col lg={5} md={8} xs={12} className="mt-5">
+                  <InfoArea
+                    icon="now-ui-icons media-2_sound-wave"
+                    iconColor="primary"
+                    title="Marketing"
+                    titleColor="info"
+                    description="We've created the marketing campaign of the website. It was a very interesting collaboration."
+                  />
+                  <InfoArea
+                    icon="now-ui-icons media-1_button-pause"
+                    iconColor="primary"
+                    title="Fully Coded in React 16"
+                    titleColor="info"
+                    description="We've developed the website with React 16, HTML5 and CSS3. The client has access to the code using GitHub."
+                  />
+                  <InfoArea
+                    icon="now-ui-icons users_single-02"
+                    iconColor="info"
+                    title="Built Audience"
+                    titleColor="info"
+                    description="There is also a Fully Customizable CMS Admin Dashboard for this product."
+                  />
+                </Col>
+                <Col lg={4} md={8} xs={12}>
+                  <Card className="card-signup">
+                    <CardHeader className="text-center">
+                      <CardTitle tag="h4">Register</CardTitle>
+                      {
+                        // <CardSocial
+                        //   description=" or be classical "
+                        //   socials={[
+                        //     { name: "twitter" },
+                        //     { name: "dribbble" },
+                        //     { name: "facebook" }
+                        //   ]}
+                        // />
+                      }
+                    </CardHeader>
+                    <CardBody>
+                      <Form>
+                        <InputGroup
+                          className={
+                            this.state.nameFocus ? "input-group-focus" : ""
+                          }
+                        >
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                              <i className="now-ui-icons users_circle-08" />
+                            </InputGroupText>
+                          </InputGroupAddon>
+                          <Input
+                            type="text"
+                            placeholder="Name..."
+                            onFocus={e =>
+                              this.setState({ nameFocus: true })
+                            }
+                            onBlur={e =>
+                              this.setState({ nameFocus: false })
+                            }
+                            onChange={
+                              (e) => this.handleChange(e, 'name')
+                            }
+                          />
+                        </InputGroup>
+                        <InputGroup
+                          className={
+                            this.state.emailFocus ? "input-group-focus" : ""
+                          }
+                        >
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                              <i className="now-ui-icons text_caps-small" />
+                            </InputGroupText>
+                          </InputGroupAddon>
+                          <Input
+                            type="email"
+                            placeholder="Email..."
+                            onFocus={e =>
+                              this.setState({ emailFocus: true })
+                            }
+                            onBlur={e =>
+                              this.setState({ emailFocus: false })
+                            }
+                            onChange={
+                              (e) => this.handleChange(e, 'email')
+                            }
+                          />
+                        </InputGroup>
+                        <InputGroup
+                          className={
+                            this.state.passwordFocus ? "input-group-focus" : ""
+                          }
+                        >
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                              <i className="now-ui-icons ui-1_email-85" />
+                            </InputGroupText>
+                          </InputGroupAddon>
+                          <Input
+                            type="password"
+                            placeholder="Password..."
+                            onFocus={e => this.setState({ passwordFocus: true })}
+                            onBlur={e => this.setState({ passwordFocus: false })}
+                            onChange={
+                              (e) => this.handleChange(e, 'password')
+                            }
+                          />
+                        </InputGroup>
+                        {
+                          // <FormGroup check>
+                          //   <Label check>
+                          //     <Input type="checkbox" {...this.props.inputProps} />
+                          //     <span className="form-check-sign" />
+                          //     <div>
+                          //       I agree to the{" "}
+                          //       <a href="#something">terms and conditions</a>.
+                          //     </div>
+                          //   </Label>
+                          // </FormGroup>
+                        }
+                      </Form>
+                    </CardBody>
+                    <CardFooter className="text-center">
+                      <Button color="primary" size="lg" round onClick={() => this.signup()}>
+                        Get Started
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </div>
+        <div
+          className="full-page-background"
+          style={{ backgroundImage: "url(" + bgImage + ")" }}
+        />
+      </div>
+    );
+  }
+}
+
+export default RegisterPage;
