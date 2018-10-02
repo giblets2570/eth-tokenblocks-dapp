@@ -53,7 +53,13 @@ class Accounts extends React.Component {
   }
   async componentDidMount(){
     let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens`);
-    this.setState({ tokens: response.data });
+    let tokenOptions = response.data.map((token) => ({value: token.id, label: token.symbol}))
+    let tokenChoice = this.state.tokenId ? tokenOptions.find((option) => option.value === this.state.tokenId) : null
+    this.setState({ 
+      tokens: response.data,
+      tokenOptions: tokenOptions,
+      tokenChoice: tokenChoice
+    });
   }
   async getBalances(tokenId){
     if(!tokenId) return;
@@ -106,16 +112,13 @@ class Accounts extends React.Component {
                     classNamePrefix="react-select"
                     placeholder="Choose token"
                     name="token"
-                    value={this.state.tokenId}
-                    options={
-                      this.state.tokens.map((token) => ({value: token.id, label: token.symbol}))
-                    }
-                    onChange={value =>
+                    value={this.state.tokenChoice}
+                    options={this.state.tokenOptions}
+                    onChange={(value) => {
                       this.setState({ 
-                        tokenId: value,
-                        redirect: true
+                        tokenChoice: value
                       })
-                    }
+                    }}
                   />
                   <Row>
                     <Route path='/investor/accounts/:id' render={(props) => {

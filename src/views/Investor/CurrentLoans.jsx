@@ -61,7 +61,7 @@ class CurrentLoans extends Component {
             {rows}
           </tbody>
         </Table>
-        <Button bsStyle="info" fill type="submit">
+        <Button color="primary" type="submit">
           Submit loan request through Dharma.io
         </Button>
         <br/>

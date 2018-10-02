@@ -9,7 +9,7 @@ import PerfectScrollbar from "perfect-scrollbar";
 import { Button } from "components";
 
 import avatar from "assets/img/ryan.jpg";
-import logo from "logo-white.svg";
+import logo from "assets/img/logo.webp";
 
 var ps;
 
@@ -82,10 +82,10 @@ class Sidebar extends React.Component {
     return (
       <div>
         <NotificationAlert ref="notificationAlert" />
-        <div className="sidebar" data-color="blue">
+        <div className="sidebar" data-color="primary-green">
           <div className="logo">
             <a
-              href="https://www.creative-tim.com"
+              href="https://tokenblocks.io"
               className="simple-text logo-mini"
             >
               <div className="logo-img">
@@ -98,19 +98,22 @@ class Sidebar extends React.Component {
             >
               Token Blocks
             </a>
-            <div className="navbar-minimize">
-              <Button
-                simple
-                neutral
-                icon
-                round
-                id="minimizeSidebar"
-                onClick={this.minimizeSidebar}
-              >
-                <i className="now-ui-icons text_align-center visible-on-sidebar-regular" />
-                <i className="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini" />
-              </Button>
-            </div>
+
+            {
+              // <div className="navbar-minimize">
+              //   <Button
+              //     simple
+              //     neutral
+              //     icon
+              //     round
+              //     id="minimizeSidebar"
+              //     onClick={this.minimizeSidebar}
+              //   >
+              //     <i className="now-ui-icons text_align-center visible-on-sidebar-regular" />
+              //     <i className="now-ui-icons design_bullet-list-67 visible-on-sidebar-mini" />
+              //   </Button>
+              // </div>
+            }
           </div>
 
           <div className="sidebar-wrapper" ref="sidebar">

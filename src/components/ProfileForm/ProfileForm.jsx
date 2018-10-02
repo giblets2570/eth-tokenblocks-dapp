@@ -73,7 +73,7 @@ class ProfileForm extends React.Component {
             </FormGroup>
           </Col>
         </Row>
-        <Button color="info" type="submit">
+        <Button color="primary" type="submit">
           Update Profile
         </Button>
         <div className="clearfix" />

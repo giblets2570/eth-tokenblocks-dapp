@@ -34,12 +34,11 @@ class Profile extends Component {
           </Row>
           <Row>
             <Col md={12}>
-              <Card
-                title="Current Loans"
-                content={
+              <Card className="card-stats card-raised">
+                <CardBody>
                   <CurrentLoans/>
-                }
-              />
+                </CardBody>
+              </Card>
             </Col>
           </Row>
           <Route 

@@ -95,7 +95,7 @@
       &:after{
         content: "";
         position: absolute;
-        background-color: $white-color;
+        background-color: $primary-color;
         height: 44px;
         width: calc(100% - 5px);
         top: 0;
@@ -151,7 +151,7 @@
       > a:not([href]):not([tabindex]):hover{
         margin: 10px 15px 0;
         border-radius: $btn-round-radius;
-        color: $white-color;
+        color: $primary-color;
         display: block;
         text-decoration: none;
         position: relative;
@@ -173,22 +173,22 @@
 
       &:hover:not(.active) > a i,
       &:focus:not(.active) > a i{
-        color: $white-color;
+        color: $primary-color;
       }
 
       &.active > a{
-        background-color: $white-color;
+        background-color: $primary-color;
         box-shadow: $box-shadow;
       }
 
       &.active > a[data-toggle="collapse"],
-      & > a[aria-expanded="true"]{
+      & > a{
         background-color: $opacity-1;
         box-shadow: none;
-        color: $white-color;
+        color: $primary-color;
 
         i{
-          color: $white-color;
+          color: $primary-color;
         }
       }
 
@@ -197,7 +197,7 @@
         & ~ li:focus a[aria-expanded="true"]{
           background-color: $opacity-1;
           i{
-            color: $white-color;
+            color: $primary-color;
           }
         }
         & ~ li a[aria-expanded="true"],
@@ -317,7 +317,7 @@
       float: left;
       font-size: 20px;
       margin: 10px 10px;
-      color: $white-color;
+      color: $primary-color;
       line-height: 20px;
       font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
@@ -328,7 +328,7 @@
       display: block;
       white-space: nowrap;
       font-size: $font-size-large;
-      color: $white-color;
+      color: $primary-color;
       text-decoration: none;
       font-weight: $font-weight-normal;
       line-height: 30px;
@@ -369,6 +369,12 @@
   &,
   &[data-color="black"]{
     @include sidebar-color($black-color);
+  }
+  &[data-color="primary"]{
+    @include sidebar-color($primary-color);
+  }
+  &[data-color="primary-green"]{
+    @include sidebar-color($green-color);
   }
   &[data-color="blue"]{
     @include sidebar-color($info-color);
@@ -419,7 +425,7 @@
     }
 
     a{
-      color: $white-color;
+      color: $primary-color;
       text-decoration: none;
       padding: $padding-base-vertical 15px;
       white-space: nowrap;
@@ -462,7 +468,7 @@
   .nav {
     > li > a,
     > li > a:hover{
-      color: $white-color;
+      color: $primary-color;
     }
 
     > li > a:focus{
@@ -641,7 +647,7 @@
 
   .header{
     .title{
-      color: $white-color;
+      color: $primary-color;
     }
     .category{
       max-width: 600px;
@@ -650,7 +656,7 @@
       font-size: 13px;
 
       a{
-        color: $white-color;
+        color: $primary-color;
       }
     }
   }
