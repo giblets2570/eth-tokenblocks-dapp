@@ -28,6 +28,8 @@ import FormInputs from './FormInputs/FormInputs';
 import Header from './Header/Header';
 import PagesHeader from './Header/PagesHeader';
 
+import TradeDetails from './TradeDetails/TradeDetails';
+
 import InfoArea from './InfoArea/InfoArea';
 
 import Instructions from './Instructions/Instructions';
@@ -105,5 +107,8 @@ export {
   // CurrentLoans
   CurrentLoans,
   // AccountSetup
-  AccountSetup
+  AccountSetup,
+
+  // TradeDetails
+  TradeDetails
 };

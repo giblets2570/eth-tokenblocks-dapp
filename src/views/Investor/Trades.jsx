@@ -1,12 +1,12 @@
 import React from 'react';
+import axios from 'utils/request';
+import moment from 'moment';
+import ShowTrade from 'views/Investor/ShowTrade'
 import { Link, Route } from 'react-router-dom';
 import { Card, CardBody, CardHeader, CardTitle, Row, Col, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { subscribe } from 'utils/socket';
-import axios from 'utils/request';
-import moment from 'moment';
 import { PanelHeader, Button } from "components";
 import { decrypt } from 'utils/encrypt'
-import ShowTrade from 'views/Investor/ShowTrade'
 
 const emptyString = "0000000000000000000000000000000000000000000000000000000000000000"
 
@@ -35,7 +35,6 @@ class Trades extends React.Component {
       trade.executionDate = moment(trade.executionDate)
       trade.createdAt = moment(trade.createdAt*1000)
       let tradeKeys = JSON.parse(localStorage.getItem('tradeKeys'))
-
       trade.tradeBrokers = trade.tradeBrokers.map((ob) => {
         let key = `${trade.token.id}:${ob.broker.id}:${trade.salt}`;
         let sk = JSON.parse(localStorage.getItem('tradeKeys'))[key];
@@ -48,8 +47,19 @@ class Trades extends React.Component {
         }
         return ob
       })
+      trade.bestQuote = trade.tradeBrokers.reduce((c, ob) => {
+        if(ob.price && (c === null || parseFloat(ob.price) > c )) {
+          c = parseFloat(ob.priceDecrypted)
+        }
+        return c
+      }, null);
       return trade;
     })
+    for(let trade of trades) {
+      subscribe(`trade-update:${trade.id}`, (id) => {
+        this.fetchTrades(this.state.page, this.state.pageCount)
+      })
+    }
     this.setState({ trades: trades, total: total });
   }
   async componentDidMount(){
@@ -61,17 +71,17 @@ class Trades extends React.Component {
   }
   stateString(trade){
     if(trade.state === 0){
-      if(trade.broker){
-        return 'Waiting for trade confirmation'
-      }else if(trade.price){
+      if(trade.signature){
+        return 'Quote accepted'
+      }else if(trade.bestQuote){
         return 'Quote received'
       }else{
         return 'Waiting for quotes'
       }
     }else if(trade.state === 1){
-      return <Button onClick={() => this.claimTokens(trade)}>Claim tokens</Button>
+      return 'Trade Confirmed'
     }if(trade.state === 2){
-      return 'Tokens disbursed'
+      return <Button color='success' onClick={() => this.claimTokens(trade)}>Claim tokens</Button>
     }else if(trade.state === 3){
       return 'Trade cancelled'
     }else if(trade.state === 4){
@@ -82,12 +92,6 @@ class Trades extends React.Component {
     let rows = this.state.trades
     .sort((a, b) => a.createdAt - b.createdAt)
     .map((trade, $index) => {
-      let bestQuote = trade.tradeBrokers.reduce((c, ob) => {
-        if(ob.price && (c === null || parseFloat(ob.price) > c )) {
-          c = parseFloat(ob.priceDecrypted)
-        }
-        return c
-      }, null);
       let amount = parseFloat(trade.nominalAmount), buySell = 'Buy'
       if(amount < 0) {
         amount = -1 * amount
@@ -102,7 +106,7 @@ class Trades extends React.Component {
           <td>{amount}</td>
           <td>{trade.executionDate.format('DD/MM/YY')}</td>
           <td>{trade.createdAt.format('HH:mm [at] DD/MM/YY')}</td>
-          <td>{bestQuote}</td>
+          <td>{trade.bestQuote}</td>
           <td>{this.stateString(trade)}</td>
           <td>
             <Link to={`/investor/trades/${trade.id}`}>View</Link>

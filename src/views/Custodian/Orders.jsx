@@ -20,8 +20,10 @@ class Orders extends React.Component {
     await web3Service.promise
     let web3 = web3Service.instance
     let response = await axios.get(`${process.env.REACT_APP_API_URL}orders?executionDate=${date.format('YYYY-MM-DD')}`)
+    let {data, total} = response.data
     this.setState({
-      orders: response.data
+      orders: data,
+      total: total
     })
   }
   componentDidMount(){

@@ -55,7 +55,7 @@ class TradeBrokers extends React.Component {
                     }
                   }else{
                     thirdCol = (<Button 
-                      color="warning"
+                      color="success"
                       onClick={() => this.acceptBroker(ob.broker)}>
                       Accept
                     </Button>)

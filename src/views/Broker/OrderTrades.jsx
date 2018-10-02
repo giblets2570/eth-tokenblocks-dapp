@@ -15,6 +15,7 @@ import web3Service from 'utils/getWeb3'
 import {fromRpcSig, bufferToHex} from 'ethereumjs-util'
 import promisify from 'tiny-promisify';
 import contract from 'truffle-contract';
+import queryString from 'query-string'
 const emptyString = "0000000000000000000000000000000000000000000000000000000000000000"
 
 class OrderTrades extends React.Component {
@@ -24,6 +25,8 @@ class OrderTrades extends React.Component {
       token: {},
       holdings: [],
       trades: [],
+      page: 0,
+      pageCount: 10,
       trade: null,
       orderModal: false,
       timestamp: 'none',
@@ -37,8 +40,18 @@ class OrderTrades extends React.Component {
     }
   }
   async componentDidMount(){
+    const values = queryString.parse(this.props.location.search)
+    if(values.date) {
+      this.setState({
+        date: moment(values.date)
+      })
+    }else{
+      this.props.history.push({
+        search: "?" + new URLSearchParams({date: this.state.date.format('YYYY-MM-DD')
+      }).toString()})
+    }
     await this.fetchToken();
-    await this.getTradeData(this.state.date);
+    await this.getTradeData(this.state.date, this.state.page, this.state.pageCount);
     await this.getOrderData(this.state.date);
     await this.getHoldings();
   }
@@ -60,10 +73,10 @@ class OrderTrades extends React.Component {
       orderHoldings: orderHoldings
     })
   }
-  async getTradeData(day) {
-    let trades = await axios.get(`${process.env.REACT_APP_API_URL}trades?tokenId=${this.props.tokenId}&executionDate=${day.format('YYYY-MM-DD')}&state=1`)
-    trades = trades.data
-    trades = trades.map((trade) => {
+  async getTradeData(day, page, pageCount) {
+    let response = await axios.get(`${process.env.REACT_APP_API_URL}trades?tokenId=${this.props.tokenId}&executionDate=${day.format('YYYY-MM-DD')}&page=${page}&page_count=${pageCount}&state=1`)
+    let {data, total} = response.data
+    let trades = data.map((trade) => {
       trade.executionDate = moment(trade.executionDate)
       trade.createdAt = moment(trade.createdAt*1000)
       let ob = trade.tradeBrokers.find((ob) => ob.brokerId === this.state.user.id);
@@ -97,6 +110,7 @@ class OrderTrades extends React.Component {
     }
   }
   totalTradeValue(trades){
+    console.log(trades)
     let values = trades.reduce((c, trade) => {
       c[trade.currency] = (c[trade.currency]||0) + parseFloat(trade.nominalAmountDecrypted);
       return c;
@@ -105,10 +119,14 @@ class OrderTrades extends React.Component {
   }
   async handleDayChange(day){
     let date = moment(day)
+    this.props.history.push({
+      search: "?" + new URLSearchParams({date: date.format('YYYY-MM-DD')
+    }).toString()})
     this.setState({ 
-      date: date
+      date: date,
+      page: 0
     });
-    await this.getTradeData(date);
+    await this.getTradeData(date, 0, this.state.pageCount);
     await this.getOrderData(date);
     this.getHoldings()
   }
@@ -130,8 +148,9 @@ class OrderTrades extends React.Component {
     let tradeKernelInstance = await tradeKernel.deployed();
 
     let tradeHashes = trades.map((trade) => trade.hash)
+
     let amount = 100000 // I dunno what this is yet
-    let executionDate = moment().format('YYYY-MM-DD')
+    let executionDate = moment(this.state.date).format('YYYY-MM-DD')
     let executionDateInt = Math.floor(moment(executionDate).toDate().getTime() / 1000);
 
     // for (var i = 100 - 1; i >= 0; i--) {
@@ -162,6 +181,7 @@ class OrderTrades extends React.Component {
         amount: amount,
         executionDate: moment(executionDateInt*1000).format('YYYY-MM-DD')
       });
+      this.getOrderData(executionDate)
       this.setState({
         order: result.data
       })
@@ -187,33 +207,11 @@ class OrderTrades extends React.Component {
                 <CardBody>
                   <Row>
                     <Col xs={12} md={6}>
-                      <Statistics
-                        iconState="primary"
-                        icon="ui-2_chat-round"
-                        title={
-                          this.state.token.name
-                          ? this.state.token.name
-                          : "Loading..."
-                        }
-                        subtitle="Name"
-                      />
-                    </Col>
-                    <Col xs={12} md={6}>
-                      <Statistics
-                        iconState="primary"
-                        icon="ui-2_chat-round"
-                        title={
-                          this.state.token.symbol
-                          ? this.state.token.symbol
-                          : 'Loading...' 
-                        }
-                        subtitle="Symbol"
-                      />
-                    </Col>
-                  </Row>
-                  <Row style={{padding: '40px'}}></Row>
-                  <Row>
-                    <Col xs={12} md={6}>
+                      <h3>Trading day for {
+                        this.state.token.name
+                        ? this.state.token.name
+                        : "Loading..."
+                      }</h3>
                       <Datetime
                         timeFormat={false}
                         value={this.state.date}
@@ -225,7 +223,7 @@ class OrderTrades extends React.Component {
                     <Col xs={12} md={6}>
                       <Statistics
                         iconState="primary"
-                        icon="ui-2_chat-round"
+                        icon="design_bullet-list-67"
                         title={
                           this.state.trades.length 
                         }
@@ -233,13 +231,14 @@ class OrderTrades extends React.Component {
                       />
                     </Col>
                   </Row>
+                  
                   {
                     this.state.trades.length ? 
                     (
                       <Row>
                         <Col xs={12} md={6}>
                           <h3>Total order value</h3>
-                          <Table striped>
+                          <Table responsive>
                             <thead>
                               <tr>
                                 <th>Currency</th>
@@ -272,7 +271,7 @@ class OrderTrades extends React.Component {
                         </Col>
                         <Col xs={12} md={6}>
                           <h3>Order</h3>
-                          <Table striped>
+                          <Table responsive>
                             <thead>
                               <tr>
                                 <th>Security</th>
@@ -316,7 +315,9 @@ class OrderTrades extends React.Component {
                               </p>)
                             : null
                           }
-                          <Button>
+                          <Button
+                            color='primary'
+                            >
                             Download FIX
                           </Button>
                           {
@@ -324,7 +325,9 @@ class OrderTrades extends React.Component {
                             ? (
                               null
                             ) : (
-                              <Button onClick={() => this.complete()}>
+                              <Button 
+                                color='primary'
+                                onClick={() => this.complete()}>
                                 Confirm completion
                               </Button>
                             )

@@ -43,6 +43,7 @@ class Trades extends React.Component {
       this.setState({
         trade: null
       })
+      this.getTrades(this.state.page, this.state.pageCount)
     }
   }
   async getTrades(page, pageCount){
@@ -61,18 +62,23 @@ class Trades extends React.Component {
         message = {text: ob.price,ik: ob.ik,ek: ob.ek};
         trade.priceDecrypted = receiveMessage(this.state.bundle, message);
       }
-      trade.state = ob.state;
+      trade.amount = parseFloat(trade.nominalAmount), 
+      trade.buySell = 'Buy'
+      if(trade.amount < 0) {
+        trade.amount = -1 * trade.amount
+        trade.buySell = 'Sell'
+      }
       return trade;
     })
     this.setState({ trades: trades, total: total });
   }
   stateString(trade){
     if(trade.state === 0){
-      if(trade.broker){
+      if(trade.signature){
         return 'Waiting for trade confirmation'
-      }else if(trade.price){
-        return 'Quote received'
-      }else{
+      }else if(trade.priceDecrypted){
+        return 'Quote given'
+      }else {
         return 'Waiting for quotes'
       }
     }else if(trade.state === 1){
@@ -92,19 +98,14 @@ class Trades extends React.Component {
     let rows = this.state.trades
     .sort((a, b) => a.createdAt - b.createdAt)
     .map((trade, $index) => {
-      let amount = parseFloat(trade.nominalAmount), buySell = 'Buy'
-      if(amount < 0) {
-        amount = -1 * amount
-        buySell = 'Sell'
-      }
       return (
         <tr key={$index}>
           <td scope="row">{$index+1}</td>
           <td>{trade.token.name}</td>
           <td>{trade.investor.name}</td>
-          <td>{buySell}</td>
+          <td>{trade.buySell}</td>
           <td>{trade.currency}</td>
-          <td>{amount}</td>
+          <td>{trade.amount}</td>
           <td>{trade.executionDate.format('DD/MM/YY')}</td>
           <td>{trade.priceDecrypted}</td>
           <td>{this.stateString(trade)}</td>

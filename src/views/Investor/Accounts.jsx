@@ -87,8 +87,8 @@ class Accounts extends React.Component {
   }
   render() {
     let pathEnd = this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length-1]
-    if(this.state.tokenId && this.state.tokenId.value && parseInt(pathEnd) !== this.state.tokenId.value) {
-      return <Redirect to={`/investor/accounts/${this.state.tokenId.value}`}/>
+    if(this.state.tokenChoice && this.state.tokenChoice.value && parseInt(pathEnd) !== this.state.tokenChoice.value) {
+      return <Redirect to={`/investor/accounts/${this.state.tokenChoice.value}`}/>
     }
     return (
       <div>

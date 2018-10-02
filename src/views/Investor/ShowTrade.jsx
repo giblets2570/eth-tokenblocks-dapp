@@ -5,7 +5,7 @@ import {
   ModalBody,
   ModalFooter,
   ModalHeader, Row, Col } from 'reactstrap';
-import { Button, GiveQuotes } from 'components';
+import { TradeDetails, Button, GiveQuotes } from 'components';
 import axios from 'utils/request';
 import { Redirect } from 'react-router-dom';
 import { subscribeOnce, subscribe } from 'utils/socket';
@@ -92,7 +92,15 @@ class ShowTrade extends React.Component {
         return ob
       })
     }
-    this.setState({ trade: response.data });
+    trade.buySell = 'Buy'
+    if(trade.nominalAmountDecrypted) {
+      [trade.currency, trade.amount] = trade.nominalAmountDecrypted.split(':');
+      if(parseFloat(trade.amount) < 0) {
+        trade.buySell = 'Sell';
+        trade.amount = trade.amount.substring(1);
+      }
+    }
+    this.setState({ trade: trade });
   }
   async componentDidMount() {
     this.setState({
@@ -170,16 +178,10 @@ class ShowTrade extends React.Component {
     }
   }
   stateShow(){
-    if(this.state.trade.state === 0 && this.state.user.role === 'investor') {
+    if(this.state.trade.state <= 1) {
       return (
-        <Button color="info"
-          onClick={() => this.cancel()}>
-          Cancel
-        </Button> 
-      )
-    } else if(this.state.trade.state === 1) {
-      return (
-        <Button color="info"
+        <Button 
+          color="danger"
           onClick={() => this.cancel()}>
           {this.state.user.role === 'investor' ? 'Cancel' : 'Reject'}
         </Button> 
@@ -188,11 +190,11 @@ class ShowTrade extends React.Component {
 
     } else if(this.state.trade.state === 3) {
       return (
-        <p style={{color: 'red'}}>Trade cancelled by investor</p>
+        <p style={{color: 'red', textAlign: 'center'}}>Trade cancelled by investor</p>
       )
     } else if(this.state.trade.state === 4) {
       return (
-        <p style={{color: 'red'}}>Trade cancelled by broker</p>
+        <p style={{color: 'red', textAlign: 'center'}}>Trade cancelled by broker</p>
       )
     }
   }
@@ -227,7 +229,8 @@ class ShowTrade extends React.Component {
             <p style={{textAlign: 'center'}}>
               Investor has accepted your quote
             </p>
-            <Button color="info"
+            <Button 
+              color="success"
               onClick={() => this.acceptInvestor()}>
               Confirm Trade
             </Button> 
@@ -253,14 +256,6 @@ class ShowTrade extends React.Component {
     if(this.state.toggled) {
       return <Redirect to={this.props.returnTo} />
     }
-    let currency, amount, buySell = 'Buy'
-    if(this.state.trade.nominalAmountDecrypted) {
-      [currency, amount] = this.state.trade.nominalAmountDecrypted.split(':');
-      if(parseFloat(amount) < 0) {
-        buySell = 'Sell';
-        amount = amount.substring(1);
-      }
-    }
     return (
       <Modal 
         isOpen={this.state.isOpen}
@@ -275,36 +270,24 @@ class ShowTrade extends React.Component {
           } tokens
         </ModalHeader>
         <ModalBody>
-          <Row>
-            <Col xs={6} style={{textAlign: 'center'}}>
-              <h4>Buy/Sell</h4>
-              <p style={{color: 'green'}}>{buySell}</p>
-            </Col>
-            <Col xs={6} style={{textAlign: 'center'}}>
-              <h4>Amount</h4>
-              <p style={{color: 'green'}}>{amount}</p>
-            </Col>
-            <Col xs={6} style={{textAlign: 'center'}}>
-              <h4>Currency</h4>
-              <p style={{color: 'green'}}>{currency}</p>
-            </Col>
-            <Col xs={6} style={{textAlign: 'center'}}>
-              <h4>Execution date</h4>
-              <p style={{color: 'green'}}>{
-                this.state.trade.executionDate
-                ? this.state.trade.executionDate.format("DD/MM/YYYY")
-                : null
-              }</p>
-            </Col>
-          </Row>
+          <TradeDetails trade={this.state.trade}/>
           <Row>
             <Col>
-              {this.roleShow()}
+              {this.stateShow()}
             </Col>
           </Row>
+          {
+            this.state.trade.state < 3
+            ? (
+              <Row>
+                <Col>
+                  {this.roleShow()}
+                </Col>
+              </Row>
+            ): null
+          }
         </ModalBody>
         <ModalFooter>
-          {this.stateShow()}
         </ModalFooter>
       </Modal>
     )

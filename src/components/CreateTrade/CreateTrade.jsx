@@ -69,8 +69,8 @@ class CreateTrade extends Component {
   constructor(props){
     super(props)
 
-    let buySells = ['GBP', 'EUR', 'USD']
-    let currencies = ['Buy', 'Sell']
+    let buySells = ['Buy', 'Sell']
+    let currencies = ['GBP', 'EUR', 'USD']
     let collaterals = ['Fiat', 'Ethereum']
     let buySellSelect = buySells.map((bs) => ({value: bs, label: bs}))
     let currencySelect = currencies.map((currency) => ({value: currency, label: currency}))
