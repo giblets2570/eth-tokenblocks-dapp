@@ -49,16 +49,11 @@ class PagesHeader extends React.Component {
               </NavbarToggler>
             </div>
             <Link to="/" className="navbar-brand">
-              Now Ui Dashboard Pro - React
+              TokenBlocks
             </Link>
           </div>
           <Collapse isOpen={this.state.isOpen} navbar>
             <Nav className="ml-auto" navbar>
-              <NavItem>
-                <Link to="/dashboard" className="nav-link">
-                  <i className="now-ui-icons design_bullet-list-67" /> Dashboard
-                </Link>
-              </NavItem>
               {pagesRoutes.map((prop, key) => {
                 if (prop.redirect) return null;
                 return (

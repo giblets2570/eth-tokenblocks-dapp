@@ -184,7 +184,7 @@ class Sidebar extends React.Component {
                               <li
                                 className={this.activeRoute(prop.path)}
                                 key={key}
-                              >
+                                >
                                 <NavLink
                                   to={prop.path}
                                   activeClassName="active"
@@ -192,7 +192,7 @@ class Sidebar extends React.Component {
                                   <span className="sidebar-mini-icon">
                                     {prop.mini}
                                   </span>
-                                  <span className="sidebar-normal">
+                                  <span className="sidebar-normal text-center">
                                     {prop.name}
                                   </span>
                                 </NavLink>

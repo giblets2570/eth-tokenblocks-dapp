@@ -5,7 +5,7 @@ import LockScreenPage from "views/Pages/LockScreenPage.jsx";
 
 const pagesRoutes = [
   {
-    path: "/pages/register-page",
+    path: "/pages/register",
     name: "Register Page",
     short: "Register",
     mini: "RPP",
@@ -21,25 +21,9 @@ const pagesRoutes = [
     component: LoginPage
   },
   {
-    path: "/pages/pricing-page",
-    name: "Pricing Page",
-    short: "Pricing",
-    mini: "PP",
-    icon: "business_money-coins",
-    component: PricingPage
-  },
-  {
-    path: "/pages/lock-screen-page",
-    name: "Lock Screen Page",
-    short: "Lock",
-    mini: "LSP",
-    icon: "ui-1_lock-circle-open",
-    component: LockScreenPage
-  },
-  {
     redirect: true,
     path: "/pages",
-    pathTo: "/pages/register-page",
+    pathTo: "/pages/register",
     name: "Register Page"
   }
 ];

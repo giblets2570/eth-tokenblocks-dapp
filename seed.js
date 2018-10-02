@@ -53,7 +53,7 @@ let users = [{
   id: 5, name: 'custodian', email: 'custodian@custodian.com', password: 'custodian', role: 'custodian', account: 5,
   passwordHash: '$pbkdf2-sha256$29000$hxBC6J3TGuO8dy4FQMiZkw$6Gicn.ohOheoFMGsrJvoAg38BMstr8QwCpdk00xzt.k', 
 },{
-  id: 6, name: 'fund', email: 'fund@fund.com', password: 'fund', role: 'fund', account: 4,
+  id: 6, name: 'fund', email: 'fund@fund.com', password: 'fund', role: 'issuer', account: 4,
   passwordHash: '$pbkdf2-sha256$29000$k9IaQ.hdy1nrXYtRivHe2w$81aKj1eGHd9s.YjSINps3dP7P1qHE0h5xMJ8pFagq94', 
 }]
 let brokers = [users[1],users[2]]

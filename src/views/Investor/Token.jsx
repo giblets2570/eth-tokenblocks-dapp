@@ -23,7 +23,7 @@ import {
   Progress
 } from "components";
 
-import { Line, Bar, Pie } from "react-chartjs-2";
+import { Line, Bar, Pie, Doughnut } from "react-chartjs-2";
 
 import {
   chartsLine1,
@@ -43,10 +43,33 @@ class Token extends React.Component {
       balance: null,
       orderModal: false,
       timestamp: 'none',
+      colours: [
+        "#55efc4",
+        "#81ecec",
+        "#74b9ff",
+        "#a29bfe",
+        "#00b894",
+        "#00cec9",
+        "#0984e3",
+        "#6c5ce7",
+        "#ffeaa7",
+        "#fab1a0",
+        "#ff7675",
+        "#fd79a8",
+        "#636e72",
+        "#fdcb6e",
+        "#e17055",
+        "#d63031",
+        "#e84393",
+        "#2d3436"
+      ]
     }
   }
   async componentDidMount(){
     let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}`);
+    let minutes = `${response.data.cutoffTime%(60*60)}`
+    if(minutes.length === 1) minutes = `0${minutes}`
+    response.data.cutoffTimeString = `${response.data.cutoffTime/(60*60)}:${minutes}`
     this.setState({ token: response.data });
     response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/holdings`);
     this.setState({ holdings: response.data })
@@ -62,18 +85,35 @@ class Token extends React.Component {
     }
   }
   toggleOrderModal() {
-    console.log('HAHAHAHHAAH')
     this.setState({
       orderModal: !this.state.orderModal
     })
   }
   createOrder() {
-    console.log('HAHAHAHHAAH')
     this.setState({
       orderModal: true
     })
   }
+  makeData(object){
+    return {
+      labels: Object.keys(object),
+      datasets: [{
+        data: Object.keys(object).map((c) => object[c]),
+        backgroundColor: this.state.colours.slice(0, Object.keys(object).length),
+        hoverBackgroundColor: this.state.colours.slice(0, Object.keys(object).length),
+      }]
+    }
+  }
   render() {
+    let sectors = {}, currencies = {}, countries = {}
+    for(let holding of this.state.holdings){
+      sectors[holding.security.sector] = (sectors[holding.security.sector]||0)+1;
+      currencies[holding.security.currency] = (currencies[holding.security.currency]||0)+1;
+      countries[holding.security.country] = (countries[holding.security.country]||0)+1;
+    }
+    let countryData = this.makeData(countries)
+    let sectorData = this.makeData(sectors)
+    let currencyData = this.makeData(currencies)
     return (
       <div>
         <CreateTrade isOpen={this.state.orderModal} toggle={() => this.toggleOrderModal()} token={this.state.token} />
@@ -245,20 +285,20 @@ class Token extends React.Component {
           <Row>
             <Col xs={12} md={12}>
               <Card className="card-stats card-raised">
-                <CardBody>
+                <CardBody style={{minHeight: '200px'}}>
                   <h3 style={{textAlign: 'center'}}>Exposure Summary</h3>
                   <Row>
-                    <Col xs={12} md={4} className="ml-auto">
+                    <Col xs={12} md={4}>
                       <h6 className="info-title">Sector Breakdown</h6>
-                      <Pie data={chartsBar1.data} />
+                      <Doughnut data={sectorData} />
                     </Col>
-                    <Col xs={12} md={4} className="ml-auto">
+                    <Col xs={12} md={4}>
                       <h6 className="info-title">Currency Breakdown</h6>
-                      <Pie data={chartsBar1.data} />
+                      <Doughnut data={currencyData} />
                     </Col>
-                    <Col xs={12} md={4} className="ml-auto">
+                    <Col xs={12} md={4}>
                       <h6 className="info-title">Country Breakdown</h6>
-                      <Pie data={chartsBar1.data} />
+                      <Doughnut data={countryData} />
                     </Col>
                   </Row>
                 </CardBody>

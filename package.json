@@ -2,7 +2,6 @@
   "name": "now-ui-dashboard-pro-react",
   "version": "1.2.0",
   "private": true,
-  "homepage": "https://creativetimofficial.github.io/now-ui-dashboard-pro-react/#/documentation/tutorial",
   "dependencies": {
     "@types/googlemaps": "3.30.11",
     "@types/markerclustererplus": "2.1.33",
@@ -50,7 +49,7 @@
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
     "start-js": "react-app-env start",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "npm run build-css && react-scripts build",
+    "build": "npm run build-css && react-app-env build && rimraf dist && mv build dist",
     "test": "react-app-env test",
     "eject": "react-scripts eject",
     "install:clean": "rm -rf node_modules/ && rm -rf package-lock.json && npm install && npm start",

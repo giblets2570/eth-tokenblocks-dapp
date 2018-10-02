@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, Route } from 'react-router-dom';
-import { Card, CardBody, CardHeader, CardTitle, Row, Col, Table } from "reactstrap";
+import { Card, CardBody, CardHeader, CardTitle, Row, Col, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { subscribe } from 'utils/socket';
 import axios from 'utils/request';
 import moment from 'moment';
@@ -22,17 +22,16 @@ class Trades extends React.Component {
   componentWillReceiveProps(nextProps) {
     
   }
-  changePage(direction) {
-    let page = Math.max(0, this.state.page + direction)
+  changePage(page) {
     this.setState({
       page: page
     })
     this.props.fetchTrades(page, this.state.pageCount);
   }
-  async componentDidMount(){
-    let response = await axios.get(`${process.env.REACT_APP_API_URL}trades?page=${this.state.page}&page_count=${this.state.pageCount}`);
-    let trades = response.data;
-    trades = trades.map((trade) => {
+  async fetchTrades(page, pageCount) {
+    let response = await axios.get(`${process.env.REACT_APP_API_URL}trades?page=${page}&page_count=${pageCount}`);
+    let {data, total} = response.data;
+    let trades = data.map((trade) => {
       trade.executionDate = moment(trade.executionDate)
       trade.createdAt = moment(trade.createdAt*1000)
       let tradeKeys = JSON.parse(localStorage.getItem('tradeKeys'))
@@ -51,7 +50,10 @@ class Trades extends React.Component {
       })
       return trade;
     })
-    this.setState({ trades: trades });
+    this.setState({ trades: trades, total: total });
+  }
+  async componentDidMount(){
+    this.fetchTrades(this.state.page, this.state.pageCount)
   }
   async claimTokens(trade) {
     let response = await axios.put(`${process.env.REACT_APP_API_URL}trades/${trade.id}/claim`);
@@ -108,6 +110,14 @@ class Trades extends React.Component {
         </tr>
       )
     })
+    let pagination = this.state.total 
+    ? Array(Math.ceil(this.state.total / this.state.pageCount)).fill(null)
+      .map((t, key) => (
+        <PaginationItem active={this.state.page === key} key={key}>
+          <PaginationLink onClick={() => this.changePage(key)}>{key+1}</PaginationLink>
+        </PaginationItem>
+      ))
+    : [];
     return(
       <div>
         <Route 
@@ -146,6 +156,9 @@ class Trades extends React.Component {
                       {rows}
                     </tbody>
                   </Table>
+                  <Pagination>
+                    {pagination}
+                  </Pagination>
                 </CardBody>
               </Card>
             </Col>

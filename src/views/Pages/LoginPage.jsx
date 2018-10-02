@@ -17,8 +17,9 @@ import { Button } from "components";
 import axios from 'utils/request';
 import Auth from 'utils/auth';
 import nowLogo from "assets/img/now-logo.png";
+import logo from "assets/img/logo.webp";
 import { Redirect } from 'react-router-dom';
-import bgImage from "assets/img/bg14.jpg";
+import bgImage from "assets/img/background.webp";
 import { loadBundle, createBundle, saveBundle, formatPublicBundle } from "utils/encrypt";
 
 class LoginPage extends React.Component {
@@ -26,7 +27,8 @@ class LoginPage extends React.Component {
     super(props);
     this.state = {};
   }
-  async login() {
+  async login(e) {
+    e.preventDefault()
     let response = await axios.post(`${process.env.REACT_APP_API_URL}auth/login`,{
       email: this.state.email,
       password: this.state.password
@@ -57,7 +59,9 @@ class LoginPage extends React.Component {
     }else{
       let loadedBundle = JSON.parse(localStorage.getItem(`bundle:${user.id}`))
     }
-    this.setState({ loggedIn: true, user: user })
+    
+    this.setState({ user: user })
+    this.setState({ loggedIn: true })
   }
   handleChange(event,key) {
     this.setState({
@@ -73,7 +77,10 @@ class LoginPage extends React.Component {
         route = '/broker/trades'
       }else if(this.state.user.role === 'custodian'){
         route = '/custodian/orders'
+      }else if(this.state.user.role === 'issuer'){
+        route = '/issuer/tokens'
       }
+      console.log(route, this.state.ser)
       return <Redirect to={route} />
     }
     return (
@@ -82,11 +89,11 @@ class LoginPage extends React.Component {
           <div className="login-page">
             <Container>
               <Col xs={12} md={8} lg={4} className="ml-auto mr-auto">
-                <Form>
+                <Form onSubmit={(e) => this.login(e)}>
                   <Card className="card-login card-plain">
                     <CardHeader>
                       <div className="logo-container">
-                        <img src={nowLogo} alt="now-logo" />
+                        <img src={logo} alt="now-logo" />
                       </div>
                     </CardHeader>
                     <CardBody>
@@ -133,11 +140,10 @@ class LoginPage extends React.Component {
                       <Button
                         block
                         round
+                        type='submit'
                         color="primary"
                         size="lg"
-                        href="#pablo"
                         className="mb-3"
-                        onClick={() => this.login()}
                       >
                         Get Started
                       </Button>
@@ -145,13 +151,6 @@ class LoginPage extends React.Component {
                         <h6>
                           <a href="/pages/register-page" className="link footer-link">
                             Create Account
-                          </a>
-                        </h6>
-                      </div>
-                      <div className="pull-right">
-                        <h6>
-                          <a href="#" className="link footer-link">
-                            Need Help?
                           </a>
                         </h6>
                       </div>

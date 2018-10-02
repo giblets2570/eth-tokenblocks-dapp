@@ -21,7 +21,7 @@ import { CardSocial, InfoArea, Button } from "components";
 import { loadBundle, createBundle, saveBundle, formatPublicBundle } from "utils/encrypt";
 import { Redirect } from 'react-router-dom';
 import axios from "utils/request"
-import bgImage from "assets/img/bg16.jpg";
+import bgImage from "assets/img/background.webp";
 import Auth from 'utils/auth';
 
 class RegisterPage extends React.Component {
@@ -89,23 +89,23 @@ class RegisterPage extends React.Component {
                   <InfoArea
                     icon="now-ui-icons media-2_sound-wave"
                     iconColor="primary"
-                    title="Marketing"
+                    title="Instant access"
                     titleColor="info"
-                    description="We've created the marketing campaign of the website. It was a very interesting collaboration."
-                  />
-                  <InfoArea
-                    icon="now-ui-icons media-1_button-pause"
-                    iconColor="primary"
-                    title="Fully Coded in React 16"
-                    titleColor="info"
-                    description="We've developed the website with React 16, HTML5 and CSS3. The client has access to the code using GitHub."
+                    description="Instant access to global economies and funds through digital tokens."
                   />
                   <InfoArea
                     icon="now-ui-icons users_single-02"
-                    iconColor="info"
-                    title="Built Audience"
+                    iconColor="primary"
+                    title="Cheaper execution"
                     titleColor="info"
-                    description="There is also a Fully Customizable CMS Admin Dashboard for this product."
+                    description="Cheap and fair execution as you buy alongside others."
+                  />
+                  <InfoArea
+                    icon="now-ui-icons media-1_button-pause"
+                    iconColor="info"
+                    title="Cut out middlemen"
+                    titleColor="info"
+                    description="Reduced costs as blockchain removes unnecessary third parties."
                   />
                 </Col>
                 <Col lg={4} md={8} xs={12}>

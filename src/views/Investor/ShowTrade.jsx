@@ -62,18 +62,6 @@ class ShowTrade extends React.Component {
         price: ob.price,
         signature: signature
       })
-      // // Save the secret keys for decryption later
-      // let tradeKeys = JSON.parse(localStorage.getItem('tradeKeys')) || {};
-      // for (var i = Object.keys(tradeKeys).length - 1; i >= 0; i--) {
-      //   let key = Object.keys(tradeKeys)[i]
-      //   if(key.includes(`:${trade.salt}`)){
-      //     let sk = tradeKeys[key]
-      //     delete tradeKeys[key]
-      //     let newKey = key.replace(`${trade.salt}`,`${salt}`)
-      //     tradeKeys[newKey] = sk
-      //   }
-      // }
-      // localStorage.setItem('tradeKeys', JSON.stringify(tradeKeys));
     }
   }
   async getTrade(){
@@ -146,10 +134,8 @@ class ShowTrade extends React.Component {
       ], 
       [executionDateInt, this.state.trade.expirationTimestampInSec, this.state.trade.salt]
     ];
-    console.log(formattedTrade)
     let {r, s, v} = fromRpcSig(this.state.trade.signature);
     let signer = await tradeKernelInstance.recoverSigner(this.state.trade.hash, v, bufferToHex(r), bufferToHex(s), {from: address});
-    console.log(signer);
     let result = await tradeKernelInstance.confirmTrade(...formattedTrade, v, bufferToHex(r), bufferToHex(s), {from: address});
     subscribeOnce(`trade-broker-confirm:${this.state.trade.id}`, () => {
       this.getTrade();
@@ -161,7 +147,6 @@ class ShowTrade extends React.Component {
     let {trade} = this.state
     if(trade.state === 0){
       let result = await axios.delete(`${process.env.REACT_APP_API_URL}trades/${trade.id}`);
-      console.log(result)
     } else if(trade.state === 1) { // Already accepted on the blockchain
       const TradeKernelContract = require(`../../${process.env.REACT_APP_CONTRACTS_FOLDER}TradeKernel.json`);
       const tradeKernel = contract(TradeKernelContract);
@@ -185,7 +170,6 @@ class ShowTrade extends React.Component {
     }
   }
   stateShow(){
-    console.log(this.state)
     if(this.state.trade.state === 0 && this.state.user.role === 'investor') {
       return (
         <Button color="info"
@@ -281,6 +265,7 @@ class ShowTrade extends React.Component {
       <Modal 
         isOpen={this.state.isOpen}
         toggle={() => this.toggle()}
+        fade={false}
         className="modal-notice text-center">
         <ModalHeader toggle={() => this.toggle()}>
           Trade for {

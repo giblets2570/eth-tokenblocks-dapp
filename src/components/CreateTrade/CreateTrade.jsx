@@ -11,7 +11,7 @@ import {
   FormGroup, Input, Button
 } from 'reactstrap'
 
-import { Instructions, Checkbox } from "components";
+import { Checkbox } from "components";
 import axios from 'utils/request'
 import { subscribeOnce } from 'utils/socket'
 import { Redirect } from 'react-router-dom'
@@ -68,26 +68,39 @@ async function createTrade(brokers, token, executionDate, amount) {
 class CreateTrade extends Component {
   constructor(props){
     super(props)
-    this.currencies = ['GBP', 'EUR', 'USD']
+
+    let buySells = ['GBP', 'EUR', 'USD']
+    let currencies = ['Buy', 'Sell']
+    let collaterals = ['Fiat', 'Ethereum']
+    let buySellSelect = buySells.map((bs) => ({value: bs, label: bs}))
+    let currencySelect = currencies.map((currency) => ({value: currency, label: currency}))
+    let collateralSelect = collaterals.map((collateral) => ({value: collateral, label: collateral}))
+
     this.state = {
-      toggled: false,
-      amount: '0',
-      collateralAmount: '',
       token: {},
-      dropdownOpen: false,
-      buySell: 'Buy',
-      collateral: 'Fiat',
-      currency: this.currencies[0],
       status: 0,
+      amount: '',
       brokers: [],
+      toggled: false,
+      minDate: moment(),
+      buySells: buySells,
+      dropdownOpen: false,
+      collateralAmount: '',
+      currencies: currencies,
       executionDate: moment(),
-      minDate: moment()
+      collaterals: collaterals,
+      buySells: ['Buy', 'Sell'],
+      buySellSelect: buySellSelect,
+      currencySelect: currencySelect,
+      currencies: ['GBP', 'EUR', 'USD'],
+      collaterals: ['Fiat', 'Ethereum'],
+      collateralSelect: collateralSelect,
+      buySell: buySellSelect[0],
+      currency: currencySelect[0],
+      collateral: collateralSelect[0],
     }
   }
   async componentDidMount(){
-    this.setState({
-      redirect: false
-    })
     if(
       moment().hours() > this.props.token.cutoff_time_hours  ||
       (moment().hours() === this.props.token.cutoff_time_hours && moment().minutes() >= this.props.token.cutoff_time_minutes)
@@ -140,7 +153,6 @@ class CreateTrade extends Component {
     }
     this.setState({ status: 1 })
     let newTrade = await createTrade(brokers, this.props.token, this.state.executionDate, amount);
-    console.log(newTrade)
     this.setState({ newTrade: newTrade })
   }
   toggleBuySell() {
@@ -198,7 +210,8 @@ class CreateTrade extends Component {
         isOpen={this.props.isOpen}
         toggle={() => this.props.toggle()}
         className="modal-notice text-center"
-      >
+        fade={false}
+        >
         <ModalHeader toggle={() => this.props.toggle()}>
           Create trade for {this.props.token.symbol} tokens
         </ModalHeader>
@@ -211,15 +224,12 @@ class CreateTrade extends Component {
                   <Select
                     className="react-select primary"
                     classNamePrefix="react-select"
-                    placeholder="Single Select"
                     name="buySell"
+                    options={this.state.buySellSelect}
                     value={this.state.buySell}
-                    options={
-                      ['Buy', 'Sell'].map((bs) => ({value: bs, label: bs}))
-                    }
-                    onChange={(value) =>
-                      this.setState({ buySell: value })
-                    }
+                    onChange={(value) => {
+                      this.setState({ value })
+                    }}
                   />
                 </FormGroup>
               </Col>
@@ -227,8 +237,7 @@ class CreateTrade extends Component {
                 <FormGroup>
                   <Label>Amount</Label>
                   <Input
-                    rows="5"
-                    type="input"
+                    type="text"
                     className='form-control'
                     value={this.state.amount}
                     onChange={(e) => this.handleChange(e, 'amount')}
@@ -244,13 +253,11 @@ class CreateTrade extends Component {
                     classNamePrefix="react-select"
                     placeholder="Single Select"
                     name="currency"
+                    options={this.state.currencySelect}
                     value={this.state.currency}
-                    options={
-                      this.currencies.map((currency) => ({value: currency, label: currency}))
-                    }
-                    onChange={(value) =>
-                      this.setState({ currency: value })
-                    }
+                    onChange={(value) => {
+                      this.setState({ value })
+                    }}
                   />
                 </FormGroup>
               </Col>
@@ -260,7 +267,7 @@ class CreateTrade extends Component {
                   <Datetime
                     timeFormat={false}
                     onChange={(day) => this.handleDayChange(day)}
-                    inputProps={{ placeholder: "Datetime Picker Here" }}
+                    inputProps={{ placeholder: "Choose date..." }}
                   />
                 </FormGroup>
               </Col>
@@ -272,13 +279,11 @@ class CreateTrade extends Component {
                     classNamePrefix="react-select"
                     placeholder="Single Select"
                     name="collateral"
+                    options={this.state.collateralSelect}
                     value={this.state.collateral}
-                    options={
-                      ['Fiat', 'Ethereum'].map((collateral) => ({value: collateral, label: collateral}))
-                    }
-                    onChange={(value) =>
-                      this.setState({ collateral: value })
-                    }
+                    onChange={(value) => {
+                      this.setState({ value })
+                    }}
                   />
                 </FormGroup>
               </Col>
