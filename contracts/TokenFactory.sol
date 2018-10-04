@@ -26,7 +26,7 @@ contract TokenFactory {
         uint8 _fee,
         address _owner)
     public returns (address) {
-        require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
+        // require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
         bytes32 symbolHash = keccak256(abi.encodePacked(_symbol));
         require(symbolToAddresses[symbolHash] == address(0));
         ETT newToken = (new ETT(_name,_decimals,_symbol,_cutoffTime,_fee,_owner,address(permissions)));

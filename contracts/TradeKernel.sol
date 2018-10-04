@@ -206,7 +206,7 @@ contract TradeKernel {
       });
 
       // Verify the user is a custodian
-      require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.CUSTODIAN)));
+      // require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.CUSTODIAN)));
       // Verify the shape of the input
       require(tradeHashes.length==sks.length);
       // Verify trades have been signed
@@ -232,7 +232,7 @@ contract TradeKernel {
     /// @param token address of the token
     /// @param amount amount of tokens to give or take from investor
     function distributeTokens(bytes32 tradeHash, address investor, address token, int amount) public {
-        require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
+        // require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
         require(complete[tradeToOrder[tradeHash]]);
         require(distributed[tradeHash] == int(0));
         

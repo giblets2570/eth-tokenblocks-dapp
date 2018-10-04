@@ -17,9 +17,7 @@ class Trades extends React.Component {
     this.state = {
       page: 0,
       pageCount: 10,
-      trades: [],
-      user: Auth.user,
-      bundle: loadBundle(Auth.getBundle())
+      trades: []
     };
   }
   changePage(page) {
@@ -30,8 +28,13 @@ class Trades extends React.Component {
     this.getTrades(page, this.state.pageCount);
   }
   componentDidMount(){
+    let user = Auth.user
+    this.setState({
+      user: user,
+      bundle: loadBundle(Auth.getBundle())
+    })
     this.getTrades(this.state.page, this.state.pageCount);
-    subscribe(`trade-created-broker:${this.state.user.id}`, (id) => {
+    subscribe(`trade-created-broker:${user.id}`, (id) => {
       this.getTrades();
       this.setState({
         trade: id

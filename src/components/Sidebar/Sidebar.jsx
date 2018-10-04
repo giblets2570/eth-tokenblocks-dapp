@@ -27,7 +27,6 @@ class Sidebar extends React.Component {
     };
     this.activeRoute.bind(this);
     this.minimizeSidebar = this.minimizeSidebar.bind(this);
-    document.body.classList.toggle("sidebar-mini");
   }
   // verifies if routeName is the one active (in browser input)
   activeRoute(routeName) {

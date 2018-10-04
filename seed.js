@@ -4,6 +4,7 @@ const Promise = require("bluebird");
 const rp = require('request-promise');
 const Web3 = require('web3');
 const moment = require('moment');
+const fs = require('fs');
 const web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 const {formatPublicKey,encrypt,encode,createBundle,saveBundle,formatPublicBundle,formatPrivateKey,sendMessage,verifyPKSig,decrypt} = require('./src/utils/encrypt');
 let connection = mysql.createConnection({
@@ -292,6 +293,10 @@ let createTokenHoldings = async (token) => {
   let response = await rp(options)
 }
 
+let saveJSON = (data, name) => {
+  fs.writeFileSync(`bundles/${name}.json`, JSON.stringify(data));
+}
+
 let main = async () => {
   connection.connect();
   await cleanTables();
@@ -304,17 +309,10 @@ let main = async () => {
   await createOrders();
   connection.end();
 
-  console.log();
-  console.log("BUNDLES");
-  console.log();
-  console.log(JSON.stringify(tradeKeys))
-  console.log();
-  console.log(JSON.stringify(brokers[0].savedBundle));
-  console.log();
-  console.log(JSON.stringify(brokers[1].savedBundle));
-  console.log()
-  console.log(JSON.stringify(investor.savedBundle))
-  console.log()
+  saveJSON(tradeKeys,'tradeKeys')
+  saveJSON(brokers[0].savedBundle,`bundle:${brokers[0].id}`)
+  saveJSON(brokers[1].savedBundle,`bundle:${brokers[1].id}`)
+  saveJSON(investor.savedBundle,`bundle:${investor.id}`)
   console.log("Done")
 }
 

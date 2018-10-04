@@ -34,7 +34,11 @@ class RegisterPage extends React.Component {
       [key]: event.target.value
     })
   }
-  async signup() {
+  async signup(e) {
+    e.preventDefault()
+    this.setState({
+      signing: true
+    })
     await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, { 
       name: this.state.name,
       email: this.state.email,
@@ -45,9 +49,8 @@ class RegisterPage extends React.Component {
       password: this.state.password
     })
     let {user, token} = response.data
-    Auth.authenticate(user, token);
-    localStorage.setItem('user', JSON.stringify(user));
-    localStorage.setItem('token', token);
+    await Auth.authenticate(user, token);
+
     if(!(user.ik && user.signature && user.spk)) {
       let bundle;
       if(localStorage.getItem(`bundle:${user.id}`)){
@@ -112,19 +115,9 @@ class RegisterPage extends React.Component {
                   <Card className="card-signup">
                     <CardHeader className="text-center">
                       <CardTitle tag="h4">Register</CardTitle>
-                      {
-                        // <CardSocial
-                        //   description=" or be classical "
-                        //   socials={[
-                        //     { name: "twitter" },
-                        //     { name: "dribbble" },
-                        //     { name: "facebook" }
-                        //   ]}
-                        // />
-                      }
                     </CardHeader>
                     <CardBody>
-                      <Form>
+                      <Form onSubmit={(e) => this.signup(e)}>
                         <InputGroup
                           className={
                             this.state.nameFocus ? "input-group-focus" : ""
@@ -205,12 +198,15 @@ class RegisterPage extends React.Component {
                           //   </Label>
                           // </FormGroup>
                         }
+                        <div className="text-center">
+                          <Button color="primary" size="lg" type='submit' disabled={this.state.signing} round>
+                            { this.state.signing ? 'Signing you up...': 'Get Started' }
+                          </Button>
+                        </div>
                       </Form>
                     </CardBody>
                     <CardFooter className="text-center">
-                      <Button color="primary" size="lg" round onClick={() => this.signup()}>
-                        Get Started
-                      </Button>
+                      
                     </CardFooter>
                   </Card>
                 </Col>

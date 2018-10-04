@@ -17,7 +17,6 @@ class ProfileForm extends React.Component {
   }
 
   handleChange(event,key) {
-    console.log(event.target.value)
     this.setState({
       [key]: event.target.value
     })

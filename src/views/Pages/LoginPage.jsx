@@ -21,18 +21,44 @@ import logo from "assets/img/logo.webp";
 import { Redirect } from 'react-router-dom';
 import bgImage from "assets/img/background.webp";
 import { loadBundle, createBundle, saveBundle, formatPublicBundle } from "utils/encrypt";
+import NotificationAlert from "react-notification-alert";
 
 class LoginPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
   }
+  notify(message) {
+    let options = {
+      place: 'bl',
+      message: (
+        <div>
+          {message}
+        </div>
+      ),
+      type: 'info',
+      icon: "now-ui-icons ui-1_bell-53",
+      autoDismiss: 2
+    };
+    this.refs.notificationAlert.notificationAlert(options);
+  }
   async login(e) {
     e.preventDefault()
-    let response = await axios.post(`${process.env.REACT_APP_API_URL}auth/login`,{
-      email: this.state.email,
-      password: this.state.password
+    this.setState({
+      logging: true
     })
+    let response;
+    try{
+      response = await axios.post(`${process.env.REACT_APP_API_URL}auth/login`,{
+        email: this.state.email,
+        password: this.state.password
+      })
+    }catch(e){
+      this.setState({
+        logging: false
+      })
+      return this.notify("Wrong email/password")
+    }
     let {user, token} = response.data
     Auth.authenticate(user, token);
     if(!(user.ik && user.signature && user.spk)) {
@@ -60,8 +86,9 @@ class LoginPage extends React.Component {
       let loadedBundle = JSON.parse(localStorage.getItem(`bundle:${user.id}`))
     }
     
-    this.setState({ user: user })
-    this.setState({ loggedIn: true })
+    this.setState({ user: user }, () => {
+      this.setState({ loggedIn: true })
+    })
   }
   handleChange(event,key) {
     this.setState({
@@ -80,13 +107,14 @@ class LoginPage extends React.Component {
       }else if(this.state.user.role === 'issuer'){
         route = '/issuer/tokens'
       }
-      console.log(route, this.state.ser)
+      
       return <Redirect to={route} />
     }
     return (
       <div>
         <div className="full-page-content">
           <div className="login-page">
+            <NotificationAlert ref="notificationAlert" />
             <Container>
               <Col xs={12} md={8} lg={4} className="ml-auto mr-auto">
                 <Form onSubmit={(e) => this.login(e)}>
@@ -142,10 +170,15 @@ class LoginPage extends React.Component {
                         round
                         type='submit'
                         color="primary"
+                        disabled={this.state.logging}
                         size="lg"
                         className="mb-3"
                       >
-                        Get Started
+                        {
+                          this.state.logging 
+                          ? "Logging in..."
+                          : "Get Started"
+                        }
                       </Button>
                       <div className="pull-left">
                         <h6>

@@ -90,6 +90,30 @@ class Accounts extends React.Component {
     if(this.state.tokenChoice && this.state.tokenChoice.value && parseInt(pathEnd) !== this.state.tokenChoice.value) {
       return <Redirect to={`/investor/accounts/${this.state.tokenChoice.value}`}/>
     }
+    let rows = [{
+      account: '0x1bbf9f9429202f6c95b1890abfef0e09595d3c2f',
+      alias: 'Fund',
+      balance: '10000.1'
+    },{
+      account: '0x505199bd3a160dc9a8ca5dcdee2dde0a0fba17ac',
+      alias: 'Investor',
+      balance: '900.545'
+    },{
+      account: '0x2de27f04354bc2299a22860ae69061f2472eef4c',
+      alias: 'Broker',
+      balance: '891.1'
+    },{
+      account: '0x006da85075cf27348cd295dc66b3f0bbd5399a5c',
+      alias: 'Investor 2',
+      balance: '47.0'
+    }].map((row, key) => (
+      <tr>
+        <td>{key+1}</td>
+        <td>{row.account}</td>
+        <td>{row.alias}</td>
+        <td>{row.balance}</td>
+      </tr>
+    ))
     return (
       <div>
         <CreateTrade isOpen={this.state.orderModal} toggle={() => this.toggleOrderModal()} token={this.state.token} />
@@ -133,7 +157,7 @@ class Accounts extends React.Component {
                             </tr>
                           </thead>
                           <tbody>
-                            {}
+                            {rows}
                           </tbody>
                         </Table>
                       )

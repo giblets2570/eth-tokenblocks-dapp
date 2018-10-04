@@ -71,8 +71,22 @@ class Token extends React.Component {
     if(minutes.length === 1) minutes = `0${minutes}`
     response.data.cutoffTimeString = `${response.data.cutoffTime/(60*60)}:${minutes}`
     this.setState({ token: response.data });
+
     response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/holdings`);
-    this.setState({ holdings: response.data })
+    this.setState({ holdings: response.data });
+
+    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/balance`);
+    let balance = response.data.balance
+    this.setState({ balance: balance });
+
+    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/nav`);
+    let nav = response.data ? response.data.value : 0
+    this.setState({ nav: nav });
+
+    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/invested`);
+    this.setState({ investedValue: response.data.totalAmount });
+
+    this.setState({ currentValue: balance * nav })
   }
   componentWillReceiveProps(nextProps) {
     
@@ -97,6 +111,11 @@ class Token extends React.Component {
   makeData(object){
     return {
       labels: Object.keys(object),
+      options: {
+        legend: {
+          display: false
+        }
+      },
       datasets: [{
         data: Object.keys(object).map((c) => object[c]),
         backgroundColor: this.state.colours.slice(0, Object.keys(object).length),
@@ -135,9 +154,11 @@ class Token extends React.Component {
                         iconState="primary"
                         icon="ui-2_chat-round"
                         title={
-                          (2345.56).toLocaleString()
+                          typeof this.state.balance === 'number'
+                          ? this.state.balance.toLocaleString()
+                          : 'Loading...'
                         }
-                        subtitle="Current Balance"
+                        subtitle="Number of tokens"
                       />
                     </Col>
                     <Col xs={12} md={4}>
@@ -145,11 +166,13 @@ class Token extends React.Component {
                         iconState="success"
                         icon="business_money-coins"
                         title={
-                          <span>
-                            <small>£</small>{(3521.00).toLocaleString()}
-                          </span>
+                          typeof this.state.nav === 'number'
+                          ? (<span>
+                              <small>£</small>{this.state.nav.toLocaleString()}
+                            </span>)
+                          : 'Loading...'
                         }
-                        subtitle="Fiat Equivalent"
+                        subtitle="Current NAV (per token)"
                       />
                     </Col>
                     <Col xs={12} md={4}>
@@ -157,9 +180,11 @@ class Token extends React.Component {
                         iconState="info"
                         icon="users_single-02"
                         title={
-                          <span>
-                            <small>£</small>{(4325.00).toLocaleString()}
-                          </span>
+                          typeof this.state.investedValue === 'number'
+                          ? (<span>
+                              <small>£</small>{this.state.investedValue.toLocaleString()}
+                            </span>)
+                          : 'Loading...'
                         }
                         subtitle="Invested Value"
                       />
@@ -171,9 +196,11 @@ class Token extends React.Component {
                         iconState="danger"
                         icon="objects_support-17"
                         title={
-                          <span>
-                            <small>£</small>{(8298.00).toLocaleString()}
-                          </span>
+                          typeof this.state.currentValue === 'number'
+                          ? (<span>
+                              <small>£</small>{this.state.currentValue.toLocaleString()}
+                            </span>)
+                          : 'Loading...'
                         }
                         subtitle="Current Value"
                       />
@@ -182,7 +209,15 @@ class Token extends React.Component {
                       <Statistics
                         iconState="primary"
                         icon="ui-2_chat-round"
-                        title={((1034434 - 831297) * 100 / 1034434).toFixed(2) + "%"}
+                        title={
+                          typeof this.state.currentValue === 'number' && typeof this.state.investedValue === 'number'
+                          ? this.state.investedValue
+                            ?(
+                              (this.state.currentValue - this.state.investedValue) * 100 / this.state.investedValue
+                            ).toFixed(2) + "%"
+                            : "0%"
+                          : 'Loading...'
+                        }
                         subtitle="Performance"
                       />
                     </Col>

@@ -15,8 +15,18 @@ import web3Service from 'utils/getWeb3'
 import {fromRpcSig, bufferToHex} from 'ethereumjs-util'
 import promisify from 'tiny-promisify';
 import contract from 'truffle-contract';
-import queryString from 'query-string'
 const emptyString = "0000000000000000000000000000000000000000000000000000000000000000"
+
+function parseUrl(params){
+  // "?this=sfsdfds&"
+  if(params[0] === '?') params = params.slice(1);
+  let paramParts = params.split('&')
+  let parmsObj = paramParts.reduce((c,part) => {
+    let p = part.split('=')
+    c[p[0]] = p[1]
+    return c;
+  },{})
+}
 
 class OrderTrades extends React.Component {
   constructor(props) {
@@ -40,7 +50,7 @@ class OrderTrades extends React.Component {
     }
   }
   async componentDidMount(){
-    const values = queryString.parse(this.props.location.search)
+    const values = parseUrl(this.props.location.search)
     if(values.date) {
       this.setState({
         date: moment(values.date)

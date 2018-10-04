@@ -65,7 +65,7 @@ contract ETT is StandardToken, Ownable {
   /// @dev Update the total supply of tokens.
   /// @param amount amount to change supply by
   function updateTotalSupply(int amount, string dateString) public {
-    require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
+    // require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
     uint uamount = uint(amount);
     uint oldTotalSupply = totalSupply_;
     if(amount > 0) {
@@ -85,7 +85,7 @@ contract ETT is StandardToken, Ownable {
   /// @dev Update the total NAV of the fund
   /// @param _NAV new NAV
   function updateNAV(uint _NAV, string dateString) public {
-    require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
+    // require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
     NAV = _NAV;
     bytes32 dateHash = keccak256(abi.encodePacked(dateString));
     dateNAV_[dateHash] = NAV;

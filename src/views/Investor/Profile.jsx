@@ -10,9 +10,13 @@ import {
   CardBody
 } from "reactstrap";
 
+import Auth from 'utils/auth'
 import {PanelHeader, ProfileForm, CurrentLoans, AccountSetup, Button} from "components";
 
 class Profile extends Component {
+  connectBank(){
+    window.location.href = `${process.env.REACT_APP_API_URL}truelayer?id=${Auth.user.id}`;
+  }
   render() {
     return (
       <div>
@@ -37,6 +41,15 @@ class Profile extends Component {
               <Card className="card-stats card-raised">
                 <CardBody>
                   <CurrentLoans/>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+          <Row>
+            <Col md={12}>
+              <Card className="card-stats card-raised">
+                <CardBody>
+                  <Button color='primary' onClick={() => this.connectBank()}>Connect bank account</Button>
                 </CardBody>
               </Card>
             </Col>
