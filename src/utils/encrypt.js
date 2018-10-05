@@ -82,7 +82,6 @@ let getSharedSecret = (receiversBundle, message)  => {
 }
 
 let encrypt = (text, key) => {
-  console.log('text',text)
   text = String(text)
   var keyEnc = CryptoJS.enc.Hex.parse(key);
   let ivEnc = CryptoJS.enc.Base64.parse("MDAwMDAwMDAwMDAwMDAwMA==");

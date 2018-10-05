@@ -42,7 +42,7 @@ class ShowTrade extends React.Component {
     
     let formattedTrade = [
       [trade.investor.address, broker.address, trade.token.address], 
-      [makeNbytes(trade.nominalAmount), makeNbytes(ob.price)], 
+      [makeNbytes(ob.nominalAmount), makeNbytes(ob.price)], 
       [executionDateInt, trade.expirationTimestampInSec, trade.salt]
     ];
     let tradeHash = await tradeKernelInstance.getTradeHash(...formattedTrade, {from: address});

@@ -6,7 +6,10 @@ const Web3 = require('web3');
 const moment = require('moment');
 const fs = require('fs');
 const web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
-const {formatPublicKey,encrypt,encode,createBundle,saveBundle,formatPublicBundle,formatPrivateKey,sendMessage,verifyPKSig,decrypt} = require('./src/utils/encrypt');
+const contract = require('truffle-contract');
+const promisify = require('tiny-promisify');
+const {fromRpcSig, bufferToHex} = require('ethereumjs-util');
+const {makeNbytes,getSharedSecret,formatPublicKey,encrypt,encode,createBundle,saveBundle,formatPublicBundle,formatPrivateKey,sendMessage,verifyPKSig,decrypt} = require('./src/utils/encrypt');
 let connection = mysql.createConnection({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
@@ -148,8 +151,22 @@ let createUsers = async () => {
 let createTrades = async (numTrades = 10) => {
   console.log("createTrades")
   let tradeKeys = {}
-  let currencies = ['USD'];
+
+  let currencies = ['GBP'];
+  let investorLoggedin = await login('investor')
+  let brokerLoggedin = brokers.map(async (broker) => {
+    return await login(broker.name)
+  })
+  brokerLoggedin = await Promise.all(brokerLoggedin)
+
+  const TradeKernelContract = require(`${process.env.CONTRACTS_FOLDER}TradeKernel.json`);
+  const tradeKernel = contract(TradeKernelContract);
+  tradeKernel.setProvider(web3.currentProvider);
+
+  tradeKernelInstance = await tradeKernel.deployed()
+
   for (let j = 0; j < numTrades; j++) {
+    // Create the trade from the investors side
     let amount = `${chooseRandom(currencies)}:${(Math.random() * 100000).toFixed(2)}`
     let tokenId = chooseRandom([1,2,3])
     let brokerPublicBundles = brokers.map((broker) => broker.publicBundle);
@@ -182,9 +199,57 @@ let createTrades = async (numTrades = 10) => {
       method: 'POST',
       uri: `${process.env.API_URL}trades`,
       body: trade,
+      headers: { Authorization: `Bearer ${investorLoggedin.token}` },
       json: true
     };
-    let response = await rp(options)
+    trade = await rp(options)
+
+    // Give price as the brokers
+    let price = Math.random().toFixed(2)
+    let brokerIndex = Math.floor(Math.random()*brokers.length)
+    let broker = brokers[brokerIndex];
+    trade = await rp.get(`${process.env.API_URL}trades/${trade.id}`,{headers:{Authorization:`Bearer ${brokerLoggedin[brokerIndex].token}`},json: true})
+    let tradeBroker = trade.tradeBrokers.find((ob) => ob.broker.id === broker.id);
+    let sk = getSharedSecret(broker.bundle, tradeBroker);
+    let encryptedPrice = encrypt(`${price}`, sk);
+    if(encryptedPrice.slice(0,2) !== '0x') encryptedPrice = '0x' + encryptedPrice;
+    let result = await rp.put(`${process.env.API_URL}trades/${trade.id}/set-price`, {
+      body:{price: encryptedPrice},
+      headers:{Authorization:`Bearer ${brokerLoggedin[brokerIndex].token}`},
+      json:true
+    });
+    
+    let formattedTrade = [
+      [trade.investor.address, broker.address, trade.token.address], 
+      [makeNbytes(tradeBroker.nominalAmount), makeNbytes(encryptedPrice)], 
+      [executionDateInt, trade.expirationTimestampInSec, trade.salt]
+    ];
+
+    let tradeHash = await tradeKernelInstance.getTradeHash(...formattedTrade, {from: web3.eth.accounts[investor.account]});
+
+    // Accept the brokers price as investor
+    let signature = await promisify(web3.eth.sign)(web3.eth.accounts[investor.account],tradeHash);
+
+    // First, we have to update the update the trade
+    // on the server to include this new information
+    let response = await rp.put(`${process.env.API_URL}trades/${trade.id}`, {
+      body: {
+        hash: tradeHash,
+        brokerId: broker.id,
+        ik: tradeBroker.ik,
+        ek: tradeBroker.ek,
+        salt: trade.salt,
+        nominalAmount: tradeBroker.nominalAmount,
+        price: encryptedPrice,
+        signature: signature,
+      },
+      headers:{Authorization:`Bearer ${investorLoggedin.token}`},
+      json: true,
+    })
+
+    // Confirm trade as broker
+    let {r, s, v} = fromRpcSig(signature);
+    result = await tradeKernelInstance.confirmTrade(...formattedTrade, v, bufferToHex(r), bufferToHex(s), {from: web3.eth.accounts[broker.account]});
   }
   return tradeKeys
 }
@@ -214,7 +279,7 @@ let createOrders = async () => {
   }
 }
 let login = async (name) => {
-  console.log("login")
+  console.log(`login ${name}`)
   let user = users.find((u) => u.name === name)
   let options = {
     method: 'POST',
@@ -254,7 +319,6 @@ let cleanTables = async () => {
 }
 
 let createTokens = async () => {
-  console.log("createTokens")
   for (var i = 0; i < tokens.length; i++) {
     let token = tokens[i]
     let options = {
@@ -273,7 +337,6 @@ let createTokens = async () => {
 }
 
 let createTokenHoldings = async (token) => {
-  console.log("createTokenHoldings")
   let holdings = securities.map((security) => {
     return {
       amount: Math.floor(Math.random() * 100),
