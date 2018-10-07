@@ -4,7 +4,8 @@ import {
   Modal,
   ModalBody,
   ModalFooter,
-  ModalHeader, Row, Col } from 'reactstrap';
+  ModalHeader, Row, Col 
+} from 'reactstrap';
 import { TradeDetails, Button, GiveQuotes } from 'components';
 import axios from 'utils/request';
 import { Redirect } from 'react-router-dom';
@@ -14,7 +15,7 @@ import {decrypt,receiveMessage,loadBundle,getSharedSecret,encrypt,splitKeyInto2,
 import web3Service from 'utils/getWeb3';
 import contract from 'truffle-contract';
 import Auth from 'utils/auth';
-import {fromRpcSig, bufferToHex} from 'ethereumjs-util'
+import {fromRpcSig, bufferToHex} from 'ethereumjs-util';
 import promisify from 'tiny-promisify';
 const emptyString = "0000000000000000000000000000000000000000000000000000000000000000";
 
@@ -34,12 +35,12 @@ class ShowTrade extends React.Component {
     const tradeKernel = contract(TradeKernelContract);
     tradeKernel.setProvider(web3.currentProvider);
     let address = await promisify(web3.eth.getCoinbase)()
+    if(!address) return alert("Please connect Metamask")
     let tradeKernelInstance = await tradeKernel.deployed();
     let ob = trade.tradeBrokers.find((_ob) => _ob.brokerId === broker.id)
     let [ik1, ik2] = splitKeyInto2(ob.ik)
     let [ek1, ek2] = splitKeyInto2(ob.ek)
     let executionDateInt = Math.floor(moment(trade.executionDate).toDate().getTime() / 1000)
-    
     let formattedTrade = [
       [trade.investor.address, broker.address, trade.token.address], 
       [makeNbytes(ob.nominalAmount), makeNbytes(ob.price)], 
@@ -99,6 +100,7 @@ class ShowTrade extends React.Component {
         trade.buySell = 'Sell';
         trade.amount = trade.amount.substring(1);
       }
+      trade.amount = (parseInt(trade.amount) / 100).toFixed(2)
     }
     this.setState({ trade: trade });
   }
@@ -227,7 +229,7 @@ class ShowTrade extends React.Component {
         return (
           <div>
             <p style={{textAlign: 'center'}}>
-              Investor has accepted your quote
+              Investor has accepted your quote: <span style={{color: 'green'}}>{this.state.trade.priceDecrypted}</span>
             </p>
             <Button 
               color="success"

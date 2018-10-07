@@ -60,7 +60,7 @@ class Trades extends React.Component {
       let total = receiveMessage(this.state.bundle, message);
       let [currency, nominalAmount] = total.split(':');
       trade.currency = currency;
-      trade.nominalAmount = nominalAmount;
+      trade.nominalAmount = (parseInt(nominalAmount) / 100.0).toFixed(2);
       if(ob.price && ob.price.length && ob.price !== emptyString) {
         message = {text: ob.price,ik: ob.ik,ek: ob.ek};
         trade.priceDecrypted = receiveMessage(this.state.bundle, message);

@@ -19,14 +19,11 @@ class Trades extends React.Component {
       trades: []
     };
   }
-  componentWillReceiveProps(nextProps) {
-    
-  }
   changePage(page) {
     this.setState({
       page: page
-    })
-    this.props.fetchTrades(page, this.state.pageCount);
+    });
+    this.fetchTrades(page, this.state.pageCount);
   }
   async fetchTrades(page, pageCount) {
     let response = await axios.get(`${process.env.REACT_APP_API_URL}trades?page=${page}&page_count=${pageCount}`);
@@ -41,17 +38,17 @@ class Trades extends React.Component {
         let total = decrypt(ob.nominalAmount, sk);
         let [currency, nominalAmount] = total.split(':');
         trade.currency = currency;
-        trade.nominalAmount = nominalAmount;
+        trade.nominalAmount = (parseInt(nominalAmount) / 100.0).toFixed(2);
         if(ob.price && ob.price.length && ob.price !== emptyString) {
           ob.priceDecrypted = decrypt(ob.price, sk);
         }
-        return ob
+        return ob;
       })
       trade.bestQuote = trade.tradeBrokers.reduce((c, ob) => {
         if(ob.price && (c === null || parseFloat(ob.price) > c )) {
-          c = parseFloat(ob.priceDecrypted)
+          c = parseFloat(ob.priceDecrypted);
         }
-        return c
+        return c;
       }, null);
       return trade;
     })
@@ -67,7 +64,7 @@ class Trades extends React.Component {
   }
   async claimTokens(trade) {
     let response = await axios.put(`${process.env.REACT_APP_API_URL}trades/${trade.id}/claim`);
-    console.log(response);
+    this.fetchTrades(this.state.page, this.state.pageCount)
   }
   stateString(trade){
     if(trade.state === 0){
@@ -81,11 +78,14 @@ class Trades extends React.Component {
     }else if(trade.state === 1){
       return 'Trade Confirmed'
     }if(trade.state === 2){
+      // Need to figure out how to differentiate between
       return <Button color='success' onClick={() => this.claimTokens(trade)}>Claim tokens</Button>
     }else if(trade.state === 3){
       return 'Trade cancelled'
     }else if(trade.state === 4){
       return 'Trade rejected'
+    }else {
+      return 'Tokens claimed'
     }
   }
   render() {

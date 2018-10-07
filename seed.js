@@ -9,7 +9,7 @@ const web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 const contract = require('truffle-contract');
 const promisify = require('tiny-promisify');
 const {fromRpcSig, bufferToHex} = require('ethereumjs-util');
-const {makeNbytes,getSharedSecret,formatPublicKey,encrypt,encode,createBundle,saveBundle,formatPublicBundle,formatPrivateKey,sendMessage,verifyPKSig,decrypt} = require('./src/utils/encrypt');
+const {makeNbytes,getSharedSecret,formatPublicKey,encrypt,encode,createBundle,loadBundle,saveBundle,formatPublicBundle,formatPrivateKey,sendMessage,verifyPKSig,decrypt} = require('./src/utils/encrypt');
 let connection = mysql.createConnection({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
@@ -40,7 +40,7 @@ const tables = [
   "TokenBalance",
   "Token",
 ]
-if(process.env.SEEDUSER) tables.push('User')
+
 let users = [{
   id: 1, name: 'admin', email: 'admin@admin.com', password: 'admin', role: 'admin', account: 0,
   passwordHash: '$pbkdf2-sha256$29000$lfJ.jxGC0HpPidF6r7X2Pg$mnlwqH3CNLooy9q8FI9Jej.ESblTfr7WGzXsKyKAlA4', 
@@ -60,6 +60,19 @@ let users = [{
   id: 6, name: 'fund', email: 'fund@fund.com', password: 'fund', role: 'issuer', account: 4,
   passwordHash: '$pbkdf2-sha256$29000$k9IaQ.hdy1nrXYtRivHe2w$81aKj1eGHd9s.YjSINps3dP7P1qHE0h5xMJ8pFagq94', 
 }]
+if(process.env.SEEDUSER) tables.push('User')
+else {
+  users = users.map((user) => {
+    try{
+      user.savedBundle = require(`./bundles/bundle:${user.id}.json`);
+      user.bundle = loadBundle(user.savedBundle);
+      user.publicBundle = formatPublicBundle(user.bundle);
+    }catch(e){
+      // console.log(e)
+    }
+    return user;
+  })
+}
 let brokers = [users[1],users[2]]
 let investor = users[3]
 let custodian = users[4]
@@ -111,9 +124,10 @@ let createSecurities = async () => {
       json: true
     }
     let response = await rp(options)
-    let price = Math.floor(Math.random() * 200)
+    let price = Math.floor(Math.random() * 10)
+    security.price = price
     await new Promise((resolve, reject) => {
-      let sql = "INSERT INTO `SecurityTimestamp` (securityId, price) VALUES ('"+ [response.id, price].join("', '") +"')"
+      let sql = "INSERT INTO `SecurityTimestamp` (securityId, price, executionDate) VALUES ('"+ [response.id, price, moment().format("YYYY-MM-DD")].join("', '") +"')"
       connection.query(sql, function (error, results, fields) {
         if (error) reject(error);
         resolve(results)
@@ -167,7 +181,7 @@ let createTrades = async (numTrades = 10) => {
 
   for (let j = 0; j < numTrades; j++) {
     // Create the trade from the investors side
-    let amount = `${chooseRandom(currencies)}:${(Math.random() * 100000).toFixed(2)}`
+    let amount = `${chooseRandom(currencies)}:${(Math.random() * 1000000).toFixed(0)}`
     let tokenId = chooseRandom([1,2,3])
     let brokerPublicBundles = brokers.map((broker) => broker.publicBundle);
     let investorBundle = investor.bundle;
@@ -227,29 +241,30 @@ let createTrades = async (numTrades = 10) => {
 
     let tradeHash = await tradeKernelInstance.getTradeHash(...formattedTrade, {from: web3.eth.accounts[investor.account]});
 
-    // Accept the brokers price as investor
-    let signature = await promisify(web3.eth.sign)(web3.eth.accounts[investor.account],tradeHash);
+    // // Accept the brokers price as investor
+    // let signature = await promisify(web3.eth.sign)(web3.eth.accounts[investor.account],tradeHash);
 
-    // First, we have to update the update the trade
-    // on the server to include this new information
-    let response = await rp.put(`${process.env.API_URL}trades/${trade.id}`, {
-      body: {
-        hash: tradeHash,
-        brokerId: broker.id,
-        ik: tradeBroker.ik,
-        ek: tradeBroker.ek,
-        salt: trade.salt,
-        nominalAmount: tradeBroker.nominalAmount,
-        price: encryptedPrice,
-        signature: signature,
-      },
-      headers:{Authorization:`Bearer ${investorLoggedin.token}`},
-      json: true,
-    })
+    // // First, we have to update the update the trade
+    // // on the server to include this new information
+    // let response = await rp.put(`${process.env.API_URL}trades/${trade.id}`, {
+    //   body: {
+    //     hash: tradeHash,
+    //     brokerId: broker.id,
+    //     ik: tradeBroker.ik,
+    //     ek: tradeBroker.ek,
+    //     salt: trade.salt,
+    //     nominalAmount: tradeBroker.nominalAmount,
+    //     price: encryptedPrice,
+    //     signature: signature,
+    //   },
+    //   headers:{Authorization:`Bearer ${investorLoggedin.token}`},
+    //   json: true,
+    // })
 
-    // Confirm trade as broker
-    let {r, s, v} = fromRpcSig(signature);
-    result = await tradeKernelInstance.confirmTrade(...formattedTrade, v, bufferToHex(r), bufferToHex(s), {from: web3.eth.accounts[broker.account]});
+    // // Confirm trade as broker
+    // let {r, s, v} = fromRpcSig(signature);
+    // result = await tradeKernelInstance.confirmTrade(...formattedTrade, v, bufferToHex(r), bufferToHex(s), {from: web3.eth.accounts[broker.account]});
+    // console.log(result);
   }
   return tradeKeys
 }
@@ -321,6 +336,24 @@ let cleanTables = async () => {
 let createTokens = async () => {
   for (var i = 0; i < tokens.length; i++) {
     let token = tokens[i]
+    let holdings = securities.map((security) => {
+      return {
+        amount: Math.floor(Math.random() * 1000000),
+        security: security
+      }
+    })
+    holdings = chooseRandoms(holdings, 10);
+    // I want the NAV to be 100
+    let aum = holdings.reduce((c, holding) => c + holding.security.price * holding.amount, 0);
+    token.initialAmount = Math.floor(aum / 100);
+    holdings = holdings.map((holding) => {
+      return {
+        amount: holding.amount,
+        symbol: holding.security.symbol
+      }
+    })
+    token.holdings = holdings;
+
     let options = {
       method: 'POST',
       uri: `${process.env.API_URL}tokens`,
@@ -332,28 +365,7 @@ let createTokens = async () => {
     }
     let response = await rp(options)
     token.id = response.id
-    await createTokenHoldings(token)
   }
-}
-
-let createTokenHoldings = async (token) => {
-  let holdings = securities.map((security) => {
-    return {
-      amount: Math.floor(Math.random() * 100),
-      symbol: security.symbol
-    }
-  })
-  holdings = chooseRandoms(holdings, 10)
-  let options = {
-    method: 'POST',
-    uri: `${process.env.API_URL}tokens/${token.id}/holdings`,
-    body: holdings,
-    headers: {
-      Authorization: `Bearer ${loggedin.token}`
-    },
-    json: true
-  }
-  let response = await rp(options)
 }
 
 let saveJSON = (data, name) => {

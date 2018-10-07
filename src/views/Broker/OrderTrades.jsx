@@ -26,6 +26,7 @@ function parseUrl(params){
     c[p[0]] = p[1]
     return c;
   },{})
+  return parmsObj
 }
 
 class OrderTrades extends React.Component {
@@ -74,9 +75,14 @@ class OrderTrades extends React.Component {
   getHoldings(){
     let totalValue = this.state.totalTradeValue['GBP']
     let orderHoldings = this.state.token.holdings;
+    let nav = 0
     for (let i = 0; i < orderHoldings.length; i++) {
-      let holding = orderHoldings[i]
-      holding.amount = holding.securityTimestamp.price * holding.securityAmount / totalValue
+      let holding = orderHoldings[i];
+      nav += (holding.securityTimestamp.price * holding.securityAmount);
+    }
+    for (let i = 0; i < orderHoldings.length; i++) {
+      let holding = orderHoldings[i];
+      holding.amount = (totalValue / nav) * holding.securityAmount
       holding.direction = holding.amount >= 0 ? 'Buy' : 'Sell'
     }
     this.setState({
@@ -84,8 +90,9 @@ class OrderTrades extends React.Component {
     })
   }
   async getTradeData(day, page, pageCount) {
-    let response = await axios.get(`${process.env.REACT_APP_API_URL}trades?tokenId=${this.props.tokenId}&executionDate=${day.format('YYYY-MM-DD')}&page=${page}&page_count=${pageCount}&state=1`)
+    let response = await axios.get(`${process.env.REACT_APP_API_URL}trades?tokenId=${this.props.tokenId}&executionDate=${day.format('YYYY-MM-DD')}&page=${page}&page_count=${pageCount}&confirmed=1`)
     let {data, total} = response.data
+
     let trades = data.map((trade) => {
       trade.executionDate = moment(trade.executionDate)
       trade.createdAt = moment(trade.createdAt*1000)
@@ -95,7 +102,7 @@ class OrderTrades extends React.Component {
       trade.sk = getSharedSecret(this.state.bundle, message);
       let [currency, nominalAmount] = total.split(':');
       trade.currency = currency;
-      trade.nominalAmountDecrypted = nominalAmount;
+      trade.nominalAmountDecrypted = (parseInt(nominalAmount)/100).toFixed(2);
       if(ob.price && ob.price.length && ob.price !== emptyString) {
         message = {text: ob.price,ik: ob.ik,ek: ob.ek}
         trade.priceDecrypted = receiveMessage(this.state.bundle, message);
@@ -103,6 +110,7 @@ class OrderTrades extends React.Component {
       trade.state = ob.state
       return trade
     })
+    console.log(trades)
     this.setState({
       trades: trades,
       totalTradeValue: this.totalTradeValue(trades)
@@ -120,7 +128,6 @@ class OrderTrades extends React.Component {
     }
   }
   totalTradeValue(trades){
-    console.log(trades)
     let values = trades.reduce((c, trade) => {
       c[trade.currency] = (c[trade.currency]||0) + parseFloat(trade.nominalAmountDecrypted);
       return c;
@@ -178,7 +185,6 @@ class OrderTrades extends React.Component {
     // console.log(this.state.user.address, orderHash, v, r, s);
     let signer = await tradeKernelInstance.recoverSigner(orderHash, v, bufferToHex(r), bufferToHex(s), {from: address});
 
-
     let _signer = await promisify(web3.personal.ecRecover)(orderHash, signature)
     if(signer.toLowerCase() === this.state.user.address.toLowerCase()){
       let result = await axios.post(`${process.env.REACT_APP_API_URL}orders`, {
@@ -192,9 +198,6 @@ class OrderTrades extends React.Component {
         executionDate: moment(executionDateInt*1000).format('YYYY-MM-DD')
       });
       this.getOrderData(executionDate)
-      this.setState({
-        order: result.data
-      })
     }else{
       console.log("Not valid");
     }
@@ -246,7 +249,7 @@ class OrderTrades extends React.Component {
                     this.state.trades.length ? 
                     (
                       <Row>
-                        <Col xs={12} md={6}>
+                        <Col xs={12} md={4}>
                           <h3>Total order value</h3>
                           <Table responsive>
                             <thead>
@@ -279,7 +282,7 @@ class OrderTrades extends React.Component {
                             </tbody>
                           </Table>
                         </Col>
-                        <Col xs={12} md={6}>
+                        <Col xs={12} md={8}>
                           <h3>Order</h3>
                           <Table responsive>
                             <thead>
@@ -318,7 +321,7 @@ class OrderTrades extends React.Component {
                             this.state.order.id
                             ? (<p>
                                 Verified by custodian: {
-                                  this.state.order.verified
+                                  this.state.order.state === 1
                                   ? <span style={{color: "green"}}>Yes</span>
                                   : <span style={{color: "red"}}>No</span>
                                 }

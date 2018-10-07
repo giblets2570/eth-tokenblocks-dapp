@@ -11,23 +11,23 @@ contract ETT is StandardToken, Ownable {
   uint public cutoffTime;
   uint8 public decimals;
   uint8 public fee;
-  
-  uint public NAV;
-  bool private feeTakeable;
+  uint public AUM;
 
   mapping(bytes32 => uint) dateTotalSupply_;
-  mapping(bytes32 => uint) dateNAV_;
+  mapping(bytes32 => uint) dateAUM_;
 
   Permissions public permissions;
 
-  event TotalSupplyUpdate(uint oldTotalSupply, uint newTotalSupply, address owner, uint time);
-  event NavUpdate(uint NAV, address owner, uint time);
-  event FeeTaken(uint amount, uint time);
+  event TotalSupplyUpdate(address token, address owner, uint oldTotalSupply, uint newTotalSupply, uint time);
+  event AUMUpdate(address token, address owner, uint AUM, uint totalSupply, uint time);
+  event FeeTaken(address token, address owner, uint value, uint time);
 
   constructor(
     string _name,
     uint8 _decimals,
     string _symbol,
+    uint _initialAmount,
+    uint _initialAUM,
     uint _cutoffTime,
     uint8 _fee,
     address _owner,
@@ -39,17 +39,22 @@ contract ETT is StandardToken, Ownable {
     symbol = _symbol;
     decimals = _decimals;
     cutoffTime = _cutoffTime;
-    
-    NAV = 0;
-    totalSupply_ = 0;
+
+    AUM = _initialAUM;
+    totalSupply_ = _initialAmount;
+    // Give the owner the initial amount
+    balances[owner] = _initialAmount;
 
     permissions = Permissions(_permissions);
   }
   /// @dev Gives the owner of the token their fee
   function _takeFee() internal {
-    uint amount = fee * totalSupply_ / 10000;
-    totalSupply_ = totalSupply_.add(amount);
-    balances[owner] = balances[owner].add(amount);
+    uint numerator = totalSupply_.mul(fee);
+    uint denomiator = (uint(360).mul(10000)).sub(fee);
+    uint value = numerator.div(denomiator);
+    totalSupply_ = totalSupply_.add(value);
+    balances[owner] = balances[owner].add(value);
+    emit FeeTaken(address(this), owner, value, now);
   }
 
   function dateTotalSupply(string dateString) public view returns(uint){
@@ -57,9 +62,9 @@ contract ETT is StandardToken, Ownable {
     return dateTotalSupply_[dateHash];
   }
 
-  function dateNAV(string dateString) public view returns(uint){
+  function dateAUM(string dateString) public view returns(uint){
     bytes32 dateHash = keccak256(abi.encodePacked(dateString));
-    return dateNAV_[dateHash];
+    return dateAUM_[dateHash];
   }
 
   /// @dev Update the total supply of tokens.
@@ -76,20 +81,25 @@ contract ETT is StandardToken, Ownable {
       totalSupply_ = totalSupply_.sub(uamount);
       balances[owner] = balances[owner].sub(uamount);
     }
-    _takeFee();
     bytes32 dateHash = keccak256(abi.encodePacked(dateString));
     dateTotalSupply_[dateHash] = totalSupply_;
-    emit TotalSupplyUpdate(oldTotalSupply, totalSupply_, owner, now);
+    emit TotalSupplyUpdate(address(this), owner, oldTotalSupply, totalSupply_, now);
   }
 
-  /// @dev Update the total NAV of the fund
-  /// @param _NAV new NAV
-  function updateNAV(uint _NAV, string dateString) public {
+  /// @dev Update the total AUM of the fund
+  /// @param _AUM new AUM
+  function updateAUM(uint _AUM, string dateString) public {
     // require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
-    NAV = _NAV;
     bytes32 dateHash = keccak256(abi.encodePacked(dateString));
-    dateNAV_[dateHash] = NAV;
-    emit NavUpdate(NAV, owner, now);
+    require(dateAUM_[dateHash] == 0);
+    dateAUM_[dateHash] = _AUM;
+    AUM = _AUM;
+    
+    // Now take the fee
+    _takeFee();
+    
+    // Now I need to create the tokens
+    emit AUMUpdate(address(this),owner,AUM,totalSupply_,now);
   }
   
   /// @dev Transfer token for a specified address

@@ -13,13 +13,15 @@ class Orders extends React.Component {
     super(props);
     this.state = {
       date: moment(),
-      user: Auth.user
+      user: Auth.user,
+      page: 0,
+      pageCount: 10
     };
   }
-  async fetchOrderData(date) {
+  async fetchOrderData(page, pageCount) {
     await web3Service.promise
     let web3 = web3Service.instance
-    let response = await axios.get(`${process.env.REACT_APP_API_URL}orders?executionDate=${date.format('YYYY-MM-DD')}`)
+    let response = await axios.get(`${process.env.REACT_APP_API_URL}orders?page=${page}&page_count=${pageCount}`)
     let {data, total} = response.data
     this.setState({
       orders: data,
@@ -27,10 +29,7 @@ class Orders extends React.Component {
     })
   }
   componentDidMount(){
-    this.fetchOrderData(this.state.date);
-  }
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+    this.fetchOrderData(this.state.page, this.state.pageCount);
   }
   async verifyOrder(order) {
     await web3Service.promise
@@ -82,11 +81,14 @@ class Orders extends React.Component {
           <td scope="row">{$index+1}</td>
           <td>{order.broker.name}</td>
           <td>{order.token.name}</td>
+          <td>{moment(order.executionDate).format("DD/MM/YYYY")}</td>
           <td>
             {
               order.state === 0 ? 
               (
-                <Button onClick={() => this.verifyOrder(order)} >
+                <Button 
+                  color='primary'
+                  onClick={() => this.verifyOrder(order)}>
                   Verify order
                 </Button>
               ) : <span style={{color: 'green'}}>Verified</span>
@@ -119,6 +121,7 @@ class Orders extends React.Component {
                         <th>#</th>
                         <th>Broker</th>
                         <th>Token</th>
+                        <th>Date</th>
                       </tr>
                     </thead>
                     <tbody>

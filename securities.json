@@ -1,2682 +1,1858 @@
 [
-    {
-        "name": "ALIBABA GROUP HOLDING ADR REPRESEN",
-        "class": "Equity",
-        "symbol": "BABA",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TENCENT HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "700",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "APPLE INC",
-        "class": "Equity",
-        "symbol": "AAPL",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "NASPERS LIMITED N LTD",
-        "class": "Equity",
-        "symbol": "NPN",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "PHILIP MORRIS INTERNATIONAL INC",
-        "class": "Equity",
-        "symbol": "PM",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHINA MOBILE LTD",
-        "class": "Equity",
-        "symbol": "941",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "UNILEVER DRC NV",
-        "class": "Equity",
-        "symbol": "UNA",
-        "country": "Netherlands",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ANHEUSER BUSCH INBEV NV",
-        "class": "Equity",
-        "symbol": "ABI",
-        "country": "Belgium",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "UNILEVER PLC",
-        "class": "Equity",
-        "symbol": "ULVR",
-        "country": "United Kingdom",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ASTRAZENECA PLC",
-        "class": "Equity",
-        "symbol": "AZN",
-        "country": "United Kingdom",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "COLGATE-PALMOLIVE",
-        "class": "Equity",
-        "symbol": "CL",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "JD.COM ADR REPRESENTING INC CLASS",
-        "class": "Equity",
-        "symbol": "JD",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TELEFONICA SA",
-        "class": "Equity",
-        "symbol": "TEF",
-        "country": "Spain",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AMERICA MOVIL L",
-        "class": "Equity",
-        "symbol": "AMXL",
-        "country": "Mexico",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GALAXY ENTERTAINMENT GROUP LTD",
-        "class": "Equity",
-        "symbol": "27",
-        "country": "Hong Kong",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AMBEV SA",
-        "class": "Equity",
-        "symbol": "ABEV3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LAS VEGAS SANDS CORP",
-        "class": "Equity",
-        "symbol": "LVS",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "NETEASE ADR REPRESENTING INC",
-        "class": "Equity",
-        "symbol": "NTES",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CTRIP.COM INTERNATIONAL ADR REPRE",
-        "class": "Equity",
-        "symbol": "CTRP",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "FOMENTO ECONOMICO MEXICANO",
-        "class": "Equity",
-        "symbol": "FEMSAUBD",
-        "country": "Mexico",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "YUM CHINA HOLDINGS INC",
-        "class": "Equity",
-        "symbol": "YUMC",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MTN GROUP LTD",
-        "class": "Equity",
-        "symbol": "MTN",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HINDUSTAN UNILEVER LTD",
-        "class": "Equity",
-        "symbol": "HINDUNILVR",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SANDS CHINA LTD",
-        "class": "Equity",
-        "symbol": "1928",
-        "country": "Hong Kong",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HONDA MOTOR LTD",
-        "class": "Equity",
-        "symbol": "7267",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GEELY AUTOMOBILE HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "175",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHUNGHWA TELECOM CO. LTD.",
-        "class": "Equity",
-        "symbol": "2412",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "NEW ORIENTAL EDUCATION & TECHNOLOG",
-        "class": "Equity",
-        "symbol": "EDU",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "WALMART DE MEXICO V",
-        "class": "Equity",
-        "symbol": "WALMEX*",
-        "country": "Mexico",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TELEKOMUNIKASI INDONESIA",
-        "class": "Equity",
-        "symbol": "TLKM",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ITC LTD",
-        "class": "Equity",
-        "symbol": "ITC",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MARUTI SUZUKI INDIA LTD",
-        "class": "Equity",
-        "symbol": "MARUTI",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CSPC PHARMACEUTICAL GROUP LTD",
-        "class": "Equity",
-        "symbol": "1093",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TAL EDUCATION GROUP ADR REPTG",
-        "class": "Equity",
-        "symbol": "TAL",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LG HOUSEHOLD & HEALTH CARE LTD",
-        "class": "Equity",
-        "symbol": "051900",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HYUNDAI MOTOR",
-        "class": "Equity",
-        "symbol": "005380",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SINO BIOPHARMACEUTICAL LTD",
-        "class": "Equity",
-        "symbol": "1177",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "UNI-PRESIDENT ENTERPRISES CORP.",
-        "class": "Equity",
-        "symbol": "1216",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ASTRA INTERNATIONAL",
-        "class": "Equity",
-        "symbol": "ASII",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "WYNN RESORTS LTD",
-        "class": "Equity",
-        "symbol": "WYNN",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CP ALL NON-VOTING DR PCL",
-        "class": "Equity",
-        "symbol": "CPALL.R",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHINA MENGNIU DAIRY LTD",
-        "class": "Equity",
-        "symbol": "2319",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "INDUSTRIA DE DISENO TEXTIL INDITEX",
-        "class": "Equity",
-        "symbol": "ITX",
-        "country": "Spain",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AMOREPACIFIC CORP",
-        "class": "Equity",
-        "symbol": "090430",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CK HUTCHISON HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "1",
-        "country": "Hong Kong",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HYUNDAI MOBIS LTD",
-        "class": "Equity",
-        "symbol": "012330",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "KT&G CORP",
-        "class": "Equity",
-        "symbol": "033780",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CELLTRION INC",
-        "class": "Equity",
-        "symbol": "068270",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SHISEIDO LTD",
-        "class": "Equity",
-        "symbol": "4911",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHINA UNICOM (HONG KONG) LTD",
-        "class": "Equity",
-        "symbol": "762",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHINA RESOURCES BEER HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "291",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TELENOR",
-        "class": "Equity",
-        "symbol": "TEL",
-        "country": "Norway",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MAHINDRA AND MAHINDRA LTD",
-        "class": "Equity",
-        "symbol": "M&M",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SWATCH GROUP AG",
-        "class": "Equity",
-        "symbol": "UHR",
-        "country": "Switzerland",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MELCO RESORTS ENTERTAINMENT ADR LT",
-        "class": "Equity",
-        "symbol": "MLCO",
-        "country": "Hong Kong",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GRUPO TELEVISA",
-        "class": "Equity",
-        "symbol": "TLEVISACPO",
-        "country": "Mexico",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "JARDINE STRATEGIC HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "J37",
-        "country": "Hong Kong",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SHOPRITE HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "SHP",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ANTA SPORTS PRODUCTS LTD",
-        "class": "Equity",
-        "symbol": "2020",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BHARTI AIRTEL LTD",
-        "class": "Equity",
-        "symbol": "BHARTIARTL",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "PRESIDENT CHAIN STORE CORP.",
-        "class": "Equity",
-        "symbol": "2912",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HENGAN INTERNATIONAL GROUP LTD",
-        "class": "Equity",
-        "symbol": "1044",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "PJSC MAGNIT GDR",
-        "class": "Equity",
-        "symbol": "MGNT",
-        "country": "Russian Federation",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "VODACOM GROUP LTD",
-        "class": "Equity",
-        "symbol": "VOD",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "DENSO CORP",
-        "class": "Equity",
-        "symbol": "6902",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HERMES INTERNATIONAL",
-        "class": "Equity",
-        "symbol": "RMS",
-        "country": "France",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MAGNA INTERNATIONAL INC",
-        "class": "Equity",
-        "symbol": "MG",
-        "country": "Canada",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "WYNN MACAU LTD",
-        "class": "Equity",
-        "symbol": "1128",
-        "country": "Hong Kong",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BRILLIANCE CHINA AUTOMOTIVE HOLDIN",
-        "class": "Equity",
-        "symbol": "1114",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TAIWAN MOBILE LTD",
-        "class": "Equity",
-        "symbol": "3045",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "S.A.C.I. FALABELLA",
-        "class": "Equity",
-        "symbol": "FALABELLA",
-        "country": "Chile",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LG ELECTRONICS INC",
-        "class": "Equity",
-        "symbol": "066570",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MEIJI HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "2269",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LOJAS RENNER S/A",
-        "class": "Equity",
-        "symbol": "LREN3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "UNILEVER INDONESIA",
-        "class": "Equity",
-        "symbol": "UNVR",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MOBILE TELESYSTEMS ADR REP",
-        "class": "Equity",
-        "symbol": "MBT",
-        "country": "Russian Federation",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "NEXON LTD",
-        "class": "Equity",
-        "symbol": "3659",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SINOPHARM GROUP H",
-        "class": "Equity",
-        "symbol": "1099",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TELEFONICA BRASIL PREF SA",
-        "class": "Equity",
-        "symbol": "VIVT4",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "E-MART INC",
-        "class": "Equity",
-        "symbol": "139480",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ASPEN PHARMACARE LTD",
-        "class": "Equity",
-        "symbol": "APN",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ESSITY CLASS B",
-        "class": "Equity",
-        "symbol": "ESSITY B",
-        "country": "Sweden",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BIOMARIN PHARMACEUTICAL INC",
-        "class": "Equity",
-        "symbol": "BMRN",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "WANT WANT CHINA HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "151",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ADVANCED INFO SERVICE NON-VOTING D",
-        "class": "Equity",
-        "symbol": "ADVANC.R",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "VIPSHOP HOLDINGS SPONSORED ADS REP",
-        "class": "Equity",
-        "symbol": "VIPS",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TINGYI (CAYMAN ISLANDS) HOLDINGS C",
-        "class": "Equity",
-        "symbol": "322",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MR PRICE GROUP LTD",
-        "class": "Equity",
-        "symbol": "MRP",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BORGWARNER INC",
-        "class": "Equity",
-        "symbol": "BWA",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TIGER BRANDS LTD",
-        "class": "Equity",
-        "symbol": "TBS",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "NCSOFT CORP",
-        "class": "Equity",
-        "symbol": "036570",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HAIER ELECTRONICS GROUP LTD",
-        "class": "Equity",
-        "symbol": "1169",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SK TELECOM LTD",
-        "class": "Equity",
-        "symbol": "017670",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "UNICHARM CORP",
-        "class": "Equity",
-        "symbol": "8113",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MILLICOM INTERNATIONAL CELLULAR SD",
-        "class": "Equity",
-        "symbol": "MIC SDB",
-        "country": "Sweden",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "COCA COLA HBC AG",
-        "class": "Equity",
-        "symbol": "CCH",
-        "country": "United Kingdom",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TITAN COMPANY LTD",
-        "class": "Equity",
-        "symbol": "TITAN",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SM INVESTMENTS CORP",
-        "class": "Equity",
-        "symbol": "SM",
-        "country": "Philippines",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "COWAY LTD",
-        "class": "Equity",
-        "symbol": "021240",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "FAR EASTONE TELECOMMUNICATIONS LTD",
-        "class": "Equity",
-        "symbol": "4904",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BYD LTD H",
-        "class": "Equity",
-        "symbol": "1211",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CENCOSUD S.A.",
-        "class": "Equity",
-        "symbol": "CENCOSUD",
-        "country": "Chile",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SUMITOMO ELECTRIC INDUSTRIES LTD",
-        "class": "Equity",
-        "symbol": "5802",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MOMO ADR REPRESENTING INC CLASS A",
-        "class": "Equity",
-        "symbol": "MOMO",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "KROTON EDUCACIONAL SA",
-        "class": "Equity",
-        "symbol": "KROT3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ZEE ENTERTAINMENT ENTERPRISES LTD",
-        "class": "Equity",
-        "symbol": "ZEEL",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "YY ADR REPRESENTING INC CLASS A",
-        "class": "Equity",
-        "symbol": "YY",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SHENZHOU INTERNATIONAL GROUP LTD",
-        "class": "Equity",
-        "symbol": "2313",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "RAIA DROGASIL SA",
-        "class": "Equity",
-        "symbol": "RADL3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "RYOHIN KEIKAKU LTD",
-        "class": "Equity",
-        "symbol": "7453",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GUANGZHOU AUTOMOBILE GROUP LTD H",
-        "class": "Equity",
-        "symbol": "2238",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HOTEL SHILLA CO LTDINARY SHARES KO",
-        "class": "Equity",
-        "symbol": "008770",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LOJAS AMERICANAS PN REP1 PREF SA",
-        "class": "Equity",
-        "symbol": "LAME4",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "DIGI.COM BHD",
-        "class": "Equity",
-        "symbol": "DIGI",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BIM BIRLESIK MAGAZALAR A",
-        "class": "Equity",
-        "symbol": "BIMAS",
-        "country": "Turkey",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "WILMAR INTERNATIONAL LTD",
-        "class": "Equity",
-        "symbol": "F34",
-        "country": "Singapore",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AMOREG",
-        "class": "Equity",
-        "symbol": "002790",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SHINSEGAE INC",
-        "class": "Equity",
-        "symbol": "004170",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AISIN SEIKI LTD",
-        "class": "Equity",
-        "symbol": "7259",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "NESTLE INDIA LTD",
-        "class": "Equity",
-        "symbol": "NESTLEIND",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "COMPANHIA BRASILEIRA DE DISTRIBUIC",
-        "class": "Equity",
-        "symbol": "PCAR4",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "DONGFENG MOTOR GROUP LTD H",
-        "class": "Equity",
-        "symbol": "489",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SUN PHARMACEUTICAL INDUSTRIES LTD",
-        "class": "Equity",
-        "symbol": "SUNPHARMA",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BRL CASH",
-        "class": "Cash",
-        "symbol": "BRL",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GREAT WALL MOTOR LTD H",
-        "class": "Equity",
-        "symbol": "2333",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LOCALIZA RENT A CAR S/A",
-        "class": "Equity",
-        "symbol": "RENT3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TIM PARTICIPACOES S/A",
-        "class": "Equity",
-        "symbol": "TIMP3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "JG SUMMIT HOLDINGS INC",
-        "class": "Equity",
-        "symbol": "JGS",
-        "country": "Philippines",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LIFE HEALTH LTD",
-        "class": "Equity",
-        "symbol": "LHC",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "KOITO MANUFACTURING LTD",
-        "class": "Equity",
-        "symbol": "7276",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HELLENIC TELECOMMUNICATIONS ORGANI",
-        "class": "Equity",
-        "symbol": "HTO",
-        "country": "Greece",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LATAM AIRLINES GROUP SA",
-        "class": "Equity",
-        "symbol": "LTM",
-        "country": "Chile",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AXIATA GROUP",
-        "class": "Equity",
-        "symbol": "AXIATA",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SHANGHAI FOSUN PHARMACEUTICAL (GRO",
-        "class": "Equity",
-        "symbol": "2196",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "COCA-COLA FEMSA CLASS L",
-        "class": "Equity",
-        "symbol": "KOFL",
-        "country": "Mexico",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "KANGWON LAND INC",
-        "class": "Equity",
-        "symbol": "035250",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHINA MEDICAL SYSTEM HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "867",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GODREJ CONSUMER PRODUCTS LTD",
-        "class": "Equity",
-        "symbol": "GODREJCP",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MGM CHINA HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "2282",
-        "country": "Hong Kong",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "UNITED SPIRITS LTD",
-        "class": "Equity",
-        "symbol": "MCDOWELL.N",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "WOOLWORTHS HLDGS LTD",
-        "class": "Equity",
-        "symbol": "WHL",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HOTAI MOTOR CO LTD",
-        "class": "Equity",
-        "symbol": "2207",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HKD CASH",
-        "class": "Cash",
-        "symbol": "HKD",
-        "country": "Hong Kong",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "DABUR INDIA LTD",
-        "class": "Equity",
-        "symbol": "DABUR",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SUN ART RETAIL GROUP LTD",
-        "class": "Equity",
-        "symbol": "6808",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "JERONIMO MARTINS SGPS S/A",
-        "class": "Equity",
-        "symbol": "JMT",
-        "country": "Portugal",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CP ALL PCL",
-        "class": "Equity",
-        "symbol": "CPALL.F",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "THE FOSCHINI GROUP LTD",
-        "class": "Equity",
-        "symbol": "TFG",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MAXIS BHD",
-        "class": "Equity",
-        "symbol": "MAXIS",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HERO MOTOCORP LTD",
-        "class": "Equity",
-        "symbol": "HEROMOTOCO",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TSINGTAO BREWERY LTD H",
-        "class": "Equity",
-        "symbol": "168",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HYPERMARCAS S/A",
-        "class": "Equity",
-        "symbol": "HYPE3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SWATCH GROUP AG",
-        "class": "Equity",
-        "symbol": "UHRN",
-        "country": "Switzerland",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SHARP CORP",
-        "class": "Equity",
-        "symbol": "6753",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BAJAJ AUTO LTD",
-        "class": "Equity",
-        "symbol": "BAJAJ.AUTO",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TURKCELL ILETISIM HIZMETLERI A",
-        "class": "Equity",
-        "symbol": "TCELL",
-        "country": "Turkey",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HANJAYA MANDALA SAMPOERNA",
-        "class": "Equity",
-        "symbol": "HMSP",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SJM HLDGS LTD",
-        "class": "Equity",
-        "symbol": "880",
-        "country": "Hong Kong",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "JARDINE CYCLE AND CARRIAGE LTD",
-        "class": "Equity",
-        "symbol": "C07",
-        "country": "Singapore",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ARCA CONTINENTAL",
-        "class": "Equity",
-        "symbol": "AC*",
-        "country": "Mexico",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "KIMBERLY-CLARK DE MEXICO CLASS A",
-        "class": "Equity",
-        "symbol": "KIMBERA",
-        "country": "Mexico",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ORION CORP",
-        "class": "Equity",
-        "symbol": "271560",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SINGAPORE AIRLINES LTD",
-        "class": "Equity",
-        "symbol": "C6L",
-        "country": "Singapore",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TRUWORTHS INTERNATIONAL LTD",
-        "class": "Equity",
-        "symbol": "TRU",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GENTING MALAYSIA",
-        "class": "Equity",
-        "symbol": "GENM",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "PPB GROUP",
-        "class": "Equity",
-        "symbol": "PPB",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BANGKOK DUSIT MEDICAL SERVICES NON",
-        "class": "Equity",
-        "symbol": "BDMS.R",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GUDANG GARAM",
-        "class": "Equity",
-        "symbol": "GGRM",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GREEK ORGANITION OF FOOTBALL PROGN",
-        "class": "Equity",
-        "symbol": "OPAP",
-        "country": "Greece",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "IHH HEALTHCARE",
-        "class": "Equity",
-        "symbol": "IHH",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LOTTE SHOPPING LTD",
-        "class": "Equity",
-        "symbol": "023530",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CJ CHEILJEDANG CORP",
-        "class": "Equity",
-        "symbol": "097950",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "YAMAHA CORP",
-        "class": "Equity",
-        "symbol": "7951",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "PICK N PAY STORES LTD",
-        "class": "Equity",
-        "symbol": "PIK",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "INDOFOOD SUKSES MAKMUR",
-        "class": "Equity",
-        "symbol": "INDF",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "STANLEY ELECTRIC LTD",
-        "class": "Equity",
-        "symbol": "6923",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "YAKULT HONSHA LTD",
-        "class": "Equity",
-        "symbol": "2267",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "PLDT INC INC",
-        "class": "Equity",
-        "symbol": "TEL",
-        "country": "Philippines",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "UNIVERSAL ROBINA CORP.",
-        "class": "Equity",
-        "symbol": "URC",
-        "country": "Philippines",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MARICO LTD",
-        "class": "Equity",
-        "symbol": "MARICO",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ALFA A",
-        "class": "Equity",
-        "symbol": "ALFAA",
-        "country": "Mexico",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MAGAZINE LUIZA S.A.",
-        "class": "Equity",
-        "symbol": "MGLU3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BERLI JUCKER CO THB1(ALIEN MKT)",
-        "class": "Equity",
-        "symbol": "BJC.F",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "EUR CASH",
-        "class": "Cash",
-        "symbol": "EUR",
-        "country": "European Union",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "KALBE FARMA",
-        "class": "Equity",
-        "symbol": "KLBF",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "JOLLIBEE FOODS CORP",
-        "class": "Equity",
-        "symbol": "JFC",
-        "country": "Philippines",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LENOVO GROUP LTD",
-        "class": "Equity",
-        "symbol": "992",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "KUALA LUMPUR KEPONG BHD",
-        "class": "Equity",
-        "symbol": "KLK",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HANMI PHARMACEUTICAL CO. LTD.",
-        "class": "Equity",
-        "symbol": "128940",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SPAR GROUP LTD",
-        "class": "Equity",
-        "symbol": "SPP",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GEDEON RICHTER",
-        "class": "Equity",
-        "symbol": "RICHTER",
-        "country": "Hungary",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "IMPERIAL HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "IPL",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BRF SA",
-        "class": "Equity",
-        "symbol": "BRFS3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHAROEN POKPHAND INDONESIA",
-        "class": "Equity",
-        "symbol": "CPIN",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BOSCH LTD",
-        "class": "Equity",
-        "symbol": "BOSCHLTD",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHENG SHIN RUBBER INDUSTRY LTD",
-        "class": "Equity",
-        "symbol": "2105",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "COMPANIA CERVECERIAS UNIDAS SA",
-        "class": "Equity",
-        "symbol": "CCU",
-        "country": "Chile",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ZHEJIANG EXPRESSWAY LTD H",
-        "class": "Equity",
-        "symbol": "576",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HOME PRODUCT CENTER NON-VOTING DR",
-        "class": "Equity",
-        "symbol": "HMPRO.R",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "YUHAN CORP",
-        "class": "Equity",
-        "symbol": "000100",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CIPLA LTD",
-        "class": "Equity",
-        "symbol": "CIPLA",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CJ CORP",
-        "class": "Equity",
-        "symbol": "001040",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "JIANGSU EXPRESSWAY LTD H",
-        "class": "Equity",
-        "symbol": "177",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HYUNDAI MOTOR CO 2ND PRF",
-        "class": "Equity",
-        "symbol": "005387",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GBP CASH",
-        "class": "Cash",
-        "symbol": "GBP",
-        "country": "United Kingdom",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BUMRUNGRAD HOSPITAL NON-VOTING DR",
-        "class": "Equity",
-        "symbol": "BH.R",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AIR CHINA LTD H",
-        "class": "Equity",
-        "symbol": "753",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SHANGRI LA ASIA LTD",
-        "class": "Equity",
-        "symbol": "69",
-        "country": "Hong Kong",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "RAMSAY HEALTH CARE LTD",
-        "class": "Equity",
-        "symbol": "RHC",
-        "country": "Australia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CJ E&M CORP",
-        "class": "Equity",
-        "symbol": "130960",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MATAHARI DEPARTMENT STORE",
-        "class": "Equity",
-        "symbol": "LPPF",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ATACADAO CARREFOUR SA",
-        "class": "Equity",
-        "symbol": "CRFB3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TRUE CORPORATION NON-VOTING DR PCL",
-        "class": "Equity",
-        "symbol": "TRUE.R",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ADVANCED INFO SERVICE PCL F",
-        "class": "Equity",
-        "symbol": "ADVANC.F",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LOTTE CORP",
-        "class": "Equity",
-        "symbol": "004990",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MEDICLINIC INTERNATIONAL PLC",
-        "class": "Equity",
-        "symbol": "MDC",
-        "country": "United Kingdom",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CYFROWY POLSAT S.A.",
-        "class": "Equity",
-        "symbol": "CPS",
-        "country": "Poland",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MOTHERSON SUMI SYSTEMS LTD",
-        "class": "Equity",
-        "symbol": "MOTHERSUMI",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "NATURA COSMETICOS S.A.",
-        "class": "Equity",
-        "symbol": "NATU3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "JUMBO SA",
-        "class": "Equity",
-        "symbol": "BELA",
-        "country": "Greece",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHINA SOUTHERN AIRLINES LTD H",
-        "class": "Equity",
-        "symbol": "1055",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "FUYAO GLASS INDUSTRY GROUP LTD H",
-        "class": "Equity",
-        "symbol": "3606",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "OOREDOO",
-        "class": "Equity",
-        "symbol": "ORDS",
-        "country": "Qatar",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "YUE YUEN INDUSTRIAL (HOLDINGS) LTD",
-        "class": "Equity",
-        "symbol": "551",
-        "country": "Hong Kong",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "INDOFOOD CBP SUKSES MAKMUR",
-        "class": "Equity",
-        "symbol": "ICBP",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "STANDARD FOODS CORP.",
-        "class": "Equity",
-        "symbol": "1227",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MINOR INTERNATIONAL PUBLIC NON VOT",
-        "class": "Equity",
-        "symbol": "MINT.R",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GIANT MANUFACTURING CO. LTD.",
-        "class": "Equity",
-        "symbol": "9921",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HYUNDAI DEPARTMENT STORE LTD",
-        "class": "Equity",
-        "symbol": "069960",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "DINO POLSKA SA",
-        "class": "Equity",
-        "symbol": "DNP",
-        "country": "Poland",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AMOREPACIFIC CORP. NON-VOTING PREF",
-        "class": "Equity",
-        "symbol": "090435",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "KOREAN AIR LINES LTD",
-        "class": "Equity",
-        "symbol": "003490",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "IDEA CELLULAR LTD",
-        "class": "Equity",
-        "symbol": "IDEA",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "RUENTEX INDUSTRIES LTD.",
-        "class": "Equity",
-        "symbol": "2915",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BHARAT FORGE LTD",
-        "class": "Equity",
-        "symbol": "BHARATFORG",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LG HOUSEHOLD & HEALTH CARE LTD. PR",
-        "class": "Equity",
-        "symbol": "051905",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHAROEN POKPHAND FOODS NON-VOTING",
-        "class": "Equity",
-        "symbol": "CPF.R",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BGF RETAIL LTD",
-        "class": "Equity",
-        "symbol": "282330",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CCC SA",
-        "class": "Equity",
-        "symbol": "CCC",
-        "country": "Poland",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ECLAT TEXTILE LTD",
-        "class": "Equity",
-        "symbol": "1476",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ALIBABA PICTURES GROUP LTD",
-        "class": "Equity",
-        "symbol": "1060",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "EL PUERTO DE LIVERPOOL C1",
-        "class": "Equity",
-        "symbol": "LIVEPOLC.1",
-        "country": "Mexico",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TURK HAVA YOLLARI AO A",
-        "class": "Equity",
-        "symbol": "THYAO",
-        "country": "Turkey",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "NETCARE LTD",
-        "class": "Equity",
-        "symbol": "NTC",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "M. DIAS BRANCO S/A INDUSTRIA E COM",
-        "class": "Equity",
-        "symbol": "MDIA3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AIRASIA GROUP",
-        "class": "Equity",
-        "symbol": "AIRASIA",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "DISCOVERY INC SERIES C",
-        "class": "Equity",
-        "symbol": "DISCK",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GOLDEN AGRI RESOURCES LTD",
-        "class": "Equity",
-        "symbol": "E5H",
-        "country": "Singapore",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "LUPIN LTD",
-        "class": "Equity",
-        "symbol": "LUPIN",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HANSSEM CO LTD",
-        "class": "Equity",
-        "symbol": "009240",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "EMBOTELLADORA ANDINA SERIES B PREF",
-        "class": "Equity",
-        "symbol": "ANDINA.B",
-        "country": "Chile",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AUROBINDO PHARMA LTD",
-        "class": "Equity",
-        "symbol": "AUROPHARMA",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GOME RETAIL HOLDINGS LTD",
-        "class": "Equity",
-        "symbol": "493",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "PIONEER FOOD GROUP LTD",
-        "class": "Equity",
-        "symbol": "PFG",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HYUNDAI MOTOR PREF",
-        "class": "Equity",
-        "symbol": "005385",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BRITISH AMERICAN TOBACCO (MALAYSIA",
-        "class": "Equity",
-        "symbol": "BAT",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ROBINSON PCL F",
-        "class": "Equity",
-        "symbol": "ROBINS.F",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "KRW CASH",
-        "class": "Cash",
-        "symbol": "KRW",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SURYA CITRA MEDIA",
-        "class": "Equity",
-        "symbol": "SCMA",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "RINNAI CORP",
-        "class": "Equity",
-        "symbol": "5947",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHEIL WORLDWIDE INC",
-        "class": "Equity",
-        "symbol": "030000",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "NOK CORP",
-        "class": "Equity",
-        "symbol": "7240",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SIHUAN PHARMACEUTICAL HOLDINGS GRO",
-        "class": "Equity",
-        "symbol": "460",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ODONTOPREV SA",
-        "class": "Equity",
-        "symbol": "ODPV3",
-        "country": "Brazil",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ZAR CASH",
-        "class": "Cash",
-        "symbol": "ZAR",
-        "country": "South Africa",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ALLIANCE GLOBAL GROUP INC.",
-        "class": "Equity",
-        "symbol": "AGI",
-        "country": "Philippines",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GLOBE TEL INC",
-        "class": "Equity",
-        "symbol": "GLO",
-        "country": "Philippines",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CASIO COMPUTER LTD",
-        "class": "Equity",
-        "symbol": "6952",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HANON SYSTEMS",
-        "class": "Equity",
-        "symbol": "018880",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GS RETAIL LTD",
-        "class": "Equity",
-        "symbol": "007070",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "OTTOGI CORP",
-        "class": "Equity",
-        "symbol": "007310",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ORANGE POLSKA SA",
-        "class": "Equity",
-        "symbol": "OPL",
-        "country": "Poland",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "DISCOVERY INC SERIES A",
-        "class": "Equity",
-        "symbol": "DISCA",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HANMI SCIENCE LTD",
-        "class": "Equity",
-        "symbol": "008930",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ANADOLU EFES BIRACILIK VE MALT SAN",
-        "class": "Equity",
-        "symbol": "AEFES",
-        "country": "Turkey",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "O2 CZECH REPUBLIC AS",
-        "class": "Equity",
-        "symbol": "BAATELEC",
-        "country": "Czech Republic",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "FORD OTOMOTIV SANAYI A",
-        "class": "Equity",
-        "symbol": "FROTO",
-        "country": "Turkey",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BANGKOK DUSIT MEDICAL SERVICES PCL",
-        "class": "Equity",
-        "symbol": "BDMS.F",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "IDR CASH",
-        "class": "Cash",
-        "symbol": "IDR",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "EVA AIRWAYS CORP.",
-        "class": "Equity",
-        "symbol": "2618",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "DONG SUH INC",
-        "class": "Equity",
-        "symbol": "026960",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GRUPO LALA",
-        "class": "Equity",
-        "symbol": "LALAB",
-        "country": "Mexico",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HYUNDAI WIA CORP",
-        "class": "Equity",
-        "symbol": "011210",
-        "country": "Korea (South)",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "FORMOSA TAFFETA CO. LTD.",
-        "class": "Equity",
-        "symbol": "1434",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TURK TELEKOMUNIKASYON",
-        "class": "Equity",
-        "symbol": "TTKOM",
-        "country": "Turkey",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ASICS CORP",
-        "class": "Equity",
-        "symbol": "7936",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TRUE CORPORATION PCL F",
-        "class": "Equity",
-        "symbol": "TRUE.F",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ABC MART INC",
-        "class": "Equity",
-        "symbol": "2670",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "UMW HOLDINGS BHD",
-        "class": "Equity",
-        "symbol": "UMWH",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HTC CORP",
-        "class": "Equity",
-        "symbol": "2498",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ASIA PACIFIC TELECOM LTD",
-        "class": "Equity",
-        "symbol": "3682",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GLENMARK PHARMACEUTICALS LTD",
-        "class": "Equity",
-        "symbol": "GLENMARK",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "USD CASH",
-        "class": "Cash",
-        "symbol": "USD",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ULKER BISKUVI SANAYI A",
-        "class": "Equity",
-        "symbol": "ULKER",
-        "country": "Turkey",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ASTRO MALAYSIA HOLDINGS",
-        "class": "Equity",
-        "symbol": "ASTRO",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CADILA HEALTHCARE LTD",
-        "class": "Equity",
-        "symbol": "CADILAHC",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TOYODA GOSEI LTD",
-        "class": "Equity",
-        "symbol": "7282",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "FELDA GLOBAL VENTURES HOLDINGS",
-        "class": "Equity",
-        "symbol": "FGV",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "JPY CASH",
-        "class": "Cash",
-        "symbol": "JPY",
-        "country": "Japan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "XL AXIATA",
-        "class": "Equity",
-        "symbol": "EXCL",
-        "country": "Indonesia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GENTING PLANTATIONS BHD",
-        "class": "Equity",
-        "symbol": "GENP",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "ARCELIK A",
-        "class": "Equity",
-        "symbol": "ARCLK",
-        "country": "Turkey",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHINA AIRLINES LTD.",
-        "class": "Equity",
-        "symbol": "2610",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MXN CASH",
-        "class": "Cash",
-        "symbol": "MXN",
-        "country": "Mexico",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHAROEN POKPHAND FOODS PCL FOREIGN",
-        "class": "Equity",
-        "symbol": "CPF.F",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BUMRUNGRAD HOPTL THB1(ALIEN MKT)",
-        "class": "Equity",
-        "symbol": "BH.F",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "DXB ENTERTAINMENTS",
-        "class": "Equity",
-        "symbol": "DXBE",
-        "country": "United Arab Emirates",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TOFAS TURK OTOMOBIL FABRIKASI A",
-        "class": "Equity",
-        "symbol": "TOASO",
-        "country": "Turkey",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "COCA-COLA ICECEK A",
-        "class": "Equity",
-        "symbol": "CCOLA",
-        "country": "Turkey",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "NOK CASH",
-        "class": "Cash",
-        "symbol": "NOK",
-        "country": "Norway",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CASH COLLATERAL USD BZFUT",
-        "class": "Cash Collateral and Margins",
-        "symbol": "BZFUT",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "INR CASH",
-        "class": "Cash",
-        "symbol": "INR",
-        "country": "India",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MYR CASH",
-        "class": "Cash",
-        "symbol": "MYR",
-        "country": "Malaysia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHF CASH",
-        "class": "Cash",
-        "symbol": "CHF",
-        "country": "Switzerland",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SEK CASH",
-        "class": "Cash",
-        "symbol": "SEK",
-        "country": "Sweden",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "GLOBAL TELECOM HOLDING",
-        "class": "Equity",
-        "symbol": "GTHE",
-        "country": "Egypt",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AED CASH",
-        "class": "Cash",
-        "symbol": "AED",
-        "country": "United Arab Emirates",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "FOLLI FOLLIE COMMERCIAL MANUFACTUR",
-        "class": "Equity",
-        "symbol": "FFGRP",
-        "country": "Greece",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "SGD CASH",
-        "class": "Cash",
-        "symbol": "SGD",
-        "country": "Singapore",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TRY CASH",
-        "class": "Cash",
-        "symbol": "TRY",
-        "country": "Turkey",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "QAR CASH",
-        "class": "Cash",
-        "symbol": "QAR",
-        "country": "Qatar",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "HUF CASH",
-        "class": "Cash",
-        "symbol": "HUF",
-        "country": "Hungary",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "TWD CASH",
-        "class": "Cash",
-        "symbol": "TWD",
-        "country": "Taiwan",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CAD CASH",
-        "class": "Cash",
-        "symbol": "CAD",
-        "country": "Canada",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "AUD CASH",
-        "class": "Cash",
-        "symbol": "AUD",
-        "country": "Australia",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "THB CASH",
-        "class": "Cash",
-        "symbol": "THB",
-        "country": "Thailand",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CZK CASH",
-        "class": "Cash",
-        "symbol": "CZK",
-        "country": "Czech Republic",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CNH CASH",
-        "class": "Cash",
-        "symbol": "CNH",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "PHP CASH",
-        "class": "Cash",
-        "symbol": "PHP",
-        "country": "Philippines",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CLP CASH",
-        "class": "Cash",
-        "symbol": "CLP",
-        "country": "Chile",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "BRL/USD",
-        "class": "FX",
-        "symbol": "BRL",
-        "country": "United States",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "MSCI EMER MKT INDEX (ICE) JUN 18",
-        "class": "Futures",
-        "symbol": "MESM8",
-        "country": "-",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "CHINA HUISHAN DAIRY HOLDINGS COMPA",
-        "class": "Equity",
-        "symbol": "6863",
-        "country": "China",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "EGP CASH",
-        "class": "Cash",
-        "symbol": "EGP",
-        "country": "Egypt",
-        "currency": "USD",
-        "sector": "Technology"
-    },
-    {
-        "name": "PLN CASH",
-        "class": "Cash",
-        "symbol": "PLN",
-        "country": "Poland",
-        "currency": "USD",
-        "sector": "Technology"
-    }
+  {
+    "symbol": "MMM",
+    "name": "3M Company",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ABT",
+    "name": "Abbott Laboratories",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ABBV",
+    "name": "AbbVie Inc.",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ABMD",
+    "name": "ABIOMED Inc",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ACN",
+    "name": "Accenture plc",
+    "sector": "Information Technology",
+    "country": "Ireland",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ATVI",
+    "name": "Activision Blizzard",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ADBE",
+    "name": "Adobe Systems Inc",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AMD",
+    "name": "Advanced Micro Devices Inc",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AAP",
+    "name": "Advance Auto Parts",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AES",
+    "name": "AES Corp",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AET",
+    "name": "Aetna Inc",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AMG",
+    "name": "Affiliated Managers Group Inc",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AFL",
+    "name": "AFLAC Inc",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "A",
+    "name": "Agilent Technologies Inc",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "APD",
+    "name": "Air Products & Chemicals Inc",
+    "sector": "Materials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AKAM",
+    "name": "Akamai Technologies Inc",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ALK",
+    "name": "Alaska Air Group Inc",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ALB",
+    "name": "Albemarle Corp",
+    "sector": "Materials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ARE",
+    "name": "Alexandria Real Estate EquitiesInc",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ALXN",
+    "name": "Alexion Pharmaceuticals",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ALGN",
+    "name": "Align Technology",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ALLE",
+    "name": "Allegion",
+    "sector": "Industrials",
+    "country": "Ireland",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AGN",
+    "name": "Allergan, Plc",
+    "sector": "Health Care",
+    "country": "Ireland",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ADS",
+    "name": "Alliance Data Systems",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "LNT",
+    "name": "Alliant Energy Corp",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ALL",
+    "name": "Allstate Corp",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GOOGL",
+    "name": "Alphabet Inc Class A",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GOOG",
+    "name": "Alphabet Inc Class C",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "MO",
+    "name": "Altria Group Inc",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AMZN",
+    "name": "Amazon.com Inc.",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AEE",
+    "name": "Ameren Corp",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AAL",
+    "name": "American Airlines Group",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AEP",
+    "name": "American Electric Power",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AXP",
+    "name": "American Express Co",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AIG",
+    "name": "American International Group, Inc.",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AMT",
+    "name": "American Tower Corp.",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AWK",
+    "name": "American Water Works Company Inc",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AMP",
+    "name": "Ameriprise Financial",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ABC",
+    "name": "AmerisourceBergen Corp",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AME",
+    "name": "AMETEK Inc.",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AMGN",
+    "name": "Amgen Inc.",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "APH",
+    "name": "Amphenol Corp",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "APC",
+    "name": "Anadarko Petroleum Corp",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ADI",
+    "name": "Analog Devices, Inc.",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ANSS",
+    "name": "ANSYS",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ANTM",
+    "name": "Anthem Inc.",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AON",
+    "name": "Aon plc",
+    "sector": "Financials",
+    "country": "UK",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AOS",
+    "name": "A.O. Smith Corp",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "APA",
+    "name": "Apache Corporation",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AIV",
+    "name": "Apartment Investment & Management (Aimco)",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AAPL",
+    "name": "Apple Inc.",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AMAT",
+    "name": "Applied Materials Inc.",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "APTV",
+    "name": "Aptiv Plc",
+    "sector": "Consumer Discretionary",
+    "country": "UK",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ADM",
+    "name": "Archer-Daniels-Midland Co",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ARNC",
+    "name": "Arconic Inc.",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ANET",
+    "name": "Arista Networks",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AJG",
+    "name": "Arthur J. Gallagher & Co.",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AIZ",
+    "name": "Assurant Inc.",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "T",
+    "name": "AT&T Inc.",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ADSK",
+    "name": "Autodesk Inc.",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ADP",
+    "name": "Automatic Data Processing",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AZO",
+    "name": "AutoZone Inc",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AVB",
+    "name": "AvalonBay Communities, Inc.",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AVY",
+    "name": "Avery Dennison Corp",
+    "sector": "Materials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BHGE",
+    "name": "Baker Hughes, a GE Company",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BLL",
+    "name": "Ball Corp",
+    "sector": "Materials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BAC",
+    "name": "Bank of America Corp",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BK",
+    "name": "The Bank of New York Mellon Corp.",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BAX",
+    "name": "Baxter International Inc.",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BBT",
+    "name": "BB&T Corporation",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BDX",
+    "name": "Becton Dickinson",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BRK.B",
+    "name": "Berkshire Hathaway",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BBY",
+    "name": "Best Buy Co. Inc.",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BIIB",
+    "name": "Biogen Inc.",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BLK",
+    "name": "BlackRock",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "HRB",
+    "name": "Block H&R",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BA",
+    "name": "Boeing Company",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BKNG",
+    "name": "Booking Holdings Inc",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BWA",
+    "name": "BorgWarner",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BXP",
+    "name": "Boston Properties",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BSX",
+    "name": "Boston Scientific",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BHF",
+    "name": "Brighthouse Financial Inc",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BMY",
+    "name": "Bristol-Myers Squibb",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "AVGO",
+    "name": "Broadcom",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BR",
+    "name": "Broadridge Financial Solutions",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BF.B",
+    "name": "Brown-Forman Corp.",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CHRW",
+    "name": "C. H. Robinson Worldwide",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CA",
+    "name": "CA, Inc.",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "COG",
+    "name": "Cabot Oil & Gas",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CDNS",
+    "name": "Cadence Design Systems",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CPB",
+    "name": "Campbell Soup",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "COF",
+    "name": "Capital One Financial",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CAH",
+    "name": "Cardinal Health Inc.",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "KMX",
+    "name": "Carmax Inc",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CCL",
+    "name": "Carnival Corp.",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CAT",
+    "name": "Caterpillar Inc.",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CBOE",
+    "name": "Cboe Global Markets",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CBRE",
+    "name": "CBRE Group",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CBS",
+    "name": "CBS Corp.",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CELG",
+    "name": "Celgene Corp.",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CNC",
+    "name": "Centene Corporation",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CNP",
+    "name": "CenterPoint Energy",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CTL",
+    "name": "CenturyLink Inc",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CERN",
+    "name": "Cerner",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CF",
+    "name": "CF Industries Holdings Inc",
+    "sector": "Materials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "SCHW",
+    "name": "Charles Schwab Corporation",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CHTR",
+    "name": "Charter Communications",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CVX",
+    "name": "Chevron Corp.",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CMG",
+    "name": "Chipotle Mexican Grill",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CB",
+    "name": "Chubb Limited",
+    "sector": "Financials",
+    "country": "Switzerland",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CHD",
+    "name": "Church & Dwight",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CI",
+    "name": "CIGNA Corp.",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "XEC",
+    "name": "Cimarex Energy",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CINF",
+    "name": "Cincinnati Financial",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CTAS",
+    "name": "Cintas Corporation",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CSCO",
+    "name": "Cisco Systems",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "C",
+    "name": "Citigroup Inc.",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CFG",
+    "name": "Citizens Financial Group",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CTXS",
+    "name": "Citrix Systems",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CLX",
+    "name": "The Clorox Company",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CME",
+    "name": "CME Group Inc.",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CMS",
+    "name": "CMS Energy",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "KO",
+    "name": "Coca-Cola Company (The)",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CTSH",
+    "name": "Cognizant Technology Solutions",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CL",
+    "name": "Colgate-Palmolive",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CMCSA",
+    "name": "Comcast Corp.",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CMA",
+    "name": "Comerica Inc.",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CAG",
+    "name": "Conagra Brands",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CXO",
+    "name": "Concho Resources",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "COP",
+    "name": "ConocoPhillips",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ED",
+    "name": "Consolidated Edison",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "STZ",
+    "name": "Constellation Brands",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "COO",
+    "name": "The Cooper Companies",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CPRT",
+    "name": "Copart Inc",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GLW",
+    "name": "Corning Inc.",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "COST",
+    "name": "Costco Wholesale Corp.",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "COTY",
+    "name": "Coty, Inc",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CCI",
+    "name": "Crown Castle International Corp.",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CSX",
+    "name": "CSX Corp.",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CMI",
+    "name": "Cummins Inc.",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "CVS",
+    "name": "CVS Health",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DHI",
+    "name": "D. R. Horton",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DHR",
+    "name": "Danaher Corp.",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DRI",
+    "name": "Darden Restaurants",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DVA",
+    "name": "DaVita Inc.",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DE",
+    "name": "Deere & Co.",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DAL",
+    "name": "Delta Air Lines Inc.",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "XRAY",
+    "name": "Dentsply Sirona",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DVN",
+    "name": "Devon Energy Corp.",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DLR",
+    "name": "Digital Realty Trust Inc",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DFS",
+    "name": "Discover Financial Services",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DISCA",
+    "name": "Discovery Inc. Class A",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DISCK",
+    "name": "Discovery Inc. Class C",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DISH",
+    "name": "Dish Network",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DG",
+    "name": "Dollar General",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DLTR",
+    "name": "Dollar Tree",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "D",
+    "name": "Dominion Energy",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DOV",
+    "name": "Dover Corp.",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DWDP",
+    "name": "DowDuPont",
+    "sector": "Materials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DTE",
+    "name": "DTE Energy Co.",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DRE",
+    "name": "Duke Realty Corp",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DUK",
+    "name": "Duke Energy",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "DXC",
+    "name": "DXC Technology",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ETFC",
+    "name": "E*Trade",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EMN",
+    "name": "Eastman Chemical",
+    "sector": "Materials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ETN",
+    "name": "Eaton Corporation",
+    "sector": "Industrials",
+    "country": "Ireland",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EBAY",
+    "name": "eBay Inc.",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ECL",
+    "name": "Ecolab Inc.",
+    "sector": "Materials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EIX",
+    "name": "Edison Int'l",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EW",
+    "name": "Edwards Lifesciences",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EA",
+    "name": "Electronic Arts",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EMR",
+    "name": "Emerson Electric Company",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ETR",
+    "name": "Entergy Corp.",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EVHC",
+    "name": "Envision Healthcare",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EOG",
+    "name": "EOG Resources",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EQT",
+    "name": "EQT Corporation",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EFX",
+    "name": "Equifax Inc.",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EQIX",
+    "name": "Equinix",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EQR",
+    "name": "Equity Residential",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ESS",
+    "name": "Essex Property Trust, Inc.",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EL",
+    "name": "Estee Lauder Cos.",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EVRG",
+    "name": "Evergy",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ES",
+    "name": "Eversource Energy",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "RE",
+    "name": "Everest Re Group Ltd.",
+    "sector": "Financials",
+    "country": "Bermuda",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EXC",
+    "name": "Exelon Corp.",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EXPE",
+    "name": "Expedia Group",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EXPD",
+    "name": "Expeditors",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "ESRX",
+    "name": "Express Scripts",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "EXR",
+    "name": "Extra Space Storage",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "XOM",
+    "name": "Exxon Mobil Corp.",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FFIV",
+    "name": "F5 Networks",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FB",
+    "name": "Facebook, Inc.",
+    "sector": "Communication Services",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FAST",
+    "name": "Fastenal Co",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FRT",
+    "name": "Federal Realty Investment Trust",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FDX",
+    "name": "FedEx Corporation",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FIS",
+    "name": "Fidelity National Information Services",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FITB",
+    "name": "Fifth Third Bancorp",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FE",
+    "name": "FirstEnergy Corp",
+    "sector": "Utilities",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FISV",
+    "name": "Fiserv Inc",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FLT",
+    "name": "FleetCor Technologies Inc",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FLIR",
+    "name": "FLIR Systems",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FLS",
+    "name": "Flowserve Corporation",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FLR",
+    "name": "Fluor Corp.",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FMC",
+    "name": "FMC Corporation",
+    "sector": "Materials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FL",
+    "name": "Foot Locker Inc",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "F",
+    "name": "Ford Motor",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FTV",
+    "name": "Fortive Corp",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FBHS",
+    "name": "Fortune Brands Home & Security",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "BEN",
+    "name": "Franklin Resources",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "FCX",
+    "name": "Freeport-McMoRan Inc.",
+    "sector": "Materials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GPS",
+    "name": "Gap Inc.",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GRMN",
+    "name": "Garmin Ltd.",
+    "sector": "Consumer Discretionary",
+    "country": "Switzerland",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "IT",
+    "name": "Gartner Inc",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GD",
+    "name": "General Dynamics",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GE",
+    "name": "General Electric",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GIS",
+    "name": "General Mills",
+    "sector": "Consumer Staples",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GM",
+    "name": "General Motors",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GPC",
+    "name": "Genuine Parts",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GILD",
+    "name": "Gilead Sciences",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GPN",
+    "name": "Global Payments Inc.",
+    "sector": "Information Technology",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GS",
+    "name": "Goldman Sachs Group",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GT",
+    "name": "Goodyear Tire & Rubber",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "GWW",
+    "name": "Grainger (W.W.) Inc.",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "HAL",
+    "name": "Halliburton Co.",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "HBI",
+    "name": "Hanesbrands Inc",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "HOG",
+    "name": "Harley-Davidson",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "HRS",
+    "name": "Harris Corporation",
+    "sector": "Industrials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "HIG",
+    "name": "Hartford Financial Svc.Gp.",
+    "sector": "Financials",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "HAS",
+    "name": "Hasbro Inc.",
+    "sector": "Consumer Discretionary",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "HCA",
+    "name": "HCA Holdings",
+    "sector": "Health Care",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "HCP",
+    "name": "HCP Inc.",
+    "sector": "Real Estate",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  },
+  {
+    "symbol": "HP",
+    "name": "Helmerich & Payne",
+    "sector": "Energy",
+    "country": "USA",
+    "currency": "GBP",
+    "class": "Equity"
+  }
 ]

@@ -22,6 +22,8 @@ contract TokenFactory {
         string _name, 
         uint8 _decimals, 
         string _symbol, 
+        uint _initialAmount,
+        uint _initialAUM,
         uint _cutoffTime,
         uint8 _fee,
         address _owner)
@@ -29,7 +31,7 @@ contract TokenFactory {
         // require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
         bytes32 symbolHash = keccak256(abi.encodePacked(_symbol));
         require(symbolToAddresses[symbolHash] == address(0));
-        ETT newToken = (new ETT(_name,_decimals,_symbol,_cutoffTime,_fee,_owner,address(permissions)));
+        ETT newToken = (new ETT(_name,_decimals,_symbol,_initialAmount,_initialAUM,_cutoffTime,_fee,_owner,address(permissions)));
 
         created[msg.sender].push(address(newToken));
         isETT[address(newToken)] = true;

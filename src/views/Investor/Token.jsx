@@ -67,26 +67,27 @@ class Token extends React.Component {
   }
   async componentDidMount(){
     let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}`);
-    let minutes = `${response.data.cutoffTime%(60*60)}`
+    let token = response.data;
+    let minutes = `${token.cutoffTime%(60*60)}`
     if(minutes.length === 1) minutes = `0${minutes}`
-    response.data.cutoffTimeString = `${response.data.cutoffTime/(60*60)}:${minutes}`
-    this.setState({ token: response.data });
-
+    token.cutoffTimeString = `${token.cutoffTime/(60*60)}:${minutes}`
+    this.setState({ token: token });
     response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/holdings`);
-    this.setState({ holdings: response.data });
+    let holdings = response.data
 
+    this.setState({ holdings: holdings });
+
+    let aum = holdings.reduce((c, holding) => c + holding.securityAmount * holding.securityTimestamp.price, 0);
+    let nav = aum / token.totalSupply
+    console.log(aum, token.totalSupply)
+    this.setState({ nav: nav });
     response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/balance`);
     let balance = response.data.balance
     this.setState({ balance: balance });
-
-    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/nav`);
-    let nav = response.data ? response.data.value : 0
-    this.setState({ nav: nav });
-
+    this.setState({ currentValue: balance * nav })
     response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/invested`);
     this.setState({ investedValue: response.data.totalAmount });
 
-    this.setState({ currentValue: balance * nav })
   }
   componentWillReceiveProps(nextProps) {
     

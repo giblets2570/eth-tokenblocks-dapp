@@ -141,7 +141,7 @@ class CreateTrade extends Component {
     let currency = this.state.currency.value
     let buySell = this.state.buySell.value
     let collateral = this.state.collateral.value
-    let amount = `${this.state.amount}`;
+    let amount = `${Math.floor(this.state.amount*100)}`;
     if(buySell === 'Sell'){
       amount = '-' + amount;
     }
