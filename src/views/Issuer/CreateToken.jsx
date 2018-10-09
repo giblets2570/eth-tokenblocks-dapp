@@ -12,6 +12,8 @@ import {
   Nav, NavItem, NavLink, TabContent, TabPane
 } from 'reactstrap'
 
+import CSVReader from "react-csv-reader";
+
 import { Instructions, Checkbox, Button } from "components";
 import axios from 'utils/request'
 import { subscribeOnce } from 'utils/socket'
@@ -31,13 +33,18 @@ class CreateToken extends Component {
       hTabs: "ht1",
       questions1: questions.questions1,
       questions2: questions.questions2,
+      name: '',
+      symbol: '',
+      decimals: 18,
+      initialAmountString: '',
+      cutoffTime: 64800,
+      fee: 25
     }
   }
   async componentDidMount(){
 
   }
   choose(key, value){
-    console.log(key, value)
     this.setState({
       [key]: value
     })
@@ -55,10 +62,27 @@ class CreateToken extends Component {
       [key]: event.target.value
     })
   }
+  async create(e){
+    e.preventDefault()
+    this.setState({
+      uploading: true
+    })
+    let token = this.state
+    token.initialAmount = parseFloat(this.state.initialAmountString) * Math.pow(10,token.decimals)
+    try {
+      let response = await axios.post(`${process.env.REACT_APP_API_URL}tokens`, token);
+      this.props.toggle()
+    }catch(e) {
+      console.log(e)
+    }
+    this.setState({
+      uploading: false
+    })
+  }
   showButton(){
     if(this.state.status === 0){
       return (
-        <Button onClick={(event) => this.create(event)} color="info" type="submit">
+        <Button color="info">
           Submit
         </Button>
       )
@@ -69,6 +93,25 @@ class CreateToken extends Component {
     }else if(this.state.status === 2){
       return (<p style={{color: 'green'}}>Complete!</p>)
     }
+  }
+  handleForce(data){
+    let keys = data[0]
+    let parsed = data.slice(1).map((line) => {
+      let entry = {}
+      for(let i = 0; i < keys.length; i++) {
+        entry[keys[i]] = line[i]
+      }
+      entry.amount = parseFloat((entry.amount||'').replace(/,/g,''))
+      entry.price = parseFloat((entry.price||'').replace(/,/g,'')) * 100
+      return entry
+    }).filter((entry) => keys.every((key) => entry[key]))
+    console.log(parsed)
+    this.setState({
+      holdings: parsed
+    })
+  }
+  handleDarkSideForce(data){
+    console.log(data)
   }
   makeQuestion(question) {
     return (
@@ -112,7 +155,7 @@ class CreateToken extends Component {
         </ModalHeader>
         <ModalBody>
           <Nav pills className="nav-pills-primary">
-            <NavItem>
+            <NavItem style={{cursor: 'pointer'}}>
               <NavLink
                 className={this.state.hTabs === "ht1" ? "active" : ""}
                 onClick={() => this.setState({ hTabs: "ht1" })}
@@ -120,7 +163,7 @@ class CreateToken extends Component {
                 Designing the Token
               </NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem style={{cursor: 'pointer'}}>
               <NavLink
                 className={this.state.hTabs === "ht2" ? "active" : ""}
                 onClick={() => this.setState({ hTabs: "ht2" })}
@@ -128,7 +171,7 @@ class CreateToken extends Component {
                 Review and Compare Your Options
               </NavLink>
             </NavItem>
-            <NavItem>
+            <NavItem style={{cursor: 'pointer'}}>
               <NavLink
                 className={this.state.hTabs === "ht3" ? "active" : ""}
                 onClick={() => this.setState({ hTabs: "ht3" })}
@@ -153,40 +196,59 @@ class CreateToken extends Component {
             </TabPane>
             <TabPane tabId="ht3">
               <Form 
-                onSubmit={() => this.setState({})}
+                onSubmit={(e) => this.create(e)}
                 className="form-horizontal"
                 >
                 <Row>
                   <Label md={3}>Fund Name</Label>
                   <Col xs={12} md={9}>
                     <FormGroup>
-                      <Input type="text" />
+                      <Input type="text" value={this.state.name} onChange={(e) => this.handleChange(e, 'name')}/>
                     </FormGroup>
                   </Col>
                 </Row>
                 <Row>
-                  <Label md={3}>Fund Issuer</Label>
+                  <Label md={3}>Fund symbol</Label>
                   <Col xs={12} md={9}>
                     <FormGroup>
-                      <Input type="email" />
+                      <Input type="text" value={this.state.symbol} onChange={(e) => this.handleChange(e, 'symbol')}/>
                     </FormGroup>
                   </Col>
                 </Row>
                 <Row>
-                  <Label md={3}>Inception Date</Label>
+                  <Label md={3}>Fund fee</Label>
                   <Col xs={12} md={9}>
-                    <Datetime
-                      timeFormat={false}
-                      onChange={(day) => this.handleDayChange(day)}
-                      inputProps={{ placeholder: "Click here to choose date..." }}
+                    <FormGroup>
+                      <Input type="number" value={this.state.fee} onChange={(e) => this.handleChange(e, 'fee')}/>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Label md={3}>Initial number of tokens</Label>
+                  <Col xs={12} md={9}>
+                    <FormGroup>
+                      <Input type="number" value={this.state.initialAmountString} onChange={(e) => this.handleChange(e, 'initialAmountString')}/>
+                    </FormGroup>
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12} md={3}></Col>
+                  <Col xs={12} md={9}>
+                    <CSVReader
+                      cssClass="csv-input"
+                      label="Upload fund composition"
+                      onFileLoaded={(data) => this.handleForce(data)}
+                      onError={(data) => this.handleDarkSideForce(data)}
+                      inputId="ObiWan"
                     />
                   </Col>
                 </Row>
                 <Button
                   color="primary"
                   type="submit"
+                  disabled={this.state.uploading}
                   >
-                  Submit
+                  {this.state.uploading ? 'Loading...' : 'Submit'}
                 </Button>
               </Form>
             </TabPane>

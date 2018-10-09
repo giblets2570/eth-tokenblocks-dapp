@@ -33,8 +33,6 @@ import {
   chartsBar2
 } from "variables/charts";
 
-import CreateTrade from 'components/CreateTrade/CreateTrade'
-
 import { Route, Redirect } from 'react-router-dom'
 
 class Accounts extends React.Component {
@@ -43,13 +41,12 @@ class Accounts extends React.Component {
     let pathEnd = this.props.location.pathname.split('/')[this.props.location.pathname.split('/').length-1]
     this.state = {
       tokens: [],
-      token: {},
       tokenId: pathEnd !== 'accounts' ? parseInt(pathEnd) : null,
       balance: null,
       orderModal: false,
       timestamp: 'none',
+      balances: []
     }
-    console.log(this.state)
   }
   async componentDidMount(){
     let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens`);
@@ -60,13 +57,33 @@ class Accounts extends React.Component {
       tokenOptions: tokenOptions,
       tokenChoice: tokenChoice
     });
+    this.getBalances(this.state.tokenId)
   }
   async getBalances(tokenId){
     if(!tokenId) return;
+    this.setState({
+      balances: [],
+      loading: true
+    })
     let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${tokenId}/balances`);
+    let balances = response.data.map((balance) => {
+      balance.balance = parseFloat(balance.balance || 0)
+      return balance
+    })
+
+    this.setState({
+      balances: response.data,
+      loading: false
+    })
   }
   componentWillReceiveProps(nextProps) {
-    
+    let oldLocationParts = this.props.location.pathname.split('/')
+    let newLocationParts = nextProps.location.pathname.split('/')
+    let oldLocationEnd = oldLocationParts[oldLocationParts.length - 1]
+    let newLocationEnd = newLocationParts[newLocationParts.length - 1]
+    if(oldLocationEnd !== newLocationEnd) {
+      this.getBalances(newLocationEnd)
+    }
   }
   onInputChange(key) {
     return (event) => {
@@ -90,33 +107,21 @@ class Accounts extends React.Component {
     if(this.state.tokenChoice && this.state.tokenChoice.value && parseInt(pathEnd) !== this.state.tokenChoice.value) {
       return <Redirect to={`/investor/accounts/${this.state.tokenChoice.value}`}/>
     }
-    let rows = [{
-      account: '0x1bbf9f9429202f6c95b1890abfef0e09595d3c2f',
-      alias: 'Fund',
-      balance: '10000.1'
-    },{
-      account: '0x505199bd3a160dc9a8ca5dcdee2dde0a0fba17ac',
-      alias: 'Investor',
-      balance: '900.545'
-    },{
-      account: '0x2de27f04354bc2299a22860ae69061f2472eef4c',
-      alias: 'Broker',
-      balance: '891.1'
-    },{
-      account: '0x006da85075cf27348cd295dc66b3f0bbd5399a5c',
-      alias: 'Investor 2',
-      balance: '47.0'
-    }].map((row, key) => (
-      <tr>
+    let rows = this.state.balances
+    .filter((a) => a.balance)
+    .sort((a,b) => {
+      return b.balance - a.balance
+    })
+    .map((row, key) => (
+      <tr key={key}>
         <td>{key+1}</td>
-        <td>{row.account}</td>
-        <td>{row.alias}</td>
-        <td>{row.balance}</td>
+        <td>{row.investor.address}</td>
+        <td>{row.investor.name}</td>
+        <td>{(row.balance / Math.pow(10, row.token.decimals)).toFixed(2)}</td>
       </tr>
     ))
     return (
       <div>
-        <CreateTrade isOpen={this.state.orderModal} toggle={() => this.toggleOrderModal()} token={this.state.token} />
         <PanelHeader 
           size="sm" 
           content={
@@ -146,6 +151,9 @@ class Accounts extends React.Component {
                   />
                   <Row>
                     <Route path='/investor/accounts/:id' render={(props) => {
+                      if(this.state.loading) {
+                        return <p>Loading...</p>
+                      }
                       return (
                         <Table responsive>
                           <thead>

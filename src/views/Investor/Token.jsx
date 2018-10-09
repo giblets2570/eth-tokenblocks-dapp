@@ -65,32 +65,43 @@ class Token extends React.Component {
       ]
     }
   }
-  async componentDidMount(){
-    let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}`);
+  async getTokenData(props) {
+    this.setState({
+      token: {},
+      holdings: [],
+      balance: null,
+    })
+    let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}`);
     let token = response.data;
     let minutes = `${token.cutoffTime%(60*60)}`
     if(minutes.length === 1) minutes = `0${minutes}`
     token.cutoffTimeString = `${token.cutoffTime/(60*60)}:${minutes}`
+    token.totalSupply = parseFloat(token.totalSupply)
     this.setState({ token: token });
-    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/holdings`);
+    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}/holdings`);
     let holdings = response.data
-
+    console.log(holdings)
     this.setState({ holdings: holdings });
 
-    let aum = holdings.reduce((c, holding) => c + holding.securityAmount * holding.securityTimestamp.price, 0);
-    let nav = aum / token.totalSupply
-    console.log(aum, token.totalSupply)
+    let aum = holdings.reduce((c, holding) => c + holding.securityAmount * holding.securityTimestamp.price, 0) / 100.0;
+    console.log(aum)
+    let nav = aum * Math.pow(10, token.decimals) / token.totalSupply
+    console.log(nav)
     this.setState({ nav: nav });
-    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/balance`);
-    let balance = response.data.balance
+    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}/balance`);
+    let balance = response.data.balance || 0
     this.setState({ balance: balance });
     this.setState({ currentValue: balance * nav })
-    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.tokenId}/invested`);
+    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}/invested`);
     this.setState({ investedValue: response.data.totalAmount });
-
+  }
+  componentDidMount(){
+    this.getTokenData(this.props)
   }
   componentWillReceiveProps(nextProps) {
-    
+    if(this.props.tokenId !== nextProps.tokenId){
+      this.getTokenData(nextProps)
+    }
   }
   onInputChange(key) {
     return (event) => {
@@ -137,248 +148,263 @@ class Token extends React.Component {
     return (
       <div>
         <CreateTrade isOpen={this.state.orderModal} toggle={() => this.toggleOrderModal()} token={this.state.token} />
-        <PanelHeader 
-          size="sm" 
-          content={
-            <h1>{this.state.token ? this.state.token.name : 'Loading...'}</h1>
-          }
-        />
-        <div className="content">
-          <Row>
-            <Col xs={12} md={12}>
-              <Card className="card-stats card-raised">
-                <CardBody>
-                  <h3 style={{textAlign: 'center'}}>Fund Summary</h3>
-                  <Row>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="primary"
-                        icon="ui-2_chat-round"
-                        title={
-                          typeof this.state.balance === 'number'
-                          ? this.state.balance.toLocaleString()
-                          : 'Loading...'
-                        }
-                        subtitle="Number of tokens"
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="success"
-                        icon="business_money-coins"
-                        title={
-                          typeof this.state.nav === 'number'
-                          ? (<span>
-                              <small>£</small>{this.state.nav.toLocaleString()}
-                            </span>)
-                          : 'Loading...'
-                        }
-                        subtitle="Current NAV (per token)"
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="info"
-                        icon="users_single-02"
-                        title={
-                          typeof this.state.investedValue === 'number'
-                          ? (<span>
-                              <small>£</small>{this.state.investedValue.toLocaleString()}
-                            </span>)
-                          : 'Loading...'
-                        }
-                        subtitle="Invested Value"
-                      />
-                    </Col>
-                  </Row>
-                  <Row>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="danger"
-                        icon="objects_support-17"
-                        title={
-                          typeof this.state.currentValue === 'number'
-                          ? (<span>
-                              <small>£</small>{this.state.currentValue.toLocaleString()}
-                            </span>)
-                          : 'Loading...'
-                        }
-                        subtitle="Current Value"
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="primary"
-                        icon="ui-2_chat-round"
-                        title={
-                          typeof this.state.currentValue === 'number' && typeof this.state.investedValue === 'number'
-                          ? this.state.investedValue
-                            ?(
-                              (this.state.currentValue - this.state.investedValue) * 100 / this.state.investedValue
-                            ).toFixed(2) + "%"
-                            : "0%"
-                          : 'Loading...'
-                        }
-                        subtitle="Performance"
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="success"
-                        // icon="business_money-coins"
-                        title={
-                          <Button color="primary" onClick={() => this.createOrder(this.state.token)}>
-                            Place order
-                          </Button>
-                        }
-                        subtitle=""
-                      />
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} md={12}>
-              <Card className="card-stats card-raised">
-                <CardBody>
-                  <h3 style={{textAlign: 'center'}}>Investor Summary</h3>
-                  <Row>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="danger"
-                        icon="objects_support-17"
-                        title={
-                          this.state.token.name
-                          ? this.state.token.name
-                          : "Loading..."
-                        }
-                        subtitle="Name"
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="primary"
-                        icon="ui-2_chat-round"
-                        title={
-                          this.state.token.symbol
-                          ? this.state.token.symbol
-                          : "Loading..."
-                        }
-                        subtitle="Symbol"
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="success"
-                        icon="business_money-coins"
-                        title={
-                          this.state.token.name
-                          ? this.state.token.name
-                          : "Loading..."
-                        }
-                        subtitle="Underlying index"
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="danger"
-                        icon="objects_support-17"
-                        title={
-                          this.state.token.cutoffTimeString
-                          ? this.state.token.cutoffTimeString
-                          : "Loading..."
-                        }
-                        subtitle="Fund cutoff"
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="primary"
-                        icon="ui-2_chat-round"
-                        title={
-                          <span>
-                            <small>£</small>{(100000).toLocaleString()}
-                          </span>
-                        }
-                        subtitle="Minimum order"
-                      />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <Statistics
-                        iconState="success"
-                        icon="business_money-coins"
-                        title="Accumalating"
-                        subtitle="Replication type"
-                      />
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12} md={12}>
-              <Card className="card-stats card-raised">
-                <CardBody style={{minHeight: '200px'}}>
-                  <h3 style={{textAlign: 'center'}}>Exposure Summary</h3>
-                  <Row>
-                    <Col xs={12} md={4}>
-                      <h6 className="info-title">Sector Breakdown</h6>
-                      <Doughnut data={sectorData} />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <h6 className="info-title">Currency Breakdown</h6>
-                      <Doughnut data={currencyData} />
-                    </Col>
-                    <Col xs={12} md={4}>
-                      <h6 className="info-title">Country Breakdown</h6>
-                      <Doughnut data={countryData} />
-                    </Col>
-                  </Row>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <Card>
-                <CardHeader>
-                  <CardTitle tag="h4" style={{textAlign: 'center'}}>
-                    Fund Portfolio
-                  </CardTitle>
-                </CardHeader>
-                <CardBody>
-                  <Table responsive>
-                    <thead className="text-primary">
-                      <tr>
-                        <th className="text-right">#</th>
-                        <th>Name</th>
-                        <th>Currency</th>
-                        <th>Amount</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {
-                        this.state.holdings.map((holding,key) => {
-                          return (
-                            <tr key={key}>
-                              <td>{key+1}</td>
-                              <td>{holding.security.name}</td>
-                              <td>{holding.security.currency}</td>
-                              <td>{holding.securityAmount}</td>
-                            </tr>
-                          )
-                        })
+        <Row>
+          <Col xs={12} md={12}>
+            <Card className="card-stats card-raised">
+              <CardBody>
+                <h3 style={{textAlign: 'center'}}>Fund Summary</h3>
+                <Row>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="danger"
+                      icon="objects_support-17"
+                      title={
+                        this.state.token.name
+                        ? this.state.token.name
+                        : "Loading..."
                       }
-                    </tbody>
-                  </Table>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-        </div>
+                      subtitle="Name"
+                    />
+                  </Col>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="primary"
+                      icon="ui-2_chat-round"
+                      title={
+                        this.state.token.symbol
+                        ? this.state.token.symbol
+                        : "Loading..."
+                      }
+                      subtitle="Symbol"
+                    />
+                  </Col>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="success"
+                      icon="business_money-coins"
+                      title={
+                        this.state.token.name
+                        ? this.state.token.name
+                        : "Loading..."
+                      }
+                      subtitle="Underlying index"
+                    />
+                  </Col>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="danger"
+                      icon="objects_support-17"
+                      title={
+                        this.state.token.cutoffTimeString
+                        ? this.state.token.cutoffTimeString
+                        : "Loading..."
+                      }
+                      subtitle="Fund cutoff"
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="primary"
+                      icon="ui-2_chat-round"
+                      title={
+                        <span>
+                          <small>£</small>{(100000).toLocaleString()}
+                        </span>
+                      }
+                      subtitle="Minimum order"
+                    />
+                  </Col>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="success"
+                      icon="business_money-coins"
+                      title="Accumalating"
+                      subtitle="Replication type"
+                    />
+                  </Col>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="success"
+                      icon="business_money-coins"
+                      title={
+                        typeof this.state.nav === 'number'
+                        ? (<span>
+                            <small>£</small>{this.state.nav.toLocaleString()}
+                          </span>)
+                        : 'Loading...'
+                      }
+                      subtitle="Current NAV (per token)"
+                    />
+                  </Col>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="success"
+                      icon="business_money-coins"
+                      title={
+                        this.state.token.fee
+                        ? (<span>
+                            {this.state.token.fee}
+                          </span>)
+                        : 'Loading...'
+                      }
+                      subtitle="Fee (bp per annum)"
+                    />
+                  </Col>
+                </Row>
+                <Row>
+                  <Col xs={12} md={9}></Col>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="success"
+                      // icon="business_money-coins"
+                      title={
+                        <Button color="primary" onClick={() => this.createOrder(this.state.token)}>
+                          Place order
+                        </Button>
+                      }
+                      subtitle=""
+                    />
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12} md={12}>
+            <Card className="card-stats card-raised">
+              <CardBody>
+                <h3 style={{textAlign: 'center'}}>Investor Summary</h3>
+                <Row>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="primary"
+                      icon="ui-2_chat-round"
+                      title={
+                        typeof this.state.balance === 'number'
+                        ? this.state.balance.toLocaleString()
+                        : 'Loading...'
+                      }
+                      subtitle="Number of tokens"
+                    />
+                  </Col>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="info"
+                      icon="users_single-02"
+                      title={
+                        typeof this.state.investedValue === 'number'
+                        ? (<span>
+                            <small>£</small>{this.state.investedValue.toLocaleString()}
+                          </span>)
+                        : 'Loading...'
+                      }
+                      subtitle="Invested Value"
+                    />
+                  </Col>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="danger"
+                      icon="objects_support-17"
+                      title={
+                        typeof this.state.currentValue === 'number'
+                        ? (<span>
+                            <small>£</small>{this.state.currentValue.toLocaleString()}
+                          </span>)
+                        : 'Loading...'
+                      }
+                      subtitle="Current Value"
+                    />
+                  </Col>
+                  <Col xs={12} md={3}>
+                    <Statistics
+                      iconState="primary"
+                      icon="ui-2_chat-round"
+                      title={
+                        typeof this.state.currentValue === 'number' && typeof this.state.investedValue === 'number'
+                        ? this.state.investedValue
+                          ?(
+                            (this.state.currentValue - this.state.investedValue) * 100 / this.state.investedValue
+                          ).toFixed(2) + "%"
+                          : "0%"
+                        : 'Loading...'
+                      }
+                      subtitle="Performance"
+                    />
+                  </Col>
+                </Row>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+        {
+        // <Row>
+        //   <Col xs={12} md={12}>
+        //     <Card className="card-stats card-raised">
+        //       <CardBody style={{minHeight: '200px'}}>
+        //         <h3 style={{textAlign: 'center'}}>Exposure Summary</h3>
+        //         <Row>
+        //           <Col xs={12} md={4}>
+        //             <h6 className="info-title">Sector Breakdown</h6>
+        //             <Doughnut data={sectorData} />
+        //           </Col>
+        //           <Col xs={12} md={4}>
+        //             <h6 className="info-title">Currency Breakdown</h6>
+        //             <Doughnut data={currencyData} />
+        //           </Col>
+        //           <Col xs={12} md={4}>
+        //             <h6 className="info-title">Country Breakdown</h6>
+        //             <Doughnut data={countryData} />
+        //           </Col>
+        //         </Row>
+        //       </CardBody>
+        //     </Card>
+        //   </Col>
+        // </Row>
+        }
+        <Row>
+          <Col xs={12}>
+            <Card>
+              <CardHeader>
+                <CardTitle tag="h4" style={{textAlign: 'center'}}>
+                  Fund Portfolio
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <Table responsive>
+                  <thead className="text-primary">
+                    <tr>
+                      <th className="text-right">#</th>
+                      <th>Name</th>
+                      <th>Currency</th>
+                      <th>Sector</th>
+                      <th>Country</th>
+                      <th>Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      this.state.holdings.map((holding,key) => {
+                        return (
+                          <tr key={key}>
+                            <td>{key+1}</td>
+                            <td>{holding.security.symbol}</td>
+                            <td>{holding.security.currency}</td>
+                            <td>{holding.security.sector}</td>
+                            <td>{holding.security.country}</td>
+                            <td>{holding.securityAmount.toLocaleString()}</td>
+                          </tr>
+                        )
+                      })
+                    }
+                  </tbody>
+                </Table>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
       </div>
     )
   }

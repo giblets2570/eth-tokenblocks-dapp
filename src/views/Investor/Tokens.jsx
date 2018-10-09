@@ -1,28 +1,44 @@
-import moment from "moment";
-import React from "react";
-import Auth from 'utils/auth'
-import { Card,
+import React from 'react'
+import axios from 'utils/request'
+import {
+  Card,
   CardHeader,
   CardBody,
   CardFooter,
-  CardTitle, Row, 
-  Col, Table, 
-  Label, FormGroup } from "reactstrap";
+  CardTitle,
+  Row,
+  Col,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  Table,
+  Button,
+  FormGroup,
+  Label
+} from "reactstrap";
 import Select from "react-select";
-import CSVReader from "react-csv-reader";
-import {Redirect} from 'react-router-dom'
-import { PanelHeader, Statistics, Button } from "components";
-import Datetime from "react-datetime";
-import axios from "utils/request"
-import { receiveMessage, getSharedSecret, loadBundle } from 'utils/encrypt'
-import web3Service from 'utils/getWeb3'
-import {fromRpcSig, bufferToHex} from 'ethereumjs-util'
-import promisify from 'tiny-promisify';
-import OrderTradeToken from 'views/Broker/OrderTradeToken'
-import contract from 'truffle-contract';
-const emptyString = "0000000000000000000000000000000000000000000000000000000000000000"
+import {
+  PanelHeader,
+  Stats,
+  Statistics,
+  CardCategory,
+  Progress
+} from "components";
 
-class OrderTrades extends React.Component {
+import { Line, Bar, Pie, Doughnut } from "react-chartjs-2";
+
+import {
+  chartsLine1,
+  chartsLine2,
+  chartsBar1,
+  chartsBar2
+} from "variables/charts";
+import {Redirect} from 'react-router-dom'
+import CreateTrade from 'components/CreateTrade/CreateTrade'
+import Token from 'views/Investor/Token'
+
+class Tokens extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -47,12 +63,15 @@ class OrderTrades extends React.Component {
       }
     }
   }
-  render(){
+  componentWillReceiveProps(nextProps) {
+    
+  }
+  render() {
     if(this.state.redirect) {
       let locationParts = this.props.location.pathname.split('/')
       let locationEnd = locationParts[locationParts.length-1]
       if(String(this.state.token.value.id) !== locationEnd){
-        return <Redirect to={`/broker/tokens/${this.state.token.value.id}`}/>
+        return <Redirect to={`/investor/tokens/${this.state.token.value.id}`}/>
       }
     }
     return (
@@ -60,9 +79,7 @@ class OrderTrades extends React.Component {
         <PanelHeader 
           size="sm" 
           content={
-            <div>
-              <h1>{this.state.token ? this.state.token.name : 'Loading...'}</h1>
-            </div>
+            <p></p>
           }
         />
         <div className="content">
@@ -93,7 +110,7 @@ class OrderTrades extends React.Component {
           </Row>
           {
             this.state.token
-            ? <OrderTradeToken {...this.props} tokenId={this.state.token.value.id}/>
+            ? <Token {...this.props} tokenId={this.state.token.value.id}/>
             : null
           }
         </div>
@@ -102,4 +119,4 @@ class OrderTrades extends React.Component {
   }
 }
 
-export default OrderTrades
+export default Tokens

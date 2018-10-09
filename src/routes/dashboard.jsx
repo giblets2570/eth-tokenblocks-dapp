@@ -1,31 +1,18 @@
 import React from 'react'
 
-import Token from 'views/Investor/Token'
+import Tokens from 'views/Investor/Tokens'
 import Trades from 'views/Investor/Trades'
 import Accounts from 'views/Investor/Accounts'
 import Profile from 'views/Investor/Profile'
 
 var dashRoutes = [
   {
-    collapse: true,
     path: "/investor/tokens",
     name: "Tokens",
     state: "openTokens",
     icon: "business_money-coins",
     auth: 'investor',
-    views: [{
-      path: `/investor/tokens/1`,
-      name: `S&P`,
-      component: (props) => <Token {...props} tokenId={1}/>
-    },{
-      path: `/investor/tokens/2`,
-      name: `FTSE 100`,
-      component: (props) => <Token {...props} tokenId={2}/>
-    },{
-      path: `/investor/tokens/3`,
-      name: `SFSX`,
-      component: (props) => <Token {...props} tokenId={3}/>
-    }]
+    component: Tokens
   },
   {
     path: "/investor/trades",

@@ -11,7 +11,7 @@ contract TokenFactory {
     mapping(bytes32 => address) public symbolToAddresses;
     Permissions public permissions;
     
-    event TokenCreated(address indexed tokenAddress, string name, uint8 decimals, string symbol, uint cutoffTime, uint8 fee, address owner);
+    event TokenCreated(address indexed tokenAddress, string name, uint8 decimals, string symbol, uint cutoffTime, uint8 fee, address owner, uint initialAmount);
 
     constructor(address _permissions) public {
         //upon creation of the factory, deploy a ETT (parameters are meaningless) and store the bytecode provably.
@@ -23,7 +23,7 @@ contract TokenFactory {
         uint8 _decimals, 
         string _symbol, 
         uint _initialAmount,
-        uint _initialAUM,
+        string _holdingsString,
         uint _cutoffTime,
         uint8 _fee,
         address _owner)
@@ -31,7 +31,7 @@ contract TokenFactory {
         // require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
         bytes32 symbolHash = keccak256(abi.encodePacked(_symbol));
         require(symbolToAddresses[symbolHash] == address(0));
-        ETT newToken = (new ETT(_name,_decimals,_symbol,_initialAmount,_initialAUM,_cutoffTime,_fee,_owner,address(permissions)));
+        ETT newToken = (new ETT(_name,_decimals,_symbol,_initialAmount,_holdingsString,_cutoffTime,_fee,_owner,address(permissions)));
 
         created[msg.sender].push(address(newToken));
         isETT[address(newToken)] = true;
@@ -41,7 +41,8 @@ contract TokenFactory {
 
         symbolToAddresses[symbolHash] = address(newToken);
 
-        emit TokenCreated(address(newToken),_name,_decimals,_symbol,_cutoffTime,_fee,_owner);
+        emit TokenCreated(address(newToken),_name,_decimals,_symbol,_cutoffTime,_fee,_owner,_initialAmount);
+
         return address(newToken);
     }
     function tokenFromSymbol(string _symbol) public view returns (address){

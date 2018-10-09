@@ -79,12 +79,14 @@ class Trades extends React.Component {
       return 'Trade Confirmed'
     }if(trade.state === 2){
       // Need to figure out how to differentiate between
-      return <Button color='success' onClick={() => this.claimTokens(trade)}>Claim tokens</Button>
+      return 'Trade Verified'
     }else if(trade.state === 3){
       return 'Trade cancelled'
     }else if(trade.state === 4){
       return 'Trade rejected'
-    }else {
+    }else if(trade.state === 5){
+      return <Button color='success' onClick={() => this.claimTokens(trade)}>Claim tokens</Button>
+    }else{
       return 'Tokens claimed'
     }
   }

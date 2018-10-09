@@ -27,7 +27,6 @@ const shuffle = _a => {
 let chooseRandom = array => array[Math.floor(Math.random()*array.length)]
 let chooseRandoms = (array, n) => shuffle(array).slice(0, n)
 const tables = [
-  "NavTimestamp",
   "TokenHoldings",
   "TokenHolding",
   "OrderHolding",
@@ -339,19 +338,14 @@ let createTokens = async () => {
     let holdings = securities.map((security) => {
       return {
         amount: Math.floor(Math.random() * 1000000),
-        security: security
+        ...security
       }
-    })
+    });
     holdings = chooseRandoms(holdings, 10);
     // I want the NAV to be 100
-    let aum = holdings.reduce((c, holding) => c + holding.security.price * holding.amount, 0);
-    token.initialAmount = Math.floor(aum / 100);
-    holdings = holdings.map((holding) => {
-      return {
-        amount: holding.amount,
-        symbol: holding.security.symbol
-      }
-    })
+    let desiredNav = 10000
+    let aum = holdings.reduce((c, holding) => c + holding.price * holding.amount, 0);
+    token.initialAmount = Math.floor(aum * Math.pow(10,token.decimals) / desiredNav);
     token.holdings = holdings;
 
     let options = {

@@ -11,15 +11,16 @@ contract ETT is StandardToken, Ownable {
   uint public cutoffTime;
   uint8 public decimals;
   uint8 public fee;
-  uint public AUM;
+  bytes32 public holdingsHash;
 
   mapping(bytes32 => uint) dateTotalSupply_;
-  mapping(bytes32 => uint) dateAUM_;
+  mapping(bytes32 => bytes32) dateHoldingsHash;
+  mapping(bytes32 => bool) endOfDays;
 
   Permissions public permissions;
 
   event TotalSupplyUpdate(address token, address owner, uint oldTotalSupply, uint newTotalSupply, uint time);
-  event AUMUpdate(address token, address owner, uint AUM, uint totalSupply, uint time);
+  event EndOfDay(address token, address owner, uint totalSupply, uint time);
   event FeeTaken(address token, address owner, uint value, uint time);
 
   constructor(
@@ -27,7 +28,7 @@ contract ETT is StandardToken, Ownable {
     uint8 _decimals,
     string _symbol,
     uint _initialAmount,
-    uint _initialAUM,
+    string _holdingsString,
     uint _cutoffTime,
     uint8 _fee,
     address _owner,
@@ -40,10 +41,10 @@ contract ETT is StandardToken, Ownable {
     decimals = _decimals;
     cutoffTime = _cutoffTime;
 
-    AUM = _initialAUM;
+    holdingsHash = keccak256(abi.encodePacked(_holdingsString));
     totalSupply_ = _initialAmount;
     // Give the owner the initial amount
-    balances[owner] = _initialAmount;
+    balances[_owner] = _initialAmount;
 
     permissions = Permissions(_permissions);
   }
@@ -62,14 +63,9 @@ contract ETT is StandardToken, Ownable {
     return dateTotalSupply_[dateHash];
   }
 
-  function dateAUM(string dateString) public view returns(uint){
-    bytes32 dateHash = keccak256(abi.encodePacked(dateString));
-    return dateAUM_[dateHash];
-  }
-
   /// @dev Update the total supply of tokens.
   /// @param amount amount to change supply by
-  function updateTotalSupply(int amount, string dateString) public {
+  function updateTotalSupply(int amount, string holdingsString, string dateString) public {
     // require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
     uint uamount = uint(amount);
     uint oldTotalSupply = totalSupply_;
@@ -83,30 +79,30 @@ contract ETT is StandardToken, Ownable {
     }
     bytes32 dateHash = keccak256(abi.encodePacked(dateString));
     dateTotalSupply_[dateHash] = totalSupply_;
+    holdingsHash = keccak256(abi.encodePacked(holdingsString));
+    dateHoldingsHash[dateHash] = holdingsHash;
     emit TotalSupplyUpdate(address(this), owner, oldTotalSupply, totalSupply_, now);
   }
 
   /// @dev Update the total AUM of the fund
-  /// @param _AUM new AUM
-  function updateAUM(uint _AUM, string dateString) public {
+  function endOfDay(string dateString) public {
     // require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
     bytes32 dateHash = keccak256(abi.encodePacked(dateString));
-    require(dateAUM_[dateHash] == 0);
-    dateAUM_[dateHash] = _AUM;
-    AUM = _AUM;
+    require(!endOfDays[dateHash]);
+    endOfDays[dateHash] = true;
     
     // Now take the fee
     _takeFee();
     
     // Now I need to create the tokens
-    emit AUMUpdate(address(this),owner,AUM,totalSupply_,now);
+    emit EndOfDay(address(this),owner,totalSupply_,now);
   }
   
   /// @dev Transfer token for a specified address
   /// @param _to The address to transfer to.
   /// @param _value The amount to be transferred.
   function transfer(address _to, uint _value) public returns (bool) {
-    require(!permissions.isAuthorized(msg.sender, 0));
+    // require(!permissions.isAuthorized(msg.sender, 0));
     return super.transfer(_to, _value);
   }
 

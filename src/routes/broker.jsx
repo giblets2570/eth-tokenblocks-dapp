@@ -11,25 +11,12 @@ var brokerRoutes = [
     component: Trades
   },
   {
-    collapse: true,
     path: "/broker/tokens",
     name: "Tokens",
     state: "openTokens",
     icon: "education_atom",
     auth: 'broker',
-    views: [{
-      path: `/broker/tokens/1`,
-      name: `S&P`,
-      component: (props) => <AllTrades {...props} tokenId={1}/>
-    },{
-      path: `/broker/tokens/2`,
-      name: `FTSE 100`,
-      component: (props) => <AllTrades {...props} tokenId={2}/>
-    },{
-      path: `/broker/tokens/3`,
-      name: `SFSX`,
-      component: (props) => <AllTrades {...props} tokenId={3}/>
-    }]
+    component: (props) => <AllTrades {...props}/>
   },
   { redirect: true, path: "/", pathTo: "/broker", name: "Broker" }
 ];

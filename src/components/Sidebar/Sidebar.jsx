@@ -160,7 +160,9 @@ class Sidebar extends React.Component {
               // </div>
           }
             <Nav>
-              {this.state.routes.map((prop, key) => {
+              {this.state.routes
+                .filter((r) => !r.hidden)
+                .map((prop, key) => {
                 if (prop.redirect) return null;
                 if (prop.collapse) {
                   var st = {};

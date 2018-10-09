@@ -1,8 +1,10 @@
 import React from "react";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-import { Route, Switch, Redirect } from "react-router-dom";
+import axios from 'utils/request';
+import Token from 'views/Investor/Token'
 
+import { Route, Switch, Redirect } from "react-router-dom";
 import { PrivateRoute, Header, Footer, Sidebar } from "components";
 
 import dashboardRoutes from "routes/dashboard.jsx";
@@ -10,7 +12,13 @@ import dashboardRoutes from "routes/dashboard.jsx";
 var ps;
 
 class Dashboard extends React.Component {
-  componentDidMount() {
+  constructor(props){
+    super(props)
+    this.state = {
+      routes: dashboardRoutes
+    }
+  }
+  async componentDidMount() {
     if (navigator.platform.indexOf("Win") > -1) {
       document.documentElement.className += " perfect-scrollbar-on";
       document.documentElement.classList.remove("perfect-scrollbar-off");
@@ -34,11 +42,11 @@ class Dashboard extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <Sidebar {...this.props} routes={dashboardRoutes} />
+        <Sidebar {...this.props} routes={this.state.routes} />
         <div className="main-panel" ref="mainPanel">
           <Header {...this.props} />
           <Switch>
-            {dashboardRoutes.map((prop, key) => {
+            {this.state.routes.map((prop, key) => {
               if (prop.collapse) {
                 return prop.views.map((prop2, key2) => {
                   if(prop2.auth) {

@@ -36,7 +36,9 @@ class Tokens extends React.Component {
     let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens`);
     this.setState({ tokens: response.data });
   }
-  componentWillReceiveProps(nextProps) {}
+  async componentWillReceiveProps(nextProps) {
+    
+  }
   onInputChange(key) {
     return (event) => {
       this.setState({ 
@@ -44,7 +46,11 @@ class Tokens extends React.Component {
       })
     }
   }
-  toggleTokenModal() {
+  async toggleTokenModal() {
+    if(this.state.tokenModal){
+      let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens`);
+      this.setState({ tokens: response.data });
+    }
     this.setState({
       tokenModal: !this.state.tokenModal
     })
@@ -61,7 +67,7 @@ class Tokens extends React.Component {
           <td>{key + 1}</td>
           <td>{token.name}</td>
           <td>{token.symbol}</td>
-          <td>{token.totalSupply}</td>
+          <td>{(parseFloat(token.totalSupply) / Math.pow(10,token.decimals)).toFixed(2)}</td>
         </tr>
       )
     })

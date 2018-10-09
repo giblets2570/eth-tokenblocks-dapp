@@ -1,16 +1,24 @@
 import React from "react";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
-import { Route, Switch, Redirect } from "react-router-dom";
+import axios from 'utils/request';
+import AllTrades from 'views/Broker/OrderTrades';
+import brokerRoutes from "routes/broker.jsx";
 
+import { Route, Switch, Redirect } from "react-router-dom";
 import { PrivateRoute, Header, Footer, Sidebar } from "components";
 
-import brokerRoutes from "routes/broker.jsx";
 
 var ps;
 
 class Broker extends React.Component {
-  componentDidMount() {
+  constructor(props){
+    super(props)
+    this.state = {
+      routes: brokerRoutes
+    }
+  }
+  async componentDidMount() {
     if (navigator.platform.indexOf("Win") > -1) {
       document.documentElement.className += " perfect-scrollbar-on";
       document.documentElement.classList.remove("perfect-scrollbar-off");
@@ -34,11 +42,11 @@ class Broker extends React.Component {
   render() {
     return (
       <div className="wrapper">
-        <Sidebar {...this.props} routes={brokerRoutes} />
+        <Sidebar {...this.props} routes={this.state.routes} />
         <div className="main-panel" ref="mainPanel">
           <Header {...this.props} />
           <Switch>
-            {brokerRoutes.map((prop, key) => {
+            {this.state.routes.map((prop, key) => {
               if (prop.collapse) {
                 return prop.views.map((prop2, key2) => {
                   if(prop2.auth) {
@@ -61,7 +69,6 @@ class Broker extends React.Component {
               if (prop.redirect)
                 return <Redirect from={prop.path} to={prop.pathTo} key={key} />;
               else if(prop.auth){
-                console.log("I'm getting redirected");
                 return <PrivateRoute path={prop.path} component={prop.component} key={key} role={prop.auth}/>
               } return (
                 <Route path={prop.path} component={prop.component} key={key} />
