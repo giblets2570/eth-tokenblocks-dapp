@@ -108,7 +108,7 @@ class Trades extends React.Component {
           <td>{trade.investor.name}</td>
           <td>{trade.buySell}</td>
           <td>{trade.currency}</td>
-          <td>{trade.amount}</td>
+          <td>{trade.amount.toLocaleString()}</td>
           <td>{trade.executionDate.format('DD/MM/YY')}</td>
           <td>{trade.priceDecrypted}</td>
           <td>{this.stateString(trade)}</td>

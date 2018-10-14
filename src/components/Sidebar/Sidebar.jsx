@@ -11,6 +11,8 @@ import { Button } from "components";
 import avatar from "assets/img/ryan.jpg";
 import logo from "assets/img/logo.webp";
 
+import Auth from 'utils/auth';
+
 var ps;
 
 class Sidebar extends React.Component {
@@ -23,7 +25,8 @@ class Sidebar extends React.Component {
       openTables: this.activeRoute("/tables") !== "" ? true : false,
       openMaps: this.activeRoute("/maps") !== "" ? true : false,
       openPages: this.activeRoute("/pages") !== "" ? true : false,
-      routes: []
+      routes: [],
+      user: Auth.user
     };
     this.activeRoute.bind(this);
     this.minimizeSidebar = this.minimizeSidebar.bind(this);
@@ -116,49 +119,21 @@ class Sidebar extends React.Component {
           </div>
 
           <div className="sidebar-wrapper" ref="sidebar">
-          {
-              // <div className="user">
-              //   <div className="photo">
-              //     <img src={avatar} alt="Avatar" />
-              //   </div>
-              //   <div className="info">
-              //     <a
-              //       data-toggle="collapse"
-              //       aria-expanded={this.state.openAvatar}
-              //       onClick={() =>
-              //         this.setState({ openAvatar: !this.state.openAvatar })
-              //       }
-              //     >
-              //       <span>
-              //         Ryan Gosling
-              //         <b className="caret" />
-              //       </span>
-              //     </a>
-              //     <Collapse isOpen={this.state.openAvatar}>
-              //       <ul className="nav">
-              //         <li>
-              //           <a>
-              //             <span className="sidebar-mini-icon">MP</span>
-              //             <span className="sidebar-normal">My Profile</span>
-              //           </a>
-              //         </li>
-              //         <li>
-              //           <a>
-              //             <span className="sidebar-mini-icon">EP</span>
-              //             <span className="sidebar-normal">Edit Profile</span>
-              //           </a>
-              //         </li>
-              //         <li>
-              //           <a>
-              //             <span className="sidebar-mini-icon">S</span>
-              //             <span className="sidebar-normal">Settings</span>
-              //           </a>
-              //         </li>
-              //       </ul>
-              //     </Collapse>
-              //   </div>
-              // </div>
-          }
+            <div className="user">
+              <div className="info">
+                <a
+                  data-toggle="collapse"
+                  aria-expanded={this.state.openAvatar}
+                  onClick={() =>
+                    this.setState({ openAvatar: !this.state.openAvatar })
+                  }
+                >
+                  <span style={{color: '#5f236e'}}>
+                    Welcome back { this.state.user.name }
+                  </span>
+                </a>
+              </div>
+            </div>
             <Nav>
               {this.state.routes
                 .filter((r) => !r.hidden)

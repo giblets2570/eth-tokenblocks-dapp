@@ -13,6 +13,8 @@ contract('TokenFactory', async (accounts) => {
     symbol: "S&P 500 ETT",
     decimals: 18,
     cutoffTime: 64000,
+    initialAmount: 1000000,
+    holdingsString: `[]`,
     fee: 25,
     owner: fundAddress
   }
@@ -25,10 +27,20 @@ contract('TokenFactory', async (accounts) => {
   })
 
   it("should be able to create a token", async () => {
+    console.log([token.name, 
+      token.decimals, 
+      token.symbol, 
+      token.initialAmount,
+      token.holdingsString,
+      token.cutoffTime, 
+      token.fee,
+      token.owner].length)
     let transaction = await tokenFactory.createETT(
       token.name, 
       token.decimals, 
       token.symbol, 
+      token.initialAmount,
+      token.holdingsString,
       token.cutoffTime, 
       token.fee,
       token.owner,

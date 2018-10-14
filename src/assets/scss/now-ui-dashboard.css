@@ -3724,23 +3724,25 @@ Created using IcoMoon - icomoon.io
       opacity: .6; }
 
 .tooltip.bs-tooltip-right .arrow:before {
-  border-right-color: #FFFFFF; }
+  /*border-right-color: #FFFFFF; */
+}
 
 .tooltip.bs-tooltip-top .arrow:before {
-  border-top-color: #FFFFFF; }
+  /*border-top-color: #FFFFFF; */
+}
 
 .tooltip.bs-tooltip-bottom .arrow:before {
-  border-bottom-color: #FFFFFF; }
+  /*border-bottom-color: #FFFFFF; */
+}
 
 .tooltip.bs-tooltip-left .arrow:before {
-  border-left-color: #FFFFFF; }
+  /*border-left-color: #FFFFFF; */
+}
 
 .tooltip-inner {
   padding: 0.5rem 0.7rem;
   min-width: 130px;
-  background-color: #FFFFFF;
   font-size: 14px;
-  color: inherit;
   box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2); }
 
 .modal-content {

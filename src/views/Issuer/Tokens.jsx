@@ -13,7 +13,8 @@ import {
   DropdownMenu,
   DropdownItem,
   Table,
-  Button
+  Button,
+  Tooltip
 } from "reactstrap";
 import {
   PanelHeader,
@@ -24,20 +25,30 @@ import {
 } from "components";
 
 import CreateToken from 'views/Issuer/CreateToken'
+import RegCheck from 'views/Issuer/RegCheck'
 
 class Tokens extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tokens: []
+      tokens: [],
+      token: {},
+      tooltipsOpen: false
     }
+  }
+  toggleTooltip() {
+    // this.setState({
+    //   tooltipsOpen: !this.state.tooltipsOpen
+    // });
   }
   async componentDidMount(){
     let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens`);
-    this.setState({ tokens: response.data });
+    let tokens = response.data
+    this.setState({ tokens: tokens });
+    console.log(this.props)
   }
   async componentWillReceiveProps(nextProps) {
-    
+    console.log(nextProps) 
   }
   onInputChange(key) {
     return (event) => {
@@ -60,6 +71,19 @@ class Tokens extends React.Component {
       tokenModal: true
     })
   }
+  regCheck(token){
+    this.setState({
+      token: token
+    })
+    this.setState({
+      regModal: true
+    })
+  }
+  toggleRegModal() {
+    this.setState({
+      regModal: !this.state.regModal
+    })
+  }
   render() {
     let rows = this.state.tokens.map((token, key) => {
       return (
@@ -68,12 +92,18 @@ class Tokens extends React.Component {
           <td>{token.name}</td>
           <td>{token.symbol}</td>
           <td>{(parseFloat(token.totalSupply) / Math.pow(10,token.decimals)).toFixed(2)}</td>
+          <td>
+            <Button color="primary" onClick={() => this.regCheck(token)} id={`RegCheck${key}`}>
+              Regulation Check
+            </Button>
+          </td>
         </tr>
       )
-    })
+    });
     return (
       <div>
-        <CreateToken isOpen={this.state.tokenModal} toggle={() => this.toggleTokenModal()} />
+        <CreateToken isOpen={this.state.tokenModal} toggle={() => this.toggleTokenModal()} {...this.props} />
+        <RegCheck isOpen={this.state.regModal} toggle={() => this.toggleRegModal()} token={this.state.token} {...this.props} />
         <PanelHeader 
           size="sm" 
           content={
@@ -93,19 +123,32 @@ class Tokens extends React.Component {
                         <th>Name</th>
                         <th>Symbol</th>
                         <th>Total Supply</th>
+                        <th>Compliant</th>
                       </tr>
                     </thead>
                     <tbody>
                       {rows}
                     </tbody>
                   </Table>
-                  <Button color="primary" onClick={() => this.createToken()}>
+                  <Button color="primary" onClick={() => this.createToken()} id="CreateToken">
                     Create token
                   </Button>
                 </CardBody>
               </Card>
             </Col>
           </Row>
+          <Tooltip placement="right" isOpen={this.props.tooltipsOpen && !this.state.tokenModal && !this.state.regModal} target="CreateToken">
+            Click here to start creating a new token
+          </Tooltip>
+          {
+            rows.length
+            ? (
+              <Tooltip placement="right" isOpen={this.props.tooltipsOpen && !this.state.tokenModal && !this.state.regModal} target={`RegCheck0`}>
+                Click here to perform the regulation checks
+              </Tooltip>
+            )
+            : null
+          }
         </div>
       </div>
     )

@@ -39,10 +39,15 @@ class Dashboard extends React.Component {
       this.refs.mainPanel.scrollTop = 0;
     }
   }
+  showTooltips() {
+    this.setState({
+      showingTooltips: !this.state.showingTooltips
+    })
+  }
   render() {
     return (
       <div className="wrapper">
-        <Sidebar {...this.props} routes={this.state.routes} />
+        <Sidebar {...this.props} routes={this.state.routes} showTooltips={() => this.showTooltips()} />
         <div className="main-panel" ref="mainPanel">
           <Header {...this.props} />
           <Switch>

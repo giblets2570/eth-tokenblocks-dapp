@@ -15,11 +15,11 @@ import {
   InputGroup,
   InputGroupAddon,
   InputGroupText,
-  Input,
-  Button
+  Input
 } from "reactstrap";
 
 import dashboardRoutes from "routes/dashboard.jsx";
+import { Button } from 'components';
 import Auth from 'utils/auth'
 
 class Header extends React.Component {
@@ -206,7 +206,13 @@ class Header extends React.Component {
                 //     </p>
                 //   </Link>
                 // </NavItem>
+              // <NavItem>
+              //   <Button color='primary' onClick={() => this.logout()}>?</Button>
+              // </NavItem>
               }
+              <NavItem>
+                <Button color="primary" onClick={() => this.props.showTooltips()}>Help</Button>
+              </NavItem>
               <NavItem>
                 <Button color='primary' onClick={() => this.logout()}>Logout</Button>
               </NavItem>

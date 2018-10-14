@@ -3,13 +3,17 @@ import React from "react";
 import PerfectScrollbar from "perfect-scrollbar";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { PrivateRoute, Header, Footer, Sidebar } from "components";
+import { PrivateRoute, Header, Footer, Sidebar, Button } from "components";
 
 import issuerRoutes from "routes/issuer.jsx";
 
 var ps;
 
 class Issuer extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {};
+  }
   componentDidMount() {
     if (navigator.platform.indexOf("Win") > -1) {
       document.documentElement.className += " perfect-scrollbar-on";
@@ -31,20 +35,27 @@ class Issuer extends React.Component {
       this.refs.mainPanel.scrollTop = 0;
     }
   }
+  showTooltips() {
+    this.setState({
+      tooltipsOpen: !this.state.tooltipsOpen
+    })
+  }
   render() {
     return (
       <div className="wrapper">
-        <Sidebar {...this.props} routes={issuerRoutes} />
+        <Sidebar {...this.props} routes={issuerRoutes}/>
         <div className="main-panel" ref="mainPanel">
-          <Header {...this.props} />
+          <Header {...this.props} showTooltips={() => this.showTooltips()}/>
           <Switch>
             {issuerRoutes.map((prop, key) => {
+              let Component = prop.component
               if (prop.collapse) {
                 return prop.views.map((prop2, key2) => {
+                  Component = prop2.component
                   if(prop2.auth) {
                     return <PrivateRoute
                       path={prop2.path}
-                      component={prop2.component}
+                      render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
                       key={key2}
                       role={prop2.auth}
                     />
@@ -52,7 +63,7 @@ class Issuer extends React.Component {
                   return (
                     <Route
                       path={prop2.path}
-                      component={prop2.component}
+                      render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
                       key={key2}
                     />
                   );
@@ -61,10 +72,20 @@ class Issuer extends React.Component {
               if (prop.redirect)
                 return <Redirect from={prop.path} to={prop.pathTo} key={key} />;
               else if(prop.auth){
-                console.log("I'm getting redirected");
-                return <PrivateRoute path={prop.path} component={prop.component} key={key} role={prop.auth}/>
+                return (
+                  <PrivateRoute
+                    path={prop.path}
+                    render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
+                    key={key}
+                    role={prop.auth}
+                  />
+                )
               } return (
-                <Route path={prop.path} component={prop.component} key={key} />
+                <Route
+                  path={prop.path} 
+                  render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
+                  key={key} 
+                />
               );
             })}
           </Switch>
@@ -74,6 +95,7 @@ class Issuer extends React.Component {
             <Footer fluid />
           )}
         </div>
+
       </div>
     );
   }

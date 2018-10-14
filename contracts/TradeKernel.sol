@@ -228,15 +228,21 @@ contract TradeKernel {
 
     /// @dev Function to distribute tokens to investor
     /// @param tradeHash identifier of a trade
-    /// @param investor address of investor
-    /// @param token address of the token
-    /// @param amount amount of tokens to give or take from investor
-    function distributeTokens(bytes32 tradeHash, address investor, address token, int amount) public {
+    /// @param distributeAddresses address for token investor broker
+    /// @param distributeAmounts amounts for investor broker  
+    function distributeTokens(
+        bytes32 tradeHash, 
+        address[] distributeAddresses,
+        int[] distributeAmounts)
+    public {
+        address token = distributeAddresses[0];
+        address investor = distributeAddresses[1];
+        address broker = distributeAddresses[2];
         // require(permissions.isAuthorized(msg.sender, uint(Permissions.Role.ADMIN)));
         require(complete[tradeToOrder[tradeHash]]);
         require(distributed[tradeHash] == int(0));
-        
         address tokenOwner = ETT(token).owner();
+        int amount = distributeAmounts[0];
         if(amount < 0) {
             uint256 uamount = uint(amount * -1);
             ETT(token).transferFrom(
@@ -251,6 +257,12 @@ contract TradeKernel {
                 uint(amount)
             );
         }
+        // Distribute to broker
+        ETT(token).transferFrom(
+            tokenOwner, 
+            broker, 
+            uint(distributeAmounts[1])
+        );
         distributed[tradeHash] = amount;
         emit LogDistributed(investor, token, amount, tradeHash);
     }

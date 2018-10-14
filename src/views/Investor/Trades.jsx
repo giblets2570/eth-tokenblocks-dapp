@@ -85,9 +85,15 @@ class Trades extends React.Component {
     }else if(trade.state === 4){
       return 'Trade rejected'
     }else if(trade.state === 5){
-      return <Button color='success' onClick={() => this.claimTokens(trade)}>Claim tokens</Button>
+      return <Button color='success' onClick={() => this.claimTokens(trade)}>{
+        trade.nominalAmount >= 0
+         ? "Claim tokens"
+         : "Sell tokens"
+      }</Button>
     }else{
-      return 'Tokens claimed'
+      return trade.nominalAmount >= 0
+       ? 'Tokens claimed'
+       : "Tokens sold"
     }
   }
   render() {
@@ -105,7 +111,7 @@ class Trades extends React.Component {
           <td>{trade.token.name}</td>
           <td>{buySell}</td>
           <td>{trade.currency}</td>
-          <td>{amount}</td>
+          <td>{amount.toLocaleString()}</td>
           <td>{trade.executionDate.format('DD/MM/YY')}</td>
           <td>{trade.createdAt.format('HH:mm [at] DD/MM/YY')}</td>
           <td>{trade.bestQuote}</td>

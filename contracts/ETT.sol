@@ -121,10 +121,10 @@ contract ETT is StandardToken, Ownable {
     require(_value <= balances[_from]);
     require(_to != address(0));
 
-    if(!permissions.isAuthorized(msg.sender, uint(Permissions.Role.CONTRACT))) {
-      require(_value <= allowed[_from][msg.sender]);
-      allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
-    }
+    // if(!permissions.isAuthorized(msg.sender, uint(Permissions.Role.CONTRACT))) {
+    //   require(_value <= allowed[_from][msg.sender]);
+    //   allowed[_from][msg.sender] = allowed[_from][msg.sender].sub(_value);
+    // }
 
     balances[_from] = balances[_from].sub(_value);
     balances[_to] = balances[_to].add(_value);

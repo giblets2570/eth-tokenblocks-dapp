@@ -117,7 +117,7 @@ class Accounts extends React.Component {
         <td>{key+1}</td>
         <td>{row.investor.address}</td>
         <td>{row.investor.name}</td>
-        <td>{(row.balance / Math.pow(10, row.token.decimals)).toFixed(2)}</td>
+        <td>{(row.balance / Math.pow(10, row.token.decimals)).toFixed(4)}</td>
       </tr>
     ))
     return (

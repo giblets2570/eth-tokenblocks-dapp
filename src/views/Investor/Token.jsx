@@ -80,16 +80,21 @@ class Token extends React.Component {
     this.setState({ token: token });
     response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}/holdings`);
     let holdings = response.data
-    console.log(holdings)
+    let aum = holdings.reduce((c, holding) => c + holding.securityAmount * holding.securityTimestamp.price, 0) / 100.0;
+    holdings = holdings.map((holding) => {
+      holding.weight = holding.securityAmount * holding.securityTimestamp.price / (100 * aum)
+      return holding
+    })
     this.setState({ holdings: holdings });
 
-    let aum = holdings.reduce((c, holding) => c + holding.securityAmount * holding.securityTimestamp.price, 0) / 100.0;
     console.log(aum)
     let nav = aum * Math.pow(10, token.decimals) / token.totalSupply
     console.log(nav)
     this.setState({ nav: nav });
     response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}/balance`);
+    console.log(response)
     let balance = response.data.balance || 0
+    balance = Math.abs(parseFloat(balance)) / Math.pow(10, token.decimals)
     this.setState({ balance: balance });
     this.setState({ currentValue: balance * nav })
     response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}/invested`);
@@ -297,7 +302,7 @@ class Token extends React.Component {
                       title={
                         typeof this.state.investedValue === 'number'
                         ? (<span>
-                            <small>£</small>{this.state.investedValue.toLocaleString()}
+                            <small>£</small>{(this.state.investedValue/100).toLocaleString()}
                           </span>)
                         : 'Loading...'
                       }
@@ -326,7 +331,7 @@ class Token extends React.Component {
                         typeof this.state.currentValue === 'number' && typeof this.state.investedValue === 'number'
                         ? this.state.investedValue
                           ?(
-                            (this.state.currentValue - this.state.investedValue) * 100 / this.state.investedValue
+                            (this.state.currentValue - this.state.investedValue/100) * 100 / this.state.investedValue
                           ).toFixed(2) + "%"
                           : "0%"
                         : 'Loading...'
@@ -382,11 +387,14 @@ class Token extends React.Component {
                       <th>Sector</th>
                       <th>Country</th>
                       <th>Amount</th>
+                      <th>Weight</th>
                     </tr>
                   </thead>
                   <tbody>
                     {
-                      this.state.holdings.map((holding,key) => {
+                      this.state.holdings
+                      .sort((a, b) => b.weight - a.weight)
+                      .map((holding,key) => {
                         return (
                           <tr key={key}>
                             <td>{key+1}</td>
@@ -395,6 +403,7 @@ class Token extends React.Component {
                             <td>{holding.security.sector}</td>
                             <td>{holding.security.country}</td>
                             <td>{holding.securityAmount.toLocaleString()}</td>
+                            <td>{(holding.weight*100).toFixed(2)}%</td>
                           </tr>
                         )
                       })

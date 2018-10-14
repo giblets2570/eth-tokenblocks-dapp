@@ -84,9 +84,9 @@ class OrderTrades extends React.Component {
     })
   }
   getHoldings(){
-    console.log(this.state.totalTradeValue)
-    let totalValue = this.state.totalTradeValue['GBP'] || 0
-    console.log(this.state.token)
+    console.log(this.state.totalTradeValue);
+    let totalValue = this.state.totalTradeValue['GBP'] || 0;
+    console.log(this.state.token);
     let orderHoldings = this.state.token.holdings;
     let aum = 0
     for (let i = 0; i < orderHoldings.length; i++) {
@@ -98,10 +98,10 @@ class OrderTrades extends React.Component {
       holding.amount = (totalValue / aum) * holding.securityAmount
       holding.direction = holding.amount >= 0 ? 'Buy' : 'Sell'
     }
-    console.log(orderHoldings)
+    console.log(orderHoldings);
     this.setState({
       orderHoldings: orderHoldings
-    })
+    });
   }
   async getTradeData(day, page, pageCount) {
     let response = await axios.get(`${process.env.REACT_APP_API_URL}trades?tokenId=${this.props.tokenId}&executionDate=${day.format('YYYY-MM-DD')}&page=${page}&page_count=${pageCount}&confirmed=1`)

@@ -8,6 +8,8 @@ import web3Service from 'utils/getWeb3';
 import Auth from 'utils/auth';
 import axios from 'utils/request';
 import {fromRpcSig, bufferToHex} from 'ethereumjs-util'
+import OrderHoldings from './OrderHoldings'
+
 class Orders extends React.Component {
   constructor(props) {
     super(props);
@@ -15,7 +17,8 @@ class Orders extends React.Component {
       date: moment(),
       user: Auth.user,
       page: 0,
-      pageCount: 10
+      pageCount: 10,
+      order: {}
     };
   }
   async fetchOrderData(page, pageCount) {
@@ -62,14 +65,26 @@ class Orders extends React.Component {
     let verifiedOrder = await tradeKernelInstance.verifyOrder(...formattedOrder, v, bufferToHex(r), bufferToHex(s), {from: address});
 
     let orders = this.state.orders.map((o) => {
-      let _order = Object.assign({}, o)
+      let _order = Object.assign({}, o);
       if(_order.id === order.id){
-        _order.state = 1
+        _order.state = 1;
       }
-      return _order
+      return _order;
     })
     this.setState({
       orders: orders
+    })
+  }
+  viewOrder(order) {
+    this.setState({
+      order: order,
+      orderModal: true
+    });
+  }
+  toggleOrderModal(){
+    this.setState({
+      orderModal: !this.state.orderModal,
+      order: this.state.order.id ? {} : this.state.order
     })
   }
   render() {
@@ -94,11 +109,19 @@ class Orders extends React.Component {
               ) : <span style={{color: 'green'}}>Verified</span>
             }
           </td>
+          <td>
+            <Button 
+              color='primary'
+              onClick={() => this.viewOrder(order)}>
+              View order
+            </Button>
+          </td>
         </tr>
       )
     })
     return(
       <div>
+        <OrderHoldings isOpen={this.state.orderModal} toggle={() => this.toggleOrderModal()} order={this.state.order} />
         <PanelHeader 
           size="sm" 
           content={
@@ -112,7 +135,7 @@ class Orders extends React.Component {
             <Col md={12}>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">Orders</CardTitle>
+                  <CardTitle tag="h4">Fund Orders to Confirm</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table>
