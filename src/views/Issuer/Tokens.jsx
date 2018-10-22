@@ -1,79 +1,57 @@
-import React from 'react'
-import axios from 'utils/request'
+import React from 'react';
+import axios from 'utils/request';
+import CreateToken from 'views/Issuer/CreateToken';
+import RegCheck from 'views/Issuer/RegCheck';
+import {Route,Link} from 'react-router-dom';
+import ShowToken from 'views/Issuer/ShowToken'
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  Row,
-  Col,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Table,
-  Button,
-  Tooltip
+  Card,CardHeader,CardBody,CardFooter,CardTitle,Row,Col,UncontrolledDropdown,
+  DropdownToggle,DropdownMenu,DropdownItem,Table,Button,Tooltip
 } from "reactstrap";
-import {
-  PanelHeader,
-  Stats,
-  Statistics,
-  CardCategory,
-  Progress
-} from "components";
-
-import CreateToken from 'views/Issuer/CreateToken'
-import RegCheck from 'views/Issuer/RegCheck'
+import { PanelHeader,Stats,Statistics,CardCategory,Progress } from "components";
 
 class Tokens extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      tokens: [],
-      token: {},
+      funds: [],
+      fund: {},
       tooltipsOpen: false
     }
   }
-  toggleTooltip() {
-    // this.setState({
-    //   tooltipsOpen: !this.state.tooltipsOpen
-    // });
-  }
   async componentDidMount(){
-    let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens`);
-    let tokens = response.data
-    this.setState({ tokens: tokens });
+    let response = await axios.get(`${process.env.REACT_APP_API_URL}funds`);
+    let funds = response.data
+    this.setState({ funds: funds });
     console.log(this.props)
   }
   async componentWillReceiveProps(nextProps) {
-    console.log(nextProps) 
+    console.log(nextProps);
   }
   onInputChange(key) {
     return (event) => {
-      this.setState({ 
-        [key]: event.target.value 
+      this.setState({
+        [key]: event.target.value
       })
     }
   }
   async toggleTokenModal() {
-    if(this.state.tokenModal){
-      let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens`);
-      this.setState({ tokens: response.data });
+    if(this.state.fundModal){
+      let response = await axios.get(`${process.env.REACT_APP_API_URL}funds`);
+      this.setState({ funds: response.data });
     }
     this.setState({
-      tokenModal: !this.state.tokenModal
+      fundModal: !this.state.fundModal
     })
   }
   createToken() {
     this.setState({
-      tokenModal: true
+      fundModal: true
     })
   }
-  regCheck(token){
+  regCheck(fund){
     this.setState({
-      token: token
+      fund: fund
     })
     this.setState({
       regModal: true
@@ -85,32 +63,39 @@ class Tokens extends React.Component {
     })
   }
   render() {
-    let rows = this.state.tokens.map((token, key) => {
+    let rows = this.state.funds.map((fund, key) => {
       return (
         <tr key={key}>
           <td>{key + 1}</td>
-          <td>{token.name}</td>
-          <td>{token.symbol}</td>
-          <td>{(parseFloat(token.totalSupply) / Math.pow(10,token.decimals)).toFixed(2)}</td>
+          <td>{fund.name}</td>
           <td>
-            <Button color="primary" onClick={() => this.regCheck(token)} id={`RegCheck${key}`}>
+            <Button color="primary" onClick={() => this.regCheck(fund)} id={`RegCheck${key}`}>
               Regulation Check
             </Button>
+          </td>
+          <td>
+            <Link to={`/issuer/funds/${fund.id}`}>
+              View
+            </Link>
           </td>
         </tr>
       )
     });
     return (
       <div>
-        <CreateToken isOpen={this.state.tokenModal} toggle={() => this.toggleTokenModal()} {...this.props} />
-        <RegCheck isOpen={this.state.regModal} toggle={() => this.toggleRegModal()} token={this.state.token} {...this.props} />
-        <PanelHeader 
-          size="sm" 
+        <CreateToken isOpen={this.state.fundModal} toggle={() => this.toggleTokenModal()} {...this.props} />
+        <RegCheck isOpen={this.state.regModal} toggle={() => this.toggleRegModal()} fund={this.state.fund} {...this.props} />
+        <PanelHeader
+          size="sm"
           content={
-            <h1>{this.state.token ? this.state.token.name : 'Loading...'}</h1>
+            <h1>{this.state.fund ? this.state.fund.name : 'Loading...'}</h1>
           }
         />
-        <div className="content">
+      <Route
+        path="/issuer/funds"
+        exact={true}
+        render={(props) => (
+          <div className="content">
           <Row>
             <Col xs={12} md={12}>
               <Card className="card-stats card-raised">
@@ -121,8 +106,6 @@ class Tokens extends React.Component {
                       <tr className="text-primary">
                         <th>#</th>
                         <th>Name</th>
-                        <th>Symbol</th>
-                        <th>Total Supply</th>
                         <th>Compliant</th>
                       </tr>
                     </thead>
@@ -131,25 +114,43 @@ class Tokens extends React.Component {
                     </tbody>
                   </Table>
                   <Button color="primary" onClick={() => this.createToken()} id="CreateToken">
-                    Create token
+                    Create fund
                   </Button>
                 </CardBody>
               </Card>
             </Col>
           </Row>
-          <Tooltip placement="right" isOpen={this.props.tooltipsOpen && !this.state.tokenModal && !this.state.regModal} target="CreateToken">
-            Click here to start creating a new token
+          <Tooltip placement="right" isOpen={this.props.tooltipsOpen && !this.state.fundModal && !this.state.regModal} target="CreateToken">
+            Click here to start creating a new fund
           </Tooltip>
           {
             rows.length
             ? (
-              <Tooltip placement="right" isOpen={this.props.tooltipsOpen && !this.state.tokenModal && !this.state.regModal} target={`RegCheck0`}>
+              <Tooltip placement="right" isOpen={this.props.tooltipsOpen && !this.state.fundModal && !this.state.regModal} target={`RegCheck0`}>
                 Click here to perform the regulation checks
               </Tooltip>
             )
             : null
           }
         </div>
+        )}
+        />
+        <Route
+          path="/issuer/funds/:id"
+          render={(props) => (
+            <div className="content">
+              <Row>
+                <Col xs={12} md={12}>
+                  <Card className="card-stats card-raised">
+                    <CardBody>
+                      <ShowToken {...props} />
+                    </CardBody>
+                  </Card>
+                </Col>
+              </Row>
+            </div>
+          )}
+          />
       </div>
     )
   }

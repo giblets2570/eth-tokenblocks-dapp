@@ -16,16 +16,23 @@ ReactDOM.render(
   <Router history={hist}>
     <Switch>
       {indexRoutes.map((prop, key) => {
+        let Component = prop.component
         if(prop.auth){
-          return (<PrivateRoute
-            path={prop.path}
-            component={prop.component}
-            key={key}
-            role={prop.auth}
-          />)
+          return (
+            <PrivateRoute
+              path={prop.path}
+              render={(props) => <Component {...props} routes={prop.routes} />}
+              key={key}
+              role={prop.auth}
+            />
+          )
         }
         return (
-          <Route path={prop.path} key={key} component={prop.component} />
+          <Route
+            path={prop.path}
+            key={key}
+            render={(props) => <Component {...props} routes={prop.routes} />}
+          />
         );
       })}
     </Switch>

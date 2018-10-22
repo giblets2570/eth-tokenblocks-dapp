@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Select from "react-select";
-import { 
+import {
   Modal, Form,
   ModalBody,
   ModalFooter,
@@ -24,11 +24,32 @@ import img1 from "assets/img/bg1.jpg";
 import img2 from "assets/img/bg3.jpg";
 import {loadBundle, sendMessage} from 'utils/encrypt';
 import Auth from 'utils/auth';
-import questions from 'views/Issuer/TokenQuestions'
+import questions from 'views/Issuer/TokenQuestions';
+import ShareClasses from 'views/Issuer/ShareClasses';
 
 class CreateToken extends Component {
   constructor(props){
     super(props)
+    let classProps = [
+      {name: "Share class", state: "shareClass"},
+      {name: "Fee (BP)", state: "fee"},
+      {name: "Front load", state: "frontLoad"},
+      {name: "Back load", state: "backLoad"},
+      {name: "Min size", state: "minimumOrder"},
+      {name: "Number Shares", state: "numShares"},
+      {
+        name: "Currency",
+        state: "currency",
+        type: "select",
+        options: ["GBP","USD"]
+      },
+      {
+        name: "IncomeCategory",
+        state: "incomeCategory",
+        type: "select",
+        options: ["Accumulating","Distributing"]
+      }
+    ];
     this.state = {
       hTabs: "ht1",
       questions1: questions.questions1,
@@ -38,7 +59,15 @@ class CreateToken extends Component {
       decimals: 18,
       initialAmountString: '',
       cutoffTime: 64800,
-      fee: 25
+      classes: [{
+        ...classProps.reduce((c, prop) => {
+          prop.type === 'select'
+          ? c[prop.state] = prop.options[0]
+          : c[prop.state] = '';
+          return c;
+        }, {})
+      }],
+      classProps: classProps
     }
   }
   choose(key, value){
@@ -54,19 +83,14 @@ class CreateToken extends Component {
     });
   }
   handleDayChange(day) {
-    this.setState({ 
-      inceptionDate: day 
+    this.setState({
+      inceptionDate: day
     });
   }
   componentWillReceiveProps(nextProps) {
     setTimeout(() => this.setState({
       tooltipOpen: nextProps.tooltipsOpen && nextProps.isOpen
     }));
-  }
-  componentDidMount(){
-    // this.setState({
-    //   tooltipsOpen: this.props.tooltipsOpen
-    // })
   }
   handleChange(event,key) {
     this.setState({
@@ -75,17 +99,30 @@ class CreateToken extends Component {
   }
   async create(e){
     e.preventDefault()
-    this.setState({
-      uploading: true
-    })
-    let token = this.state
-    token.initialAmount = parseFloat(this.state.initialAmountString) * Math.pow(10,token.decimals)
-    try {
-      let response = await axios.post(`${process.env.REACT_APP_API_URL}tokens`, token);
-      this.props.toggle()
-    }catch(e) {
-      console.log(e)
+    this.setState({ uploading: true });
+    let data = this.state;
+    data.initialAmount = parseFloat(data.initialAmountString || '0') * Math.pow(10,data.decimals);
+    // Need to create a different token for each share class
+    let fund = {
+      name: data.name,
+      tokens: data.classes.map((_class) => {
+        return {
+          decimals: data.decimals,
+          symbol: `${data.symbol}-${_class.shareClass}`,
+          cutoffTime: data.cutoffTime,
+          fee: Math.round(parseFloat(_class.fee)),
+          initialAmount: Math.round(parseFloat(_class.numShares)) * Math.pow(10, data.decimals),
+          currency: _class.currency,
+          holdings: data.holdings,
+          incomeCategory: _class.incomeCategory,
+          minimumOrder: _class.minimumOrder
+        }
+      })
     }
+
+    let response = await axios.post(`${process.env.REACT_APP_API_URL}funds`, fund);
+
+    this.props.toggle()
     this.setState({
       uploading: false
     })
@@ -143,7 +180,7 @@ class CreateToken extends Component {
                   size="sm"
                   key={key}
                   color="primary"
-                  simple={this.state[question.key] !== value} 
+                  simple={this.state[question.key] !== value}
                   onClick={() => this.choose(question.key,value)}>
                   {value}
                 </Button>
@@ -153,6 +190,24 @@ class CreateToken extends Component {
         </Col>
       </Row>
     )
+  }
+  classChange(e, index, prop) {
+    let classes = this.state.classes;
+    while(classes.length <= index) {
+        classes.push({})
+    }
+    classes[index][prop.state] = e.target.value;
+    this.setState({classes: classes});
+  }
+  addShareClass() {
+    this.setState({classes: this.state.classes.concat([{
+      ...this.state.classProps.reduce((c, prop) => {
+        prop.type === 'select'
+        ? c[prop.state] = prop.options[0]
+        : c[prop.state] = '';
+        return c;
+      }, {})
+    }])})
   }
   toggle() {
     this.setState({
@@ -230,7 +285,9 @@ class CreateToken extends Component {
                   {
                     this.state.q2done
                     ? (
-                      <Button color="primary" onClick={() => this.setState({ hTabs: "ht3" })}>
+                      <Button
+                        color="primary"
+                        onClick={() => this.setState({ hTabs: "ht3" })}>
                         Next <i className="now-ui-icons arrows-1_minimal-right" />
                       </Button>
                     )
@@ -240,7 +297,7 @@ class CreateToken extends Component {
               </Row>
             </TabPane>
             <TabPane tabId="ht3">
-              <Form 
+              <Form
                 onSubmit={(e) => this.create(e)}
                 className="form-horizontal"
                 >
@@ -248,7 +305,11 @@ class CreateToken extends Component {
                   <Label md={3}>Fund Name</Label>
                   <Col xs={12} md={9}>
                     <FormGroup>
-                      <Input type="text" value={this.state.name} onChange={(e) => this.handleChange(e, 'name')}/>
+                      <Input
+                        type="text"
+                        value={this.state.name}
+                        onChange={(e) => this.handleChange(e, 'name')}
+                      />
                     </FormGroup>
                   </Col>
                 </Row>
@@ -256,23 +317,11 @@ class CreateToken extends Component {
                   <Label md={3}>Fund symbol</Label>
                   <Col xs={12} md={9}>
                     <FormGroup>
-                      <Input type="text" value={this.state.symbol} onChange={(e) => this.handleChange(e, 'symbol')}/>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Label md={3}>Fund fee</Label>
-                  <Col xs={12} md={9}>
-                    <FormGroup>
-                      <Input type="number" value={this.state.fee} onChange={(e) => this.handleChange(e, 'fee')}/>
-                    </FormGroup>
-                  </Col>
-                </Row>
-                <Row>
-                  <Label md={3}>Initial number of tokens</Label>
-                  <Col xs={12} md={9}>
-                    <FormGroup>
-                      <Input type="number" value={this.state.initialAmountString} onChange={(e) => this.handleChange(e, 'initialAmountString')}/>
+                      <Input
+                        type="text"
+                        value={this.state.symbol}
+                        onChange={(e) => this.handleChange(e, 'symbol')}
+                      />
                     </FormGroup>
                   </Col>
                 </Row>
@@ -288,6 +337,11 @@ class CreateToken extends Component {
                     />
                   </Col>
                 </Row>
+                <ShareClasses
+                  classProps={this.state.classProps}
+                  addShareClass={() => this.addShareClass()}
+                  onClassChange={(e, index, prop) => this.classChange(e, index, prop)}
+                  classes={this.state.classes}/>
                 <Button
                   color="primary"
                   type="submit"
@@ -315,7 +369,7 @@ class CreateToken extends Component {
       </Modal>
     )
   }
-  
+
 }
 
 export default CreateToken

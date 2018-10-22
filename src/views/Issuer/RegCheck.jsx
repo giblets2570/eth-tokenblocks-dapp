@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Select from "react-select";
-import { 
+import {
   Modal, Form,
   ModalBody,
   ModalFooter,
@@ -42,8 +42,8 @@ class RegCheck extends Component {
     })
   }
   handleDayChange(day) {
-    this.setState({ 
-      inceptionDate: day 
+    this.setState({
+      inceptionDate: day
     });
   }
   async componentWillReceiveProps(nextProps) {
@@ -136,7 +136,7 @@ class RegCheck extends Component {
         size="lg"
       >
         <ModalHeader toggle={() => this.props.toggle()}>
-          Checks for {this.props.token.symbol}
+          Checks for {this.props.fund.name}
         </ModalHeader>
         <ModalBody>
           <h3>Regulation Checks</h3>
@@ -179,7 +179,7 @@ class RegCheck extends Component {
       </Modal>
     )
   }
-  
+
 }
 
 export default RegCheck

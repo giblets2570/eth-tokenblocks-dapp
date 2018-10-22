@@ -3,12 +3,13 @@ import axios from 'utils/request';
 import moment from 'moment';
 import ShowTrade from 'views/Investor/ShowTrade'
 import { Link, Route } from 'react-router-dom';
-import { Card, CardBody, CardHeader, CardTitle, Row, Col, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
+import {
+  Card, CardBody, CardHeader, CardTitle, Row, Col,
+  Table, Pagination, PaginationItem, PaginationLink
+} from "reactstrap";
 import { subscribe } from 'utils/socket';
 import { PanelHeader, Button } from "components";
 import { decrypt } from 'utils/encrypt'
-
-const emptyString = "0000000000000000000000000000000000000000000000000000000000000000"
 
 class Trades extends React.Component {
   constructor(props) {
@@ -39,7 +40,7 @@ class Trades extends React.Component {
         let [currency, nominalAmount] = total.split(':');
         trade.currency = currency;
         trade.nominalAmount = (parseInt(nominalAmount) / 100.0).toFixed(2);
-        if(ob.price && ob.price.length && ob.price !== emptyString) {
+        if(ob.price && ob.price.length) {
           ob.priceDecrypted = decrypt(ob.price, sk);
         }
         return ob;
@@ -122,7 +123,7 @@ class Trades extends React.Component {
         </tr>
       )
     })
-    let pagination = this.state.total 
+    let pagination = this.state.total
     ? Array(Math.ceil(this.state.total / this.state.pageCount)).fill(null)
       .map((t, key) => (
         <PaginationItem active={this.state.page === key} key={key}>
@@ -132,12 +133,12 @@ class Trades extends React.Component {
     : [];
     return(
       <div>
-        <Route 
-          path="/investor/trades/:id" 
+        <Route
+          path="/investor/trades/:id"
           render={(props) => <ShowTrade {...props} returnTo='/investor/trades'/>
         }/>
-        <PanelHeader 
-          size="sm" 
+        <PanelHeader
+          size="sm"
           content={
             <h1>{this.state.token ? this.state.token.name : 'Loading...'}</h1>
           }

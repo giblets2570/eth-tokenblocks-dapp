@@ -35,7 +35,7 @@ var dashRoutes = [
     auth: 'investor',
     component: Profile
   },
-  { redirect: true, path: "/", pathTo: "/dashboard", name: "Dashboard" }
+  { redirect: true, path: "/investor", pathTo: "/investor/tokens", name: "Dashboard" }
 ];
 
 export default dashRoutes;

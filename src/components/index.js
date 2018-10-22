@@ -1,4 +1,5 @@
 import Accordion from './Accordion/Accordion';
+import Accounts from './Accounts/Accounts';
 
 import CardAuthor from './CardElements/CardAuthor';
 import CardCategory from './CardElements/CardCategory';
@@ -110,5 +111,8 @@ export {
   AccountSetup,
 
   // TradeDetails
-  TradeDetails
+  TradeDetails,
+
+  // Accounts
+  Accounts
 };

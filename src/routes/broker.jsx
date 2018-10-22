@@ -18,6 +18,6 @@ var brokerRoutes = [
     auth: 'broker',
     component: (props) => <AllTrades {...props}/>
   },
-  { redirect: true, path: "/", pathTo: "/broker", name: "Broker" }
+  { redirect: true, path: "/broker", pathTo: "/broker/trades", name: "Broker" }
 ];
 export default brokerRoutes;

@@ -7,16 +7,12 @@ import Token from 'views/Investor/Token'
 import { Route, Switch, Redirect } from "react-router-dom";
 import { PrivateRoute, Header, Footer, Sidebar } from "components";
 
-import dashboardRoutes from "routes/dashboard.jsx";
-
 var ps;
 
 class Dashboard extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      routes: dashboardRoutes
-    }
+    this.state = {};
   }
   async componentDidMount() {
     if (navigator.platform.indexOf("Win") > -1) {
@@ -41,33 +37,33 @@ class Dashboard extends React.Component {
   }
   showTooltips() {
     this.setState({
-      showingTooltips: !this.state.showingTooltips
+      tooltipsOpen: !this.state.tooltipsOpen
     })
   }
   render() {
     return (
       <div className="wrapper">
-        <Sidebar {...this.props} routes={this.state.routes} showTooltips={() => this.showTooltips()} />
+        <Sidebar {...this.props} />
         <div className="main-panel" ref="mainPanel">
-          <Header {...this.props} />
+          <Header {...this.props} showTooltips={() => this.showTooltips()}/>
           <Switch>
-            {this.state.routes.map((prop, key) => {
+            {this.props.routes.map((prop, key) => {
+              let Component = prop.component
               if (prop.collapse) {
                 return prop.views.map((prop2, key2) => {
+                  Component = prop2.component
                   if(prop2.auth) {
-                    return (
-                      <PrivateRoute
+                    return <PrivateRoute
                       path={prop2.path}
-                      component={prop2.component}
+                      render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
                       key={key2}
                       role={prop2.auth}
                     />
-                    )
                   } 
                   return (
                     <Route
                       path={prop2.path}
-                      component={prop2.component}
+                      render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
                       key={key2}
                     />
                   );
@@ -76,9 +72,20 @@ class Dashboard extends React.Component {
               if (prop.redirect)
                 return <Redirect from={prop.path} to={prop.pathTo} key={key} />;
               else if(prop.auth){
-                return <PrivateRoute path={prop.path} component={prop.component} key={key} role={prop.auth} />
+                return (
+                  <PrivateRoute
+                    path={prop.path}
+                    render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
+                    key={key}
+                    role={prop.auth}
+                  />
+                )
               } return (
-                <Route path={prop.path} component={prop.component} key={key} />
+                <Route
+                  path={prop.path} 
+                  render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
+                  key={key} 
+                />
               );
             })}
           </Switch>

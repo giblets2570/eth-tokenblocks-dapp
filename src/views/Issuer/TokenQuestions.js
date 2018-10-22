@@ -22,7 +22,7 @@ let questions = {
   },{
     key: 'jurisdiction',
     question: 'Do you have a prefered jurisdiction for the fund?',
-    values: ['UK','Luxembourg','Ireland','Jersey']
+    values: ['Luxembourg','Ireland','Jersey','UK']
   },{
     key: 'ended',
     question: 'Will the fund be open/ close ended?',

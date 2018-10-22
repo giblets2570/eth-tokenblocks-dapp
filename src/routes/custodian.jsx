@@ -9,6 +9,6 @@ var custodianRoutes = [
     auth: "custodian",
     component: Orders
   },
-  { redirect: true, path: "/", pathTo: "/custodian", name: "Custodian" }
+  { redirect: true, path: "/custodian", pathTo: "/custodian/orders", name: "Custodian" }
 ];
 export default custodianRoutes;

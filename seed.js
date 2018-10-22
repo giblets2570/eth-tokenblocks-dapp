@@ -36,22 +36,22 @@ const tables = [
 
 let users = [{
   id: 1, name: 'admin', email: 'admin@admin.com', password: 'admin', role: 'admin', account: 0,
-  passwordHash: '$pbkdf2-sha256$29000$lfJ.jxGC0HpPidF6r7X2Pg$mnlwqH3CNLooy9q8FI9Jej.ESblTfr7WGzXsKyKAlA4', 
+  passwordHash: '$pbkdf2-sha256$29000$lfJ.jxGC0HpPidF6r7X2Pg$mnlwqH3CNLooy9q8FI9Jej.ESblTfr7WGzXsKyKAlA4',
 },{
   id: 2, name: 'broker1', email: 'broker1@broker1.com', password: 'broker1', role: 'broker', account: 1,
-  passwordHash: '$pbkdf2-sha256$29000$QQghJMQYI.S8V0qJsfYegw$Zxe48f0Uga3nNJRkkvMkX/ULc7AMgn9G3L17ORh6CY4', 
+  passwordHash: '$pbkdf2-sha256$29000$QQghJMQYI.S8V0qJsfYegw$Zxe48f0Uga3nNJRkkvMkX/ULc7AMgn9G3L17ORh6CY4',
 },{
   id: 3, name: 'broker2', email: 'broker2@broker2.com', password: 'broker2', role: 'broker', account: 3,
-  passwordHash: '$pbkdf2-sha256$29000$gnCutfa.17pXypmT8r53zg$/qjz8z4q2sXZIy7bAGdGTYunNdgCVtFsGK2TXB74Ntc', 
+  passwordHash: '$pbkdf2-sha256$29000$gnCutfa.17pXypmT8r53zg$/qjz8z4q2sXZIy7bAGdGTYunNdgCVtFsGK2TXB74Ntc',
 },{
   id: 4, name: 'investor', email: 'investor@investor.com', password: 'investor', role: 'investor', account: 2,
-  passwordHash: '$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I', 
+  passwordHash: '$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I',
 },{
   id: 5, name: 'custodian', email: 'custodian@custodian.com', password: 'custodian', role: 'custodian', account: 5,
-  passwordHash: '$pbkdf2-sha256$29000$hxBC6J3TGuO8dy4FQMiZkw$6Gicn.ohOheoFMGsrJvoAg38BMstr8QwCpdk00xzt.k', 
+  passwordHash: '$pbkdf2-sha256$29000$hxBC6J3TGuO8dy4FQMiZkw$6Gicn.ohOheoFMGsrJvoAg38BMstr8QwCpdk00xzt.k',
 },{
   id: 6, name: 'fund', email: 'fund@fund.com', password: 'fund', role: 'issuer', account: 4,
-  passwordHash: '$pbkdf2-sha256$29000$k9IaQ.hdy1nrXYtRivHe2w$81aKj1eGHd9s.YjSINps3dP7P1qHE0h5xMJ8pFagq94', 
+  passwordHash: '$pbkdf2-sha256$29000$k9IaQ.hdy1nrXYtRivHe2w$81aKj1eGHd9s.YjSINps3dP7P1qHE0h5xMJ8pFagq94',
 }]
 if(process.env.SEEDALL) {
   tables.push("User");
@@ -89,27 +89,39 @@ let createOrderHoldingsString = (_h) => {
   let holdingsString = JSON.stringify(h.map((__h) => ({symbol: __h, amount: hhash[__h]})));
   return holdingsString;
 }
-let tokens = [{
+let funds = [{
   "name": "S&P ETT",
-  "symbol": "S&P",
-  "decimals": 18,
-  "cutoffTime": 64800,
-  "fee": 25,
-  "owner": fund['address']
+  "tokens": [{
+    "symbol": "S&P",
+    "decimals": 18,
+    "cutoffTime": 64800,
+    "fee": 25,
+    "owner": fund['address'],
+    "incomeCategory": "Accumulating",
+    "minimumOrder": 1000000000
+  }],
 },{
   "name": "FTSE 100 ETT",
-  "symbol": "FTSE 100",
-  "decimals": 18,
-  "cutoffTime": 64800,
-  "fee": 25,
-  "owner": fund['address']
+  "tokens": [{
+    "symbol": "FTSE 100",
+    "decimals": 18,
+    "cutoffTime": 64800,
+    "fee": 25,
+    "owner": fund['address'],
+    "incomeCategory": "Accumulating",
+    "minimumOrder": 1000000000
+  }],
 },{
   "name": "SX5E ETT",
-  "symbol": "SX5E",
-  "decimals": 18,
-  "cutoffTime": 64800,
-  "fee": 25,
-  "owner": fund['address']
+  "tokens": [{
+    "symbol": "SX5E",
+    "decimals": 18,
+    "cutoffTime": 64800,
+    "fee": 25,
+    "owner": fund['address'],
+    "incomeCategory": "Accumulating",
+    "minimumOrder": 1000000000
+  }],
 }]
 let createSecurities = async () => {
   console.log("createSecurities")
@@ -163,9 +175,9 @@ let createUsers = async () => {
     let response = await rp(options)
   }
 }
-let createTokens = async () => {
-  for (var i = 0; i < tokens.length; i++) {
-    let token = tokens[i]
+let createFunds = async () => {
+  for (var i = 0; i < funds.length; i++) {
+    let fund = funds[i]
     let holdings = securities.map((security) => {
       return {
         amount: Math.floor(Math.random() * 1000000),
@@ -176,23 +188,23 @@ let createTokens = async () => {
     // I want the NAV to be 100
     let desiredNav = 10000
     let aum = holdings.reduce((c, holding) => c + holding.price * holding.amount, 0);
-    token.initialAmount = Math.floor(aum * Math.pow(10,token.decimals) / desiredNav);
-    token.holdings = holdings;
+    fund.tokens[0].initialAmount = Math.floor(aum * Math.pow(10, fund.tokens[0].decimals) / desiredNav);
+    fund.tokens[0].holdings = holdings;
+    fund.tokens[0].currency = "GBP"
 
     let options = {
       method: 'POST',
-      uri: `${process.env.API_URL}tokens`,
-      body: token,
+      uri: `${process.env.API_URL}funds`,
+      body: fund,
       headers: {
         Authorization: `Bearer ${loggedin.token}`
       },
       json: true
     }
     let response = await rp(options)
-    token.id = response.id
   }
 }
-let createTrades = async (numTrades = 10) => {
+let createTrades = async (numTrades = 1000) => {
   console.log("createTrades")
   let tradeKeys = {}
   let currencies = ['GBP'];
@@ -258,10 +270,10 @@ let createTrades = async (numTrades = 10) => {
       headers:{Authorization:`Bearer ${brokerLoggedin[brokerIndex].token}`},
       json:true
     });
-    
+
     let formattedTrade = [
-      [trade.investor.address, web3.eth.accounts[broker.account], trade.token.address], 
-      [makeNbytes(tradeBroker.nominalAmount), makeNbytes(encryptedPrice)], 
+      [trade.investor.address, web3.eth.accounts[broker.account], trade.token.address],
+      [makeNbytes(tradeBroker.nominalAmount), makeNbytes(encryptedPrice)],
       [executionDateInt, trade.expirationTimestampInSec, trade.salt]
     ];
 
@@ -297,7 +309,6 @@ let createTrades = async (numTrades = 10) => {
 let createOrders = async () => {
   console.log("createOrders");
   let brokerLoggedin = brokers.map(async (broker) => {
-    console.log(broker.name);
     return await login(broker.name);
   });
   brokerLoggedin = await Promise.all(brokerLoggedin);
@@ -332,7 +343,6 @@ let createOrders = async () => {
         trade.state = ob.state;
         return trade;
       });
-      console.log(trades.length);
       let totalTradeValue = trades.reduce((c, trade) => {
         c[trade.currency] = (c[trade.currency]||0) + parseFloat(trade.nominalAmountDecrypted);
         return c;
@@ -355,9 +365,7 @@ let createOrders = async () => {
         holding.amount = (totalValue / aum) * holding.securityAmount
         holding.direction = holding.amount >= 0 ? 'Buy' : 'Sell'
       }
-      console.log(orderHoldings);
-      console.log(aum);
-      
+
       // Create order
       const TradeKernelContract = require(`${process.env.CONTRACTS_FOLDER}TradeKernel.json`);
       const tradeKernel = contract(TradeKernelContract);
@@ -399,7 +407,6 @@ let createOrders = async () => {
           headers:{Authorization:`Bearer ${brokerLoggedin[$index].token}`},
           json: true
         });
-        console.log(result)
       }else{
         console.log("Not valid");
       }
@@ -458,7 +465,7 @@ let main = async () => {
   if(process.env.SEEDALL) await createUsers();
   loggedin = await login('admin');
   if(process.env.SEEDALL) await createSecurities();
-  if(process.env.SEEDALL) await createTokens();
+  if(process.env.SEEDALL) await createFunds();
   loggedin = await login('broker2');
   let tradeKeys = await createTrades(6);
   await createOrders();

@@ -3724,20 +3724,16 @@ Created using IcoMoon - icomoon.io
       opacity: .6; }
 
 .tooltip.bs-tooltip-right .arrow:before {
-  /*border-right-color: #FFFFFF; */
-}
+  border-right-color: #FFFFFF; }
 
 .tooltip.bs-tooltip-top .arrow:before {
-  /*border-top-color: #FFFFFF; */
-}
+  border-top-color: #FFFFFF; }
 
 .tooltip.bs-tooltip-bottom .arrow:before {
-  /*border-bottom-color: #FFFFFF; */
-}
+  border-bottom-color: #FFFFFF; }
 
 .tooltip.bs-tooltip-left .arrow:before {
-  /*border-left-color: #FFFFFF; */
-}
+  border-left-color: #FFFFFF; }
 
 .tooltip-inner {
   padding: 0.5rem 0.7rem;
