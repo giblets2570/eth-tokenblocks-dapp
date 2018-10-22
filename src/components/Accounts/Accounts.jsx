@@ -7,10 +7,11 @@ class Accounts extends React.Component {
     super(props);
     this.state = {};
   }
-  async componentDidMount() {
-    let {data} = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${this.props.token.id}/balances`);
+  async getBalances(props){
+    if(!props.token.id) return;
+    let {data} = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.token.id}/balances`);
     let balances = data.map((balance) => {
-      balance.balance = parseFloat( balance.balance || 0 ) / Math.pow(10, this.props.token.decimals);
+      balance.balance = parseFloat( balance.balance || 0 ) / Math.pow(10, props.token.decimals);
       return balance;
     });
     this.setState({
@@ -18,7 +19,16 @@ class Accounts extends React.Component {
       loading: false
     })
   }
+  componentDidMount() {
+    this.getBalances(this.props);
+  }
+  componentWillReceiveProps(nextProps) {
+    this.getBalances(nextProps);
+  }
   render() {
+    if(this.state.balances && !this.state.balances.length) {
+      return <p>Balances not initialised</p>
+    }
     let rows = (this.state.balances||[])
     .map((balance,key) => {
       return (

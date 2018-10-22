@@ -34,25 +34,7 @@ const tables = [
   "Trade"
 ]
 
-let users = [{
-  id: 1, name: 'admin', email: 'admin@admin.com', password: 'admin', role: 'admin', account: 0,
-  passwordHash: '$pbkdf2-sha256$29000$lfJ.jxGC0HpPidF6r7X2Pg$mnlwqH3CNLooy9q8FI9Jej.ESblTfr7WGzXsKyKAlA4',
-},{
-  id: 2, name: 'broker1', email: 'broker1@broker1.com', password: 'broker1', role: 'broker', account: 1,
-  passwordHash: '$pbkdf2-sha256$29000$QQghJMQYI.S8V0qJsfYegw$Zxe48f0Uga3nNJRkkvMkX/ULc7AMgn9G3L17ORh6CY4',
-},{
-  id: 3, name: 'broker2', email: 'broker2@broker2.com', password: 'broker2', role: 'broker', account: 3,
-  passwordHash: '$pbkdf2-sha256$29000$gnCutfa.17pXypmT8r53zg$/qjz8z4q2sXZIy7bAGdGTYunNdgCVtFsGK2TXB74Ntc',
-},{
-  id: 4, name: 'investor', email: 'investor@investor.com', password: 'investor', role: 'investor', account: 2,
-  passwordHash: '$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I',
-},{
-  id: 5, name: 'custodian', email: 'custodian@custodian.com', password: 'custodian', role: 'custodian', account: 5,
-  passwordHash: '$pbkdf2-sha256$29000$hxBC6J3TGuO8dy4FQMiZkw$6Gicn.ohOheoFMGsrJvoAg38BMstr8QwCpdk00xzt.k',
-},{
-  id: 6, name: 'fund', email: 'fund@fund.com', password: 'fund', role: 'issuer', account: 4,
-  passwordHash: '$pbkdf2-sha256$29000$k9IaQ.hdy1nrXYtRivHe2w$81aKj1eGHd9s.YjSINps3dP7P1qHE0h5xMJ8pFagq94',
-}]
+let users = require('./users.json');
 if(process.env.SEEDALL) {
   tables.push("User");
   tables.push("TokenBalance");
@@ -89,40 +71,7 @@ let createOrderHoldingsString = (_h) => {
   let holdingsString = JSON.stringify(h.map((__h) => ({symbol: __h, amount: hhash[__h]})));
   return holdingsString;
 }
-let funds = [{
-  "name": "S&P ETT",
-  "tokens": [{
-    "symbol": "S&P",
-    "decimals": 18,
-    "cutoffTime": 64800,
-    "fee": 25,
-    "owner": fund['address'],
-    "incomeCategory": "Accumulating",
-    "minimumOrder": 1000000000
-  }],
-},{
-  "name": "FTSE 100 ETT",
-  "tokens": [{
-    "symbol": "FTSE 100",
-    "decimals": 18,
-    "cutoffTime": 64800,
-    "fee": 25,
-    "owner": fund['address'],
-    "incomeCategory": "Accumulating",
-    "minimumOrder": 1000000000
-  }],
-},{
-  "name": "SX5E ETT",
-  "tokens": [{
-    "symbol": "SX5E",
-    "decimals": 18,
-    "cutoffTime": 64800,
-    "fee": 25,
-    "owner": fund['address'],
-    "incomeCategory": "Accumulating",
-    "minimumOrder": 1000000000
-  }],
-}]
+let funds = require('./funds.json');
 let createSecurities = async () => {
   console.log("createSecurities")
   for (var i = 0; i < securities.length; i++) {
@@ -153,7 +102,18 @@ let createUsers = async () => {
   for (var i = 0; i < users.length; i++) {
     let user = users[i];
     await new Promise((resolve, reject) => {
-      let sql = "INSERT INTO `User` (name, email, password, address, role) VALUES ('"+ [user.name, user.email, user.passwordHash, web3.eth.accounts[user.account], user.role].join("', '") +"')"
+      let keys = Object.keys(user).filter((key) => key !== 'id' && key !== 'passwordHash')
+      keys.push('address')
+      let index = keys.indexOf('account');
+      if(index >= 0) keys[index] = 'address';
+      let values = keys.map((key) => {
+        if(key === 'address') return web3.eth.accounts[user.id-1]
+        if(key === 'password') return user.passwordHash
+        return user[key]
+      });
+      console.log(keys)
+      console.log(values)
+      let sql = "INSERT INTO `User` (" + keys.join(', ') + ") VALUES ('"+ values.join("', '") +"')"
       connection.query(sql, function (error, results, fields) {
         if (error) reject(error);
         resolve(results)
@@ -178,19 +138,25 @@ let createUsers = async () => {
 let createFunds = async () => {
   for (var i = 0; i < funds.length; i++) {
     let fund = funds[i]
-    let holdings = securities.map((security) => {
-      return {
-        amount: Math.floor(Math.random() * 1000000),
-        ...security
+    fund.tokens = fund.tokens.map((token) => {
+      if(token.holdings) {
+        token.initialAmount = token.initialAmount * Math.pow(10, token.decimals);
+        return token
       }
-    });
-    holdings = chooseRandoms(holdings, 10);
-    // I want the NAV to be 100
-    let desiredNav = 10000
-    let aum = holdings.reduce((c, holding) => c + holding.price * holding.amount, 0);
-    fund.tokens[0].initialAmount = Math.floor(aum * Math.pow(10, fund.tokens[0].decimals) / desiredNav);
-    fund.tokens[0].holdings = holdings;
-    fund.tokens[0].currency = "GBP"
+      let holdings = securities.map((security) => {
+        return {
+          amount: Math.floor(Math.random() * 1000000),
+          ...security
+        }
+      });
+      holdings = chooseRandoms(holdings, 10);
+      // I want the NAV to be 100
+      let desiredNav = 10000
+      let aum = holdings.reduce((c, holding) => c + holding.price * holding.amount, 0);
+      token.initialAmount = Math.floor(aum * Math.pow(10, token.decimals) / desiredNav);
+      token.holdings = holdings;
+      return token
+    })
 
     let options = {
       method: 'POST',
@@ -272,15 +238,15 @@ let createTrades = async (numTrades = 1000) => {
     });
 
     let formattedTrade = [
-      [trade.investor.address, web3.eth.accounts[broker.account], trade.token.address],
+      [trade.investor.address, web3.eth.accounts[broker.id-1], trade.token.address],
       [makeNbytes(tradeBroker.nominalAmount), makeNbytes(encryptedPrice)],
       [executionDateInt, trade.expirationTimestampInSec, trade.salt]
     ];
 
 
-    let tradeHash = await tradeKernelInstance.getTradeHash(...formattedTrade, {from: web3.eth.accounts[investor.account]});
+    let tradeHash = await tradeKernelInstance.getTradeHash(...formattedTrade, {from: web3.eth.accounts[investor.id-1]});
     // Accept the brokers price as investor
-    let signature = await promisify(web3.eth.sign)(web3.eth.accounts[investor.account],tradeHash);
+    let signature = await promisify(web3.eth.sign)(web3.eth.accounts[investor.id-1],tradeHash);
 
     // First, we have to update the update the trade
     // on the server to include this new information
@@ -302,7 +268,7 @@ let createTrades = async (numTrades = 1000) => {
     // Confirm trade as broker
     let {r, s, v} = fromRpcSig(signature);
     // console.log(r, s, v)
-    result = await tradeKernelInstance.confirmTrade(...formattedTrade, v, bufferToHex(r), bufferToHex(s), {from: web3.eth.accounts[broker.account]});
+    result = await tradeKernelInstance.confirmTrade(...formattedTrade, v, bufferToHex(r), bufferToHex(s), {from: web3.eth.accounts[broker.id-1]});
   }
   return tradeKeys
 }
@@ -381,18 +347,18 @@ let createOrders = async () => {
       let salt = Math.floor(Math.pow(2,32) * Math.random())
 
       let formattedOrder = [
-        [web3.eth.accounts[broker.account], token.address],
+        [web3.eth.accounts[broker.id-1], token.address],
         [amount, executionDateInt, salt],
         tradeHashes
       ]
       let orderHash = await tradeKernelInstance.getOrderHash(formattedOrder[0], formattedOrder[1], formattedOrder[2])
-      let signature = await promisify(web3.eth.sign)(web3.eth.accounts[broker.account], orderHash)
+      let signature = await promisify(web3.eth.sign)(web3.eth.accounts[broker.id-1], orderHash)
       let {r, s, v} = fromRpcSig(signature)
 
       // console.log(this.state.user.address, orderHash, v, r, s);
-      let signer = await tradeKernelInstance.recoverSigner(orderHash, v, bufferToHex(r), bufferToHex(s), {from: web3.eth.accounts[broker.account]});
+      let signer = await tradeKernelInstance.recoverSigner(orderHash, v, bufferToHex(r), bufferToHex(s), {from: web3.eth.accounts[broker.id-1]});
 
-      if(signer.toLowerCase() === web3.eth.accounts[broker.account].toLowerCase()){
+      if(signer.toLowerCase() === web3.eth.accounts[broker.id-1].toLowerCase()){
         let result = await rp.post(`${process.env.API_URL}orders`, {
           body: {
             orderHoldings: orderHoldings,
@@ -424,7 +390,7 @@ let login = async (name) => {
     body: {
       email: user.email,
       password: user.password,
-      address: web3.eth.accounts[user.account]
+      address: web3.eth.accounts[user.id-1]
     },
     json: true
   };

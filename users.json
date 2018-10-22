@@ -1,0 +1,134 @@
+[{
+  "id": 1,
+  "name": "admin",
+  "email": "admin@admin.com",
+  "type": "pension",
+  "juristiction": "French",
+  "password": "admin",
+  "role": "admin",
+  "passwordHash": "$pbkdf2-sha256$29000$lfJ.jxGC0HpPidF6r7X2Pg$mnlwqH3CNLooy9q8FI9Jej.ESblTfr7WGzXsKyKAlA4"
+},{
+  "id": 2,
+  "name": "broker1",
+  "email": "broker1@broker1.com",
+  "type": "broker",
+  "password": "broker1",
+  "role": "broker",
+  "passwordHash": "$pbkdf2-sha256$29000$QQghJMQYI.S8V0qJsfYegw$Zxe48f0Uga3nNJRkkvMkX/ULc7AMgn9G3L17ORh6CY4"
+},{
+  "id": 3,
+  "name": "broker2",
+  "email": "broker2@broker2.com",
+  "type": "broker",
+  "password": "broker2",
+  "role": "broker",
+  "passwordHash": "$pbkdf2-sha256$29000$gnCutfa.17pXypmT8r53zg$/qjz8z4q2sXZIy7bAGdGTYunNdgCVtFsGK2TXB74Ntc"
+},{
+  "id": 4,
+  "name": "investor",
+  "juristiction": "French",
+  "type": "retail",
+  "email": "investor@investor.com",
+  "password": "investor",
+  "role": "investor",
+  "passwordHash": "$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I"
+},{
+  "id": 5,
+  "name": "custodian",
+  "email": "custodian@custodian.com",
+  "type": "pension",
+  "juristiction": "UK",
+  "password": "custodian",
+  "role": "custodian",
+  "passwordHash": "$pbkdf2-sha256$29000$hxBC6J3TGuO8dy4FQMiZkw$6Gicn.ohOheoFMGsrJvoAg38BMstr8QwCpdk00xzt.k"
+},{
+  "id": 6,
+  "name": "fund",
+  "email": "fund@fund.com",
+  "type": "institutional",
+  "juristiction": "French",
+  "password": "fund",
+  "role": "issuer",
+  "passwordHash": "$pbkdf2-sha256$29000$k9IaQ.hdy1nrXYtRivHe2w$81aKj1eGHd9s.YjSINps3dP7P1qHE0h5xMJ8pFagq94"
+},{
+  "id": 7,
+  "name": "investor2",
+  "juristiction": "French",
+  "type": "retail",
+  "email": "investor2@investor.com",
+  "password": "investor",
+  "role": "investor",
+  "passwordHash": "$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I"
+},{
+  "id": 8,
+  "name": "investor3",
+  "juristiction": "UK",
+  "type": "institutional",
+  "email": "investor3@investor.com",
+  "password": "investor",
+  "role": "investor",
+  "passwordHash": "$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I"
+},{
+  "id": 9,
+  "name": "investor4",
+  "juristiction": "UK",
+  "type": "institutional",
+  "email": "investor4@investor.com",
+  "password": "investor",
+  "role": "investor",
+  "passwordHash": "$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I"
+},{
+  "id": 10,
+  "name": "investor5",
+  "juristiction": "Spain",
+  "type": "institutional",
+  "email": "investor5@investor.com",
+  "password": "investor",
+  "role": "investor",
+  "passwordHash": "$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I"
+},{
+  "id": 11,
+  "name": "investor6",
+  "juristiction": "Germany",
+  "type": "retail",
+  "email": "investor5@investor.com",
+  "password": "investor",
+  "role": "investor",
+  "passwordHash": "$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I"
+},{
+  "id": 12,
+  "name": "investor5",
+  "juristiction": "Spain",
+  "type": "retail",
+  "email": "investor5@investor.com",
+  "password": "investor",
+  "role": "investor",
+  "passwordHash": "$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I"
+},{
+  "id": 13,
+  "name": "investor6",
+  "juristiction": "Switzerland",
+  "type": "assetManager",
+  "email": "investor5@investor.com",
+  "password": "investor",
+  "role": "investor",
+  "passwordHash": "$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I"
+},{
+  "id": 14,
+  "name": "investor7",
+  "juristiction": "Switzerland",
+  "type": "assetManager",
+  "email": "investor5@investor.com",
+  "password": "investor",
+  "role": "investor",
+  "passwordHash": "$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I"
+},{
+  "id": 15,
+  "name": "investor8",
+  "juristiction": "UK",
+  "type": "pension",
+  "email": "investor5@investor.com",
+  "password": "investor",
+  "role": "investor",
+  "passwordHash": "$pbkdf2-sha256$29000$03pPCWHsXWttbY0xJkTonQ$2F7SBshVX/zsRccGWe4PftDe.1DtunTIQgeZl4DnU6I"
+}]

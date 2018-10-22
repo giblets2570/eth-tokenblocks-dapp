@@ -1,8 +1,8 @@
 import React from 'react';
 import {
-  Modal, ModalBody, ModalFooter,
-  ModalHeader, Row, Col,
-  Nav, NavItem, NavLink,
+  Modal, ModalBody, ModalFooter, Label,
+  ModalHeader, Row, Col, FormGroup,
+  Nav, NavItem, NavLink, Input,
   TabContent, TabPane, Table
 } from 'reactstrap';
 
@@ -12,6 +12,43 @@ import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 import Auth from 'utils/auth';
 import promisify from 'tiny-promisify';
+import { Line, Bar } from "react-chartjs-2";
+
+const chartsBar = {
+  data: {
+    labels: [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May"
+    ],
+    datasets: [
+      {
+        backgroundColor: "#5f236e",
+        data: [40, 26, 28, 45, 20]
+      }
+    ]
+  },
+  options: {
+    maintainAspectRatio: false,
+    legend: {
+      display: false
+    },
+    tooltips: {
+      bodySpacing: 4,
+      mode: "nearest",
+      intersect: 0,
+      position: "nearest",
+      xPadding: 10,
+      yPadding: 10,
+      caretPadding: 10
+    },
+    layout: {
+      padding: { left: 0, right: 0, top: 15, bottom: 15 }
+    }
+  }
+};
 
 class ShowToken extends React.Component {
   constructor(props){
@@ -19,15 +56,52 @@ class ShowToken extends React.Component {
     this.state = {
       fund: {},
       hTabs: "ht1",
-      user: Auth.user
+      user: Auth.user,
+      token: {},
+      juristictionBar: {
+        data: {},
+        options: {}
+      },
+      investorTypeBar: {
+        data: {},
+        options: {}
+      }
     }
   }
   async componentDidMount() {
     if(this.props.match.params.id) {
       this.setState({ isOpen: true });
+      let distributionChannels = [{
+        name: "Issuer Platform",
+        id: 1
+      },{
+        name: "Tokenblocks Platform",
+        id: 2
+      },{
+        name: "Hargreaves Lansdown",
+        id: 3
+      },{
+        name: "Barclays Stockbrokers",
+        id: 4
+      },{
+        name: "Fidelity FundNetwork",
+        id: 5
+      }];
       let {data} = await axios.get(`${process.env.REACT_APP_API_URL}funds/${this.props.match.params.id}`);
-      console.log(data)
-      this.setState({ fund: data })
+      data.tokens = data.tokens.map((token, key) => {
+        token.distributionChannels = distributionChannels
+          .map((d) => d.id)
+          .filter((d) => {
+            if(d==1) return true
+            return d > 1 && (key+d) % 2
+          })
+        return token;
+      })
+      this.setState({
+        fund: data,
+        token: data.tokens[0],
+        distributionChannels: distributionChannels
+      })
     }
   }
   toggle(){
@@ -39,17 +113,6 @@ class ShowToken extends React.Component {
     if(this.state.toggled) {
       return <Redirect to={this.props.returnTo} />
     }
-    let rows = (this.state.fund.tokens||[])
-    .map((token, key) => {
-      return (
-        <tr key={key}>
-          <td>{token.symbol}</td>
-          <td>{token.fee}</td>
-          <td>{"0.59%"}</td>
-          <td>{"12:30pm"}</td>
-        </tr>
-      )
-    })
     return (
       <div>
         <Nav pills className="nav-pills-primary">
@@ -91,22 +154,98 @@ class ShowToken extends React.Component {
                 </tr>
               </thead>
               <tbody>
-                {rows}
+                {
+                  (this.state.fund.tokens||[])
+                  .map((token, key) => {
+                    return (
+                      <tr key={key}>
+                        <td>{token.symbol}</td>
+                        <td>{token.fee}</td>
+                        <td>{"0.59%"}</td>
+                        <td>{"12:30pm"}</td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </Table>
+            <Row>
+              <Col>
+                <h4>Distribution channels</h4>
+              </Col>
+            </Row>
+            <Table responsive>
+              <thead>
+                <tr className="text-primary">
+                  <th>Share class</th>
+                  {
+                    (this.state.distributionChannels||[])
+                    .map((channel, key) => {
+                      return <th key={key}>{channel.name}</th>
+                    })
+                  }
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  (this.state.fund.tokens||[])
+                  .map((token, key) => {
+                    return (
+                      <tr key={key}>
+                        <td>{token.symbol}</td>
+                        {
+                          (this.state.distributionChannels||[])
+                          .map((channel, key) => {
+                            return (
+                              <td key={key}>
+                                <FormGroup check>
+                                  <Label check>
+                                    <Input
+                                      checked={
+                                        token.distributionChannels.includes(channel.id)
+                                      }
+                                      type="checkbox"
+                                      disabled={true}/>
+                                    <span className="form-check-sign" />
+                                  </Label>
+                                </FormGroup>
+                              </td>
+                            )
+                          })
+                        }
+                      </tr>
+                    )
+                  })
+                }
               </tbody>
             </Table>
           </TabPane>
           <TabPane tabId="ht2">
-            {
-              (this.state.fund.tokens||[])
-              .map((token, key) => {
-                return (
-                  <div key={key}>
-                    <h4>{token.symbol}</h4>
-                    <Accounts token={token} />
-                  </div>
-                )
-              })
-            }
+            <Input
+              type="select"
+              style={{height: '100%'}}
+              value={this.state.token}
+              onChange={(e) => {
+                this.setState({
+                  token: this.state.fund.tokens.find((t) => String(t.id) === e.target.value)
+                })
+              }}>
+              {
+                (this.state.fund.tokens||[])
+                .map((token,key) => <option key={key} value={token.id}>{token.symbol}</option>)
+              }
+            </Input>
+            <Accounts token={this.state.token} />
+            <Row style={{height: '200px'}}>
+              <Col xs={6}>
+                <p>Summary by juristiction</p>
+                <Bar data={chartsBar.data} options={chartsBar.options} />
+              </Col>
+              <Col xs={6}>
+                <p>Summary by investor type</p>
+                <Bar data={chartsBar.data} options={chartsBar.options} />
+              </Col>
+            </Row>
           </TabPane>
         </TabContent>
       </div>
