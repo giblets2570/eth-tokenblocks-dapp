@@ -56,8 +56,10 @@ class Trades extends React.Component {
       trade.executionDate = moment(trade.executionDate);
       trade.createdAt = moment(trade.createdAt*1000);
       let ob = trade.tradeBrokers.find((ob) => ob.brokerId === this.state.user.id);
+      console.log(ob)
       let message = {text: ob.nominalAmount,ik: ob.ik,ek: ob.ek};
       let total = receiveMessage(this.state.bundle, message);
+      console.log(total)
       let [currency, nominalAmount] = total.split(':');
       trade.currency = currency;
       trade.nominalAmount = (parseInt(nominalAmount) / 100.0).toFixed(2);
@@ -65,7 +67,7 @@ class Trades extends React.Component {
         message = {text: ob.price,ik: ob.ik,ek: ob.ek};
         trade.priceDecrypted = receiveMessage(this.state.bundle, message);
       }
-      trade.amount = parseFloat(trade.nominalAmount), 
+      trade.amount = parseFloat(trade.nominalAmount),
       trade.buySell = 'Buy'
       if(trade.amount < 0) {
         trade.amount = -1 * trade.amount
@@ -104,7 +106,7 @@ class Trades extends React.Component {
       return (
         <tr key={$index}>
           <td scope="row">{$index+1}</td>
-          <td>{trade.token.name}</td>
+          <td>{trade.token.symbol}</td>
           <td>{trade.investor.name}</td>
           <td>{trade.buySell}</td>
           <td>{trade.currency}</td>
@@ -119,7 +121,7 @@ class Trades extends React.Component {
       )
     });
 
-    let pagination = this.state.total 
+    let pagination = this.state.total
     ? Array(Math.ceil(this.state.total / this.state.pageCount)).fill(null)
       .map((t, key) => (
         <PaginationItem active={this.state.page === key} key={key}>
@@ -130,12 +132,12 @@ class Trades extends React.Component {
 
     return(
       <div>
-        <Route 
-          path="/broker/trades/:id" 
+        <Route
+          path="/broker/trades/:id"
           render={(props) => <ShowTrade {...props} returnTo='/broker/trades'/>
         }/>
-        <PanelHeader 
-          size="sm" 
+        <PanelHeader
+          size="sm"
           content={
             <h1>{this.state.token ? this.state.token.name : 'Loading...'}</h1>
           }

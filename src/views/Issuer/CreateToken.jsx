@@ -37,6 +37,7 @@ class CreateToken extends Component {
       {name: "Back load", state: "backLoad"},
       {name: "Min size", state: "minimumOrder"},
       {name: "Number Shares", state: "numShares"},
+      {name: "NAV", state: "nav"},
       {
         name: "Currency",
         state: "currency",
@@ -106,16 +107,29 @@ class CreateToken extends Component {
     let fund = {
       name: data.name,
       tokens: data.classes.map((_class) => {
+        let incomeCategoryAbv = _class.incomeCategory==="Accumulating"?'ACC':'DIST';
+        let initialAmount = Math.round(parseFloat(_class.numShares)) * Math.pow(10, data.decimals);
+        let symbol = `${data.symbol}-${_class.shareClass}-${incomeCategoryAbv}`;
         return {
           decimals: data.decimals,
-          symbol: `${data.symbol}-${_class.shareClass}`,
+          symbol: symbol,
           cutoffTime: data.cutoffTime,
           fee: Math.round(parseFloat(_class.fee)),
-          initialAmount: Math.round(parseFloat(_class.numShares)) * Math.pow(10, data.decimals),
+          initialAmount: initialAmount,
           currency: _class.currency,
           holdings: data.holdings,
           incomeCategory: _class.incomeCategory,
-          minimumOrder: _class.minimumOrder
+          minimumOrder: _class.minimumOrder,
+          holdings: [{
+            name: symbol,
+            symbol: symbol,
+            class: "Equity",
+            currency: _class.currency,
+            country: "UK",
+            sector: "Tech",
+            amount: Math.round(parseFloat(_class.numShares)),
+            price: Math.round(parseFloat(_class.nav)*100)
+          }]
         }
       })
     }
@@ -325,23 +339,26 @@ class CreateToken extends Component {
                     </FormGroup>
                   </Col>
                 </Row>
-                <Row>
-                  <Col xs={12} md={3}></Col>
-                  <Col xs={12} md={9}>
-                    <CSVReader
-                      cssClass="csv-input"
-                      label="Upload fund composition"
-                      onFileLoaded={(data) => this.handleForce(data)}
-                      onError={(data) => this.handleDarkSideForce(data)}
-                      inputId="ObiWan"
-                    />
-                  </Col>
-                </Row>
+                {
+                  // <Row>
+                  //   <Col xs={12} md={3}></Col>
+                  //   <Col xs={12} md={9}>
+                  //     <CSVReader
+                  //       cssClass="csv-input"
+                  //       label="Upload fund composition"
+                  //       onFileLoaded={(data) => this.handleForce(data)}
+                  //       onError={(data) => this.handleDarkSideForce(data)}
+                  //       inputId="ObiWan"
+                  //       />
+                  //   </Col>
+                  // </Row>
+                }
                 <ShareClasses
                   classProps={this.state.classProps}
                   addShareClass={() => this.addShareClass()}
                   onClassChange={(e, index, prop) => this.classChange(e, index, prop)}
-                  classes={this.state.classes}/>
+                  classes={this.state.classes}
+                />
                 <Button
                   color="primary"
                   type="submit"

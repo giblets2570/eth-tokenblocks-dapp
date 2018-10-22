@@ -102,6 +102,7 @@ let decrypt = (ciphertext, key) => {
 
 let receiveMessage = (receiversBundle, message) => {
   let sk = getSharedSecret(receiversBundle, message);
+  console.log(sk)
   let decrypted = decrypt(message.text, sk);
   return decrypted;
 }
@@ -161,7 +162,7 @@ let joinKeysInto1 = (key1, key2)  => {
 
 //   let bobBundle = createBundle(2);
 //   let bobPublicBundle = formatPublicBundle(bobBundle);
-  
+
 //   let message = sendMessage(aliceBundle, bobPublicBundle, "This is a message");
 //   let receivedMessage = receiveMessage(bobBundle, message);
 // }

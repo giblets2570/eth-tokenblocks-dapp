@@ -54,10 +54,12 @@ class Orders extends React.Component {
       sks
     ]
 
+    console.log(formattedOrder);
+
     const TradeKernelContract = require(`../../${process.env.REACT_APP_CONTRACTS_FOLDER}TradeKernel.json`);
     const tradeKernel = contract(TradeKernelContract);
     tradeKernel.setProvider(web3.currentProvider);
-    
+
     let tradeKernelInstance = await tradeKernel.deployed();
 
     let orderHash = await tradeKernelInstance.getOrderHash(formattedOrder[0], formattedOrder[1], formattedOrder[2])
@@ -96,12 +98,13 @@ class Orders extends React.Component {
           <td scope="row">{$index+1}</td>
           <td>{order.broker.name}</td>
           <td>{order.token.name}</td>
+          <td>{order.token.symbol}</td>
           <td>{moment(order.executionDate).format("DD/MM/YYYY")}</td>
           <td>
             {
-              order.state === 0 ? 
+              order.state === 0 ?
               (
-                <Button 
+                <Button
                   color='primary'
                   onClick={() => this.verifyOrder(order)}>
                   Verify order
@@ -110,7 +113,7 @@ class Orders extends React.Component {
             }
           </td>
           <td>
-            <Button 
+            <Button
               color='primary'
               onClick={() => this.viewOrder(order)}>
               View order
@@ -122,8 +125,8 @@ class Orders extends React.Component {
     return(
       <div>
         <OrderHoldings isOpen={this.state.orderModal} toggle={() => this.toggleOrderModal()} order={this.state.order} />
-        <PanelHeader 
-          size="sm" 
+        <PanelHeader
+          size="sm"
           content={
             <h1>{
               this.state.token ? this.state.token.name : 'Loading...'
@@ -143,6 +146,7 @@ class Orders extends React.Component {
                       <tr>
                         <th>#</th>
                         <th>Broker</th>
+                        <th>Fund</th>
                         <th>Token</th>
                         <th>Date</th>
                       </tr>
@@ -154,7 +158,7 @@ class Orders extends React.Component {
                 </CardBody>
               </Card>
               <Card
-                
+
                 legend={
                   <div className="legend">
                     <i className="pe-7s-angle-left" style={{fontSize: '40px', cursor: 'pointer'}} onClick={() => this.changePage(-1)}/>

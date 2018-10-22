@@ -153,7 +153,7 @@ class OrderTrades extends React.Component {
     this.props.history.push({
       search: "?" + new URLSearchParams({date: date.format('YYYY-MM-DD')
     }).toString()})
-    this.setState({ 
+    this.setState({
       date: date,
       page: 0
     });
@@ -172,7 +172,7 @@ class OrderTrades extends React.Component {
     let web3 = web3Service.instance
     let address = web3.eth.accounts[0];
     if(!address) return alert("Please connect metamask")
-    
+
     const TradeKernelContract = require(`../../${process.env.REACT_APP_CONTRACTS_FOLDER}TradeKernel.json`);
     const tradeKernel = contract(TradeKernelContract);
     tradeKernel.setProvider(web3.currentProvider);
@@ -242,15 +242,15 @@ class OrderTrades extends React.Component {
                     iconState="primary"
                     icon="design_bullet-list-67"
                     title={
-                      this.state.trades.length 
+                      this.state.trades.length
                     }
                     subtitle="Number of trades"
                   />
                 </Col>
               </Row>
-              
+
               {
-                this.state.trades.length ? 
+                this.state.trades.length ?
                 (
                   <Row>
                     <Col xs={12} md={4}>
@@ -330,7 +330,7 @@ class OrderTrades extends React.Component {
                         this.state.order.id
                         ? (<p>
                             Verified by custodian: {
-                              this.state.order.state === 1
+                              this.state.order.state === 2
                               ? <span style={{color: "green"}}>Yes</span>
                               : <span style={{color: "red"}}>No</span>
                             }
@@ -347,7 +347,7 @@ class OrderTrades extends React.Component {
                         ? (
                           null
                         ) : (
-                          <Button 
+                          <Button
                             color='primary'
                             onClick={() => this.complete()}>
                             Confirm completion

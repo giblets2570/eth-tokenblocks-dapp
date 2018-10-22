@@ -109,7 +109,7 @@ class Trades extends React.Component {
       return (
         <tr key={$index}>
           <td scope="row">{$index+1}</td>
-          <td>{trade.token.name}</td>
+          <td>{trade.token.symbol}</td>
           <td>{buySell}</td>
           <td>{trade.currency}</td>
           <td>{amount.toLocaleString()}</td>

@@ -5,8 +5,8 @@ import { Card,
   CardHeader,
   CardBody,
   CardFooter,
-  CardTitle, Row, 
-  Col, Table, 
+  CardTitle, Row,
+  Col, Table,
   Label, FormGroup } from "reactstrap";
 import Select from "react-select";
 import CSVReader from "react-csv-reader";
@@ -33,8 +33,8 @@ class OrderTrades extends React.Component {
   async componentDidMount(){
     let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens`);
     let tokens = response.data;
-    let tokenSelect = tokens.map((bs) => ({value: bs, label: bs.name}));
-    this.setState({ 
+    let tokenSelect = tokens.map((bs) => ({value: bs, label: `${bs.name} - ${bs.symbol}`}));
+    this.setState({
       tokens: tokens,
       tokenSelect: tokenSelect
     });
@@ -57,8 +57,8 @@ class OrderTrades extends React.Component {
     }
     return (
       <div>
-        <PanelHeader 
-          size="sm" 
+        <PanelHeader
+          size="sm"
           content={
             <div>
               <h1>{this.state.token ? this.state.token.name : 'Loading...'}</h1>
@@ -80,7 +80,7 @@ class OrderTrades extends React.Component {
                       value={this.state.token}
                       onChange={(value) => {
                         console.log(value)
-                        this.setState({ 
+                        this.setState({
                           token: value,
                           redirect: true
                         })

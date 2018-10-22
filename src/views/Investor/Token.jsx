@@ -73,6 +73,7 @@ class Token extends React.Component {
     })
     let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}`);
     let token = response.data;
+    console.log(token)
     let minutes = `${token.cutoffTime%(60*60)}`
     if(minutes.length === 1) minutes = `0${minutes}`
     token.cutoffTimeString = `${token.cutoffTime/(60*60)}:${minutes}`
@@ -87,12 +88,9 @@ class Token extends React.Component {
     })
     this.setState({ holdings: holdings });
 
-    console.log(aum)
     let nav = aum * Math.pow(10, token.decimals) / token.totalSupply
-    console.log(nav)
     this.setState({ nav: nav });
     response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}/balance`);
-    console.log(response)
     let balance = response.data.balance || 0
     balance = Math.abs(parseFloat(balance)) / Math.pow(10, token.decimals)
     this.setState({ balance: balance });
@@ -110,8 +108,8 @@ class Token extends React.Component {
   }
   onInputChange(key) {
     return (event) => {
-      this.setState({ 
-        [key]: event.target.value 
+      this.setState({
+        [key]: event.target.value
       })
     }
   }
@@ -214,9 +212,11 @@ class Token extends React.Component {
                       iconState="primary"
                       icon="ui-2_chat-round"
                       title={
-                        <span>
-                          <small>£</small>{(100000).toLocaleString()}
-                        </span>
+                        typeof this.state.token.minimumOrder === 'number'
+                        ? (<span>
+                            <small>£</small>{(this.state.token.minimumOrder/100).toLocaleString()}
+                          </span>)
+                        : null
                       }
                       subtitle="Minimum order"
                     />
@@ -225,8 +225,13 @@ class Token extends React.Component {
                     <Statistics
                       iconState="success"
                       icon="business_money-coins"
-                      title="Accumalating"
-                      subtitle="Replication type"
+                      title={
+                        this.state.token.incomeCategory
+                        ? this.state.token.incomeCategory.charAt(0).toUpperCase()
+                          + this.state.token.incomeCategory.substr(1)
+                        : null
+                      }
+                      subtitle="Income type"
                     />
                   </Col>
                   <Col xs={12} md={3}>

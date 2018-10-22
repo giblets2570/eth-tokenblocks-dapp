@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { 
+import {
   Modal, Row, Col, Table,
   Grid, ControlLabel,
   FormGroup, FormControl
@@ -12,12 +12,9 @@ class CurrentLoans extends Component {
     super(props)
     this.state = {}
   }
-  componentDidMount(){
-
-  }
   handleDayChange(day) {
-    this.setState({ 
-      executionDate: day 
+    this.setState({
+      executionDate: day
     });
   }
   handleChange(event,key) {
@@ -71,7 +68,7 @@ class CurrentLoans extends Component {
       </div>
     )
   }
-  
+
 }
 
 export default CurrentLoans

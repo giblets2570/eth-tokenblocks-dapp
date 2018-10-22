@@ -8,14 +8,16 @@ const fs = require('fs');
 const web3 = new Web3(new Web3.providers.HttpProvider("http://127.0.0.1:8545"));
 const contract = require('truffle-contract');
 const promisify = require('tiny-promisify');
-const {fromRpcSig, bufferToHex} = require('ethereumjs-util');
+const {fromRpcSig,bufferToHex} = require('ethereumjs-util');
 const {makeNbytes,getSharedSecret,formatPublicKey,encrypt,encode,createBundle,loadBundle,saveBundle,formatPublicBundle,formatPrivateKey,sendMessage,verifyPKSig,decrypt,receiveMessage} = require('./src/utils/encrypt');
+
 let connection = mysql.createConnection({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
   password: process.env.MYSQL_PASSWORD,
   database: process.env.MYSQL_DB
 });
+
 const shuffle = _a => {
   let a = _a.slice()
   for (let i = a.length - 1; i > 0; i--) {
@@ -434,7 +436,7 @@ let main = async () => {
   if(process.env.SEEDALL) await createFunds();
   loggedin = await login('broker2');
   let tradeKeys = await createTrades(6);
-  await createOrders();
+  // await createOrders();
   connection.end();
 
   saveJSON(tradeKeys,'tradeKeys')

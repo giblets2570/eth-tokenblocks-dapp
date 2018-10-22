@@ -12,7 +12,6 @@ import { Redirect } from 'react-router-dom';
 import moment from 'moment';
 import Auth from 'utils/auth';
 import promisify from 'tiny-promisify';
-import { Line, Bar } from "react-chartjs-2";
 
 const chartsBar = {
   data: {
@@ -109,6 +108,11 @@ class ShowToken extends React.Component {
       toggled: true
     })
   }
+  tokenView(e) {
+    this.setState({
+      token: this.state.fund.tokens.find((t) => String(t.id) === e.target.value)
+    })
+  }
   render(){
     if(this.state.toggled) {
       return <Redirect to={this.props.returnTo} />
@@ -137,7 +141,7 @@ class ShowToken extends React.Component {
         <TabContent
           activeTab={this.state.hTabs}
           className="tab-space"
-        >
+          >
           <TabPane tabId="ht1">
             <Row>
               <Col>
@@ -224,28 +228,15 @@ class ShowToken extends React.Component {
             <Input
               type="select"
               style={{height: '100%'}}
-              value={this.state.token}
-              onChange={(e) => {
-                this.setState({
-                  token: this.state.fund.tokens.find((t) => String(t.id) === e.target.value)
-                })
-              }}>
+              value={this.state.token.id}
+              onChange={(e) => this.tokenView(e)}
+              >
               {
                 (this.state.fund.tokens||[])
                 .map((token,key) => <option key={key} value={token.id}>{token.symbol}</option>)
               }
             </Input>
             <Accounts token={this.state.token} />
-            <Row style={{height: '200px'}}>
-              <Col xs={6}>
-                <p>Summary by juristiction</p>
-                <Bar data={chartsBar.data} options={chartsBar.options} />
-              </Col>
-              <Col xs={6}>
-                <p>Summary by investor type</p>
-                <Bar data={chartsBar.data} options={chartsBar.options} />
-              </Col>
-            </Row>
           </TabPane>
         </TabContent>
       </div>

@@ -49,8 +49,8 @@ class Tokens extends React.Component {
   async componentDidMount(){
     let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens`);
     let tokens = response.data;
-    let tokenSelect = tokens.map((bs) => ({value: bs, label: bs.name}));
-    this.setState({ 
+    let tokenSelect = tokens.map((bs) => ({value: bs, label: `${bs.name} - ${bs.symbol}` }));
+    this.setState({
       tokens: tokens,
       tokenSelect: tokenSelect
     });
@@ -64,7 +64,7 @@ class Tokens extends React.Component {
     }
   }
   componentWillReceiveProps(nextProps) {
-    
+
   }
   render() {
     if(this.state.redirect) {
@@ -76,8 +76,8 @@ class Tokens extends React.Component {
     }
     return (
       <div>
-        <PanelHeader 
-          size="sm" 
+        <PanelHeader
+          size="sm"
           content={
             <p></p>
           }
@@ -97,7 +97,7 @@ class Tokens extends React.Component {
                       value={this.state.token}
                       onChange={(value) => {
                         console.log(value)
-                        this.setState({ 
+                        this.setState({
                           token: value,
                           redirect: true
                         })
