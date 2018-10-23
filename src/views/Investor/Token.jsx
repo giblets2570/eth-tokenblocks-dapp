@@ -85,7 +85,7 @@ class Token extends React.Component {
     holdings = holdings.map((holding) => {
       holding.weight = holding.securityAmount * holding.securityTimestamp.price / (100 * aum)
       return holding
-    })
+    });
     this.setState({ holdings: holdings });
 
     let nav = aum * Math.pow(10, token.decimals) / token.totalSupply

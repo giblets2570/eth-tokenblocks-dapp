@@ -83,8 +83,17 @@ class Tokens extends React.Component {
     });
     return (
       <div>
-        <CreateToken isOpen={this.state.fundModal} toggle={() => this.toggleTokenModal()} {...this.props} />
-        <RegCheck isOpen={this.state.regModal} toggle={() => this.toggleRegModal()} fund={this.state.fund} {...this.props} />
+        <CreateToken
+          isOpen={this.state.fundModal}
+          toggle={() => this.toggleTokenModal()}
+          {...this.props}
+        />
+        <RegCheck
+          isOpen={this.state.regModal}
+          toggle={() => this.toggleRegModal()}
+          fund={this.state.fund}
+          {...this.props}
+        />
         <PanelHeader
           size="sm"
           content={

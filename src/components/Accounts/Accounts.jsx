@@ -37,12 +37,21 @@ class Accounts extends React.Component {
     };
   }
   async getBalances(props){
-    if(!props.token.id) return;
-    let {data} = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.token.id}/balances`);
-    let balances = data.map((balance) => {
-      balance.balance = parseFloat( balance.balance || 0 ) / Math.pow(10, props.token.decimals);
+    let balances, data
+    if(props.aggregate) {
+      if(!props.fund.id) return;
+      let response = await axios.get(`${process.env.REACT_APP_API_URL}funds/${props.fund.id}/balances`);
+      data = response.data
+      console.log(data)
+    }else{
+      if(!props.token.id) return;
+      let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.token.id}/balances`);
+      data = response.data
+    }
+    balances = data.map((balance) => {
+      balance.balance = parseFloat( balance.balance || 0 ) / Math.pow(10, 18);
       return balance;
-    }).filter((balance) => balance.investor.juristiction);
+    }).filter((balance) => balance.investor.juristiction && balance.balance);
     let juristictions = balances.map((balance)=>balance.investor.juristiction);
     let juristictionData = balances.reduce((c, balance) => {
       let index = c.labels.indexOf(balance.investor.juristiction);
@@ -76,10 +85,10 @@ class Accounts extends React.Component {
       }]
     })
     this.setState({
-      balances: balances,
       loading: false,
+      balances: balances,
+      typeData: typeData,
       juristictionData: juristictionData,
-      typeData: typeData
     })
   }
   componentDidMount() {
@@ -101,7 +110,7 @@ class Accounts extends React.Component {
           <td>{balance.investor.name}</td>
           <td>{balance.investor.juristiction}</td>
           <td>{balance.investor.type}</td>
-          <td>{balance.balance.toFixed(0)}</td>
+          <td>{parseInt(balance.balance.toFixed(0)).toLocaleString()}</td>
         </tr>
       )
     })

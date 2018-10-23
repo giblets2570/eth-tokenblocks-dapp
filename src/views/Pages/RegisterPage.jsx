@@ -39,7 +39,7 @@ class RegisterPage extends React.Component {
     this.setState({
       signing: true
     })
-    await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, { 
+    await axios.post(`${process.env.REACT_APP_API_URL}auth/signup`, {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password
@@ -68,7 +68,7 @@ class RegisterPage extends React.Component {
       }
 
       let publicBundle = formatPublicBundle(bundle);
-      let response = await axios.put(`${process.env.REACT_APP_API_URL}users/${user.id}`, { 
+      let response = await axios.put(`${process.env.REACT_APP_API_URL}users/${user.id}`, {
         ik: publicBundle.ik,
         spk: publicBundle.spk,
         signature: publicBundle.signature
@@ -80,7 +80,7 @@ class RegisterPage extends React.Component {
   }
   render() {
     if(this.state.signedUp) {
-      return <Redirect to='/investor/trades' />
+      return <Redirect to='/investor/profile' />
     }
     return (
       <div>
@@ -206,7 +206,7 @@ class RegisterPage extends React.Component {
                       </Form>
                     </CardBody>
                     <CardFooter className="text-center">
-                      
+
                     </CardFooter>
                   </Card>
                 </Col>

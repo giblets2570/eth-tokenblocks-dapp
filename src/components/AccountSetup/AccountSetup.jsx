@@ -1,30 +1,51 @@
 import React, { Component } from 'react'
 import moment from 'moment'
-import { 
-  Modal, Row, Col, Table,
+import {
+  Modal,
+  ModalBody,
+  ModalFooter,
+  ModalHeader,
+  Row, Col, Table,
   Grid, ControlLabel,
-  FormGroup, FormControl
+  FormGroup, FormControl,
+  Tooltip
 } from 'reactstrap'
 import { Redirect } from 'react-router-dom'
 import {Button} from 'components'
+import Auth from 'utils/auth'
+import web3Service from 'utils/getWeb3'
 
 class AccountSetup extends Component {
   constructor(props){
     super(props)
     this.currencies = ['GBP', 'EUR', 'USD']
-    this.state = {}
-    this.civicSip = new window.civic.sip({ appId: 'ABC123' });
-  }
-  componentDidMount(){
-    this.props.getCurrentAddress()
-    this.setState({
-      isOpen: this.props.match.path === "/dashboard/profile/setup",
-      pending: false
+    this.state = {
+      user: Auth.user,
+      currentAddress: "",
+      tooltipOpen: false
+    }
+    this.civicSip = new window.civic.sip({
+      appId: 'ABC123'
     });
   }
+  async componentDidMount(){
+    this.setState({
+      isOpen: this.props.match.path === "/investor/profile/setup",
+      pending: false
+    });
+    console.log(this.props.match.path)
+    await web3Service.promise
+    let web3 = web3Service.instance
+    web3.eth.getCoinbase((error, address) => {
+      if (error) console.log(error);
+      else {
+        this.setState({
+          currentAddress: address
+        })
+      }
+    })
+  }
   componentWillReceiveProps(nextProps) {
-    console.log(this.props)
-    console.log("Does this get called?")
     this.setState({
       isOpen: nextProps.match.path === "/dashboard/profile/setup",
     });
@@ -41,7 +62,7 @@ class AccountSetup extends Component {
     })
   }
   connectBank(){
-    window.location.href = `${process.env.REACT_APP_API_URL}truelayer?id=${this.props.user.id}`;
+    window.location.href = `${process.env.REACT_APP_API_URL}truelayer?id=${this.state.user.id}`;
   }
   connectCivic(){
     let civicSip = new window.civic.sip({ appId: 'ABC123' });
@@ -93,71 +114,57 @@ class AccountSetup extends Component {
      });
   }
   render(){
-    console.log("Is me render?")
-    let user_address = this.props.user.address ? this.props.user.address.toLowerCase() : null
-    let address = this.props.address ? this.props.address.toLowerCase() : null
+    let user_address = this.state.user.address ? this.state.user.address.toLowerCase() : null
+    let address = this.state.currentAddress ? this.state.currentAddress.toLowerCase() : null
+    console.log(user_address, address)
     if(this.state.toggled) {
       return <Redirect to={this.props.returnTo} />
     }
     return (
-      <Modal show={this.state.isOpen} onHide={() => this.toggle()}>
-        <Modal.Header closeButton>
-          <Modal.Title>Set Up Your Account</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form>
-            <Row>
-              <Col xs={12} md={12}>
-                <h3>Set up ethereum address</h3>
-                {
-                  this.props.address
-                  ? (
+      <form>
+        <Row>
+          <Col xs={12} md={12}>
+            <p>Set up user address</p>
+            <p>Current address: {user_address ? user_address : "None"}</p>
+            {
+              address
+              ? address !== user_address
+                ? (
                     <div>
-                      <p>Address: {this.props.address}</p>
-                      {
-                        address !== user_address
-                        ? <Button bsStyle="info" fill onClick={() => this.props.useAddress(this.props.address)}>Use address</Button>
-                        : <small>You've set up your ethereum address</small>
-                      }
+                      <p>Detected local address: {address}</p>
+                      <Button
+                        id="MetamaskAddressAdd"
+                        color="primary"
+                        onClick={() => this.props.useAddress(address)}>
+                        Use address
+                      </Button>
                     </div>
                   )
-                  : (
-                    <div>
-                      <p>Install metamask for ethereum address.</p>
-                      <a href='https://metamask.io/' target="_blank">
-                        Learn more.  
-                      </a>
-                    </div>
-                  )
-                }
-              </Col>
-              <Col xs={12} md={12}>
-                <h3>Set up KYC checks</h3>
-                {
-                  //<Button bsStyle="info" fill onClick={() => this.connectCivic()}>Log in with Civic</Button>
-                }
-                <Button bsStyle="info" fill onClick={() => this.connectBank()}>Connect bank account</Button>
-                {
-                  this.props.user.bankConnected
-                  ? (
-                      <div>
-                        <small>You've connected your bank account</small>
-                      </div>
-                    )
-                  : null 
-                }
-              </Col>
-            </Row>
-            <div className="clearfix" />
-          </form>
-        </Modal.Body>
-      </Modal>
+                : <small>You've set up your user address</small>
+              : (
+                <div>
+                  <p>Install metamask for user address.</p>
+                  <a href='https://metamask.io/' target="_blank">
+                    Learn more.
+                  </a>
+                </div>
+              )
+            }
+          </Col>
+        </Row>
+        {
+          // <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="MetamaskAddressAdd">
+          //   Give your token some final details, upload your tokens holdings and click submit
+          // </Tooltip>
+        }
+        <div className="clearfix" />
+      </form>
     )
-      // <Modal.Footer>
+      // <ModalFooter>
       //   <Button onClick={this.props.toggle}>Close</Button>
-      // </Modal.Footer>
+      // </ModalFooter>
   }
-  
+
 }
 
 export default AccountSetup

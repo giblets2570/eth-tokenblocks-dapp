@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import moment from 'moment'
 import Select from "react-select";
-import { 
+import {
   Modal,
   ModalBody,
   ModalFooter,
@@ -102,20 +102,27 @@ class CreateTrade extends Component {
   }
   async componentDidMount(){
     if(
-      moment().hours() > this.props.token.cutoff_time_hours  ||
-      (moment().hours() === this.props.token.cutoff_time_hours && moment().minutes() >= this.props.token.cutoff_time_minutes)
+      moment().hours()>this.props.token.cutoff_time_hours||
+      (
+        moment().hours()===this.props.token.cutoff_time_hours&&
+        moment().minutes()>=this.props.token.cutoff_time_minutes
+      )
     ){
-      this.setState({ 
-        minDate: moment().add(1, 'day'), 
-        executionDate: moment().add(1, 'day')  
+      this.setState({
+        minDate: moment().add(1, 'day'),
+        executionDate: moment().add(1, 'day')
       })
     }
     let response = await axios.get(`${process.env.REACT_APP_API_URL}users?role=broker`);
-    this.setState({ brokers: response.data })
+    let brokers = response.data.map((broker) => {
+      broker.checked = true;
+      return broker;
+    })
+    this.setState({ brokers: brokers })
   }
   handleDayChange(day) {
-    this.setState({ 
-      executionDate: day 
+    this.setState({
+      executionDate: day
     });
   }
   componentWillReceiveProps(nextProps) {
@@ -124,9 +131,9 @@ class CreateTrade extends Component {
         moment().hours() > nextProps.token.cutoff_time_hours  ||
         (moment().hours() === nextProps.token.cutoff_time_hours && moment().minutes() >= nextProps.token.cutoff_time_minutes)
       ){
-        this.setState({ 
-          minDate: moment().add(1, 'day'), 
-          executionDate: moment().add(1, 'day')  
+        this.setState({
+          minDate: moment().add(1, 'day'),
+          executionDate: moment().add(1, 'day')
         })
       }
     }
@@ -271,55 +278,60 @@ class CreateTrade extends Component {
                   />
                 </FormGroup>
               </Col>
-              <Col xs={6}>
-                <FormGroup>
-                  <Label>Collateral Method</Label>
-                  <Select
-                    className="react-select primary"
-                    classNamePrefix="react-select"
-                    placeholder="Single Select"
-                    name="collateral"
-                    options={this.state.collateralSelect}
-                    value={this.state.collateral}
-                    onChange={(value) => {
-                      this.setState({ value })
-                    }}
-                  />
-                </FormGroup>
-              </Col>
-              <Col xs={6}>
-                <FormGroup>
-                  <Label>Collateral Amount</Label>
-                  <div className='form-control'>{parseFloat(this.state.amount || '0')/2}</div>
-                </FormGroup>
-              </Col>
+              {
+              // <Col xs={6}>
+              //   <FormGroup>
+              //     <Label>Collateral Method</Label>
+              //     <Select
+              //       className="react-select primary"
+              //       classNamePrefix="react-select"
+              //       placeholder="Single Select"
+              //       name="collateral"
+              //       options={this.state.collateralSelect}
+              //       value={this.state.collateral}
+              //       onChange={(value) => {
+              //         this.setState({ value })
+              //       }}
+              //     />
+              //   </FormGroup>
+              // </Col>
+              // <Col xs={6}>
+              //   <FormGroup>
+              //     <Label>Collateral Amount</Label>
+              //     <div className='form-control'>{parseFloat(this.state.amount || '0')/2}</div>
+              //   </FormGroup>
+              // </Col>
+            }
             </Row>
             <Row>
               <Col xs={12}>
-                <FormGroup>
-                  <Label>Brokers</Label>
-                  <Table>
-                    <tbody>
-                      {
-                        this.state.brokers.map((broker, index) => {
-                          let number = "checkbox" + index;
-                          return ( 
-                            <tr key={index} className='pointer'>
-                              <td>
-                                <Checkbox
-                                  inputProps={{
-                                    onClick: () => this.toggle(broker)
-                                  }}
-                                />
-                              </td>
-                              <td> {broker.name} </td>
-                            </tr>
-                          )
-                        })
-                      }
-                    </tbody>
-                  </Table>
-                </FormGroup>
+                {
+
+                  // <FormGroup>
+                  //   <Label>Brokers</Label>
+                  //   <Table>
+                  //     <tbody>
+                  //       {
+                  //         this.state.brokers.map((broker, index) => {
+                  //           let number = "checkbox" + index;
+                  //           return (
+                  //             <tr key={index} className='pointer'>
+                  //               <td>
+                  //                 <Checkbox
+                  //                   inputProps={{
+                  //                     onClick: () => this.toggle(broker)
+                  //                   }}
+                  //                 />
+                  //               </td>
+                  //               <td> {broker.name} </td>
+                  //             </tr>
+                  //           )
+                  //         })
+                  //       }
+                  //     </tbody>
+                  //   </Table>
+                  // </FormGroup>
+                }
               </Col>
             </Row>
             <div className="clearfix" />
@@ -331,7 +343,7 @@ class CreateTrade extends Component {
       </Modal>
     )
   }
-  
+
 }
 
 export default CreateTrade

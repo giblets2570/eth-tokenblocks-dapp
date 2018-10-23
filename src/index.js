@@ -9,6 +9,7 @@ import "assets/scss/now-ui-dashboard.css?v=1.2.0";
 import "assets/css/demo.css";
 
 import indexRoutes from "routes/index.jsx";
+import {refresh} from 'utils/metamaskRefresh'
 
 const hist = createBrowserHistory();
 
@@ -39,3 +40,6 @@ ReactDOM.render(
   </Router>,
   document.getElementById("root")
 );
+
+// Refresh the page on metamask account update
+refresh()

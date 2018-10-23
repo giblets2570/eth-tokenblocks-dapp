@@ -13,50 +13,17 @@ import moment from 'moment';
 import Auth from 'utils/auth';
 import promisify from 'tiny-promisify';
 
-const chartsBar = {
-  data: {
-    labels: [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May"
-    ],
-    datasets: [
-      {
-        backgroundColor: "#5f236e",
-        data: [40, 26, 28, 45, 20]
-      }
-    ]
-  },
-  options: {
-    maintainAspectRatio: false,
-    legend: {
-      display: false
-    },
-    tooltips: {
-      bodySpacing: 4,
-      mode: "nearest",
-      intersect: 0,
-      position: "nearest",
-      xPadding: 10,
-      yPadding: 10,
-      caretPadding: 10
-    },
-    layout: {
-      padding: { left: 0, right: 0, top: 15, bottom: 15 }
-    }
-  }
-};
-
 class ShowToken extends React.Component {
   constructor(props){
     super(props)
     this.state = {
       fund: {},
-      hTabs: "ht1",
+      hTabs: "ht2",
       user: Auth.user,
-      token: {},
+      token: {
+        id: -5
+      },
+      aggregate: true,
       juristictionBar: {
         data: {},
         options: {}
@@ -94,11 +61,19 @@ class ShowToken extends React.Component {
             if(d==1) return true
             return d > 1 && (key+d) % 2
           })
+
+        let aum = token.holdings.reduce((c, holding) => c + holding.securityAmount * holding.securityTimestamp.price, 0) / 100.0;
+        token.holdings = token.holdings.map((holding) => {
+          holding.weight = holding.securityAmount * holding.securityTimestamp.price / (aum)
+          return holding
+        });
+
+        let nav = aum * Math.pow(10, token.decimals) / token.totalSupply
+        token.nav = nav
         return token;
       })
       this.setState({
         fund: data,
-        token: data.tokens[0],
         distributionChannels: distributionChannels
       })
     }
@@ -109,9 +84,17 @@ class ShowToken extends React.Component {
     })
   }
   tokenView(e) {
-    this.setState({
-      token: this.state.fund.tokens.find((t) => String(t.id) === e.target.value)
-    })
+    if(parseInt(e.target.value) === -5) {
+      this.setState({
+        token: {},
+        aggregate: true
+      })
+    }else{
+      this.setState({
+        token: this.state.fund.tokens.find((t) => String(t.id) === e.target.value),
+        aggregate: false
+      })
+    }
   }
   render(){
     if(this.state.toggled) {
@@ -120,6 +103,14 @@ class ShowToken extends React.Component {
     return (
       <div>
         <Nav pills className="nav-pills-primary">
+          <NavItem style={{cursor: 'pointer'}} id="ReviewOptions">
+            <NavLink
+              className={this.state.hTabs === "ht2" ? "active" : ""}
+              onClick={() => this.setState({ hTabs: "ht2" })}
+              >
+              Shareholders
+            </NavLink>
+          </NavItem>
           <NavItem style={{cursor: 'pointer'}} id="DesigningToken">
             <NavLink
               className={this.state.hTabs === "ht1" ? "active" : ""}
@@ -127,14 +118,6 @@ class ShowToken extends React.Component {
               id="DesigningToken"
             >
               Fund details
-            </NavLink>
-          </NavItem>
-          <NavItem style={{cursor: 'pointer'}} id="ReviewOptions">
-            <NavLink
-              className={this.state.hTabs === "ht2" ? "active" : ""}
-              onClick={() => this.setState({ hTabs: "ht2" })}
-            >
-              Shareholders
             </NavLink>
           </NavItem>
         </Nav>
@@ -153,6 +136,10 @@ class ShowToken extends React.Component {
                 <tr className="text-primary">
                   <th>Share class</th>
                   <th>OCF</th>
+                  <th>Shares outstanding</th>
+                  <th>Currency</th>
+                  <th>Minimum order</th>
+                  <th>NAV</th>
                   <th>Bid/Offer Spread</th>
                   <th>Price time</th>
                 </tr>
@@ -164,7 +151,11 @@ class ShowToken extends React.Component {
                     return (
                       <tr key={key}>
                         <td>{token.symbol}</td>
-                        <td>{token.fee}</td>
+                        <td>{(token.fee/100).toFixed(2)}%</td>
+                        <td>{Math.round(parseFloat(token.totalSupply) / Math.pow(10,18)).toLocaleString()}</td>
+                        <td>{"GBp"}</td>
+                        <td>£{(token.minimumOrder/100).toLocaleString()}</td>
+                        <td>{token.nav.toFixed(2)}</td>
                         <td>{"0.59%"}</td>
                         <td>{"12:30pm"}</td>
                       </tr>
@@ -181,7 +172,7 @@ class ShowToken extends React.Component {
             <Table responsive>
               <thead>
                 <tr className="text-primary">
-                  <th>Share class</th>
+                  <th style={{width: "180px"}}>Share class</th>
                   {
                     (this.state.distributionChannels||[])
                     .map((channel, key) => {
@@ -231,12 +222,13 @@ class ShowToken extends React.Component {
               value={this.state.token.id}
               onChange={(e) => this.tokenView(e)}
               >
+              <option value={-5}>All Share Classes</option>
               {
                 (this.state.fund.tokens||[])
                 .map((token,key) => <option key={key} value={token.id}>{token.symbol}</option>)
               }
             </Input>
-            <Accounts token={this.state.token} />
+            <Accounts aggregate={this.state.aggregate} fund={this.state.fund} token={this.state.token} />
           </TabPane>
         </TabContent>
       </div>

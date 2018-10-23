@@ -77,7 +77,7 @@ class LoginPage extends React.Component {
       }
 
       let publicBundle = formatPublicBundle(bundle);
-      let response = await axios.put(`${process.env.REACT_APP_API_URL}users/${user.id}`, { 
+      let response = await axios.put(`${process.env.REACT_APP_API_URL}users/${user.id}`, {
         ik: publicBundle.ik,
         spk: publicBundle.spk,
         signature: publicBundle.signature
@@ -85,7 +85,7 @@ class LoginPage extends React.Component {
     }else{
       let loadedBundle = JSON.parse(localStorage.getItem(`bundle:${user.id}`))
     }
-    
+
     this.setState({ user: user }, () => {
       this.setState({ loggedIn: true })
     })
@@ -97,9 +97,13 @@ class LoginPage extends React.Component {
   }
   render() {
     if(this.state.loggedIn) {
-      let route; 
+      let route;
       if(this.state.user.role === 'investor'){
-        route = '/investor/trades'
+        if(!this.state.user.address) {
+          route = '/investor/profile'
+        }else{
+          route = '/investor/trades'
+        }
       }else if(this.state.user.role === 'broker'){
         route = '/broker/trades'
       }else if(this.state.user.role === 'custodian'){
@@ -107,7 +111,7 @@ class LoginPage extends React.Component {
       }else if(this.state.user.role === 'issuer'){
         route = '/issuer/tokens'
       }
-      
+
       return <Redirect to={route} />
     }
     return (
@@ -175,7 +179,7 @@ class LoginPage extends React.Component {
                         className="mb-3"
                       >
                         {
-                          this.state.logging 
+                          this.state.logging
                           ? "Logging in..."
                           : "Get Started"
                         }

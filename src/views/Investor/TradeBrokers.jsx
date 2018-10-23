@@ -33,38 +33,40 @@ class TradeBrokers extends React.Component {
     });
   }
   render() {
+    let brokersWithPrice = (this.props.trade.tradeBrokers||[])
+      .filter((ob) => ob.priceDecrypted)
+    if(!brokersWithPrice.length) return <span></span>
     return(
       <Col>
         <Table>
           <tbody>
             <tr>
-              <th>Name</th>
               <th>Price</th>
               <th>Status</th>
             </tr>
             {
-              (this.props.trade.tradeBrokers||[]).map((ob, index) => {
+              brokersWithPrice
+              .map((ob, index) => {
                 let thirdCol = null;
                 if(this.props.trade.state >= 3) {
                 }else if(ob.priceDecrypted) {
                   if(this.props.trade.broker){
                     if(this.props.trade.broker.id == ob.broker.id && this.props.trade.state === 0){
-                      thirdCol = (<span style={{'color': 'green'}}>Accepted, waiting for broker to confirm</span>)
+                      thirdCol = (<span style={{'color': 'green'}}>Accepted, waiting for confirmation</span>)
                     }else{
-                      thirdCol = (<span style={{'color': 'green'}}>Confirmed by broker</span>)
+                      thirdCol = (<span style={{'color': 'green'}}>Confirmed by fund manager</span>)
                     }
                   }else{
-                    thirdCol = (<Button 
+                    thirdCol = (<Button
                       color="success"
                       onClick={() => this.acceptBroker(ob.broker)}>
                       Accept
                     </Button>)
                   }
                 }
-                return ( 
+                return (
                   <tr key={index} className='pointer'>
-                    <td> {ob.broker.name} </td>
-                    <td> {ob.priceDecrypted ? ob.priceDecrypted : 'Waiting for quotes'} </td>
+                    <td> {ob.priceDecrypted ? ob.priceDecrypted + "%" : 'Waiting for quotes'} </td>
                     <td> {thirdCol} </td>
                   </tr>
                 )

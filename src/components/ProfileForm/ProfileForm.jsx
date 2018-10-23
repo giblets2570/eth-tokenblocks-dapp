@@ -9,11 +9,21 @@ class ProfileForm extends React.Component {
     super(props)
 
     this.state = {
-      id: Auth.user.id,
-      name: Auth.user.name,
-      email: Auth.user.email,
-      address: Auth.user.address
+      name: "",
+      email: "",
+      address: ""
     }
+  }
+
+  componentDidMount(){
+    this.setState({
+      ...this.props.user
+    })
+  }
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      ...nextProps.user
+    })
   }
 
   handleChange(event,key) {
