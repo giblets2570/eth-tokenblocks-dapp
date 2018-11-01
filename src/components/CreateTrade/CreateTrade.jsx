@@ -272,6 +272,7 @@ class CreateTrade extends Component {
                 <FormGroup>
                   <Label>Execution date</Label>
                   <Datetime
+                    open={false}
                     timeFormat={false}
                     onChange={(day) => this.handleDayChange(day)}
                     inputProps={{ placeholder: "Choose date..." }}

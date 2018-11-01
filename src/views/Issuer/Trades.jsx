@@ -1,15 +1,15 @@
 import React from 'react';
+import ShowTrade from 'views/Investor/ShowTrade';
+import Auth from 'utils/auth';
 import axios from 'utils/request';
 import moment from 'moment';
-import ShowTrade from 'views/Investor/ShowTrade'
-import { Link, Route } from 'react-router-dom';
-import {
-  Card, CardBody, CardHeader, CardTitle, Row, Col,
-  Table, Pagination, PaginationItem, PaginationLink
-} from "reactstrap";
+import { Redirect, Link, Route } from 'react-router-dom';
+import { Card, CardBody, CardHeader, CardTitle, Row, Col, Table, Pagination, PaginationItem, PaginationLink } from "reactstrap";
 import { subscribe } from 'utils/socket';
 import { PanelHeader, Button } from "components";
-import { decrypt } from 'utils/encrypt'
+import { decrypt, receiveMessage,loadBundle} from 'utils/encrypt';
+
+const emptyString = "0000000000000000000000000000000000000000000000000000000000000000"
 
 class Trades extends React.Component {
   constructor(props) {
@@ -21,108 +21,106 @@ class Trades extends React.Component {
     };
   }
   changePage(page) {
+    // let page = Math.max(0, this.state.page + direction)
     this.setState({
       page: page
-    });
-    this.fetchTrades(page, this.state.pageCount);
+    })
+    this.getTrades(page, this.state.pageCount);
   }
-  async fetchTrades(page, pageCount) {
+  componentDidMount(){
+    let user = Auth.user
+    this.setState({
+      user: user,
+      bundle: loadBundle(Auth.getBundle())
+    })
+    this.getTrades(this.state.page, this.state.pageCount);
+    subscribe(`trade-created-broker:${user.id}`, (id) => {
+      this.getTrades();
+      this.setState({
+        trade: id
+      })
+    })
+  }
+  componentWillReceiveProps(nextProps){
+    if(nextProps.history.location.pathname === '/broker/trades'){
+      this.setState({
+        trade: null
+      })
+      this.getTrades(this.state.page, this.state.pageCount)
+    }
+  }
+  async getTrades(page, pageCount){
     let response = await axios.get(`${process.env.REACT_APP_API_URL}trades?page=${page}&page_count=${pageCount}`);
     let {data, total} = response.data;
     let trades = data.map((trade) => {
-      trade.executionDate = moment(trade.executionDate)
-      trade.createdAt = moment(trade.createdAt*1000)
-      let tradeKeys = JSON.parse(localStorage.getItem('tradeKeys'))
-      trade.tradeBrokers = trade.tradeBrokers.map((ob) => {
-        let key = `${trade.token.id}:${ob.broker.id}:${trade.salt}`;
-        let sk = JSON.parse(localStorage.getItem('tradeKeys'))[key];
-        let total = decrypt(ob.nominalAmount, sk);
-        let [currency, nominalAmount] = total.split(':');
-        trade.currency = currency;
-        trade.nominalAmount = (parseInt(nominalAmount) / 100.0).toFixed(2);
-        if(ob.price && ob.price.length) {
-          ob.priceDecrypted = decrypt(ob.price, sk);
-        }
-        return ob;
-      })
-      trade.bestQuote = trade.tradeBrokers.reduce((c, ob) => {
-        if(ob.price && (c === null || parseFloat(ob.price) > c )) {
-          c = parseFloat(ob.priceDecrypted);
-        }
-        return c;
-      }, null);
+      trade.executionDate = moment(trade.executionDate);
+      trade.createdAt = moment(trade.createdAt*1000);
+      let ob = trade.tradeBrokers.find((ob) => ob.brokerId === this.state.user.id);
+      console.log(ob)
+      let message = {text: ob.nominalAmount,ik: ob.ik,ek: ob.ek};
+      let total = receiveMessage(this.state.bundle, message);
+      console.log(total)
+      let [currency, nominalAmount] = total.split(':');
+      trade.currency = currency;
+      trade.nominalAmount = (parseInt(nominalAmount) / 100.0).toFixed(2);
+      if(ob.price && ob.price.length && ob.price !== emptyString) {
+        message = {text: ob.price,ik: ob.ik,ek: ob.ek};
+        trade.priceDecrypted = receiveMessage(this.state.bundle, message);
+      }
+      trade.amount = parseFloat(trade.nominalAmount),
+      trade.buySell = 'Buy'
+      if(trade.amount < 0) {
+        trade.amount = -1 * trade.amount
+        trade.buySell = 'Sell'
+      }
       return trade;
     })
-    for(let trade of trades) {
-      subscribe(`trade-update:${trade.id}`, (id) => {
-        this.fetchTrades(this.state.page, this.state.pageCount)
-      })
-    }
     this.setState({ trades: trades, total: total });
-  }
-  async componentDidMount(){
-    this.fetchTrades(this.state.page, this.state.pageCount)
-  }
-  async claimTokens(trade) {
-    let response = await axios.put(`${process.env.REACT_APP_API_URL}trades/${trade.id}/claim`);
-    this.fetchTrades(this.state.page, this.state.pageCount)
   }
   stateString(trade){
     if(trade.state === 0){
       if(trade.signature){
-        return 'Quote accepted'
-      }else if(trade.bestQuote){
-        return 'Quote received'
-      }else{
+        return 'Waiting for trade confirmation'
+      }else if(trade.priceDecrypted){
+        return 'Quote given'
+      }else {
         return 'Waiting for quotes'
       }
     }else if(trade.state === 1){
-      return 'Waiting on NAV'
-    }if(trade.state === 2){
-      // Need to figure out how to differentiate between
-      return 'Trade Verified'
+      return 'Trade confirmed'
     }else if(trade.state === 3){
       return 'Trade cancelled'
     }else if(trade.state === 4){
       return 'Trade rejected'
-    }else if(trade.state === 5){
-      return <Button color='success' onClick={() => this.claimTokens(trade)}>{
-        trade.nominalAmount >= 0
-         ? "Claim tokens"
-         : "Sell tokens"
-      }</Button>
-    }else{
-      return trade.nominalAmount >= 0
-       ? 'Tokens claimed'
-       : "Tokens sold"
     }
   }
   render() {
+    let pathParts = this.props.location.pathname.split('/')
+    let id = pathParts[pathParts.length-1]
+    if(this.state.trade && String(this.state.trade) !== id) {
+      return <Redirect to={`/broker/trades/${this.state.trade}`}/>
+    }
     let rows = this.state.trades
     .sort((a, b) => a.createdAt - b.createdAt)
     .map((trade, $index) => {
-      let amount = parseFloat(trade.nominalAmount), buySell = 'Buy'
-      if(amount < 0) {
-        amount = -1 * amount
-        buySell = 'Sell'
-      }
       return (
         <tr key={$index}>
           <td scope="row">{$index+1}</td>
           <td>{trade.token.symbol}</td>
-          <td>{buySell}</td>
+          <td>{trade.investor.name}</td>
+          <td>{trade.buySell}</td>
           <td>{trade.currency}</td>
-          <td>{amount.toLocaleString()}</td>
+          <td>{trade.amount.toLocaleString()}</td>
           <td>{trade.executionDate.format('DD/MM/YY')}</td>
-          <td>{trade.createdAt.format('HH:mm [at] DD/MM/YY')}</td>
-          <td>{trade.bestQuote}</td>
+          <td>{trade.priceDecrypted}</td>
           <td>{this.stateString(trade)}</td>
           <td>
-            <Link to={`/investor/trades/${trade.id}`}>View</Link>
+            <Link to={`/broker/trades/${trade.id}`}>View</Link>
           </td>
         </tr>
       )
-    })
+    });
+
     let pagination = this.state.total
     ? Array(Math.ceil(this.state.total / this.state.pageCount)).fill(null)
       .map((t, key) => (
@@ -131,11 +129,12 @@ class Trades extends React.Component {
         </PaginationItem>
       ))
     : [];
+
     return(
       <div>
         <Route
-          path="/investor/trades/:id"
-          render={(props) => <ShowTrade {...props} returnTo='/investor/trades'/>
+          path="/broker/trades/:id"
+          render={(props) => <ShowTrade {...props} returnTo='/broker/trades'/>
         }/>
         <PanelHeader
           size="sm"
@@ -148,7 +147,7 @@ class Trades extends React.Component {
             <Col xs={12} md={12}>
               <Card>
                 <CardHeader>
-                  <CardTitle tag="h4">My trades</CardTitle>
+                  <CardTitle tag="h4">Incoming trades</CardTitle>
                 </CardHeader>
                 <CardBody>
                   <Table responsive>
@@ -156,11 +155,11 @@ class Trades extends React.Component {
                       <tr className="text-primary">
                         <th className="text-center">#</th>
                         <th>Name</th>
+                        <th>Investor</th>
                         <th>Buy/Sell</th>
                         <th>Currency</th>
                         <th>Amount</th>
                         <th>Execution Date</th>
-                        <th>Date</th>
                         <th>Quote</th>
                         <th>Status</th>
                       </tr>

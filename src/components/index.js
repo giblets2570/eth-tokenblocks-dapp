@@ -18,6 +18,7 @@ import Progress from './CustomProgress/CustomProgress';
 
 import Radio from './CustomRadio/CustomRadio';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import ManageAccountHolder from './ManageAccountHolder/ManageAccountHolder';
 
 import ImageUpload from './CustomUpload/ImageUpload';
 import PictureUpload from './CustomUpload/PictureUpload';
@@ -114,5 +115,8 @@ export {
   TradeDetails,
 
   // Accounts
-  Accounts
+  Accounts,
+
+  // ManageAccountHolder
+  ManageAccountHolder
 };

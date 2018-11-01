@@ -52,7 +52,7 @@ class Accounts extends React.Component {
     let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens`);
     let tokenOptions = response.data.map((token) => ({value: token.id, label: token.symbol}))
     let tokenChoice = this.state.tokenId ? tokenOptions.find((option) => option.value === this.state.tokenId) : null
-    this.setState({ 
+    this.setState({
       tokens: response.data,
       tokenOptions: tokenOptions,
       tokenChoice: tokenChoice
@@ -87,8 +87,8 @@ class Accounts extends React.Component {
   }
   onInputChange(key) {
     return (event) => {
-      this.setState({ 
-        [key]: event.target.value 
+      this.setState({
+        [key]: event.target.value
       })
     }
   }
@@ -109,9 +109,7 @@ class Accounts extends React.Component {
     }
     let rows = this.state.balances
     .filter((a) => a.balance)
-    .sort((a,b) => {
-      return b.balance - a.balance
-    })
+    .sort((a,b) => b.balance - a.balance)
     .map((row, key) => (
       <tr key={key}>
         <td>{key+1}</td>
@@ -119,11 +117,11 @@ class Accounts extends React.Component {
         <td>{row.investor.name}</td>
         <td>{(row.balance / Math.pow(10, row.token.decimals)).toFixed(4)}</td>
       </tr>
-    ))
+    ));
     return (
       <div>
-        <PanelHeader 
-          size="sm" 
+        <PanelHeader
+          size="sm"
           content={
             <div>
               <h1>{this.state.token ? this.state.token.name : 'Loading...'}</h1>
@@ -143,11 +141,7 @@ class Accounts extends React.Component {
                     name="token"
                     value={this.state.tokenChoice}
                     options={this.state.tokenOptions}
-                    onChange={(value) => {
-                      this.setState({ 
-                        tokenChoice: value
-                      })
-                    }}
+                    onChange={(value) => this.setState({ tokenChoice: value })}
                   />
                   <Row>
                     <Route path='/investor/accounts/:id' render={(props) => {

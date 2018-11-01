@@ -7,8 +7,8 @@ import Profile from 'views/Investor/Profile'
 
 var dashRoutes = [
   {
-    path: "/investor/tokens",
-    name: "Tokens",
+    path: "/investor/funds",
+    name: "Funds",
     state: "openTokens",
     icon: "business_money-coins",
     auth: 'investor',
@@ -35,7 +35,7 @@ var dashRoutes = [
     auth: 'investor',
     component: Profile
   },
-  { redirect: true, path: "/investor", pathTo: "/investor/tokens", name: "Dashboard" }
+  { redirect: true, path: "/investor", pathTo: "/investor/funds", name: "Dashboard" }
 ];
 
 export default dashRoutes;

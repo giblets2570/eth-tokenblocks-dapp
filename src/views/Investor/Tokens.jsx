@@ -71,7 +71,7 @@ class Tokens extends React.Component {
       let locationParts = this.props.location.pathname.split('/')
       let locationEnd = locationParts[locationParts.length-1]
       if(String(this.state.token.value.id) !== locationEnd){
-        return <Redirect to={`/investor/tokens/${this.state.token.value.id}`}/>
+        return <Redirect to={`/investor/funds/${this.state.token.value.id}`}/>
       }
     }
     return (
@@ -88,7 +88,7 @@ class Tokens extends React.Component {
               <Card className="card-stats card-raised">
                 <CardBody>
                   <FormGroup>
-                    <Label>Choose a Token</Label>
+                    <Label>Choose a Fund and Share class</Label>
                     <Select
                       className="react-select primary"
                       classNamePrefix="react-select"

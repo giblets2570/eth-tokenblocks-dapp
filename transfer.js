@@ -46,11 +46,10 @@ let main = async () => {
   let adminUser = users[0];
   let investorUsers = users.filter((user) => user.name.includes("investor"));
 
-
   for(let _contract of contracts) {
     for(let user of users) {
       if(Math.random() < 0.7) continue;
-      let amount = Math.round(Math.random() * 14533020 + 1345);
+      let amount = Math.round(Math.random() * 145333020 + 1345);
       try {
         let balance = await _contract.balanceOf(web3.eth.accounts[adminUser.id-1], {from: web3.eth.accounts[adminUser.id-1]});
         console.log(balance)

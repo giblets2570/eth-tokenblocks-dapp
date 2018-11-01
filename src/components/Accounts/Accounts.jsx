@@ -2,18 +2,32 @@ import React from "react";
 import axios from "utils/request";
 import { Table, Row, Col } from "reactstrap";
 import { Line, Bar } from "react-chartjs-2";
-
+import { Button, ManageAccountHolder } from "components";
 class Accounts extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      typeHash: {
+        pension: "Pension",
+        institutional: "Institutional",
+        assetManager: "Asset Manager",
+        retail: "Retail"
+      },
+      investor: {},
       juristictionData: {},
       typeData: {},
       options: {
         scales: {
           yAxes: [{
+            scaleLabel: {
+              display: true,
+              labelString: 'Number of shares'
+            },
             ticks: {
-              beginAtZero: true
+              beginAtZero: true,
+              callback: function(label, index, labels) {
+                return label.toLocaleString();
+              }
             }
           }],
         },
@@ -68,11 +82,11 @@ class Accounts extends React.Component {
         data: []
       }]
     })
-    let types = balances.map((balance)=>balance.investor.type);
+    let types = balances.map((balance)=>this.state.typeHash[balance.investor.type]);
     let typeData = balances.reduce((c, balance) => {
-      let index = c.labels.indexOf(balance.investor.type);
+      let index = c.labels.indexOf(this.state.typeHash[balance.investor.type]);
       if(index === -1) {
-        index += c.labels.push(balance.investor.type);
+        index += c.labels.push(this.state.typeHash[balance.investor.type]);
         c.datasets[0].data.push(0);
       }
       c.datasets[0].data[index] += Math.round(balance.balance);
@@ -97,6 +111,16 @@ class Accounts extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.getBalances(nextProps);
   }
+  setCommissionRate(){
+    let rate = prompt("Set commission rate: ");
+
+  }
+  toggleManageAccountHolder(investor){
+    this.setState({
+      investor: investor || {},
+      isAccountHolderOpen: !this.state.isAccountHolderOpen
+    })
+  }
   render() {
     if(this.state.balances && !this.state.balances.length) {
       return <p>Balances not initialised</p>
@@ -109,13 +133,21 @@ class Accounts extends React.Component {
           <td>{balance.investor.address}</td>
           <td>{balance.investor.name}</td>
           <td>{balance.investor.juristiction}</td>
-          <td>{balance.investor.type}</td>
+          <td>{this.state.typeHash[balance.investor.type]}</td>
           <td>{parseInt(balance.balance.toFixed(0)).toLocaleString()}</td>
+          <td><Button color="primary" onClick={() => this.toggleManageAccountHolder(balance.investor)}>Manage</Button></td>
         </tr>
       )
     })
     return (
       <div>
+        <ManageAccountHolder
+          isOpen={this.state.isAccountHolderOpen}
+          toggle={() => this.toggleManageAccountHolder()}
+          token={this.props.token}
+          fund={this.props.fund}
+          investor={this.state.investor}
+          />
         <Table responsive>
           <thead>
             <tr className="text-primary">
@@ -125,6 +157,7 @@ class Accounts extends React.Component {
               <th>Juristiction</th>
               <th>Type</th>
               <th>Balance</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>

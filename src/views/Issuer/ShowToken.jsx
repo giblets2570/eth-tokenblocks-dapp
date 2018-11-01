@@ -3,7 +3,7 @@ import {
   Modal, ModalBody, ModalFooter, Label,
   ModalHeader, Row, Col, FormGroup,
   Nav, NavItem, NavLink, Input,
-  TabContent, TabPane, Table
+  TabContent, TabPane, Table, Container
 } from 'reactstrap';
 
 import { Accounts, Button } from 'components';
@@ -96,6 +96,11 @@ class ShowToken extends React.Component {
       })
     }
   }
+  handleChange(e, key) {
+    this.setState({
+      [key]: e.target.value
+    })
+  }
   render(){
     if(this.state.toggled) {
       return <Redirect to={this.props.returnTo} />
@@ -118,6 +123,33 @@ class ShowToken extends React.Component {
               id="DesigningToken"
             >
               Fund details
+            </NavLink>
+          </NavItem>
+          <NavItem style={{cursor: 'pointer'}} id="ManageFund">
+            <NavLink
+              className={this.state.hTabs === "ht3" ? "active" : ""}
+              onClick={() => this.setState({ hTabs: "ht3" })}
+              id="ManageFund"
+            >
+              Manage fund
+            </NavLink>
+          </NavItem>
+          <NavItem style={{cursor: 'pointer'}} id="FundCharges">
+            <NavLink
+              className={this.state.hTabs === "ht4" ? "active" : ""}
+              onClick={() => this.setState({ hTabs: "ht4" })}
+              id="FundCharges"
+            >
+              Fund charges
+            </NavLink>
+          </NavItem>
+          <NavItem style={{cursor: 'pointer'}} id="ManageIFAs">
+            <NavLink
+              className={this.state.hTabs === "ht5" ? "active" : ""}
+              onClick={() => this.setState({ hTabs: "ht5" })}
+              id="ManageIFAs"
+            >
+              Manage IFAs
             </NavLink>
           </NavItem>
         </Nav>
@@ -229,6 +261,121 @@ class ShowToken extends React.Component {
               }
             </Input>
             <Accounts aggregate={this.state.aggregate} fund={this.state.fund} token={this.state.token} />
+          </TabPane>
+          <TabPane tabId="ht3">
+            <Container>
+              <Row>
+                <Col>
+                  <h3>Dividends</h3>
+                  <Table responsive>
+                    <tr>
+                      <th>Record date</th>
+                      <th>Ex-dividend date</th>
+                      <th>Pay date</th>
+                      <th>Gross dividend</th>
+                      <th>Dividend currency</th>
+                    </tr>
+                    <tr>
+                      <td>18/12/18</td>
+                      <td>16/12/18</td>
+                      <td>23/12/18</td>
+                      <td>0.54</td>
+                      <td>GBP</td>
+                    </tr>
+                  </Table>
+                  <Button
+                    color="primary"
+                    >Upload
+                  </Button>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3>Documents</h3>
+                  <Button color="primary">Upload</Button>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3>Manage notifications</h3>
+                  <Col xs={6}>
+                    <FormGroup>
+                      <Label>Receive trade confirmations by email?</Label>
+                      <Input
+                        type="text"
+                        value={this.state.email}
+                        placeholder="Enter receiving email here..."
+                        onChange={(e) => {
+                          this.setState({
+                            updatedEmail: true
+                          })
+                          this.handleChange(e, 'email')
+                        }}
+                      />
+                      {
+                        this.state.updatedEmail
+                        ? (
+                          <Button
+                            color='primary'
+                            onClick={() => this.setState({
+                              updatedEmail: false
+                            })}>
+                            Save email
+                          </Button>
+                        ) : null
+                      }
+                    </FormGroup>
+                  </Col>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <h3>Bank account</h3>
+                  <Button color='primary'>Set bank account</Button>
+                </Col>
+              </Row>
+
+            </Container>
+          </TabPane>
+          <TabPane tabId="ht4">
+            <Table responsive>
+              <tr>
+                <th>Charge type</th>
+                <th>Number of events</th>
+                <th>Charge per event</th>
+                <th>Total charge</th>
+              </tr>
+              <tr>
+                <td>Contract notes</td>
+                <td>2</td>
+                <td>£800</td>
+                <td>£{(1600).toLocaleString()}</td>
+              </tr>
+              <tr>
+                <td>Dividend payments</td>
+                <td>6</td>
+                <td>£15</td>
+                <td>£90</td>
+              </tr>
+              <tr>
+                <td>Document disemination</td>
+                <td>57</td>
+                <td>£4</td>
+                <td>£{(57*4).toLocaleString()}</td>
+              </tr>
+              <tr>
+                <td>Cash reconciliation</td>
+                <td>78</td>
+                <td>£4.5</td>
+                <td>£{(78*4.5).toLocaleString()}</td>
+              </tr>
+              <tr>
+                <td>Emails sent</td>
+                <td>45</td>
+                <td>£4</td>
+                <td>£{(45*4).toLocaleString()}</td>
+              </tr>
+            </Table>
           </TabPane>
         </TabContent>
       </div>

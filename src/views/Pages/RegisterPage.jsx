@@ -80,7 +80,7 @@ class RegisterPage extends React.Component {
   }
   render() {
     if(this.state.signedUp) {
-      return <Redirect to='/investor/profile' />
+      return <Redirect to='/setup/bank-account' />
     }
     return (
       <div>

@@ -10,6 +10,7 @@ export let refresh = async () => {
     account = web3.eth.accounts[0];
     let accountInterval = setInterval(function() {
       if (web3.eth.accounts[0] !== account) {
+        console.log("Am I reloading")
         window.location.reload(false);
       }
     }, 100);

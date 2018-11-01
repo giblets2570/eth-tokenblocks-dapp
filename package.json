@@ -65,7 +65,9 @@
     "deploy:contracts": "aws s3 sync src/contracts/kovan/ s3://tokenblocks-contracts",
     "sync:contracts": "aws s3 sync s3://tokenblocks-contracts src/contracts/kovan/",
     "sync:bundles": "aws s3 sync bundles/ s3://tokenblocks-files/bundles",
-    "network": "export $(cat .env); func() { ganache-cli -m=\"village rely embrace donkey video demand crunch train throw trouble resource myth\" -e 10000 -a 100 --networkId=$NETWORK; }; func"
+    "transfer": "export $(cat .env) && node transfer.js",
+    "update:network:port": "node update-network.js",
+    "network": "npm run update:network:port; export $(cat .env); func() { ganache-cli -m=\"village rely embrace donkey video demand crunch train throw trouble resource myth\" -e 10000 -a 100 --networkId=$NETWORK; }; func"
   },
   "optionalDependencies": {
     "babel-eslint": "^7.2.3",

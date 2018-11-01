@@ -109,7 +109,7 @@ class Tokens extends React.Component {
             <Col xs={12} md={12}>
               <Card className="card-stats card-raised">
                 <CardBody>
-                  <h3 style={{textAlign: 'center'}}>My Tokens</h3>
+                  <h3 style={{textAlign: 'center'}}>My Funds</h3>
                   <Table responsive>
                     <thead>
                       <tr className="text-primary">
