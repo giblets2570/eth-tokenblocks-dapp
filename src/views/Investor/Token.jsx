@@ -1,21 +1,11 @@
 import React from 'react'
 import axios from 'utils/request'
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  Row,
-  Col,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Table,
-  Button
+  Card,CardHeader,CardBody,CardFooter,CardTitle,Row,Col,
+  UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem,Table,Tooltip
 } from "reactstrap";
 import {
+  Button,
   PanelHeader,
   Stats,
   Statistics,
@@ -35,35 +25,19 @@ import {
 import CreateTrade from 'components/CreateTrade/CreateTrade'
 
 class Token extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      token: {},
-      holdings: [],
-      balance: null,
-      orderModal: false,
-      timestamp: 'none',
-      colours: [
-        "#55efc4",
-        "#81ecec",
-        "#74b9ff",
-        "#a29bfe",
-        "#00b894",
-        "#00cec9",
-        "#0984e3",
-        "#6c5ce7",
-        "#ffeaa7",
-        "#fab1a0",
-        "#ff7675",
-        "#fd79a8",
-        "#636e72",
-        "#fdcb6e",
-        "#e17055",
-        "#d63031",
-        "#e84393",
-        "#2d3436"
-      ]
-    }
+  state = {
+    token: {},
+    holdings: [],
+    balance: null,
+    orderModal: false,
+    timestamp: 'none',
+    tooltipOpen: false,
+    colours: [
+      "#55efc4","#81ecec","#74b9ff","#a29bfe","#00b894",
+      "#00cec9","#0984e3","#6c5ce7","#ffeaa7","#fab1a0",
+      "#ff7675","#fd79a8","#636e72","#fdcb6e","#e17055",
+      "#d63031","#e84393","#2d3436"
+    ]
   }
   async getTokenData(props) {
     this.setState({
@@ -71,15 +45,20 @@ class Token extends React.Component {
       holdings: [],
       balance: null,
     })
-    let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}`);
+    if(!props.match.params.id) return;
+    let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.match.params.id}`);
     let token = response.data;
-    console.log(token)
     let minutes = `${token.cutoffTime%(60*60)}`
     if(minutes.length === 1) minutes = `0${minutes}`
     token.cutoffTimeString = `${token.cutoffTime/(60*60)}:${minutes}`
     token.totalSupply = parseFloat(token.totalSupply)
     this.setState({ token: token });
-    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}/holdings`);
+
+    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.match.params.id}/nav`);
+    let nav = response.data
+    this.setState({ nav: nav })
+
+    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.match.params.id}/holdings`);
     let holdings = response.data
     let aum = holdings.reduce((c, holding) => c + holding.securityAmount * holding.securityTimestamp.price, 0) / 100.0;
     holdings = holdings.map((holding) => {
@@ -88,23 +67,23 @@ class Token extends React.Component {
     });
     this.setState({ holdings: holdings });
 
-    let nav = aum * Math.pow(10, token.decimals) / token.totalSupply
-    this.setState({ nav: nav });
-    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}/balance`);
+    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.match.params.id}/balance`);
     let balance = response.data.balance || 0
     balance = Math.abs(parseFloat(balance)) / Math.pow(10, token.decimals)
     this.setState({ balance: balance });
-    this.setState({ currentValue: balance * nav })
-    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.tokenId}/invested`);
+    this.setState({ currentValue: balance * nav.price })
+    response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.match.params.id}/invested`);
     this.setState({ investedValue: response.data.totalAmount });
   }
   componentDidMount(){
     this.getTokenData(this.props)
   }
   componentWillReceiveProps(nextProps) {
-    if(this.props.tokenId !== nextProps.tokenId){
-      this.getTokenData(nextProps)
-    }
+    setTimeout(() => {
+      this.setState({
+        tooltipOpen: !this.state.orderModal && nextProps.tooltipsOpen
+      })
+    })
   }
   onInputChange(key) {
     return (event) => {
@@ -150,7 +129,12 @@ class Token extends React.Component {
     let currencyData = this.makeData(currencies)
     return (
       <div>
-        <CreateTrade isOpen={this.state.orderModal} toggle={() => this.toggleOrderModal()} token={this.state.token} />
+        <CreateTrade
+          isOpen={this.state.orderModal}
+          toggle={() => this.toggleOrderModal()}
+          token={this.state.token}
+          tooltipsOpen={this.props.tooltipsOpen}
+          />
         <Row>
           <Col xs={12} md={12}>
             <Card className="card-stats card-raised">
@@ -239,9 +223,9 @@ class Token extends React.Component {
                       iconState="success"
                       icon="business_money-coins"
                       title={
-                        typeof this.state.nav === 'number'
+                        typeof this.state.nav === 'object'
                         ? (<span>
-                            <small>£</small>{this.state.nav.toLocaleString()}
+                            <small>£</small>{(this.state.nav.price/100).toLocaleString()}
                           </span>)
                         : 'Loading...'
                       }
@@ -264,14 +248,16 @@ class Token extends React.Component {
                   </Col>
                 </Row>
                 <Row>
-                  <Col xs={12} md={9}></Col>
                   <Col xs={12} md={3}>
                     <Statistics
                       iconState="success"
-                      // icon="business_money-coins"
                       title={
-                        <Button color="primary" onClick={() => this.createOrder(this.state.token)}>
-                          Place order
+                        <Button
+                          id="CreateOrderToken"
+                          round
+                          color="primary"
+                          onClick={() => this.createOrder(this.state.token)}>
+                          Place trade
                         </Button>
                       }
                       subtitle=""
@@ -321,7 +307,7 @@ class Token extends React.Component {
                       title={
                         typeof this.state.currentValue === 'number'
                         ? (<span>
-                            <small>£</small>{this.state.currentValue.toLocaleString()}
+                            <small>£</small>{(this.state.currentValue/100).toLocaleString()}
                           </span>)
                         : 'Loading...'
                       }
@@ -335,10 +321,10 @@ class Token extends React.Component {
                       title={
                         typeof this.state.currentValue === 'number' && typeof this.state.investedValue === 'number'
                         ? this.state.investedValue
-                          ?(
-                            (this.state.currentValue - this.state.investedValue/100) * 100 / this.state.investedValue
-                          ).toFixed(2) + "%"
-                          : "0%"
+                          ? (
+                            (this.state.currentValue - this.state.investedValue) * 100 / this.state.investedValue
+                          ).toFixed(2) + '%'
+                          : '0%'
                         : 'Loading...'
                       }
                       subtitle="Performance"
@@ -350,75 +336,55 @@ class Token extends React.Component {
           </Col>
         </Row>
         {
-        // <Row>
-        //   <Col xs={12} md={12}>
-        //     <Card className="card-stats card-raised">
-        //       <CardBody style={{minHeight: '200px'}}>
-        //         <h3 style={{textAlign: 'center'}}>Exposure Summary</h3>
-        //         <Row>
-        //           <Col xs={12} md={4}>
-        //             <h6 className="info-title">Sector Breakdown</h6>
-        //             <Doughnut data={sectorData} />
-        //           </Col>
-        //           <Col xs={12} md={4}>
-        //             <h6 className="info-title">Currency Breakdown</h6>
-        //             <Doughnut data={currencyData} />
-        //           </Col>
-        //           <Col xs={12} md={4}>
-        //             <h6 className="info-title">Country Breakdown</h6>
-        //             <Doughnut data={countryData} />
-        //           </Col>
-        //         </Row>
-        //       </CardBody>
-        //     </Card>
-        //   </Col>
-        // </Row>
+          // <Row>
+          //   <Col xs={12}>
+          //     <Card>
+          //       <CardHeader>
+          //         <CardTitle tag="h4" style={{textAlign: 'center'}}>
+          //           Fund Portfolio
+          //         </CardTitle>
+          //       </CardHeader>
+          //       <CardBody>
+          //         <Table responsive>
+          //           <thead className="text-primary">
+          //             <tr>
+          //               <th className="text-right">#</th>
+          //               <th>Name</th>
+          //               <th>Currency</th>
+          //               <th>Sector</th>
+          //               <th>Country</th>
+          //               <th>Amount</th>
+          //               <th>Weight</th>
+          //             </tr>
+          //           </thead>
+          //           <tbody>
+          //             {
+          //               this.state.holdings
+          //               .sort((a, b) => b.weight - a.weight)
+          //               .map((holding,key) => {
+          //                 return (
+          //                   <tr key={key}>
+          //                     <td>{key+1}</td>
+          //                     <td>{holding.security.symbol}</td>
+          //                     <td>{holding.security.currency}</td>
+          //                     <td>{holding.security.sector}</td>
+          //                     <td>{holding.security.country}</td>
+          //                     <td>{holding.securityAmount.toLocaleString()}</td>
+          //                     <td>{(holding.weight*100).toFixed(2)}%</td>
+          //                   </tr>
+          //                 )
+          //               })
+          //             }
+          //           </tbody>
+          //         </Table>
+          //       </CardBody>
+          //     </Card>
+          //   </Col>
+          // </Row>
         }
-        <Row>
-          <Col xs={12}>
-            <Card>
-              <CardHeader>
-                <CardTitle tag="h4" style={{textAlign: 'center'}}>
-                  Fund Portfolio
-                </CardTitle>
-              </CardHeader>
-              <CardBody>
-                <Table responsive>
-                  <thead className="text-primary">
-                    <tr>
-                      <th className="text-right">#</th>
-                      <th>Name</th>
-                      <th>Currency</th>
-                      <th>Sector</th>
-                      <th>Country</th>
-                      <th>Amount</th>
-                      <th>Weight</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {
-                      this.state.holdings
-                      .sort((a, b) => b.weight - a.weight)
-                      .map((holding,key) => {
-                        return (
-                          <tr key={key}>
-                            <td>{key+1}</td>
-                            <td>{holding.security.symbol}</td>
-                            <td>{holding.security.currency}</td>
-                            <td>{holding.security.sector}</td>
-                            <td>{holding.security.country}</td>
-                            <td>{holding.securityAmount.toLocaleString()}</td>
-                            <td>{(holding.weight*100).toFixed(2)}%</td>
-                          </tr>
-                        )
-                      })
-                    }
-                  </tbody>
-                </Table>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
+        <Tooltip placement="right" isOpen={!this.state.orderModal && this.state.tooltipOpen} target="CreateOrderToken">
+          Place an order for this token by clicking the button below
+        </Tooltip>
       </div>
     )
   }

@@ -11,6 +11,8 @@ const promisify = require('tiny-promisify');
 const {fromRpcSig,bufferToHex} = require('ethereumjs-util');
 const {makeNbytes,getSharedSecret,formatPublicKey,encrypt,encode,createBundle,loadBundle,saveBundle,formatPublicBundle,formatPrivateKey,sendMessage,verifyPKSig,decrypt,receiveMessage} = require('./src/utils/encrypt');
 
+var accounts;
+
 let connection = mysql.createConnection({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
@@ -41,6 +43,8 @@ if(process.env.SEEDALL) {
   tables.push("User");
   tables.push("TokenBalance");
   tables.push("Token");
+  tables.push("Fund");
+  tables.push("NAVTimestamp");
   tables.push("SecurityTimestamp");
   tables.push("Security");
   tables.push("TokenHoldings");
@@ -58,10 +62,11 @@ else {
     return user;
   })
 }
-let brokers = [users[1],users[2]]
-let investor = users[3]
-let custodian = users[4]
-let fund = users[5]
+let brokers = [users[1],users[2]];
+let investor = users[3];
+let custodian = users[4];
+let fund = users[5];
+
 var loggedin = {};
 let securities = require('./securities.json')
 let createOrderHoldingsString = (_h) => {
@@ -109,12 +114,10 @@ let createUsers = async () => {
       let index = keys.indexOf('account');
       if(index >= 0) keys[index] = 'address';
       let values = keys.map((key) => {
-        if(key === 'address') return web3.eth.accounts[user.id-1]
+        if(key === 'address') return accounts[user.id-1]
         if(key === 'password') return user.passwordHash
         return user[key]
       });
-      console.log(keys)
-      console.log(values)
       let sql = "INSERT INTO `User` (" + keys.join(', ') + ") VALUES ('"+ values.join("', '") +"')"
       connection.query(sql, function (error, results, fields) {
         if (error) reject(error);
@@ -240,15 +243,15 @@ let createTrades = async (numTrades = 1000) => {
     });
 
     let formattedTrade = [
-      [trade.investor.address, web3.eth.accounts[broker.id-1], trade.token.address],
+      [trade.investor.address, accounts[broker.id-1], trade.token.address],
       [makeNbytes(tradeBroker.nominalAmount), makeNbytes(encryptedPrice)],
       [executionDateInt, trade.expirationTimestampInSec, trade.salt]
     ];
 
 
-    let tradeHash = await tradeKernelInstance.getTradeHash(...formattedTrade, {from: web3.eth.accounts[investor.id-1]});
+    let tradeHash = await tradeKernelInstance.getTradeHash(...formattedTrade, {from: accounts[investor.id-1]});
     // Accept the brokers price as investor
-    let signature = await promisify(web3.eth.sign)(web3.eth.accounts[investor.id-1],tradeHash);
+    let signature = await promisify(web3.eth.sign)(accounts[investor.id-1],tradeHash);
 
     // First, we have to update the update the trade
     // on the server to include this new information
@@ -270,7 +273,7 @@ let createTrades = async (numTrades = 1000) => {
     // Confirm trade as broker
     let {r, s, v} = fromRpcSig(signature);
     // console.log(r, s, v)
-    result = await tradeKernelInstance.confirmTrade(...formattedTrade, v, bufferToHex(r), bufferToHex(s), {from: web3.eth.accounts[broker.id-1]});
+    result = await tradeKernelInstance.confirmTrade(...formattedTrade, v, bufferToHex(r), bufferToHex(s), {from: accounts[broker.id-1]});
   }
   return tradeKeys
 }
@@ -281,7 +284,6 @@ let createOrders = async () => {
   });
   brokerLoggedin = await Promise.all(brokerLoggedin);
   let brokerBundles = brokers.map((broker) => broker.bundle);
-
 
   let promises = brokers.map(async (broker, $index) => {
     for(let tokenId = 1; tokenId <= tokens.length; tokenId++){
@@ -349,18 +351,18 @@ let createOrders = async () => {
       let salt = Math.floor(Math.pow(2,32) * Math.random())
 
       let formattedOrder = [
-        [web3.eth.accounts[broker.id-1], token.address],
+        [accounts[broker.id-1], token.address],
         [amount, executionDateInt, salt],
         tradeHashes
       ]
       let orderHash = await tradeKernelInstance.getOrderHash(formattedOrder[0], formattedOrder[1], formattedOrder[2])
-      let signature = await promisify(web3.eth.sign)(web3.eth.accounts[broker.id-1], orderHash)
+      let signature = await promisify(web3.eth.sign)(accounts[broker.id-1], orderHash)
       let {r, s, v} = fromRpcSig(signature)
 
       // console.log(this.state.user.address, orderHash, v, r, s);
-      let signer = await tradeKernelInstance.recoverSigner(orderHash, v, bufferToHex(r), bufferToHex(s), {from: web3.eth.accounts[broker.id-1]});
+      let signer = await tradeKernelInstance.recoverSigner(orderHash, v, bufferToHex(r), bufferToHex(s), {from: accounts[broker.id-1]});
 
-      if(signer.toLowerCase() === web3.eth.accounts[broker.id-1].toLowerCase()){
+      if(signer.toLowerCase() === accounts[broker.id-1].toLowerCase()){
         let result = await rp.post(`${process.env.API_URL}orders`, {
           body: {
             orderHoldings: orderHoldings,
@@ -392,7 +394,7 @@ let login = async (name) => {
     body: {
       email: user.email,
       password: user.password,
-      address: web3.eth.accounts[user.id-1]
+      address: accounts[user.id-1]
     },
     json: true
   };
@@ -428,21 +430,24 @@ let saveJSON = (data, name) => {
 }
 
 let main = async () => {
+
+  accounts = await promisify(web3.eth.getAccounts)()
+  console.log(accounts.length)
   connection.connect();
   await cleanTables();
   if(process.env.SEEDALL) await createUsers();
   loggedin = await login('admin');
   if(process.env.SEEDALL) await createSecurities();
   if(process.env.SEEDALL) await createFunds();
-  loggedin = await login('broker2');
-  let tradeKeys = await createTrades(6);
+  // loggedin = await login('broker2');
+  // let tradeKeys = await createTrades(6);
   // await createOrders();
   connection.end();
 
-  saveJSON(tradeKeys,'tradeKeys')
-  saveJSON(brokers[0].savedBundle,`bundle:${brokers[0].id}`)
-  saveJSON(brokers[1].savedBundle,`bundle:${brokers[1].id}`)
-  saveJSON(investor.savedBundle,`bundle:${investor.id}`)
+  // saveJSON(tradeKeys,'tradeKeys')
+  for(let user of users) {
+    saveJSON(user.savedBundle,`bundle:${user.id}`)
+  }
   console.log("Done")
 }
 

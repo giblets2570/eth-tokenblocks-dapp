@@ -1,29 +1,14 @@
 import React from 'react'
 import axios from 'utils/request'
 import {
-  Card,
-  CardHeader,
-  CardBody,
-  CardFooter,
-  CardTitle,
-  Row,
-  Col,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  Table,
-  Button,
-  FormGroup,
-  Label
+  Card,CardHeader,CardBody,CardFooter,CardTitle,Row,
+  Col,UncontrolledDropdown,DropdownToggle,DropdownMenu,
+  DropdownItem,Table,Button,FormGroup,Label,Tooltip
 } from "reactstrap";
 import Select from "react-select";
 import {
-  PanelHeader,
-  Stats,
-  Statistics,
-  CardCategory,
-  Progress
+  PanelHeader,Stats,Statistics,
+  CardCategory,Progress,TokenChooser
 } from "components";
 
 import { Line, Bar, Pie, Doughnut } from "react-chartjs-2";
@@ -34,46 +19,19 @@ import {
   chartsBar1,
   chartsBar2
 } from "variables/charts";
-import {Redirect} from 'react-router-dom'
-import CreateTrade from 'components/CreateTrade/CreateTrade'
-import Token from 'views/Investor/Token'
+import {Redirect,Route,Link} from 'react-router-dom';
+import CreateTrade from 'components/CreateTrade/CreateTrade';
+import Token from 'views/Investor/Token';
 
 class Tokens extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      tokens: [],
-      token: null
-    }
-  }
-  async componentDidMount(){
-    let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens`);
-    let tokens = response.data;
-    let tokenSelect = tokens.map((bs) => ({value: bs, label: `${bs.name} - ${bs.symbol}` }));
-    this.setState({
-      tokens: tokens,
-      tokenSelect: tokenSelect
-    });
-    let locationParts = this.props.location.pathname.split('/')
-    let locationEnd = locationParts[locationParts.length-1]
-    for (let i = 0; i < tokens.length; i++) {
-      if(String(tokens[i].id) === locationEnd){
-        this.setState({ token: tokenSelect[i] })
-        break;
-      }
-    }
-  }
-  componentWillReceiveProps(nextProps) {
-
+  state = {tooltipsOpen: false}
+  componentWillReceiveProps(nextProps){
+    setTimeout(() => this.setState({
+      tooltipsOpen: nextProps.tooltipsOpen &&
+      nextProps.location.pathname === '/investor/funds'
+    }))
   }
   render() {
-    if(this.state.redirect) {
-      let locationParts = this.props.location.pathname.split('/')
-      let locationEnd = locationParts[locationParts.length-1]
-      if(String(this.state.token.value.id) !== locationEnd){
-        return <Redirect to={`/investor/funds/${this.state.token.value.id}`}/>
-      }
-    }
     return (
       <div>
         <PanelHeader
@@ -83,36 +41,33 @@ class Tokens extends React.Component {
           }
         />
         <div className="content">
-          <Row>
-            <Col xs={12} md={12}>
-              <Card className="card-stats card-raised">
-                <CardBody>
-                  <FormGroup>
-                    <Label>Choose a Fund and Share class</Label>
-                    <Select
-                      className="react-select primary"
-                      classNamePrefix="react-select"
-                      name="buySell"
-                      options={this.state.tokenSelect}
-                      value={this.state.token}
-                      onChange={(value) => {
-                        console.log(value)
-                        this.setState({
-                          token: value,
-                          redirect: true
-                        })
-                      }}
-                    />
-                  </FormGroup>
-                </CardBody>
-              </Card>
-            </Col>
-          </Row>
-          {
-            this.state.token
-            ? <Token {...this.props} tokenId={this.state.token.value.id}/>
-            : null
-          }
+          <Route
+            path='/investor/funds'
+            render={(props) => (
+              <Row>
+                <Col xs={12} md={12}>
+                  <Card className="card-stats card-raised">
+                    <CardBody id="InvestorTokenChooser">
+                      <TokenChooser {...props} tooltipsOpen={this.state.tooltipsOpen} link='/investor/funds'/>
+                    </CardBody>
+                  </Card>
+                </Col>
+                <Tooltip placement="top" isOpen={this.state.tooltipsOpen} target="InvestorTokenChooser">
+                  Here is where you choose your tokens to invest in
+                </Tooltip>
+              </Row>
+            )}
+            exact={true}
+          />
+          <Route
+            path='/investor/funds/:id'
+            render={(props) => (
+              <Token
+                {...props}
+                tooltipsOpen={this.props.tooltipsOpen}
+              />
+            )}
+          />
         </div>
       </div>
     )

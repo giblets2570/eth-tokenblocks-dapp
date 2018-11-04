@@ -59,19 +59,19 @@
 
 .tooltip{
     &.bs-tooltip-right .arrow:before{
-        border-right-color:$white-color;
+        border-right-color: #000;//$black-color;
     }
 
     &.bs-tooltip-top .arrow:before{
-        border-top-color:$white-color;
+        border-top-color: #000;//$black-color;
     }
 
     &.bs-tooltip-bottom .arrow:before{
-        border-bottom-color:$white-color;
+        border-bottom-color: #000;//$black-color;
     }
 
     &.bs-tooltip-left .arrow:before{
-        border-left-color:$white-color;
+        border-left-color: #000;//$black-color;
     }
 }
 

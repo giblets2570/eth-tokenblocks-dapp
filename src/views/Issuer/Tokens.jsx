@@ -3,7 +3,7 @@ import axios from 'utils/request';
 import CreateToken from 'views/Issuer/CreateToken';
 import RegCheck from 'views/Issuer/RegCheck';
 import {Route,Link} from 'react-router-dom';
-import ShowToken from 'views/Issuer/ShowToken'
+import ShowFund from 'views/Issuer/ShowFund'
 import {
   Card,CardHeader,CardBody,CardFooter,CardTitle,Row,Col,UncontrolledDropdown,
   DropdownToggle,DropdownMenu,DropdownItem,Table,Button,Tooltip
@@ -68,13 +68,15 @@ class Tokens extends React.Component {
         <tr key={key}>
           <td>{key + 1}</td>
           <td>{fund.name}</td>
+          {
+            // <td>
+            //   <Button color="primary" onClick={() => this.regCheck(fund)} id={`RegCheck${key}`}>
+            //     Regulation Check
+            //   </Button>
+            // </td>
+          }
           <td>
-            <Button color="primary" onClick={() => this.regCheck(fund)} id={`RegCheck${key}`}>
-              Regulation Check
-            </Button>
-          </td>
-          <td>
-            <Link to={`/issuer/funds/${fund.id}`}>
+            <Link to={`/issuer/funds/${fund.id}/shareholders`}>
               View
             </Link>
           </td>
@@ -115,7 +117,7 @@ class Tokens extends React.Component {
                       <tr className="text-primary">
                         <th>#</th>
                         <th>Name</th>
-                        <th>Compliant</th>
+                        <th></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -133,13 +135,13 @@ class Tokens extends React.Component {
             Click here to start creating a new fund
           </Tooltip>
           {
-            rows.length
-            ? (
-              <Tooltip placement="right" isOpen={this.props.tooltipsOpen && !this.state.fundModal && !this.state.regModal} target={`RegCheck0`}>
-                Click here to perform the regulation checks
-              </Tooltip>
-            )
-            : null
+            // rows.length
+            // ? (
+            //   <Tooltip placement="right" isOpen={this.props.tooltipsOpen && !this.state.fundModal && !this.state.regModal} target={`RegCheck0`}>
+            //     Click here to perform the regulation checks
+            //   </Tooltip>
+            // )
+            // : null
           }
         </div>
         )}
@@ -152,7 +154,7 @@ class Tokens extends React.Component {
                 <Col xs={12} md={12}>
                   <Card className="card-stats card-raised">
                     <CardBody>
-                      <ShowToken {...props} />
+                      <ShowFund {...props} />
                     </CardBody>
                   </Card>
                 </Col>

@@ -17,11 +17,8 @@ import {
   Button
 } from "reactstrap";
 import {
-  PanelHeader,
-  Stats,
-  Statistics,
-  CardCategory,
-  Progress
+  PanelHeader,Stats,Statistics,
+  CardCategory,Progress,TokenChooser
 } from "components";
 
 import { Line, Bar, Pie } from "react-chartjs-2";
@@ -132,16 +129,14 @@ class Accounts extends React.Component {
           <Row>
             <Col xs={12} md={12}>
               <Card className="card-stats card-raised">
+                <CardHeader>
+                  <CardTitle tag="h4">Accounts</CardTitle>
+                </CardHeader>
                 <CardBody>
-                  <h3 style={{textAlign: 'center'}}>Accounts</h3>
-                  <Select
-                    className="react-select primary"
-                    classNamePrefix="react-select"
-                    placeholder="Choose token"
-                    name="token"
-                    value={this.state.tokenChoice}
-                    options={this.state.tokenOptions}
-                    onChange={(value) => this.setState({ tokenChoice: value })}
+                  <Route
+                    path='/investor/accounts'
+                    render={(props) => <TokenChooser {...props} link='/investor/accounts' />}
+                    exact={true}
                   />
                   <Row>
                     <Route path='/investor/accounts/:id' render={(props) => {

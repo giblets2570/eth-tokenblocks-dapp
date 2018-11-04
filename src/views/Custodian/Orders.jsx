@@ -54,8 +54,6 @@ class Orders extends React.Component {
       sks
     ]
 
-    console.log(formattedOrder);
-
     const TradeKernelContract = require(`../../${process.env.REACT_APP_CONTRACTS_FOLDER}TradeKernel.json`);
     const tradeKernel = contract(TradeKernelContract);
     tradeKernel.setProvider(web3.currentProvider);

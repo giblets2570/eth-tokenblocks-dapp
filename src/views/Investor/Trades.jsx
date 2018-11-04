@@ -79,12 +79,11 @@ class Trades extends React.Component {
     }else if(trade.state === 1){
       return 'Waiting on NAV'
     }if(trade.state === 2){
-      // Need to figure out how to differentiate between
-      return 'Trade Verified'
-    }else if(trade.state === 3){
       return 'Trade cancelled'
-    }else if(trade.state === 4){
+    }else if(trade.state === 3){
       return 'Trade rejected'
+    }else if(trade.state === 4){
+      return 'Waiting for funds'
     }else if(trade.state === 5){
       return <Button color='success' onClick={() => this.claimTokens(trade)}>{
         trade.nominalAmount >= 0

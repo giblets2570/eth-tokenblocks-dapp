@@ -5,14 +5,14 @@ const pagesRoutes = [
   {
     path: "/setup/bank-account",
     name: "Bank Account",
-    short: "Register",
-    component: DLTSetup
+    short: "Bank Account",
+    component: BankAccount
   },
   {
     path: "/setup/dlt-setup",
     name: "DLT Setup",
-    short: "Login",
-    component: BankAccount
+    short: "DLT Setup",
+    component: DLTSetup
   },
   { redirect: true, path: "/setup", pathTo: "/setup/bank-account", name: "Bank Account" }
 ];

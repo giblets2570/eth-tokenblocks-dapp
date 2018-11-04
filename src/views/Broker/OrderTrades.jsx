@@ -15,7 +15,6 @@ import { PanelHeader, Statistics, Button } from "components";
 import Datetime from "react-datetime";
 import axios from "utils/request"
 import { receiveMessage, getSharedSecret, loadBundle } from 'utils/encrypt'
-import web3Service from 'utils/getWeb3'
 import {fromRpcSig, bufferToHex} from 'ethereumjs-util'
 import promisify from 'tiny-promisify';
 import OrderTradeToken from 'views/Broker/OrderTradeToken'

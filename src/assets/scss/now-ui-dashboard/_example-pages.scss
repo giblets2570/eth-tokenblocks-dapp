@@ -1,5 +1,35 @@
 .login-page{
 
+    .info-horizontal{
+        text-align: left !important;
+
+        .icon{
+            margin-top: 0;
+
+            >i{
+                font-size: 2em;
+            }
+
+            &.icon-circle{
+                width: 65px;
+                height: 65px;
+                max-width: 65px;
+                margin-top: 8px;
+
+                i{
+                    display: table;
+                    margin: 0 auto;
+                    line-height: 3.5;
+                    font-size: 1.9em;
+                }
+            }
+        }
+        .description{
+            overflow: hidden;
+        }
+        
+    }
+
     .card-login{
         border-radius: $border-radius-large;
         padding-bottom: $padding-base-horizontal;

@@ -81,10 +81,17 @@ class ProfileForm extends React.Component {
               />
             </FormGroup>
           </Col>
+          <Col xs={12} md={4}>
+            <FormGroup>
+              <Button
+                round
+                color="primary"
+                type="submit">
+                Update Profile
+              </Button>
+            </FormGroup>
+          </Col>
         </Row>
-        <Button color="primary" type="submit">
-          Update Profile
-        </Button>
         <div className="clearfix" />
       </form>
     )

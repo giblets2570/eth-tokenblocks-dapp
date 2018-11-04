@@ -5,14 +5,15 @@ import {
   Table
 } from "reactstrap";
 import axios from 'utils/request';
+import moment from 'moment';
+import {decrypt} from 'utils/encrypt'
+const emptyString = "0000000000000000000000000000000000000000000000000000000000000000"
 
 class ManageAccountHolder extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      commissionRate: "",
-      ifa: "",
-    }
+  state = {
+    commissionRate: "",
+    ifa: "",
+    trades: []
   }
   handleChange(e, key) {
     this.setState({
@@ -25,13 +26,38 @@ class ManageAccountHolder extends React.Component {
     }
   }
   async getTrades(props) {
-    let trades = await axios.get(`${process.env.REACT_APP_API_URL}trades?investorId=${props.investor.id}&tokenId=${props.token.id}`);
+    console.log(props)
+    let response = await axios.get(`${process.env.REACT_APP_API_URL}trades?investorId=${props.investor.id}&tokenId=${props.token.id}&state=6`);
+    let trades = response.data.data.map((trade) => {
+      trade.executionDate = moment(trade.executionDate);
+      trade.createdAt = moment(trade.createdAt*1000);
+      let total = decrypt(trade.nominalAmount, trade.sk);
+      let [currency, nominalAmount] = total.split(':');
+      trade.currency = currency;
+      trade.nominalAmount = (parseInt(nominalAmount) / 100.0).toFixed(2);
+      trade.priceDecrypted = decrypt(trade.price, trade.sk);
+
+      trade.amount = parseFloat(trade.nominalAmount),
+      trade.buySell = 'Buy'
+      if(trade.amount < 0) {
+        trade.amount = -1 * trade.amount
+        trade.buySell = 'Sell'
+      }
+      return trade;
+    })
+    this.setState({
+      trades: trades
+    })
+  }
+  toggle(){
+    this.setState({ trades: [] })
+    this.props.toggle()
   }
   render() {
     return (
       <Modal
         isOpen={this.props.isOpen}
-        toggle={() => this.props.toggle()}
+        toggle={() => this.toggle()}
         className="modal-notice text-center"
         fade={false}
         size="lg"
@@ -71,19 +97,30 @@ class ManageAccountHolder extends React.Component {
               <Col xs={12}>
                 <h4>View contract notes</h4>
                 <Table responsive>
-                  <tr>
-                    <th>Buy/Sell</th>
-                    <th>Currency</th>
-                    <th>Amount</th>
-                    <th>Execution Date</th>
-                    <th>Creation Date</th>
-                    <th>Quote</th>
-                  </tr>
-                  <tr>
+                  <thead>
+                    <tr>
+                      <th>Buy/Sell</th>
+                      <th>Currency</th>
+                      <th>Amount</th>
+                      <th>Execution Date</th>
+                      <th>Creation Date</th>
+                      <th>Quote</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                     {
-
+                      this.state.trades.map((trade, key) => (
+                        <tr key={key}>
+                          <td>{trade.buySell}</td>
+                          <td>{trade.currency}</td>
+                          <td>{trade.amount}</td>
+                          <td>{trade.executionDate.format('DD/MM/YY')}</td>
+                          <td>{trade.createdAt.format('DD/MM/YY')}</td>
+                          <td>{trade.priceDecrypted}%</td>
+                        </tr>
+                      ))
                     }
-                  </tr>
+                  </tbody>
                 </Table>
               </Col>
             </Row>

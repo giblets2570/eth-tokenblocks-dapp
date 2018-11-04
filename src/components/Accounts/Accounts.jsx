@@ -4,52 +4,49 @@ import { Table, Row, Col } from "reactstrap";
 import { Line, Bar } from "react-chartjs-2";
 import { Button, ManageAccountHolder } from "components";
 class Accounts extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      typeHash: {
-        pension: "Pension",
-        institutional: "Institutional",
-        assetManager: "Asset Manager",
-        retail: "Retail"
-      },
-      investor: {},
-      juristictionData: {},
-      typeData: {},
-      options: {
-        scales: {
-          yAxes: [{
-            scaleLabel: {
-              display: true,
-              labelString: 'Number of shares'
-            },
-            ticks: {
-              beginAtZero: true,
-              callback: function(label, index, labels) {
-                return label.toLocaleString();
-              }
+  state = {
+    typeHash: {
+      pension: "Pension",
+      institutional: "Institutional",
+      assetManager: "Asset Manager",
+      retail: "Retail"
+    },
+    investor: {},
+    juristictionData: {},
+    typeData: {},
+    options: {
+      scales: {
+        yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Number of shares'
+          },
+          ticks: {
+            beginAtZero: true,
+            callback: function(label, index, labels) {
+              return label.toLocaleString();
             }
-          }],
-        },
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        },
-        tooltips: {
-          bodySpacing: 4,
-          mode: "nearest",
-          intersect: 0,
-          position: "nearest",
-          xPadding: 10,
-          yPadding: 10,
-          caretPadding: 10
-        },
-        layout: {
-          padding: { left: 0, right: 0, top: 15, bottom: 15 }
-        }
+          }
+        }],
+      },
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      tooltips: {
+        bodySpacing: 4,
+        mode: "nearest",
+        intersect: 0,
+        position: "nearest",
+        xPadding: 10,
+        yPadding: 10,
+        caretPadding: 10
+      },
+      layout: {
+        padding: { left: 0, right: 0, top: 15, bottom: 15 }
       }
-    };
-  }
+    }
+  };
   async getBalances(props){
     let balances, data
     if(props.aggregate) {
@@ -151,7 +148,7 @@ class Accounts extends React.Component {
         <Table responsive>
           <thead>
             <tr className="text-primary">
-              <th className="text-center">#</th>
+              <th>#</th>
               <th>Account</th>
               <th>Alias</th>
               <th>Juristiction</th>

@@ -10,15 +10,16 @@ import {
   Input,
   InputGroup,
   InputGroupAddon,
-  InputGroupText
+  InputGroupText,
+  Row
 } from "reactstrap";
 
-import { Button } from "components";
+import { Button, InfoArea } from "components";
 import axios from 'utils/request';
 import Auth from 'utils/auth';
 import nowLogo from "assets/img/now-logo.png";
 import logo from "assets/img/logo.webp";
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import bgImage from "assets/img/background.webp";
 import { loadBundle, createBundle, saveBundle, formatPublicBundle } from "utils/encrypt";
 import NotificationAlert from "react-notification-alert";
@@ -120,81 +121,106 @@ class LoginPage extends React.Component {
           <div className="login-page">
             <NotificationAlert ref="notificationAlert" />
             <Container>
-              <Col xs={12} md={8} lg={4} className="ml-auto mr-auto">
-                <Form onSubmit={(e) => this.login(e)}>
-                  <Card className="card-login card-plain">
-                    <CardHeader>
-                      <div className="logo-container">
-                        <img src={logo} alt="now-logo" />
-                      </div>
-                    </CardHeader>
-                    <CardBody>
-                      <InputGroup
-                        className={
-                          "no-border form-control-lg " +
-                          (this.state.emailFocus ? "input-group-focus" : "")
-                        }
-                      >
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="now-ui-icons users_circle-08" />
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          type="text"
-                          placeholder="Email..."
-                          onChange={(e) => this.handleChange(e, 'email')}
-                          onFocus={e => this.setState({ emailFocus: true })}
-                          onBlur={e => this.setState({ emailFocus: false })}
-                        />
-                      </InputGroup>
-                      <InputGroup
-                        className={
-                          "no-border form-control-lg " +
-                          (this.state.passwordFocus ? "input-group-focus" : "")
-                        }
-                      >
-                        <InputGroupAddon addonType="prepend">
-                          <InputGroupText>
-                            <i className="now-ui-icons text_caps-small" />
-                          </InputGroupText>
-                        </InputGroupAddon>
-                        <Input
-                          type="password"
-                          placeholder="Password..."
-                          onChange={(e) => this.handleChange(e, 'password')}
-                          onFocus={e => this.setState({ passwordFocus: true })}
-                          onBlur={e => this.setState({ passwordFocus: false })}
-                        />
-                      </InputGroup>
-                    </CardBody>
-                    <CardFooter>
-                      <Button
-                        block
-                        round
-                        type='submit'
-                        color="primary"
-                        disabled={this.state.logging}
-                        size="lg"
-                        className="mb-3"
-                      >
-                        {
-                          this.state.logging
-                          ? "Logging in..."
-                          : "Get Started"
-                        }
-                      </Button>
-                      <div className="pull-left">
-                        <h6>
-                          <a href="/pages/register-page" className="link footer-link">
-                            Create Account
-                          </a>
-                        </h6>
-                      </div>
-                    </CardFooter>
-                  </Card>
-                </Form>
-              </Col>
+              <Row className="justify-content-center">
+                <Col lg={5} md={8} xs={12} className="mt-5">
+                  <InfoArea
+                    icon="now-ui-icons media-2_sound-wave"
+                    iconColor="primary"
+                    title="Instant access"
+                    titleColor="info"
+                    description="Instant access to global economies and funds through digital tokens."
+                  />
+                  <InfoArea
+                    icon="now-ui-icons users_single-02"
+                    iconColor="primary"
+                    title="Cheaper execution"
+                    titleColor="info"
+                    description="Cheap and fair execution as you buy alongside others."
+                  />
+                  <InfoArea
+                    icon="now-ui-icons media-1_button-pause"
+                    iconColor="info"
+                    title="Cut out middlemen"
+                    titleColor="info"
+                    description="Reduced costs as blockchain removes unnecessary third parties."
+                  />
+                </Col>
+                <Col lg={4} md={8} xs={12}>
+                  <Form onSubmit={(e) => this.login(e)}>
+                    <Card className="card-login card-plain">
+                      <CardHeader>
+                        <div className="logo-container">
+                          <img src={logo} alt="now-logo" />
+                        </div>
+                      </CardHeader>
+                      <CardBody>
+                        <InputGroup
+                          className={
+                            "no-border form-control-lg " +
+                            (this.state.emailFocus ? "input-group-focus" : "")
+                          }
+                          >
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                              <i className="now-ui-icons users_circle-08" />
+                            </InputGroupText>
+                          </InputGroupAddon>
+                          <Input
+                            type="text"
+                            placeholder="Email..."
+                            onChange={(e) => this.handleChange(e, 'email')}
+                            onFocus={e => this.setState({ emailFocus: true })}
+                            onBlur={e => this.setState({ emailFocus: false })}
+                            />
+                        </InputGroup>
+                        <InputGroup
+                          className={
+                            "no-border form-control-lg " +
+                            (this.state.passwordFocus ? "input-group-focus" : "")
+                          }
+                          >
+                          <InputGroupAddon addonType="prepend">
+                            <InputGroupText>
+                              <i className="now-ui-icons text_caps-small" />
+                            </InputGroupText>
+                          </InputGroupAddon>
+                          <Input
+                            type="password"
+                            placeholder="Password..."
+                            onChange={(e) => this.handleChange(e, 'password')}
+                            onFocus={e => this.setState({ passwordFocus: true })}
+                            onBlur={e => this.setState({ passwordFocus: false })}
+                            />
+                        </InputGroup>
+                      </CardBody>
+                      <CardFooter>
+                        <Button
+                          block
+                          round
+                          type='submit'
+                          color="primary"
+                          disabled={this.state.logging}
+                          size="lg"
+                          className="mb-3"
+                        >
+                          {
+                            this.state.logging
+                            ? "Logging in..."
+                            : "Get Started"
+                          }
+                        </Button>
+                        <div className="pull-left">
+                          <h6>
+                            <Link to="/pages/register" className="link footer-link">
+                              Create Account
+                            </Link>
+                          </h6>
+                        </div>
+                      </CardFooter>
+                    </Card>
+                  </Form>
+                </Col>
+              </Row>
             </Container>
           </div>
         </div>

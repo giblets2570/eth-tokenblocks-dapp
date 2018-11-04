@@ -88,30 +88,11 @@ class RegisterPage extends React.Component {
           <div className="register-page">
             <Container>
               <Row className="justify-content-center">
-                <Col lg={5} md={8} xs={12} className="mt-5">
-                  <InfoArea
-                    icon="now-ui-icons media-2_sound-wave"
-                    iconColor="primary"
-                    title="Instant access"
-                    titleColor="info"
-                    description="Instant access to global economies and funds through digital tokens."
-                  />
-                  <InfoArea
-                    icon="now-ui-icons users_single-02"
-                    iconColor="primary"
-                    title="Cheaper execution"
-                    titleColor="info"
-                    description="Cheap and fair execution as you buy alongside others."
-                  />
-                  <InfoArea
-                    icon="now-ui-icons media-1_button-pause"
-                    iconColor="info"
-                    title="Cut out middlemen"
-                    titleColor="info"
-                    description="Reduced costs as blockchain removes unnecessary third parties."
-                  />
-                </Col>
-                <Col lg={4} md={8} xs={12}>
+                <Col
+                  lg={5}
+                  md={9}
+                  xs={12}
+                  >
                   <Card className="card-signup">
                     <CardHeader className="text-center">
                       <CardTitle tag="h4">Register</CardTitle>

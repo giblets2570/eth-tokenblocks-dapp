@@ -11,6 +11,8 @@ import CardStats from './CardElements/CardStats';
 
 import Button from './CustomButton/CustomButton';
 
+import ChooseAccount from './ChooseAccount/ChooseAccount';
+
 import IconCheckbox from './CustomCheckbox/IconCheckbox';
 import Checkbox from './CustomCheckbox/SimpleCheckbox';
 
@@ -19,6 +21,8 @@ import Progress from './CustomProgress/CustomProgress';
 import Radio from './CustomRadio/CustomRadio';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import ManageAccountHolder from './ManageAccountHolder/ManageAccountHolder';
+
+import TokenChooser from './TokenChooser/TokenChooser';
 
 import ImageUpload from './CustomUpload/ImageUpload';
 import PictureUpload from './CustomUpload/PictureUpload';
@@ -29,6 +33,7 @@ import FormInputs from './FormInputs/FormInputs';
 
 import Header from './Header/Header';
 import PagesHeader from './Header/PagesHeader';
+import SetupHeader from './Header/SetupHeader';
 
 import TradeDetails from './TradeDetails/TradeDetails';
 
@@ -83,6 +88,7 @@ export {
   // Header
   Header,
   PagesHeader,
+  SetupHeader,
   // InfoArea
   InfoArea,
   // Instructions
@@ -104,6 +110,9 @@ export {
   // GiveQuotes
   GiveQuotes,
 
+  // TokenChooser
+  TokenChooser,
+
   // ProfileForm
   ProfileForm,
   // CurrentLoans
@@ -118,5 +127,8 @@ export {
   Accounts,
 
   // ManageAccountHolder
-  ManageAccountHolder
+  ManageAccountHolder,
+
+  // ChooseAccount
+  ChooseAccount
 };

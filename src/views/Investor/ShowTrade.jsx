@@ -1,10 +1,10 @@
 import React from 'react';
 import TradeBrokers from 'views/Investor/TradeBrokers';
-import { 
+import {
   Modal,
   ModalBody,
   ModalFooter,
-  ModalHeader, Row, Col 
+  ModalHeader, Row, Col
 } from 'reactstrap';
 import { TradeDetails, Button, GiveQuotes } from 'components';
 import axios from 'utils/request';
@@ -20,14 +20,7 @@ import promisify from 'tiny-promisify';
 const emptyString = "0000000000000000000000000000000000000000000000000000000000000000";
 
 class ShowTrade extends React.Component {
-  constructor(props){
-    super(props)
-    this.currencies = ['GBP', 'EUR', 'USD']
-    this.state = {
-      trade: {},
-      user: Auth.user
-    }
-  }
+  state = {trade: {},user: Auth.user};
   async confirmPrice(trade, broker) {
     await web3Service.promise
     let web3 = web3Service.instance
@@ -42,12 +35,12 @@ class ShowTrade extends React.Component {
     let [ek1, ek2] = splitKeyInto2(ob.ek)
     let executionDateInt = Math.floor(moment(trade.executionDate).toDate().getTime() / 1000)
     let formattedTrade = [
-      [trade.investor.address, broker.address, trade.token.address], 
-      [makeNbytes(ob.nominalAmount), makeNbytes(ob.price)], 
+      [trade.investor.address, broker.address, trade.token.address],
+      [makeNbytes(ob.nominalAmount), makeNbytes(ob.price)],
       [executionDateInt, trade.expirationTimestampInSec, trade.salt]
     ];
     let tradeHash = await tradeKernelInstance.getTradeHash(...formattedTrade, {from: address});
-    let signature = await promisify(web3.personal.sign)(tradeHash, address);
+    let signature = await promisify(web3.eth.personal.sign)(tradeHash, address);
     let {r, s, v} = fromRpcSig(signature);
     let signer = await tradeKernelInstance.recoverSigner(tradeHash, v, bufferToHex(r), bufferToHex(s), {from: address});
     if(signer.toLowerCase() === trade.investor.address.toLowerCase()){
@@ -69,7 +62,10 @@ class ShowTrade extends React.Component {
     let response = await axios.get(`${process.env.REACT_APP_API_URL}trades/${this.props.match.params.id}`);
     let trade = response.data
     trade.executionDate = moment(trade.executionDate)
-    if(this.state.user.role === 'broker'){
+    if(
+      this.state.user.role === 'broker' ||
+      this.state.user.role === 'issuer'
+    ){
       let bundle = Auth.getBundle();
       bundle = loadBundle(bundle);
       let ob = trade.tradeBrokers.find((ob) => ob.broker.id === this.state.user.id);
@@ -134,14 +130,14 @@ class ShowTrade extends React.Component {
     let executionDateInt = Math.floor(moment(this.state.trade.executionDate).toDate().getTime() / 1000)
     let formattedTrade = [
       [
-        this.state.trade.investor.address, 
-        this.state.trade.broker.address, 
+        this.state.trade.investor.address,
+        this.state.trade.broker.address,
         this.state.trade.token.address
-      ], 
+      ],
       [
-        makeNbytes(this.state.trade.nominalAmount), 
+        makeNbytes(this.state.trade.nominalAmount),
         makeNbytes(this.state.trade.price)
-      ], 
+      ],
       [executionDateInt, this.state.trade.expirationTimestampInSec, this.state.trade.salt]
     ];
     let {r, s, v} = fromRpcSig(this.state.trade.signature);
@@ -166,8 +162,8 @@ class ShowTrade extends React.Component {
         let tradeKernelInstance = await tradeKernel.deployed();
         let executionDateInt = Math.floor(moment(trade.executionDate).toDate().getTime() / 1000)
         let formattedTrade = [
-          [trade.investor.address, trade.broker.address, trade.token.address], 
-          ['0x'+trade.nominalAmount, '0x'+trade.price], 
+          [trade.investor.address, trade.broker.address, trade.token.address],
+          ['0x'+trade.nominalAmount, '0x'+trade.price],
           [executionDateInt, trade.expirationTimestampInSec, trade.salt]
         ];
         console.log(formattedTrade)
@@ -182,11 +178,11 @@ class ShowTrade extends React.Component {
   stateShow(){
     if(this.state.trade.state <= 1) {
       return (
-        <Button 
+        <Button
           color="danger"
           onClick={() => this.cancel()}>
           {this.state.user.role === 'investor' ? 'Cancel' : 'Reject'}
-        </Button> 
+        </Button>
       )
     } else if(this.state.trade.state === 2) {
 
@@ -210,7 +206,10 @@ class ShowTrade extends React.Component {
     let result = await axios.put(`${process.env.REACT_APP_API_URL}trades/${trade.id}/set-price`, {price: encryptedPrice});
   }
   roleShow(){
-    if(this.state.user.role === 'broker'){
+    if(
+      this.state.user.role === 'broker' ||
+      this.state.user.role === 'issuer'
+    ){
       let tradeBroker = (this.state.trade.tradeBrokers||[]).find((ob) => ob.broker.id === this.state.user.id)
       if(!tradeBroker) return null;
       if(!this.state.trade.priceDecrypted) {
@@ -231,11 +230,11 @@ class ShowTrade extends React.Component {
             <p style={{textAlign: 'center'}}>
               Investor has accepted your quote: <span style={{color: 'green'}}>{this.state.trade.priceDecrypted}</span>
             </p>
-            <Button 
+            <Button
               color="success"
               onClick={() => this.acceptInvestor()}>
               Confirm Trade
-            </Button> 
+            </Button>
           </div>
         )
       }
@@ -259,7 +258,7 @@ class ShowTrade extends React.Component {
       return <Redirect to={this.props.returnTo} />
     }
     return (
-      <Modal 
+      <Modal
         isOpen={this.state.isOpen}
         toggle={() => this.toggle()}
         fade={false}
@@ -295,5 +294,5 @@ class ShowTrade extends React.Component {
     )
   }
 }
-  
+
 export default ShowTrade

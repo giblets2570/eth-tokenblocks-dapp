@@ -2,16 +2,11 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import Select from "react-select";
 import {
-  Modal,
-  ModalBody,
-  ModalFooter,
-  ModalHeader,
-  Row, Col, Table,
-  Label,
-  FormGroup, Input, Button
+  Modal, ModalBody, ModalFooter, ModalHeader,
+  Row, Col, Table,Label, Tooltip, FormGroup, Input
 } from 'reactstrap'
 
-import { Checkbox } from "components";
+import { Checkbox, Button } from "components";
 import axios from 'utils/request'
 import { subscribeOnce } from 'utils/socket'
 import { Redirect } from 'react-router-dom'
@@ -82,6 +77,7 @@ class CreateTrade extends Component {
       amount: '',
       brokers: [],
       toggled: false,
+      user: Auth.user,
       minDate: moment(),
       buySells: buySells,
       dropdownOpen: false,
@@ -113,20 +109,19 @@ class CreateTrade extends Component {
         executionDate: moment().add(1, 'day')
       })
     }
-    let response = await axios.get(`${process.env.REACT_APP_API_URL}users?role=broker`);
-    let brokers = response.data.map((broker) => {
-      broker.checked = true;
-      return broker;
-    })
-    this.setState({ brokers: brokers })
   }
   handleDayChange(day) {
     this.setState({
       executionDate: day
     });
   }
-  componentWillReceiveProps(nextProps) {
+  async componentWillReceiveProps(nextProps) {
     if(nextProps.token){
+      // Now the fund owner is the broker
+      let response = await axios.get(`${process.env.REACT_APP_API_URL}users/${nextProps.token.ownerId}`);
+      let issuer = response.data
+      issuer.checked = true
+      this.setState({ brokers: [issuer] })
       if(
         moment().hours() > nextProps.token.cutoff_time_hours  ||
         (moment().hours() === nextProps.token.cutoff_time_hours && moment().minutes() >= nextProps.token.cutoff_time_minutes)
@@ -137,6 +132,14 @@ class CreateTrade extends Component {
         })
       }
     }
+    console.log(nextProps, nextProps.tooltipsOpen, nextProps.isOpen)
+    setTimeout(() => {
+      this.setState({
+        tooltipsOpen: (
+          nextProps.tooltipsOpen && nextProps.isOpen
+        )
+      })
+    })
   }
   handleChange(event,key) {
     this.setState({
@@ -149,14 +152,22 @@ class CreateTrade extends Component {
     let buySell = this.state.buySell.value
     let collateral = this.state.collateral.value
     let amount = `${Math.floor(this.state.amount*100)}`;
+    if(this.props.token.minimumOrder > Math.round(amount)){
+      return alert("Below minimum order size");
+    }
     if(buySell === 'Sell'){
       amount = '-' + amount;
     }
     amount = currency + ':' + amount
     let brokers = this.state.brokers.filter((b) => b.checked)
     if(!brokers.length) {
-      alert("Requires broker to create a trade");
-      return
+      return alert("Requires broker to create a trade");
+    }
+    if(!this.state.user.address) {
+      return alert("You need to set up your address to make a trade");
+    }
+    if(!this.state.user.bankConnected) {
+      return alert("You need to connect your bank to make a trade");
     }
     this.setState({ status: 1 })
     let newTrade = await createTrade(brokers, this.props.token, this.state.executionDate, amount);
@@ -196,7 +207,13 @@ class CreateTrade extends Component {
   showButton(){
     if(this.state.status === 0){
       return (
-        <Button onClick={(event) => this.create(event)} color="info" type="submit">
+        <Button
+          id="SubmitCreateNewTrade"
+          round
+          block
+          color="primary"
+          type="submit"
+          onClick={(event) => this.create(event)}>
           Submit
         </Button>
       )
@@ -274,6 +291,7 @@ class CreateTrade extends Component {
                   <Datetime
                     open={false}
                     timeFormat={false}
+                    value={this.state.executionDate}
                     onChange={(day) => this.handleDayChange(day)}
                     inputProps={{ placeholder: "Choose date..." }}
                   />
@@ -341,6 +359,9 @@ class CreateTrade extends Component {
         <ModalFooter className="justify-content-center">
           {this.showButton()}
         </ModalFooter>
+        <Tooltip placement="right" isOpen={this.state.tooltipsOpen} target="SubmitCreateNewTrade">
+          Submit your trade details, then click submit here
+        </Tooltip>
       </Modal>
     )
   }

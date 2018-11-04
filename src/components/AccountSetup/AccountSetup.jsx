@@ -133,6 +133,7 @@ class AccountSetup extends Component {
                     <div>
                       <p>Detected local address: {address}</p>
                       <Button
+                        round
                         id="MetamaskAddressAdd"
                         color="primary"
                         onClick={() => this.props.useAddress(address)}>

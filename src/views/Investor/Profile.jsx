@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link, Route } from 'react-router-dom';
 import {
   Row,
@@ -9,35 +9,41 @@ import {
   Card,
   CardBody
 } from "reactstrap";
-
 import Auth from 'utils/auth'
-import {PanelHeader, ProfileForm, CurrentLoans, AccountSetup, Button} from "components";
 import axios from 'utils/request';
 
-class Profile extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      user: Auth.user
-    };
+import {
+  ChooseAccount,
+  PanelHeader,
+  ProfileForm,
+  CurrentLoans,
+  AccountSetup,
+  Button
+} from "components";
+
+export default class Profile extends React.Component {
+  state = {
+    user: Auth.user
   }
   connectBank(){
     window.location.href = `${process.env.REACT_APP_API_URL}truelayer?id=${this.state.user.id}`;
   }
   async useAddress(address) {
-    console.log(address)
-    let response = await axios.put(`${process.env.REACT_APP_API_URL}users/${this.state.user.id}`, {
-      address: address
-    })
-    Auth.updateUser({
-      address: address
-    })
-    let user = this.state.user
-    user.address = address
-    this.setState({ user: user })
+    try{
+      let response = await axios.put(`${process.env.REACT_APP_API_URL}users/${this.state.user.id}`, {
+        address: address
+      })
+      Auth.updateUser({
+        address: address
+      })
+      let user = this.state.user
+      user.address = address
+      this.setState({ user: user })
+    }catch(e){
+      console.log(e.Message)
+    }
   }
   render() {
-    console.log("Here")
     return (
       <div>
         <Route
@@ -74,23 +80,27 @@ class Profile extends Component {
               </Card>
             </Col>
           </Row>
-          {
-            // <Row>
-            //   <Col md={12}>
-            //     <Card className="card-stats card-raised">
-            //       <CardBody>
-            //         <CurrentLoans/>
-            //       </CardBody>
-            //     </Card>
-            //   </Col>
-            // </Row>
-          }
           <Row>
             <Col md={12}>
               <Card className="card-stats card-raised">
                 <CardBody>
-                  <p>KYC Checks</p>
-                  <Button color='primary' onClick={() => this.connectBank()}>Connect bank account</Button>
+                  <p>Bank account</p>
+                  {
+                    this.state.user.bankConnected
+                      ? <p>Already connected bank</p>
+                      : null
+                  }
+                  <Button
+                    round
+                    color='primary'
+                    onClick={() => this.connectBank()}>
+                    {
+                        this.state.user.bankConnected
+                        ? <span>Connect different bank account</span>
+                        : <span>Connect bank account</span>
+                    }
+                  </Button>
+                  <ChooseAccount />
                 </CardBody>
               </Card>
             </Col>
@@ -100,5 +110,3 @@ class Profile extends Component {
     );
   }
 }
-
-export default Profile;

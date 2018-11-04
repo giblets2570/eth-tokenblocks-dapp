@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import Select from "react-select";
 import {
+  Alert,
   Modal, Form,
   ModalBody,
   ModalFooter,
@@ -33,8 +34,6 @@ class CreateToken extends Component {
     let classProps = [
       {name: "Share class", state: "shareClass"},
       {name: "Fee (BP)", state: "fee"},
-      {name: "Front load", state: "frontLoad"},
-      {name: "Back load", state: "backLoad"},
       {name: "Min size", state: "minimumOrder"},
       {name: "Number Shares", state: "numShares"},
       {name: "NAV", state: "nav"},
@@ -57,6 +56,7 @@ class CreateToken extends Component {
       questions2: questions.questions2,
       name: '',
       symbol: '',
+      user: Auth.user,
       decimals: 18,
       initialAmountString: '',
       cutoffTime: 64800,
@@ -106,11 +106,13 @@ class CreateToken extends Component {
     // Need to create a different token for each share class
     let fund = {
       name: data.name,
+      ownerId: this.state.user.id,
       tokens: data.classes.map((_class) => {
-        let incomeCategoryAbv = _class.incomeCategory==="Accumulating"?'ACC':'DIST';
+        let incomeCategoryAbv = _class.incomeCategory === 'Accumulating' ? 'ACC' : 'DIST';
         let initialAmount = Math.round(parseFloat(_class.numShares)) * Math.pow(10, data.decimals);
         let symbol = `${data.symbol}-${_class.shareClass}-${incomeCategoryAbv}`;
         return {
+          ownerId: this.state.user.id,
           decimals: data.decimals,
           symbol: symbol,
           cutoffTime: data.cutoffTime,
@@ -119,7 +121,8 @@ class CreateToken extends Component {
           currency: _class.currency,
           holdings: data.holdings,
           incomeCategory: _class.incomeCategory,
-          minimumOrder: _class.minimumOrder,
+          minimumOrder: parseInt(_class.minimumOrder)*100,
+          nav: Math.round(parseFloat(_class.nav)*100),
           holdings: [{
             name: symbol,
             symbol: symbol,
@@ -339,20 +342,6 @@ class CreateToken extends Component {
                     </FormGroup>
                   </Col>
                 </Row>
-                {
-                  // <Row>
-                  //   <Col xs={12} md={3}></Col>
-                  //   <Col xs={12} md={9}>
-                  //     <CSVReader
-                  //       cssClass="csv-input"
-                  //       label="Upload fund composition"
-                  //       onFileLoaded={(data) => this.handleForce(data)}
-                  //       onError={(data) => this.handleDarkSideForce(data)}
-                  //       inputId="ObiWan"
-                  //       />
-                  //   </Col>
-                  // </Row>
-                }
                 <ShareClasses
                   classProps={this.state.classProps}
                   addShareClass={() => this.addShareClass()}

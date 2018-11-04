@@ -102,7 +102,6 @@ let decrypt = (ciphertext, key) => {
 
 let receiveMessage = (receiversBundle, message) => {
   let sk = getSharedSecret(receiversBundle, message);
-  console.log(sk)
   let decrypted = decrypt(message.text, sk);
   return decrypted;
 }

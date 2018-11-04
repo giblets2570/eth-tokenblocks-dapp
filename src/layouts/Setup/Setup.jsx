@@ -3,7 +3,7 @@ import React from "react";
 import PerfectScrollbar from "perfect-scrollbar";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import { PagesHeader, Footer, Button } from "components";
+import { SetupHeader, Footer, Button } from "components";
 import {
   Container,
   Row,
@@ -17,9 +17,7 @@ import {
   NavItem,
   NavLink
 } from 'reactstrap';
-import pagesRoutes from "routes/pages.jsx";
-
-import './Setup.css';
+import setupRoutes from "routes/setup.jsx";
 
 var ps;
 
@@ -58,46 +56,28 @@ export default class Setup extends React.Component {
     }
     console.log(this.state.activeTab)
     return (
-      <div className="Setup">
-        <header className="Setup-header">
-          <Container>
-            <Row>
-              <Col xs={2}></Col>
-              <Col xs={8}>
-                <Nav tabs>
-                  {
-                    this.props.routes
-                    .filter((route) => !route.redirect)
-                    .map((route, key) => {
-                      return (
-                        <NavLink
-                          key={key}
-                          className={{ active: this.state.activeTab === key }}
-                          onClick={() => { this.toggle(route); }}
-                          >
-                          {route.name}
-                        </NavLink>
-                      )
-                    })
-                  }
-                </Nav>
-                <TabContent activeTab={this.state.activeTab}>
-                  {
-                    this.props.routes
-                    .filter((route) => !route.redirect)
-                    .map((route, key) => (
-                      <TabPane tabId={key} key={key}>
-                        <Route path={route.path} component={route.component}/>
-                      </TabPane>
-                    ))
-                  }
-                </TabContent>
-              </Col>
-              <Col xs={2}></Col>
-            </Row>
-          </Container>
-        </header>
-        <Footer fluid />
+      <div>
+        <SetupHeader {...this.props} />
+        <div className="wrapper wrapper-full-page" ref="fullPages">
+          <div className="full-page section-image">
+            <Switch>
+              {setupRoutes.map((prop, key) => {
+                if (prop.redirect)
+                  return (
+                    <Redirect from={prop.path} to={prop.pathTo} key={key} />
+                  );
+                return (
+                  <Route
+                    path={prop.path}
+                    component={prop.component}
+                    key={key}
+                  />
+                );
+              })}
+            </Switch>
+            <Footer fluid />
+          </div>
+        </div>
       </div>
     );
   }

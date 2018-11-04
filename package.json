@@ -9,6 +9,7 @@
     "ajv": "5.0.0",
     "axios": "^0.18.0",
     "babel-polyfill": "^6.26.0",
+    "bignumber.js": "^8.0.0",
     "bootstrap": "4.1.3",
     "chart.js": "2.7.2",
     "ethereumjs-util": "^5.2.0",
@@ -16,7 +17,7 @@
     "node-sass-chokidar": "1.3.3",
     "nouislider": "11.1.0",
     "npm-run-all": "4.1.3",
-    "openzeppelin-solidity": "^1.12.0",
+    "openzeppelin-solidity": "^2.0.0",
     "perfect-scrollbar": "1.4.0",
     "react": "16.4.2",
     "react-app-env": "^1.2.2",
@@ -40,9 +41,9 @@
     "reactstrap": "6.4.0",
     "socket.io-client": "^2.1.1",
     "tiny-promisify": "^1.0.0",
-    "truffle-contract": "^3.0.6",
+    "truffle-contract": "^4.0.0-next.0",
     "truffle-hdwallet-provider": "0.0.6",
-    "web3": "^0.20.7"
+    "web3": "^1.0.0-beta.35"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
@@ -67,7 +68,8 @@
     "sync:bundles": "aws s3 sync bundles/ s3://tokenblocks-files/bundles",
     "transfer": "export $(cat .env) && node transfer.js",
     "update:network:port": "node update-network.js",
-    "network": "npm run update:network:port; export $(cat .env); func() { ganache-cli -m=\"village rely embrace donkey video demand crunch train throw trouble resource myth\" -e 10000 -a 100 --networkId=$NETWORK; }; func"
+    "network": "npm run update:network:port; export $(cat .env); func() { ganache-cli -m=\"village rely embrace donkey video demand crunch train throw trouble resource myth\" -e 10000 -a 100 --networkId=$NETWORK; }; func",
+    "mysql": "mysql -h 127.0.0.1 -u root"
   },
   "optionalDependencies": {
     "babel-eslint": "^7.2.3",

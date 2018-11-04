@@ -3724,16 +3724,16 @@ Created using IcoMoon - icomoon.io
       opacity: .6; }
 
 .tooltip.bs-tooltip-right .arrow:before {
-  border-right-color: #FFFFFF; }
+  border-right-color: #000; }
 
 .tooltip.bs-tooltip-top .arrow:before {
-  border-top-color: #FFFFFF; }
+  border-top-color: #000; }
 
 .tooltip.bs-tooltip-bottom .arrow:before {
-  border-bottom-color: #FFFFFF; }
+  border-bottom-color: #000; }
 
 .tooltip.bs-tooltip-left .arrow:before {
-  border-left-color: #FFFFFF; }
+  border-left-color: #000; }
 
 .tooltip-inner {
   padding: 0.5rem 0.7rem;
@@ -9769,6 +9769,25 @@ svg {
     border-color: #FFFFFF;
     background-color: #FFFFFF;
     color: inherit; }
+
+.login-page .info-horizontal {
+  text-align: left !important; }
+  .login-page .info-horizontal .icon {
+    margin-top: 0; }
+    .login-page .info-horizontal .icon > i {
+      font-size: 2em; }
+    .login-page .info-horizontal .icon.icon-circle {
+      width: 65px;
+      height: 65px;
+      max-width: 65px;
+      margin-top: 8px; }
+      .login-page .info-horizontal .icon.icon-circle i {
+        display: table;
+        margin: 0 auto;
+        line-height: 3.5;
+        font-size: 1.9em; }
+  .login-page .info-horizontal .description {
+    overflow: hidden; }
 
 .login-page .card-login {
   border-radius: 0.25rem;

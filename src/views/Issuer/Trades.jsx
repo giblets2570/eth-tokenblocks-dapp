@@ -42,7 +42,7 @@ class Trades extends React.Component {
     })
   }
   componentWillReceiveProps(nextProps){
-    if(nextProps.history.location.pathname === '/broker/trades'){
+    if(nextProps.history.location.pathname === '/issuer/trades'){
       this.setState({
         trade: null
       })
@@ -56,10 +56,8 @@ class Trades extends React.Component {
       trade.executionDate = moment(trade.executionDate);
       trade.createdAt = moment(trade.createdAt*1000);
       let ob = trade.tradeBrokers.find((ob) => ob.brokerId === this.state.user.id);
-      console.log(ob)
       let message = {text: ob.nominalAmount,ik: ob.ik,ek: ob.ek};
       let total = receiveMessage(this.state.bundle, message);
-      console.log(total)
       let [currency, nominalAmount] = total.split(':');
       trade.currency = currency;
       trade.nominalAmount = (parseInt(nominalAmount) / 100.0).toFixed(2);
@@ -88,17 +86,23 @@ class Trades extends React.Component {
       }
     }else if(trade.state === 1){
       return 'Trade confirmed'
-    }else if(trade.state === 3){
+    }else if(trade.state === 2){
       return 'Trade cancelled'
-    }else if(trade.state === 4){
+    }else if(trade.state === 3){
       return 'Trade rejected'
+    }else if(trade.state === 4){
+      return 'Trade waiting for funds'
+    }else if(trade.state === 5){
+      return 'Trade waiting for claim'
+    }else if(trade.state === 6){
+      return 'Trade claimed'
     }
   }
   render() {
     let pathParts = this.props.location.pathname.split('/')
     let id = pathParts[pathParts.length-1]
     if(this.state.trade && String(this.state.trade) !== id) {
-      return <Redirect to={`/broker/trades/${this.state.trade}`}/>
+      return <Redirect to={`/issuer/trades/${this.state.trade}`}/>
     }
     let rows = this.state.trades
     .sort((a, b) => a.createdAt - b.createdAt)
@@ -115,7 +119,7 @@ class Trades extends React.Component {
           <td>{trade.priceDecrypted}</td>
           <td>{this.stateString(trade)}</td>
           <td>
-            <Link to={`/broker/trades/${trade.id}`}>View</Link>
+            <Link to={`/issuer/trades/${trade.id}`}>View</Link>
           </td>
         </tr>
       )
@@ -133,8 +137,8 @@ class Trades extends React.Component {
     return(
       <div>
         <Route
-          path="/broker/trades/:id"
-          render={(props) => <ShowTrade {...props} returnTo='/broker/trades'/>
+          path="/issuer/trades/:id"
+          render={(props) => <ShowTrade {...props} returnTo='/issuer/trades'/>
         }/>
         <PanelHeader
           size="sm"
