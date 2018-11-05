@@ -124,7 +124,6 @@ class AccountSetup extends Component {
       <form>
         <Row>
           <Col xs={12} md={12}>
-            <p>Set up user address</p>
             <p>Current address: {user_address ? user_address : "None"}</p>
             {
               address
@@ -153,11 +152,6 @@ class AccountSetup extends Component {
             }
           </Col>
         </Row>
-        {
-          // <Tooltip placement="right" isOpen={this.state.tooltipOpen} target="MetamaskAddressAdd">
-          //   Give your token some final details, upload your tokens holdings and click submit
-          // </Tooltip>
-        }
         <div className="clearfix" />
       </form>
     )

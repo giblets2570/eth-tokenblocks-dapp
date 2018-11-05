@@ -48,7 +48,12 @@ class Tokens extends React.Component {
                 <Col xs={12} md={12}>
                   <Card className="card-stats card-raised">
                     <CardBody id="InvestorTokenChooser">
-                      <TokenChooser {...props} tooltipsOpen={this.state.tooltipsOpen} link='/investor/funds'/>
+                      <TokenChooser
+                        {...props}
+                        tooltipsOpen={this.state.tooltipsOpen}
+                        link='/investor/funds'
+                        showBalances={true}
+                      />
                     </CardBody>
                   </Card>
                 </Col>

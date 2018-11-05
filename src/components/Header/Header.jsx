@@ -18,7 +18,7 @@ import {
   Input
 } from "reactstrap";
 
-import dashboardRoutes from "routes/dashboard.jsx";
+import investorRoutes from "routes/investor.jsx";
 import { Button } from 'components';
 import Auth from 'utils/auth'
 
@@ -54,7 +54,7 @@ class Header extends React.Component {
   }
   getBrand() {
     var name;
-    dashboardRoutes.map((prop, key) => {
+    investorRoutes.map((prop, key) => {
       if (prop.collapse) {
         prop.views.map((prop, key) => {
           if (prop.path === this.props.location.pathname) {

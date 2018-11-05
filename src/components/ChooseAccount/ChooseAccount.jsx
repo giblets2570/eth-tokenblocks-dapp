@@ -39,57 +39,62 @@ export default class ChooseAccount extends React.Component {
   render(){
     return (
       <div>
-        <Table responsive>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Number</th>
-              <th>Sort code</th>
-              <th></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {
-              this.state.accounts.map((account, key) => (
-                <tr key={key}>
-                  <td>{account.display_name}</td>
-                  <td>{account.account_number.number}</td>
-                  <td>{account.account_number.sort_code}</td>
-                  <td>
-                    {
-                      this.state.user.truelayerAccountId === account.account_id
-                      ? (
-                        <span style={{color: 'green'}}>
-                          Connected
-                        </span>
-                      ): (
-                        <Button
-                          round
-                          color="primary"
-                          onClick={() => this.choose(account)}
-                          >
-                          Choose
-                        </Button>
-                      )
-                    }
-                  </td>
-                  <td>
-                    {
-                      this.state.user.truelayerAccountId === account.account_id
-                      ? (
-                        this.state.balance
-                        ? <span>£{this.state.balance.available} available</span>
-                        : "Loading..."
-                      )
-                      : null
-                    }
-                  </td>
+        {
+          this.state.accounts.length
+          ? (
+            <Table responsive>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Number</th>
+                  <th>Sort code</th>
+                  <th></th>
+                  <th></th>
                 </tr>
-              ))
-            }
-          </tbody>
-        </Table>
+              </thead>
+              <tbody>
+                {
+                  this.state.accounts.map((account, key) => (
+                    <tr key={key}>
+                      <td>{account.display_name}</td>
+                      <td>{account.account_number.number}</td>
+                      <td>{account.account_number.sort_code}</td>
+                      <td>
+                        {
+                          this.state.user.truelayerAccountId === account.account_id
+                          ? (
+                            <span style={{color: 'green'}}>
+                              Connected
+                            </span>
+                          ): (
+                            <Button
+                              round
+                              color="primary"
+                              onClick={() => this.choose(account)}
+                              >
+                              Choose
+                            </Button>
+                          )
+                        }
+                      </td>
+                      <td>
+                        {
+                          this.state.user.truelayerAccountId === account.account_id
+                          ? (
+                            this.state.balance
+                            ? <span>£{this.state.balance.available} available</span>
+                            : "Loading..."
+                          )
+                          : null
+                        }
+                      </td>
+                    </tr>
+                  ))
+                }
+              </tbody>
+            </Table>
+          ) : null
+        }
       </div>
     );
   }

@@ -1,7 +1,7 @@
 
 import issuerRoutes from "routes/issuer.jsx";
 // import brokerRoutes from "routes/broker.jsx";
-import investorRoutes from "routes/dashboard.jsx";
+import investorRoutes from "routes/investor.jsx";
 // import custodianRoutes from "routes/custodian.jsx";
 import setupRoutes from "routes/setup.jsx";
 

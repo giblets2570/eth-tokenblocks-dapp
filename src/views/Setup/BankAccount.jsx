@@ -24,9 +24,7 @@ export default class BankAccount extends React.Component {
   setAccount(account){
     let {user} = this.state;
     user.truelayerAccountId = account.account_id;
-    this.setState({
-      user: user
-    })
+    this.setState({ user: user })
   }
   nextPage(){
     this.setState({

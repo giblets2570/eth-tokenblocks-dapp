@@ -86,7 +86,7 @@
         left: 0;
         top: 0;
         content: "";
-        background-color: rgba(0,0,0,.7);
+        background-color: rgba(0,0,0,.5);
     }
 
     .container{
@@ -407,7 +407,7 @@
     }
 
     .pagination .page-item.disabled > .page-link{
-      background-color: $opacity-2; 
+      background-color: $opacity-2;
       color: $white-color;
     }
 

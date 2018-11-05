@@ -127,17 +127,18 @@ let createUsers = async () => {
     user.bundle = createBundle(user.id);
     user.savedBundle = saveBundle(user.bundle);
     user.publicBundle = formatPublicBundle(user.bundle);
-    let options = {
-      method: 'PUT',
-      uri: `${process.env.API_URL}users/${user.id}`,
+
+    let userLoggedin = await login(user.name)
+
+    let response = await rp.put(`${process.env.API_URL}users/${user.id}`,{
       body: {
         ik: user.publicBundle.ik,
         spk: user.publicBundle.spk,
         signature: user.publicBundle.signature
       },
+      headers:{Authorization:`Bearer ${userLoggedin.token}`},
       json: true
-    }
-    let response = await rp(options)
+    })
   }
 }
 let createFunds = async () => {

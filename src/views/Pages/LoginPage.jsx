@@ -1,17 +1,7 @@
 import React from "react";
 import {
-  Card,
-  CardBody,
-  CardHeader,
-  CardFooter,
-  Form,
-  Container,
-  Col,
-  Input,
-  InputGroup,
-  InputGroupAddon,
-  InputGroupText,
-  Row
+  Card,CardBody,CardHeader,CardFooter,Form,Container,Col,
+  Input,InputGroup,InputGroupAddon,InputGroupText,Row,CardTitle
 } from "reactstrap";
 
 import { Button, InfoArea } from "components";
@@ -25,10 +15,7 @@ import { loadBundle, createBundle, saveBundle, formatPublicBundle } from "utils/
 import NotificationAlert from "react-notification-alert";
 
 class LoginPage extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
+  state = {};
   notify(message) {
     let options = {
       place: 'bl',
@@ -124,34 +111,35 @@ class LoginPage extends React.Component {
               <Row className="justify-content-center">
                 <Col lg={5} md={8} xs={12} className="mt-5">
                   <InfoArea
-                    icon="now-ui-icons media-2_sound-wave"
+                    icon="now-ui-icons business_money-coins"
                     iconColor="primary"
-                    title="Instant access"
+                    title="0 Platform Transaction Fees"
                     titleColor="info"
-                    description="Instant access to global economies and funds through digital tokens."
+                    description="Digital shares of funds we work with use a single distributed ledger to transfer ownership. No middle man means no fees - bam."
                   />
                   <InfoArea
-                    icon="now-ui-icons users_single-02"
+                    icon="now-ui-icons business_bank"
                     iconColor="primary"
-                    title="Cheaper execution"
+                    title="Same Funds, Same Protection, Better Performance"
                     titleColor="info"
-                    description="Cheap and fair execution as you buy alongside others."
+                    description="Our technology reduces the management costs of the fund. Same fund, different share class, better performance."
                   />
                   <InfoArea
-                    icon="now-ui-icons media-1_button-pause"
+                    icon="now-ui-icons ui-2_like"
                     iconColor="info"
-                    title="Cut out middlemen"
+                    title="Mates Rates - Trade digital shares directly with your mates, no spreads"
                     titleColor="info"
-                    description="Reduced costs as blockchain removes unnecessary third parties."
+                    description="Finally an easily accessible secondary market for mutual funds. Trade whenever with whoever."
                   />
                 </Col>
                 <Col lg={4} md={8} xs={12}>
                   <Form onSubmit={(e) => this.login(e)}>
                     <Card className="card-login card-plain">
-                      <CardHeader>
+                      <CardHeader className="text-center">
                         <div className="logo-container">
                           <img src={logo} alt="now-logo" />
                         </div>
+                        <CardTitle tag="h4">Login</CardTitle>
                       </CardHeader>
                       <CardBody>
                         <InputGroup

@@ -53,16 +53,18 @@ class Accounts extends React.Component {
       if(!props.fund.id) return;
       let response = await axios.get(`${process.env.REACT_APP_API_URL}funds/${props.fund.id}/balances`);
       data = response.data
-      console.log(data)
     }else{
       if(!props.token.id) return;
       let response = await axios.get(`${process.env.REACT_APP_API_URL}tokens/${props.token.id}/balances`);
       data = response.data
     }
+    console.log(data)
     balances = data.map((balance) => {
       balance.balance = parseFloat( balance.balance || 0 ) / Math.pow(10, 18);
       return balance;
-    }).filter((balance) => balance.investor.juristiction && balance.balance);
+    })
+    // .filter((balance) => balance.investor.juristiction && balance.balance);
+    console.log(balances)
     let juristictions = balances.map((balance)=>balance.investor.juristiction);
     let juristictionData = balances.reduce((c, balance) => {
       let index = c.labels.indexOf(balance.investor.juristiction);
@@ -131,7 +133,7 @@ class Accounts extends React.Component {
           <td>{balance.investor.name}</td>
           <td>{balance.investor.juristiction}</td>
           <td>{this.state.typeHash[balance.investor.type]}</td>
-          <td>{parseInt(balance.balance.toFixed(0)).toLocaleString()}</td>
+          <td>{balance.balance.toLocaleString()}</td>
           <td><Button color="primary" onClick={() => this.toggleManageAccountHolder(balance.investor)}>Manage</Button></td>
         </tr>
       )

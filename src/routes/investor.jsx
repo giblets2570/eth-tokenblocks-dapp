@@ -21,13 +21,13 @@ var dashRoutes = [
     auth: 'investor',
     component: Trades
   },
-  {
-    path: "/investor/accounts",
-    name: "Accounts",
-    icon: "business_globe",
-    auth: 'investor',
-    component: Accounts
-  },
+  // {
+  //   path: "/investor/accounts",
+  //   name: "Accounts",
+  //   icon: "business_globe",
+  //   auth: 'investor',
+  //   component: Accounts
+  // },
   {
     path: "/investor/profile",
     name: "Profile",

@@ -70,21 +70,10 @@ class ProfileForm extends React.Component {
             </FormGroup>
           </Col>
           <Col xs={12} md={4}>
-            <FormGroup>
-              <Label>Ethereum Address</Label>
-              <Input
-                type="input"
-                className='form-control'
-                value={this.state.address}
-                onChange={(e) => this.handleChange(e, 'address')}
-                placeholder="Ethereum Address..."
-              />
-            </FormGroup>
-          </Col>
-          <Col xs={12} md={4}>
-            <FormGroup>
+            <FormGroup style={{paddingTop: '13px'}}>
               <Button
                 round
+                block
                 color="primary"
                 type="submit">
                 Update Profile

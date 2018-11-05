@@ -95,7 +95,7 @@ class Trades extends React.Component {
     }else if(trade.state === 5){
       return 'Trade waiting for claim'
     }else if(trade.state === 6){
-      return 'Trade claimed'
+      return 'Cash received'
     }
   }
   render() {
