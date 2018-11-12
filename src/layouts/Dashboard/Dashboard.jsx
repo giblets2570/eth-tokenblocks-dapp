@@ -1,4 +1,5 @@
 import React from "react";
+import Joyride from 'react-joyride';
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 import axios from 'utils/request';
@@ -6,7 +7,6 @@ import Token from 'views/Investor/Token'
 
 import { Route, Switch, Redirect } from "react-router-dom";
 import { PrivateRoute, Header, Footer, Sidebar } from "components";
-
 var ps;
 
 class Dashboard extends React.Component {
@@ -37,10 +37,11 @@ class Dashboard extends React.Component {
   }
   showTooltips() {
     this.setState({
-      tooltipsOpen: !this.state.tooltipsOpen
+      tutorialMode: !this.state.tutorialMode
     })
   }
   render() {
+    let {tutorialMode} = this.state;
     return (
       <div className="wrapper">
         <Sidebar {...this.props} />
@@ -55,15 +56,15 @@ class Dashboard extends React.Component {
                   if(prop2.auth) {
                     return <PrivateRoute
                       path={prop2.path}
-                      render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
+                      render={(props) => <Component {...props} tutorialMode={this.state.tutorialMode} />}
                       key={key2}
                       role={prop2.auth}
                     />
-                  } 
+                  }
                   return (
                     <Route
                       path={prop2.path}
-                      render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
+                      render={(props) => <Component {...props} tutorialMode={this.state.tutorialMode} />}
                       key={key2}
                     />
                   );
@@ -75,16 +76,16 @@ class Dashboard extends React.Component {
                 return (
                   <PrivateRoute
                     path={prop.path}
-                    render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
+                    render={(props) => <Component {...props} tutorialMode={this.state.tutorialMode} />}
                     key={key}
                     role={prop.auth}
                   />
                 )
               } return (
                 <Route
-                  path={prop.path} 
-                  render={(props) => <Component {...props} tooltipsOpen={this.state.tooltipsOpen} />}
-                  key={key} 
+                  path={prop.path}
+                  render={(props) => <Component {...props} tutorialMode={this.state.tutorialMode} />}
+                  key={key}
                 />
               );
             })}

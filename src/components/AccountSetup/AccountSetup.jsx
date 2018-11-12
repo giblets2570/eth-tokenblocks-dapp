@@ -33,7 +33,6 @@ class AccountSetup extends Component {
       isOpen: this.props.match.path === "/investor/profile/setup",
       pending: false
     });
-    console.log(this.props.match.path)
     await web3Service.promise
     let web3 = web3Service.instance
     web3.eth.getCoinbase((error, address) => {
@@ -49,7 +48,6 @@ class AccountSetup extends Component {
     this.setState({
       isOpen: nextProps.match.path === "/dashboard/profile/setup",
     });
-    console.log(nextProps)
   }
   handleChange(event,key) {
     this.setState({
@@ -116,7 +114,6 @@ class AccountSetup extends Component {
   render(){
     let user_address = this.state.user.address ? this.state.user.address.toLowerCase() : null
     let address = this.state.currentAddress ? this.state.currentAddress.toLowerCase() : null
-    console.log(user_address, address)
     if(this.state.toggled) {
       return <Redirect to={this.props.returnTo} />
     }

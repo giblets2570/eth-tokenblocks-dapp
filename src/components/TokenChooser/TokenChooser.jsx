@@ -80,7 +80,7 @@ export default class TokenChooser extends React.Component {
         <tbody>
           {
             (this.state.tokens||[]).map((token, key) => (
-              <tr key={key}>
+              <tr key={key} id={`FundRow${key}`}>
                 <td>
                   {token.name}
                 </td>
@@ -125,19 +125,6 @@ export default class TokenChooser extends React.Component {
             ))
           }
         </tbody>
-        {
-          this.state.tokens.length
-          ? (
-            <div>
-              <Tooltip
-                placement="left"
-                isOpen={this.state.tooltipsOpen}
-                target="ChooseToken0">
-                You can view the investors by clicking this link
-              </Tooltip>
-            </div>
-          ) : null
-        }
       </Table>
     )
   }

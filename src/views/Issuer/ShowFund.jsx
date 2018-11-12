@@ -16,6 +16,7 @@ import NavView from 'views/Issuer/NavView';
 import ManageFund from 'views/Issuer/ManageFund';
 import FundDetails from 'views/Issuer/FundDetails';
 import FundCharges from 'views/Issuer/FundCharges';
+import Joyride from 'react-joyride';
 
 export default class ShowFund extends React.Component {
   state = {
@@ -63,8 +64,129 @@ export default class ShowFund extends React.Component {
     })
   }
   render(){
+    let {tutorialMode} = this.props
     return (
       <div>
+        <Joyride
+          continuous
+          scrollToFirstStep
+          showProgress
+          showSkipButton
+          run={!!tutorialMode}
+          debug={true}
+          disableScrolling={false}
+          steps={[
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <h4 style={{fontSize: '22px'}}>Hi! Wsfdsfdsfdsfsdlcome to TokenBlocks</h4>
+                  <p style={{fontSize: '12px'}}>We are going to give your a quick tour so can fully understand what's going on</p>
+                </div>
+              ),
+              placement: "center",
+              disableBeacon: true,
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "body"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <p style={{fontSize: '12px'}}>Click here do view the shareholders in your fund</p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#Shareholders"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <p style={{fontSize: '12px'}}>
+                    This tab shows the details in your fund. <br />
+                    You can see the digital shares that are in your fund, and the distribution channels of your fund.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#FundDetails"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <p style={{fontSize: '12px'}}>
+                    Using this tab, you can manage your fund. <br/>
+                    Uploading dividends, documents, managing which email you recieve notifications to and which bank account you wish to use.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#ManageFund"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <p style={{fontSize: '12px'}}>
+                    This tab shows you the funds charges that happen in your fund. <br/>
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#FundCharges"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <p style={{fontSize: '12px'}}>
+                    Here is the table that shows all your funds
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#ManageIFAs"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <p style={{fontSize: '12px'}}>
+                    Here is the table that shows all your funds
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#NAV"
+            },
+            {
+
+            }
+          ]}
+        />
         <Nav pills className="nav-pills-primary">
           {
             this.state.tabs.map((tab,key) => {
@@ -117,7 +239,7 @@ export default class ShowFund extends React.Component {
             />
           <Route
             path={`/issuer/funds/:id/manage-fund`}
-            render={(props) => <ManageFund {...props} />}
+            render={(props) => <ManageFund {...props} fund={this.state.fund}/>}
             />
           <Route
             path={`/issuer/funds/:id/fund-charges`}

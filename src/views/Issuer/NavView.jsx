@@ -24,9 +24,9 @@ export default class NavView extends React.Component {
       await axios.put(`${process.env.REACT_APP_API_URL}trades/${trade.id}`, { sk: sk });
     }
 
-    let nav = prompt("Give todays NAV in pennies");
+    let nav = prompt("Give todays NAV");
     try {
-      nav = parseInt(nav);
+      nav = parseInt(parseFloat(nav)*100);
     }catch(e){
       console.log(`${nav} isn't a number`);
     }
@@ -74,6 +74,7 @@ export default class NavView extends React.Component {
             </select>
           </Col>
         </Row>
+        <br/>
         {
           this.state.token
           ? (

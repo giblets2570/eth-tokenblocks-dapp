@@ -45,6 +45,8 @@ if(process.env.SEEDALL) {
   tables.push("Token");
   tables.push("Fund");
   tables.push("NAVTimestamp");
+  tables.push("Dividend");
+  tables.push("DividendPayment");
   tables.push("SecurityTimestamp");
   tables.push("Security");
   tables.push("TokenHoldings");
@@ -157,9 +159,9 @@ let createFunds = async () => {
       });
       holdings = chooseRandoms(holdings, 10);
       // I want the NAV to be 100
-      let desiredNav = 10000
-      let aum = holdings.reduce((c, holding) => c + holding.price * holding.amount, 0);
-      token.initialAmount = Math.floor(aum * Math.pow(10, token.decimals) / desiredNav);
+      // let desiredNav = 10000
+      // let aum = holdings.reduce((c, holding) => c + holding.price * holding.amount, 0);
+      // token.initialAmount = Math.floor(aum * Math.pow(10, token.decimals) / desiredNav);
       token.holdings = holdings;
       return token
     })

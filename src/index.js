@@ -14,6 +14,7 @@ import {refresh} from 'utils/metamaskRefresh'
 const hist = createBrowserHistory();
 
 ReactDOM.render(
+  
   <Router history={hist}>
     <Switch>
       {indexRoutes.map((prop, key) => {

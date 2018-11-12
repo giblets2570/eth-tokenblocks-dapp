@@ -10,7 +10,6 @@ import {
 } from "reactstrap";
 
 import setupRoutes from "routes/setup.jsx";
-console.log(setupRoutes)
 
 class SetupHeader extends React.Component {
   constructor(props) {

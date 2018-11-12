@@ -24,7 +24,7 @@ class Auth {
   }
   isAuthenticated(role){
     if(!role) return !!localStorage.getItem('user');
-    return (role === this.user.role)
+    return (this.user && role === this.user.role)
   }
   loggedInAs(){
     if(this.user) return this.user.role

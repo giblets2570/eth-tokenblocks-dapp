@@ -9,8 +9,9 @@ import {
   DropdownToggle,DropdownMenu,DropdownItem,Table,Button,Tooltip
 } from "reactstrap";
 import { PanelHeader,Stats,Statistics,CardCategory,Progress } from "components";
+import Joyride from 'react-joyride';
 
-class Tokens extends React.Component {
+export default class Funds extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -68,21 +69,16 @@ class Tokens extends React.Component {
         <tr key={key}>
           <td>{key + 1}</td>
           <td>{fund.name}</td>
-          {
-            // <td>
-            //   <Button color="primary" onClick={() => this.regCheck(fund)} id={`RegCheck${key}`}>
-            //     Regulation Check
-            //   </Button>
-            // </td>
-          }
           <td>
             <Link to={`/issuer/funds/${fund.id}/shareholders`}>
-              View
+              <span id={`IssuerViewFund${key}`}>View</span>
             </Link>
           </td>
         </tr>
       )
     });
+    let {tutorialMode} = this.props
+    tutorialMode = tutorialMode && this.props.location.pathname === '/issuer/funds'
     return (
       <div>
         <CreateToken
@@ -102,6 +98,59 @@ class Tokens extends React.Component {
             <h1>{this.state.fund ? this.state.fund.name : 'Loading...'}</h1>
           }
         />
+        <Joyride
+          continuous
+          scrollToFirstStep
+          showProgress
+          showSkipButton
+          run={!!tutorialMode}
+          debug={true}
+          disableScrolling={false}
+          steps={[
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <h4 style={{fontSize: '22px'}}>Hi! Welcome to TokenBlocks</h4>
+                  <p style={{fontSize: '12px'}}>We are going to give your a quick tour so can fully understand what's going on</p>
+                </div>
+              ),
+              placement: "center",
+              disableBeacon: true,
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "body"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <p style={{fontSize: '12px'}}>Here is the table that shows all your funds</p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#IssuerAllFunds"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <p style={{fontSize: '12px'}}>Click here to view your fund</p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#IssuerViewFund0"
+            }
+          ]}
+        />
       <Route
         path="/issuer/funds"
         exact={true}
@@ -110,7 +159,7 @@ class Tokens extends React.Component {
           <Row>
             <Col xs={12} md={12}>
               <Card className="card-stats card-raised">
-                <CardBody>
+                <CardBody id="IssuerAllFunds">
                   <h3 style={{textAlign: 'center'}}>My Funds</h3>
                   <Table responsive>
                     <thead>
@@ -131,18 +180,6 @@ class Tokens extends React.Component {
               </Card>
             </Col>
           </Row>
-          <Tooltip placement="right" isOpen={this.props.tooltipsOpen && !this.state.fundModal && !this.state.regModal} target="CreateToken">
-            Click here to start creating a new fund
-          </Tooltip>
-          {
-            // rows.length
-            // ? (
-            //   <Tooltip placement="right" isOpen={this.props.tooltipsOpen && !this.state.fundModal && !this.state.regModal} target={`RegCheck0`}>
-            //     Click here to perform the regulation checks
-            //   </Tooltip>
-            // )
-            // : null
-          }
         </div>
         )}
         />
@@ -154,17 +191,18 @@ class Tokens extends React.Component {
                 <Col xs={12} md={12}>
                   <Card className="card-stats card-raised">
                     <CardBody>
-                      <ShowFund {...props} />
+                      <ShowFund
+                        {...props}
+                        tutorialMode={this.props.tutorialMode}
+                      />
                     </CardBody>
                   </Card>
                 </Col>
               </Row>
             </div>
           )}
-          />
+        />
       </div>
     )
   }
 }
-
-export default Tokens

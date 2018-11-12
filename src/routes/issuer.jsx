@@ -1,5 +1,5 @@
 import React from "react"
-import Tokens from "views/Issuer/Tokens";
+import Funds from "views/Issuer/Funds";
 import Trades from "views/Issuer/Trades";
 
 var issuerRoutes = [
@@ -8,7 +8,7 @@ var issuerRoutes = [
     name: "Funds",
     icon: "business_money-coins",
     auth: "issuer",
-    component: Tokens
+    component: Funds
   },
   {
     path: "/issuer/trades",

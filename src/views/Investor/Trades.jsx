@@ -10,16 +10,10 @@ import {
 import { subscribe } from 'utils/socket';
 import { PanelHeader, Button } from "components";
 import { decrypt } from 'utils/encrypt'
+import Joyride from 'react-joyride';
 
 class Trades extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page: 0,
-      pageCount: 10,
-      trades: []
-    };
-  }
+  state = {page: 0,pageCount: 10,trades: []};
   changePage(page) {
     this.setState({
       page: page
@@ -87,34 +81,34 @@ class Trades extends React.Component {
     }else if(trade.state === 5){
       return <Button color='success' onClick={() => this.claimTokens(trade)}>{
         trade.nominalAmount >= 0
-         ? "Claim tokens"
-         : "Sell tokens"
+         ? "Claim digital shares"
+         : "Sell digital shares"
       }</Button>
     }else{
       return trade.nominalAmount >= 0
-       ? 'Tokens claimed'
-       : "Tokens sold"
+       ? 'Digital shares claimed'
+       : "Digital shares sold"
     }
   }
   render() {
     let rows = this.state.trades
     .sort((a, b) => a.createdAt - b.createdAt)
-    .map((trade, $index) => {
+    .map((trade, key) => {
       let amount = parseFloat(trade.nominalAmount), buySell = 'Buy'
       if(amount < 0) {
         amount = -1 * amount
         buySell = 'Sell'
       }
       return (
-        <tr key={$index}>
-          <td scope="row">{$index+1}</td>
+        <tr key={key}>
+          <td scope="row">{key+1}</td>
           <td>{trade.token.symbol}</td>
           <td>{buySell}</td>
           <td>{trade.currency}</td>
           <td>{amount.toLocaleString()}</td>
           <td>{trade.executionDate.format('DD/MM/YY')}</td>
           <td>{trade.createdAt.format('HH:mm [at] DD/MM/YY')}</td>
-          <td>{trade.bestQuote}</td>
+          <td>{trade.bestQuote ? trade.bestQuote+"%" : null}</td>
           <td>{this.stateString(trade)}</td>
           <td>
             <Link to={`/investor/trades/${trade.id}`}>View</Link>
@@ -130,8 +124,170 @@ class Trades extends React.Component {
         </PaginationItem>
       ))
     : [];
+    let {tutorialMode} = this.props
     return(
       <div>
+        <Joyride
+          continuous
+          scrollToFirstStep
+          showProgress
+          showSkipButton
+          run={!!tutorialMode}
+          debug={true}
+          disableScrolling={false}
+          steps={[
+            {
+              content: (
+                <div>
+                  <h4>Hi! Welcome to TokenBlocks</h4>
+                  <p>We are going to give your a quick tour so can fully understand what's going on</p>
+                </div>
+              ),
+              placement: "center",
+              disableBeacon: true,
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "body"
+            },
+            {
+              content: (
+                <div>
+                  <h4>Trade</h4>
+                  <p>
+                    When you start trading, all your trades will appear in this table.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#InvestorTradesRow"
+            },
+            {
+              content: (
+                <div>
+                  <p>
+                    This is the name of the digital share in the trade
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#InvestorTradesName"
+            },
+            {
+              content: (
+                <div>
+                  <p>
+                    This is the direction of the trade, meaning is it a buy or sell
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#InvestorTradesBuySell"
+            },
+            {
+              content: (
+                <div>
+                  <p>
+                    This is the currency of the trade
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#InvestorTradesCurrency"
+            },
+            {
+              content: (
+                <div>
+                  <p>
+                    This is the amount you wish to trade for in fiat currency.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#InvestorTradesAmount"
+            },
+            {
+              content: (
+                <div>
+                  <p>
+                    This is the date that the fund has executed the trade.
+                    You will receive the NAV price that is for this day.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#InvestorTradesExecutionDate"
+            },
+            {
+              content: (
+                <div>
+                  <p>
+                    This is the price that the fund has quoted, given in percent above the NAV.
+                    This means if the NAV is £100 on the execution date and the price is 1%, you will effectively pay £101 for each digital share.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#InvestorTradesQuote"
+            },
+            {
+              content: (
+                <div>
+                  <p>
+                    This is the state of the trade. It can have the following states:
+                  </p>
+                  <ol>
+                    <li>Quote accepted</li>
+                    <li>Quote received</li>
+                    <li>Waiting for quotes</li>
+                    <li>Waiting on NAV</li>
+                    <li>Trade cancelled</li>
+                    <li>Trade rejected</li>
+                    <li>Waiting for funds</li>
+                    <li>Claim/Sell digital shares</li>
+                    <li>Digital shares claimed/sold</li>
+                  </ol>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#InvestorTradesState"
+            }
+          ]}
+        />
         <Route
           path="/investor/trades/:id"
           render={(props) => <ShowTrade {...props} returnTo='/investor/trades'/>
@@ -152,16 +308,16 @@ class Trades extends React.Component {
                 <CardBody>
                   <Table responsive>
                     <thead>
-                      <tr className="text-primary">
+                      <tr className="text-primary" id={`InvestorTradesRow`}>
                         <th className="text-center">#</th>
-                        <th>Name</th>
-                        <th>Buy/Sell</th>
-                        <th>Currency</th>
-                        <th>Amount</th>
-                        <th>Execution Date</th>
-                        <th>Date</th>
-                        <th>Quote</th>
-                        <th>Status</th>
+                        <th id={`InvestorTradesName`}>Name</th>
+                        <th id={`InvestorTradesBuySell`}>Buy/Sell</th>
+                        <th id={`InvestorTradesCurrency`}>Currency</th>
+                        <th id={`InvestorTradesAmount`}>Amount</th>
+                        <th id={`InvestorTradesExecutionDate`}>Execution Date</th>
+                        <th id={`InvestorTradesDate`}>Date</th>
+                        <th id={`InvestorTradesQuote`}>Quote</th>
+                        <th id={`InvestorTradesState`}>Status</th>
                       </tr>
                     </thead>
                     <tbody>

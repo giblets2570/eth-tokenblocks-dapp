@@ -168,7 +168,7 @@ class Sidebar extends React.Component {
                                   to={prop.path}
                                   activeClassName="active"
                                 >
-                                  <span className="sidebar-mini-icon">
+                                  <span className="sidebar-mini-icon" className={prop.mini}>
                                     {prop.mini}
                                   </span>
                                   <span className="sidebar-normal text-center">

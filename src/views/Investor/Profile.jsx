@@ -6,6 +6,7 @@ import {
 } from "reactstrap";
 import Auth from 'utils/auth'
 import axios from 'utils/request';
+import Joyride from 'react-joyride';
 
 import {
   ChooseAccount,
@@ -31,6 +32,9 @@ export default class Profile extends React.Component {
     this.setState({
       [key]: event.target.value
     })
+  }
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps)
   }
   async useId(e){
     e.preventDefault() // Stop form submit
@@ -78,9 +82,125 @@ export default class Profile extends React.Component {
     Auth.updateUser(addressDetails);
     this.setState({ user: Auth.user, updatedAddress: false });
   }
+  handleJoyrideCallback(something){
+    console.log(something)
+  }
   render() {
+    let {tutorialMode} = this.props;
+
     return (
       <div>
+        <Joyride
+          continuous
+          scrollToFirstStep
+          showProgress
+          showSkipButton
+          run={!!tutorialMode}
+          debug={true}
+          disableScrolling={false}
+          steps={[
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <h4 style={{fontSize: '22px'}}>Hi! Welcome to TokenBlocks</h4>
+                  <p style={{fontSize: '12px'}}>We are going to give your a quick tour so can fully understand what's going on</p>
+                </div>
+              ),
+              placement: "center",
+              disableBeacon: true,
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "body"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <h4 style={{fontSize: '22px'}}>Basic details</h4>
+                  <p style={{fontSize: '12px'}}>Here you can update your basic details</p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: ".basicDetails"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <h4 style={{fontSize: '22px'}}>DLT Setup</h4>
+                  <p style={{fontSize: '12px'}}>
+                    Here you set up your ethereum address you will be using to receive digital shares. <br/>
+                    We recommend installing Metamask on your computer to set up your account. <br/>
+                    For more information on Metamask, click <a href="https://metamask.io" target="_blank">here</a>.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: ".chooseAddress"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <h4 style={{fontSize: '22px'}}>Bank account</h4>
+                  <p style={{fontSize: '12px'}}>
+                    On TokenBlocks, your money gets transfered directly to the fund, meaning less fees.<br/>
+                    This means that before you can do any trades, you need to connect your bank and choose your account to trade with.<br/>
+                    We are not able to take any money from this account that you have not authorized.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: ".chooseBank"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <h4 style={{fontSize: '22px'}}>KYC Checks</h4>
+                  <p style={{fontSize: '12px'}}>
+                    To invest in funds, we have to know some information about you. <br />
+                    This is to prevent any malicious parties being able to use the TokenBlocks platform.<br />
+                    We also need your address to understand what legal juristiction you fall under.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: ".enterHomeAddress"
+            },
+            {
+              content: (
+                <div style={{textAlign: 'left'}}>
+                  <p style={{fontSize: '12px'}}>
+
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: ".sidebar"
+            }
+          ]}
+          callback={(something) => this.handleJoyrideCallback(something)}
+        />
         <Route
           path="/investor/profile/setup"
           render={
@@ -96,11 +216,13 @@ export default class Profile extends React.Component {
               <h1></h1>
             }
           />
-        <div className="content">
+        <div
+          className="content"
+          >
           <Row>
             <Col md={12}>
               <Card className="card-stats card-raised">
-                <CardBody>
+                <CardBody className="basicDetails">
                   <h4>Details</h4>
                   <ProfileForm user={this.state.user}/>
                 </CardBody>
@@ -110,7 +232,7 @@ export default class Profile extends React.Component {
           <Row>
             <Col md={12}>
               <Card className="card-stats card-raised">
-                <CardBody>
+                <CardBody className="chooseAddress">
                   <h4>Ethereum address</h4>
                   <AccountSetup {...this.props} useAddress={(address) => this.useAddress(address)}/>
                 </CardBody>
@@ -120,7 +242,7 @@ export default class Profile extends React.Component {
           <Row>
             <Col md={12}>
               <Card className="card-stats card-raised">
-                <CardBody>
+                <CardBody className="chooseBank">
                   <h4>Bank account</h4>
                   {
                     this.state.user.bankConnected
@@ -133,8 +255,8 @@ export default class Profile extends React.Component {
                     onClick={() => this.connectBank()}>
                     {
                         this.state.user.bankConnected
-                        ? <span>Connect different bank account</span>
-                        : <span>Connect bank account</span>
+                        ? <span>Connect different bank</span>
+                        : <span>Connect bank</span>
                     }
                   </Button>
                   <ChooseAccount />
@@ -145,7 +267,7 @@ export default class Profile extends React.Component {
           <Row>
             <Col md={12}>
               <Card className="card-stats card-raised">
-                <CardBody>
+                <CardBody className="enterHomeAddress">
                   <h4>KYC Checks</h4>
                   <p style={{fontWeight: 700, fontSize: '14px'}}>Address</p>
                   <Row>

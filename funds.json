@@ -1,27 +1,44 @@
 [{
-  "name": "UK Index Trust",
+  "name": "TokenBlocks Trust",
   "ownerId": 6,
   "tokens": [{
-    "symbol":"LGUIDFA-R-DIST",
+    "name": "S&P",
+    "symbol": "S&P-A-DIST",
     "incomeCategory": "distributing",
     "nav": 9000,
+    "decimals": 18,
+    "cutoffTime": 64800,
+    "fee": 43,
+    "frontLoad": 0,
+    "backLoad": 0,
+    "minimumOrder": 50000,
+    "currency": "GBP",
+    "initialAmount": 0
+  },{
+    "name": "FTSE 100",
+    "symbol": "FTSE 100-A-DIST",
+    "incomeCategory": "distributing",
+    "nav": 12000,
     "decimals": 18,
     "cutoffTime": 64800,
     "fee": 56,
     "frontLoad": 0,
     "backLoad": 0,
-    "minimumOrder": 50000,
+    "minimumOrder": 10000,
     "currency": "GBP",
-    "initialAmount": 521541733,
-    "holdings": [{
-      "name": "LGUIDFA-R-DIST",
-      "symbol": "LGUIDFA-R-DIST",
-      "class": "Equity",
-      "currency": "GBP",
-      "country": "UK",
-      "sector": "Tech",
-      "amount": 521541733,
-      "price": 15739
-    }]
+    "initialAmount": 0
+  },{
+    "name": "SX5E",
+    "symbol": "SX5E-A-DIST",
+    "incomeCategory": "distributing",
+    "nav": 3000,
+    "decimals": 18,
+    "cutoffTime": 64800,
+    "fee": 71,
+    "frontLoad": 0,
+    "backLoad": 0,
+    "minimumOrder": 5000,
+    "currency": "GBP",
+    "initialAmount": 0
   }]
 }]

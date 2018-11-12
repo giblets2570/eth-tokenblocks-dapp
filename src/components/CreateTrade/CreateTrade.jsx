@@ -132,7 +132,6 @@ class CreateTrade extends Component {
         })
       }
     }
-    console.log(nextProps, nextProps.tooltipsOpen, nextProps.isOpen)
     setTimeout(() => {
       this.setState({
         tooltipsOpen: (
@@ -164,7 +163,10 @@ class CreateTrade extends Component {
       return alert("Requires broker to create a trade");
     }
     if(!this.state.user.address) {
-      return alert("You need to set up your address to make a trade");
+      return alert("You need to set up your dlt address to make a trade");
+    }
+    if(!this.state.user.country) {
+      return alert("You need to set up your home address to make a trade");
     }
     if(!this.state.user.bankConnected) {
       return alert("You need to connect your bank to make a trade");
@@ -231,6 +233,7 @@ class CreateTrade extends Component {
     }
     return (
       <Modal
+        id="CreateTradeModal"
         isOpen={this.props.isOpen}
         toggle={() => this.props.toggle()}
         className="modal-notice text-center"

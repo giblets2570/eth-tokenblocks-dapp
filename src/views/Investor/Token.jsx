@@ -4,32 +4,17 @@ import {
   Card,CardHeader,CardBody,CardFooter,CardTitle,Row,Col,
   UncontrolledDropdown,DropdownToggle,DropdownMenu,DropdownItem,Table,Tooltip
 } from "reactstrap";
-import {
-  Button,
-  PanelHeader,
-  Stats,
-  Statistics,
-  CardCategory,
-  Progress
-} from "components";
-
+import {Button,PanelHeader,Stats,Statistics,CardCategory,Progress} from "components";
+import Joyride from 'react-joyride';
 import { Line, Bar, Pie, Doughnut } from "react-chartjs-2";
-
-import {
-  chartsLine1,
-  chartsLine2,
-  chartsBar1,
-  chartsBar2
-} from "variables/charts";
-
-import CreateTrade from 'components/CreateTrade/CreateTrade'
+import CreateTrade from 'components/CreateTrade/CreateTrade';
 
 class Token extends React.Component {
   state = {
     token: {},
     holdings: [],
     balance: null,
-    orderModal: false,
+    tradeModal: false,
     timestamp: 'none',
     tooltipOpen: false,
     colours: [
@@ -38,6 +23,26 @@ class Token extends React.Component {
       "#ff7675","#fd79a8","#636e72","#fdcb6e","#e17055",
       "#d63031","#e84393","#2d3436"
     ]
+  }
+  constructor(props){
+    super(props)
+    this.joyride = React.createRef();
+  }
+  handleJoyrideCallback(args) {
+    if(args.index === 3) {
+      this.setState({
+        tutorialMode: false,
+        tradeModal: true
+      }, () => {
+        setTimeout(() => {
+          this.joyride.current.helpers.index(3)
+          this.setState({ tutorialMode: true })
+        }, 100)
+      })
+    }
+    if(args.index === 4) {
+      this.setState({ tradeModal: false })
+    }
   }
   async getTokenData(props) {
     this.setState({
@@ -76,31 +81,25 @@ class Token extends React.Component {
     this.setState({ investedValue: response.data.totalAmount });
   }
   componentDidMount(){
-    this.getTokenData(this.props)
+    this.getTokenData(this.props);
   }
   componentWillReceiveProps(nextProps) {
+    let {tutorialMode} = nextProps;
+    this.setState({ tutorialMode: tutorialMode })
     setTimeout(() => {
-      this.setState({
-        tooltipOpen: !this.state.orderModal && nextProps.tooltipsOpen
-      })
+      this.setState({ tutorialMode: !this.state.tradeModal && nextProps.tutorialMode })
     })
   }
   onInputChange(key) {
-    return (event) => {
-      this.setState({
-        [key]: event.target.value
-      })
+    return (e) => {
+      this.setState({ [key]: e.target.value })
     }
   }
-  toggleOrderModal() {
-    this.setState({
-      orderModal: !this.state.orderModal
-    })
+  toggleTradeModal() {
+    this.setState({ tradeModal: !this.state.tradeModal })
   }
-  createOrder() {
-    this.setState({
-      orderModal: true
-    })
+  createTrade() {
+    this.setState({ tradeModal: true })
   }
   makeData(object){
     return {
@@ -118,6 +117,7 @@ class Token extends React.Component {
     }
   }
   render() {
+    let {tutorialMode} = this.state;
     let sectors = {}, currencies = {}, countries = {}
     for(let holding of this.state.holdings){
       sectors[holding.security.sector] = (sectors[holding.security.sector]||0)+1;
@@ -129,22 +129,133 @@ class Token extends React.Component {
     let currencyData = this.makeData(currencies)
     return (
       <div>
+        <Joyride
+          ref={this.joyride}
+          continuous
+          scrollToFirstStep
+          showProgress
+          showSkipButton
+          run={!!tutorialMode}
+          debug={true}
+          disableScrolling={false}
+          callback={(args) => this.handleJoyrideCallback(args)}
+          steps={[
+            {
+              content: (
+                <div>
+                  <h4>Hi! Welcome to TokenBlocks</h4>
+                  <p>We are going to give your a quick tour so can fully understand what's going on</p>
+                </div>
+              ),
+              placement: "center",
+              disableBeacon: true,
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "body"
+            },
+            {
+              content: (
+                <div>
+                  <h4>Fund Summary</h4>
+                  <p>
+                    Here you can see some fund data.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#FundSummary"
+            },
+            {
+              content: (
+                <div>
+                  <h4>Create a trade</h4>
+                  <p>
+                    Click here to create a trade
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#CreateTradeToken"
+            },
+            {
+              content: (
+                <div>
+                  <h4>Create a trade</h4>
+                  <p>
+                    Click here to create a trade
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#CreateTradeModal"
+            },
+            {
+              content: (
+                <div>
+                  <h4>Investor Summary</h4>
+                  <p>
+                    Here is your data regarding this fund.
+                    It shows your performance with the fund, showing how much you have made with this investment.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#InvestorSummary"
+            },
+            {
+              content: (
+                <div>
+                  <h4>Fund Portfolio</h4>
+                  <p>
+                    Here are the shares and amounts that the fund contains.
+                    Each day after trading has completed, it will be updated by the fund manager.
+                  </p>
+                </div>
+              ),
+              styles: {
+                options: {
+                  zIndex: 10000
+                }
+              },
+              target: "#FundPortfolio"
+            },
+          ]}
+        />
         <CreateTrade
-          isOpen={this.state.orderModal}
-          toggle={() => this.toggleOrderModal()}
+          isOpen={this.state.tradeModal}
+          toggle={() => this.toggleTradeModal()}
           token={this.state.token}
           tooltipsOpen={this.props.tooltipsOpen}
           />
         <Row>
           <Col xs={12} md={12}>
-            <Card className="card-stats card-raised">
+            <Card className="card-stats card-raised" id="FundSummary">
               <CardBody>
                 <h3 style={{textAlign: 'center'}}>Fund Summary</h3>
                 <Row>
                   <Col xs={12} md={3}>
                     <Statistics
-                      iconState="danger"
-                      icon="objects_support-17"
+                      iconState="primary"
+                      icon="design_app"
                       title={
                         this.state.token.name
                         ? this.state.token.name
@@ -156,7 +267,7 @@ class Token extends React.Component {
                   <Col xs={12} md={3}>
                     <Statistics
                       iconState="primary"
-                      icon="ui-2_chat-round"
+                      icon="business_globe"
                       title={
                         this.state.token.symbol
                         ? this.state.token.symbol
@@ -179,8 +290,8 @@ class Token extends React.Component {
                   </Col>
                   <Col xs={12} md={3}>
                     <Statistics
-                      iconState="danger"
-                      icon="objects_support-17"
+                      iconState="primary"
+                      icon="ui-1_bell-53"
                       title={
                         this.state.token.cutoffTimeString
                         ? this.state.token.cutoffTimeString
@@ -193,8 +304,8 @@ class Token extends React.Component {
                 <Row>
                   <Col xs={12} md={3}>
                     <Statistics
-                      iconState="primary"
-                      icon="ui-2_chat-round"
+                      iconState="success"
+                      icon="business_money-coins"
                       title={
                         typeof this.state.token.minimumOrder === 'number'
                         ? (<span>
@@ -207,8 +318,12 @@ class Token extends React.Component {
                   </Col>
                   <Col xs={12} md={3}>
                     <Statistics
-                      iconState="success"
-                      icon="business_money-coins"
+                      iconState="primary"
+                      icon={
+                        this.state.token.incomeCategory&& this.state.token.incomeCategory[0] === 'd'
+                        ? "arrows-1_share-66"
+                        : "loader_refresh"
+                      }
                       title={
                         this.state.token.incomeCategory
                         ? this.state.token.incomeCategory.charAt(0).toUpperCase()
@@ -253,10 +368,10 @@ class Token extends React.Component {
                       iconState="success"
                       title={
                         <Button
-                          id="CreateOrderToken"
+                          id="CreateTradeToken"
                           round
                           color="primary"
-                          onClick={() => this.createOrder(this.state.token)}>
+                          onClick={() => this.createTrade(this.state.token)}>
                           Place trade
                         </Button>
                       }
@@ -270,14 +385,14 @@ class Token extends React.Component {
         </Row>
         <Row>
           <Col xs={12} md={12}>
-            <Card className="card-stats card-raised">
+            <Card className="card-stats card-raised" id="InvestorSummary">
               <CardBody>
                 <h3 style={{textAlign: 'center'}}>Investor Summary</h3>
                 <Row>
                   <Col xs={12} md={3}>
                     <Statistics
                       iconState="primary"
-                      icon="ui-2_chat-round"
+                      icon="education_paper"
                       title={
                         typeof this.state.balance === 'number'
                         ? this.state.balance.toLocaleString()
@@ -288,8 +403,8 @@ class Token extends React.Component {
                   </Col>
                   <Col xs={12} md={3}>
                     <Statistics
-                      iconState="info"
-                      icon="users_single-02"
+                      iconState="success"
+                      icon="business_money-coins"
                       title={
                         typeof this.state.investedValue === 'number'
                         ? (<span>
@@ -302,8 +417,8 @@ class Token extends React.Component {
                   </Col>
                   <Col xs={12} md={3}>
                     <Statistics
-                      iconState="danger"
-                      icon="objects_support-17"
+                      iconState="success"
+                      icon="business_money-coins"
                       title={
                         typeof this.state.currentValue === 'number'
                         ? (<span>
@@ -317,7 +432,7 @@ class Token extends React.Component {
                   <Col xs={12} md={3}>
                     <Statistics
                       iconState="primary"
-                      icon="ui-2_chat-round"
+                      icon="objects_spaceship"
                       title={
                         typeof this.state.currentValue === 'number' && typeof this.state.investedValue === 'number'
                         ? this.state.investedValue
@@ -335,56 +450,51 @@ class Token extends React.Component {
             </Card>
           </Col>
         </Row>
-        {
-          // <Row>
-          //   <Col xs={12}>
-          //     <Card>
-          //       <CardHeader>
-          //         <CardTitle tag="h4" style={{textAlign: 'center'}}>
-          //           Fund Portfolio
-          //         </CardTitle>
-          //       </CardHeader>
-          //       <CardBody>
-          //         <Table responsive>
-          //           <thead className="text-primary">
-          //             <tr>
-          //               <th className="text-right">#</th>
-          //               <th>Name</th>
-          //               <th>Currency</th>
-          //               <th>Sector</th>
-          //               <th>Country</th>
-          //               <th>Amount</th>
-          //               <th>Weight</th>
-          //             </tr>
-          //           </thead>
-          //           <tbody>
-          //             {
-          //               this.state.holdings
-          //               .sort((a, b) => b.weight - a.weight)
-          //               .map((holding,key) => {
-          //                 return (
-          //                   <tr key={key}>
-          //                     <td>{key+1}</td>
-          //                     <td>{holding.security.symbol}</td>
-          //                     <td>{holding.security.currency}</td>
-          //                     <td>{holding.security.sector}</td>
-          //                     <td>{holding.security.country}</td>
-          //                     <td>{holding.securityAmount.toLocaleString()}</td>
-          //                     <td>{(holding.weight*100).toFixed(2)}%</td>
-          //                   </tr>
-          //                 )
-          //               })
-          //             }
-          //           </tbody>
-          //         </Table>
-          //       </CardBody>
-          //     </Card>
-          //   </Col>
-          // </Row>
-        }
-        <Tooltip placement="right" isOpen={!this.state.orderModal && this.state.tooltipOpen} target="CreateOrderToken">
-          Place an order for this token by clicking the button below
-        </Tooltip>
+        <Row>
+          <Col xs={12}>
+            <Card className="card-stats card-raised" id="FundPortfolio">
+              <CardHeader>
+                <CardTitle tag="h4" style={{textAlign: 'center'}}>
+                  Fund Portfolio
+                </CardTitle>
+              </CardHeader>
+              <CardBody>
+                <Table responsive>
+                  <thead className="text-primary">
+                    <tr>
+                      <th className="text-right">#</th>
+                      <th>Name</th>
+                      <th>Currency</th>
+                      <th>Sector</th>
+                      <th>Country</th>
+                      <th>Amount</th>
+                      <th>Weight</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {
+                      this.state.holdings
+                      .sort((a, b) => b.weight - a.weight)
+                      .map((holding,key) => {
+                        return (
+                          <tr key={key}>
+                            <td>{key+1}</td>
+                            <td>{holding.security.symbol}</td>
+                            <td>{holding.security.currency}</td>
+                            <td>{holding.security.sector}</td>
+                            <td>{holding.security.country}</td>
+                            <td>{holding.securityAmount.toLocaleString()}</td>
+                            <td>{(holding.weight*100).toFixed(2)}%</td>
+                          </tr>
+                        )
+                      })
+                    }
+                  </tbody>
+                </Table>
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
       </div>
     )
   }

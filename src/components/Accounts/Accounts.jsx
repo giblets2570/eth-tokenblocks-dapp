@@ -63,7 +63,7 @@ class Accounts extends React.Component {
       balance.balance = parseFloat( balance.balance || 0 ) / Math.pow(10, 18);
       return balance;
     })
-    // .filter((balance) => balance.investor.juristiction && balance.balance);
+    .filter((balance) => balance.balance);
     console.log(balances)
     let juristictions = balances.map((balance)=>balance.investor.juristiction);
     let juristictionData = balances.reduce((c, balance) => {
