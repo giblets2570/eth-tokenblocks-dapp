@@ -115,12 +115,29 @@ class ShowTrade extends React.Component {
       this.props.getTrade(nextProps.for);
     }
   }
+  async getConfirmations(txHash) {
+    try {
+      await web3Service.promise
+      let web3 = web3Service.instance
+
+      // Get transaction details
+      const trx = await web3.eth.getTransaction(txHash)
+
+      // Get current block number
+      const currentBlock = await web3.eth.getBlockNumber()
+
+      // When transaction is unconfirmed, its block number is null.
+      // In this case we return 0 as number of confirmations
+      return trx.blockNumber === null ? 0 : currentBlock - trx.blockNumber
+    }
+    catch (error) {
+      console.log(error)
+    }
+  }
   async acceptInvestor() {
     await web3Service.promise
     let web3 = web3Service.instance
-    this.setState({
-      pending: true
-    });
+    this.setState({ pending: true });
     const TradeKernelContract = require(`../../${process.env.REACT_APP_CONTRACTS_FOLDER}TradeKernel.json`);
     const tradeKernel = contract(TradeKernelContract);
     tradeKernel.setProvider(web3.currentProvider);
@@ -141,11 +158,17 @@ class ShowTrade extends React.Component {
       [executionDateInt, this.state.trade.expirationTimestampInSec, this.state.trade.salt]
     ];
     let {r, s, v} = fromRpcSig(this.state.trade.signature);
-    let signer = await tradeKernelInstance.recoverSigner(this.state.trade.hash, v, bufferToHex(r), bufferToHex(s), {from: address});
-    let result = await tradeKernelInstance.confirmTrade(...formattedTrade, v, bufferToHex(r), bufferToHex(s), {from: address});
-    subscribeOnce(`trade-broker-confirm:${this.state.trade.id}`, () => {
-      this.getTrade();
-    })
+    this.setState({ acceptingInvestor: true })
+    let transaction = await tradeKernelInstance.confirmTrade(...formattedTrade, v, bufferToHex(r), bufferToHex(s), {from: address});
+
+    let result = await axios.put(`${process.env.REACT_APP_API_URL}trades/${this.state.trade.id}`, {
+      txHash: transaction.tx
+    });
+    this.setState({ acceptingInvestor: false })
+
+    // subscribeOnce(`trade-broker-confirm:${this.state.trade.id}`, () => {
+    //   this.getTrade();
+    // })
   }
   async cancel(){
     await web3Service.promise
@@ -224,17 +247,36 @@ class ShowTrade extends React.Component {
           </div>
         )
       }
-      if(this.state.trade.state === 0) {
+      if(this.state.trade.state === 0 && !this.state.trade.txHash) {
+        if(this.state.acceptingInvestor){
+          return (
+            <div>
+              <p style={{textAlign: 'center'}}>
+                Investor has accepted your quote: <span style={{color: 'green'}}>{this.state.trade.priceDecrypted}</span><br/>
+                <span style={{color: 'green'}}>Pending...</span>
+              </p>
+            </div>
+          )
+        }else{
+          return (
+            <div>
+              <p style={{textAlign: 'center'}}>
+                Investor has accepted your quote: <span style={{color: 'green'}}>{this.state.trade.priceDecrypted}</span>
+              </p>
+              <Button
+                color="success"
+                onClick={() => this.acceptInvestor()}>
+                Confirm Trade
+              </Button>
+            </div>
+          )
+        }
+      }
+      if(this.state.trade.state === 0 && this.state.trade.txHash) {
         return (
           <div>
-            <p style={{textAlign: 'center'}}>
-              Investor has accepted your quote: <span style={{color: 'green'}}>{this.state.trade.priceDecrypted}</span>
-            </p>
-            <Button
-              color="success"
-              onClick={() => this.acceptInvestor()}>
-              Confirm Trade
-            </Button>
+            <h4 style={{textAlign: 'center'}}>Your quoted price: <span style={{color: 'green'}}>{this.state.trade.priceDecrypted}</span></h4>
+            <h5 style={{textAlign: 'center'}}>Accepted</h5>
           </div>
         )
       }
@@ -244,8 +286,13 @@ class ShowTrade extends React.Component {
           <h5 style={{textAlign: 'center'}}>Accepted</h5>
         </div>
       )
-    }else{
-      return (<TradeBrokers trade={this.state.trade} confirmPrice={(trade, price) => this.confirmPrice(trade, price)}  />);
+    }else {
+      return (
+        <TradeBrokers
+          trade={this.state.trade}
+          confirmPrice={(trade, price) => this.confirmPrice(trade, price)}
+        />
+      );
     }
   }
   toggle(){

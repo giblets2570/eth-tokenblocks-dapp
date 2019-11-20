@@ -28,8 +28,9 @@ export default class NavView extends React.Component {
     try {
       nav = parseInt(parseFloat(nav)*100);
     }catch(e){
-      console.log(`${nav} isn't a number`);
+      return console.log(`${nav} isn't a number`);
     }
+    this.setState({ pending: true })
     await web3Service.promise;
     let web3 = web3Service.instance;
     const ETTContract = require(`../../${process.env.REACT_APP_CONTRACTS_FOLDER}ETT.json`);
@@ -39,12 +40,26 @@ export default class NavView extends React.Component {
     if(!address) return alert("Please connect Metamask")
     let ettInstance = await ett.at(this.state.token.address);
     let dateString = moment().format('YYYY-MM-DD')
-    let tx = await ettInstance.updateNAV(nav, dateString, {from: address});
+    try{
+      let tx = await ettInstance.updateNAV(nav, dateString, {from: address});
+      console.log(tx)
+    }catch(e){
+      console.log(e)
+    }
+
+    response = await axios.post(`${process.env.REACT_APP_API_URL}tokens/${this.state.token.id}/nav-update`, {
+      time: Math.floor(new Date().valueOf() / 1000),
+      value: nav
+    });
+
+    console.log(response)
+
     this.setState({
       nav: {
         executionDate: dateString,
         price: nav
-      }
+      },
+      pending: false
     })
   }
   async setToken(e){
@@ -83,16 +98,26 @@ export default class NavView extends React.Component {
               <p>Todays NAV: £{(this.state.nav.price/100).toLocaleString()}</p>
             )
             : (
-              <Row>
-                <Col>
-                  <Button
-                    color="primary"
-                    onClick={() => this.uploadNAV()}
-                    >
-                    Upload todays NAV
-                  </Button>
-                </Col>
-              </Row>
+              this.state.pending
+              ? (
+                <Row>
+                  <Col>
+                    <p>Pending...</p>
+                  </Col>
+                </Row>
+              )
+              : (
+                <Row>
+                  <Col>
+                    <Button
+                      color="primary"
+                      onClick={() => this.uploadNAV()}
+                      >
+                      Upload todays NAV
+                    </Button>
+                  </Col>
+                </Row>
+              )
             )
           )
           : null

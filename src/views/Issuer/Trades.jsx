@@ -76,7 +76,7 @@ class Trades extends React.Component {
     this.setState({ trades: trades, total: total });
   }
   stateString(trade){
-    if(trade.state === 0){
+    if(trade.state === 0 && !trade.txHash){
       if(trade.signature){
         return 'Waiting for trade confirmation'
       }else if(trade.priceDecrypted){
@@ -84,7 +84,7 @@ class Trades extends React.Component {
       }else {
         return 'Waiting for quotes'
       }
-    }else if(trade.state === 1){
+    }else if(trade.state === 1 || trade.txHash){
       return 'Trade confirmed'
     }else if(trade.state === 2){
       return 'Trade cancelled'
@@ -116,7 +116,7 @@ class Trades extends React.Component {
           <td>{trade.currency}</td>
           <td>{trade.amount.toLocaleString()}</td>
           <td>{trade.executionDate.format('DD/MM/YY')}</td>
-          <td>{trade.priceDecrypted}</td>
+          <td>{trade.priceDecrypted ? `${trade.priceDecrypted}%` : ""}</td>
           <td>{this.stateString(trade)}</td>
           <td>
             <Link to={`/issuer/trades/${trade.id}`}>View</Link>

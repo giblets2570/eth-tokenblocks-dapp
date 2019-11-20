@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch } from "react-router-dom";
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 import { PrivateRoute } from "components"
 
 import "bootstrap/dist/css/bootstrap.css";
@@ -14,11 +14,15 @@ import {refresh} from 'utils/metamaskRefresh'
 const hist = createBrowserHistory();
 
 ReactDOM.render(
-  
+
   <Router history={hist}>
     <Switch>
       {indexRoutes.map((prop, key) => {
         let Component = prop.component
+        if(prop.path === '/') {
+          console.log('sadfjsdflkjasldkfjsadlkfjsalk')
+          return <Redirect to={'/pages/login'} />
+        }
         if(prop.auth){
           return (
             <PrivateRoute

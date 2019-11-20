@@ -49,9 +49,10 @@ class TradeBrokers extends React.Component {
               .map((ob, index) => {
                 let thirdCol = null;
                 if(this.props.trade.state >= 3) {
+                  
                 }else if(ob.priceDecrypted) {
                   if(this.props.trade.broker){
-                    if(this.props.trade.broker.id == ob.broker.id && this.props.trade.state === 0){
+                    if(this.props.trade.broker.id == ob.broker.id && this.props.trade.state === 0 && !this.props.trade.txHash){
                       thirdCol = (<span style={{'color': 'green'}}>Accepted, waiting for confirmation</span>)
                     }else{
                       thirdCol = (<span style={{'color': 'green'}}>Confirmed by fund manager</span>)

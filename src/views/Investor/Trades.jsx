@@ -62,7 +62,7 @@ class Trades extends React.Component {
     this.fetchTrades(this.state.page, this.state.pageCount)
   }
   stateString(trade){
-    if(trade.state === 0){
+    if(trade.state === 0 && !trade.txHash){
       if(trade.signature){
         return 'Quote accepted'
       }else if(trade.bestQuote){
@@ -70,7 +70,7 @@ class Trades extends React.Component {
       }else{
         return 'Waiting for quotes'
       }
-    }else if(trade.state === 1){
+    }else if(trade.state === 1 || trade.txHash){
       return 'Waiting on NAV'
     }if(trade.state === 2){
       return 'Trade cancelled'

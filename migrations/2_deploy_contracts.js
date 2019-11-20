@@ -25,29 +25,4 @@ module.exports = (deployer, network, accounts) => {
     console.log('TokenFactory: deploy');
     return deployer.deploy(TokenFactory, permissions.address, {from: accounts[0]});
   })
-  .then((instance) => {
-    tokenFactory = instance
-    console.log(`setAuthorized: 0xdda3d83B3f4218FF3aCa68471d539daf8a4c8c95`);
-    return permissions.setAuthorized("0xdda3d83B3f4218FF3aCa68471d539daf8a4c8c95", 2) //broker
-  })
-  .then(() => {
-    console.log(`setAuthorized: 0x1bbf9F9429202f6C95B1890abfeF0e09595D3c2F`);
-    return permissions.setAuthorized("0xcb6efeea21445c2964eda40a783b7a98a1774dc4", 2) //broker
-  })
-  .then(() => {
-    console.log(`setAuthorized: 0xcb6efeeA21445C2964Eda40a783b7A98A1774DC4`);
-    return permissions.setAuthorized("0x1bbf9f9429202f6c95b1890abfef0e09595d3c2f", 1) //investor
-  })
-  .then(() => {
-    console.log(`setAuthorized: 0x394439460e2Cf489CF3c8b3c96e17424542Bc785`);
-    return permissions.setAuthorized("0x394439460e2Cf489CF3c8b3c96e17424542Bc785", 3) //custodian
-  })
-  .then(() => {
-    console.log(`setAuthorized: 0x5589c3389e83288B055a53f7Cd6FFb59358aD172`);
-    return permissions.setAuthorized("0x5589c3389e83288B055a53f7Cd6FFb59358aD172", 5) //custodian
-  })
-  .then(() => {
-    console.log(`setAuthorized: ${tokenFactory.address}`);
-    return permissions.setAuthorized(tokenFactory.address, 6)
-  })
 };
